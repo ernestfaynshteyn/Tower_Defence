@@ -1,8 +1,14 @@
 using UnityEngine;
-
 public class EnemyHealth : MonoBehaviour
 {
     private float health = 100f;
+
+    public Animator animator;
+
+    public void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public void TakeDamage(float damage)
     {
@@ -14,10 +20,11 @@ public class EnemyHealth : MonoBehaviour
     {
         if (health <= 75f)
         {
-
+            animator.SetTrigger("HurtPhase");
         }
         if (health <= 0f)
         {
+            WaveManager.Instance.enemyleft = WaveManager.Instance.enemyleft - 1;
             Destroy(gameObject);
         }
     }

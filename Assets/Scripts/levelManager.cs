@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class levelManager : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,8 +15,13 @@ public class levelManager : MonoBehaviour
         
     }
 
-    public void changeToScenelevelThing()
+    public void changeToScenelevelThing(int index)       
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(index);
     }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 }

@@ -33,18 +33,22 @@ public class SpawnPoint : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        if (spawnPoints.Length>0) {
+        //check if there is at least one spawn point
+        if (spawnPoints.Length>0 && WaveManager.Instance.enemySpawned <= WaveManager.Instance.enemyNeeded) {
+            // looping though each spawn point
             for (int i = 0; i < spawnPoints.Length; i++)
             {
                 SpawnData data = spawnPoints[i];
                 data.spawnTimer += Time.deltaTime;
+                //check if it is time to spawn a new enemy
                 if (data.spawnTimer > data.spawnTime)
                 {
-                    //Spawn Enemy
+                    //pick random enemy
                     int randEnemy = Random.Range(0, data.enemyList.Length);
-
+                    //spawn da enemy
                     GameObject enemy = Instantiate(data.enemyList[randEnemy], data.spawnTransform.position,Quaternion.identity);
-
+                    //every time we spawn enemy, we increase da enemySpawned by 1
+                        WaveManager.Instance.enemySpawned += 1;
                     //Reset the timer
                     data.spawnTimer = 0;
                     data.spawnTime = Random.Range(data.minSpawnTime, data.maxSpawnTime);

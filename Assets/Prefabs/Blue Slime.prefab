@@ -103,7 +103,7 @@ Animation:
   m_GameObject: {fileID: 8463626256710258506}
   m_Enabled: 1
   serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: ec152e6838ac758469355f858512c4f8, type: 2}
+  m_Animation: {fileID: 7400000, guid: e131da6ca04b26a46ae3aa447d226247, type: 2}
   m_Animations: []
   m_WrapMode: 0
   m_PlayAutomatically: 1
@@ -120,7 +120,7 @@ Animator:
   m_GameObject: {fileID: 8463626256710258506}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 873ed18d803fe8948be763bf50d1a2e4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0f3c85399244fa24a8eec59777037030, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53914c51dae6d14d95d482089f004a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  animator: {fileID: 0}
 --- !u!114 &6322769596096450460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,3 +246,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 10
   damageRate: 1
+  enemyID: 0
