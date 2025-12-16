@@ -814,7 +814,7 @@ MonoBehaviour:
   enemyleft: 10
   enemyNeeded: 10
   enemySpawned: 0
-  waveTitle: {fileID: 0}
+  waveTitle: {fileID: 347269327}
 --- !u!1 &1280893709
 GameObject:
   m_ObjectHideFlags: 0

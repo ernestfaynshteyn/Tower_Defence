@@ -1,21 +1,24 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     public float health = 100f;
     public float currentHealth;
     public HealthBar healthBar;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         currentHealth = health;
         healthBar.SetMaxHealth(health);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     public void TakeDamage(float damage, int enemyID)
@@ -23,17 +26,15 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         CheckForHealth(enemyID);
-
     }
+
     public void CheckForHealth(int enemyID)
     {
-        if (currentHealth <= 75f)
+        if (currentHealth <= 0.01f)
         {
-
-        }
-        if (currentHealth <= 0f)
-        {
-            Destroy(gameObject);
+            Debug.Log("Player defeated by enemy ID: " + enemyID);
+            currentHealth = 0f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

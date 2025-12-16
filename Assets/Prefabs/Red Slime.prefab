@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53914c51dae6d14d95d482089f004a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  animator: {fileID: 0}
 --- !u!114 &-4256380432017749486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,3 +246,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 10
   damageRate: 1
+  enemyID: 2

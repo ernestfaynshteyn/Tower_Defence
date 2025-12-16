@@ -20,7 +20,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (health <= 75f)
         {
-            animator.SetTrigger("HurtPhase");
+            //animator.SetTrigger("HurtPhase");
         }
         if (health <= 0f)
         {
