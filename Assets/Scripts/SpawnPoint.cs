@@ -34,7 +34,8 @@ public class SpawnPoint : MonoBehaviour
     private void SpawnEnemy()
     {
         //check if there is at least one spawn point
-        if (spawnPoints.Length>0 && WaveManager.Instance.enemySpawned <= WaveManager.Instance.enemyNeeded) {
+        if (spawnPoints.Length>0 && WaveManager.Instance.enemySpawned <= WaveManager.Instance.enemyNeeded)
+        {
             // looping though each spawn point
             for (int i = 0; i < spawnPoints.Length; i++)
             {

@@ -9,17 +9,28 @@ public class Bullet : MonoBehaviour
     [Range(1, 10)]
     [SerializeField] private float lifeTime = 3f;
 
+    [Range(1, 10)]
+    [SerializeField] private float maxDistance = 3f;
     public float damage = 50f;
     
     private Rigidbody2D rb;
 
     public Vector3 direction;
+
+    public Transform playerTransform;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         Destroy(gameObject, lifeTime);
     }
-
+    private void Update()
+    {
+        if (Vector3.Distance(transform.position, playerTransform.position) > maxDistance)
+        {
+            Destroy(gameObject);
+        }
+    }
     private void FixedUpdate()
     {
         rb.linearVelocity = direction * speed;

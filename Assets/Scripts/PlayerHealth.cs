@@ -34,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.Log("Player defeated by enemy ID: " + enemyID);
             currentHealth = 0f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(1);
         }
     }
 }

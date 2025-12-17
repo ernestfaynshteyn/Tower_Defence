@@ -60,6 +60,7 @@ public class SmoothMouseFollow : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         Vector3 directionOffset = new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread),0);
         bullet.GetComponent<Bullet>().direction = transform.right + directionOffset;
+        bullet.GetComponent<Bullet>().playerTransform = transform;
         bullet.gameObject.transform.right = transform.up;
     }
     private void Reload()
