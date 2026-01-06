@@ -4,9 +4,9 @@ public class Shottingscript : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
-    [Range(0.01f, 3f)]
+    [Range(0.00000000001f, 3f)]
     [SerializeField] private float firingrate = 0.1f;
-    [Range(0f, 1f)]
+    [Range(0f, 10f)]
     [SerializeField] private float spread = 0.5f;
     [Range(1f, 12f)]
     [SerializeField] private int bulletPerShot = 1;

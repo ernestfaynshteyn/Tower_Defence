@@ -2,6 +2,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     private float health = 100f;
+    public int moneyReward = 10;
 
     public Animator animator;
 
@@ -25,7 +26,17 @@ public class EnemyHealth : MonoBehaviour
         if (health <= 0f)
         {
             WaveManager.Instance.enemyleft = WaveManager.Instance.enemyleft - 1;
-            Destroy(gameObject);
+            Die();
         }
+    }
+    void Die()
+    {
+        CurrencyManager.Instance.AddMoney(moneyReward);
+        Destroy(gameObject);
+
+        animator.SetTrigger("Die");
+        // Disable the enemy
+        GetComponent<Collider>().enabled = false;
+        this.enabled = false;
     }
 }
