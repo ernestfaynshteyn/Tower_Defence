@@ -21,14 +21,16 @@ public class EnemyMovement : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
         if (target != null)
         {
-            // Calculate the step to move this frame
+            // Calculate the step to move this frame    
             float step = speed * Time.deltaTime;
 
             // Move the current object's position towards the target's position
-            transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+            if (Vector3.Distance(target.position, transform.position)>1.5f) {
+                transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+            }
         }
     }
 }
