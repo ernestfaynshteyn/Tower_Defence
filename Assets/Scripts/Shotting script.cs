@@ -14,7 +14,7 @@ public class Shottingscript : MonoBehaviour
     [Range(0, 100f)]
     [SerializeField] private float currentHeat = 0;
     [SerializeField] private float HeatPerSec;
-    [SerializeField] private float coolingRate;
+    [SerializeField] private float coolingRate; 
     [Range(0, 100)]
     [SerializeField] private int maxMagSize;
     [SerializeField] private int currentMag = 0;
