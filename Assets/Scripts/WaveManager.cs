@@ -8,6 +8,7 @@ public class WaveManager : MonoBehaviour
     public int enemyNeeded = 10;
     public int enemySpawned = 0;
     public int currentWave = 1;
+    private bool isWaitingForNextWave = false;
     private bool isWaveActive = false;
     public float timeBetweenWaves = 5f;
     private bool waveRewardGiven = false;
@@ -32,14 +33,15 @@ public class WaveManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        StartWave();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isWaveActive && enemySpawned >= enemyNeeded && enemyleft <= 0)
+        if (isWaveActive && enemySpawned >= enemyNeeded && enemyleft <= 0 && !isWaitingForNextWave)
         {
+            isWaitingForNextWave = true;
             StartCoroutine(NextWaveCooldown());
         }
 
@@ -55,15 +57,24 @@ public class WaveManager : MonoBehaviour
     IEnumerator NextWaveCooldown()
     {
         isWaveActive = false;
+
         yield return new WaitForSeconds(timeBetweenWaves);
 
-        enemyNeeded++;
+        int extraEnemies = currentWave + Random.Range(
+            1,
+            4);
+        enemyNeeded += extraEnemies;
+
         enemySpawned = 0;
         enemyleft = enemyNeeded;
-        waveRewardGiven = false; // reset here
+        waveRewardGiven = false;
+        isWaitingForNextWave = false;
 
         StartWave();
     }
+
+
+
 
     void StartWave()
     {

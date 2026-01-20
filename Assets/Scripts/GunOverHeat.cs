@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GunOverheat : MonoBehaviour
 {
     [Header("Heat Settings")]
+    public Slider slider;
     public float currentHeat = 0f;
     public float maxHeat = 100f;
 
@@ -21,5 +23,6 @@ public class GunOverheat : MonoBehaviour
 
     void Update()
     {
+        slider.value = currentHeat;
     }
 }

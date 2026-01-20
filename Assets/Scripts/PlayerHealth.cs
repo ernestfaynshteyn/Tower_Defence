@@ -12,15 +12,6 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = health;
         healthBar.SetMaxHealth(health);
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-    }
-
     public void TakeDamage(float damage, int enemyID)
     {
         currentHealth -= damage;

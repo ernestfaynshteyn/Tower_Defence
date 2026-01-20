@@ -2,7 +2,7 @@
 
 public class flameThrowerDamage : MonoBehaviour
 {
-    [Range(1, 10)]
+    [Range(1, 1000)]
     [SerializeField] private float flameDamage;
 
     [SerializeField] private float maxHeat = 100f;
@@ -23,7 +23,7 @@ public class flameThrowerDamage : MonoBehaviour
     {
         bool firing = Input.GetMouseButton(0);
 
-        // 🔥 FIRING
+        // FIRING
         if (firing && !overheated)
         {
             if (!particle.isPlaying)
@@ -38,7 +38,7 @@ public class flameThrowerDamage : MonoBehaviour
                 particle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
             }
         }
-        // 🧊 COOLING
+        // COOLING
         else
         {
             if (particle.isPlaying)
@@ -48,7 +48,7 @@ public class flameThrowerDamage : MonoBehaviour
             currentHeat = Mathf.Clamp(currentHeat, 0, maxHeat);
         }
 
-        // ♻ RECOVER FROM OVERHEAT
+        // RECOVER FROM OVERHEAT
         if (overheated && currentHeat <= 0)
         {
             overheated = false;

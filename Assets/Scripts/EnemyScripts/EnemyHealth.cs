@@ -53,7 +53,7 @@ public class EnemyHealth : MonoBehaviour
 
         animator.SetTrigger("Die");
         // Disable the enemy
-        GetComponent<Collider>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
     }
 
