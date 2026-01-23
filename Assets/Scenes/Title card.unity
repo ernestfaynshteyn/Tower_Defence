@@ -1576,8 +1576,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1381360419}
   - component: {fileID: 1381360418}
+  - component: {fileID: 1381360420}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: GlobalData
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1595,6 +1596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b42cf74b66ba6f489eff87f0bca73c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedWeapon: 
 --- !u!4 &1381360419
 Transform:
   m_ObjectHideFlags: 0
@@ -1610,6 +1612,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1381360420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381360417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ca55fb16c14a1409eb6c541df204e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastEnemyThatKilledPlayer: 
 --- !u!1 &1718220721
 GameObject:
   m_ObjectHideFlags: 0

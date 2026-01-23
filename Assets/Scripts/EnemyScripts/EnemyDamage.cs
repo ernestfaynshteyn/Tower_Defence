@@ -7,7 +7,7 @@ public class EnemyDamage : MonoBehaviour
 
     private float nextDamageTimer  = 0f;
 
-    public int enemyID=0;
+    public string enemyID;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,10 +24,15 @@ public class EnemyDamage : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>().;
             if (nextDamageTimer >= damageRate)
             {
                 nextDamageTimer = 0;
-                collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damageAmount, enemyID);
+                playerHealth.TakeDamage(damageAmount, enemyID);
+            }
+            if (playerHealth.currentHealth <= 0)
+            {
+                GlobalData
             }
             nextDamageTimer += Time.deltaTime;
         }

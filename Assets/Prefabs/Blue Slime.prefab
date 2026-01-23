@@ -217,6 +217,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53914c51dae6d14d95d482089f004a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  moveSpeed: 2
+  slowResistance: 0
+  stunResistance: 0
+  moneyReward: 10
   animator: {fileID: 0}
 --- !u!114 &6322769596096450460
 MonoBehaviour:
@@ -246,4 +251,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 10
   damageRate: 1
-  enemyID: 0
+  enemyID: 2

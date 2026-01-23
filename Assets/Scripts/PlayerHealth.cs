@@ -12,20 +12,30 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = health;
         healthBar.SetMaxHealth(health);
     }
-    public void TakeDamage(float damage, int enemyID)
+    public void TakeDamage(float damage, string enemyID)
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         CheckForHealth(enemyID);
     }
 
-    public void CheckForHealth(int enemyID)
+    public void CheckForHealth(string enemyID)
     {
         if (currentHealth <= 0.01f)
         {
-            Debug.Log("Player defeated by enemy ID: " + enemyID);
+            if (GlobalData.Instance != null)
+            {
+                GlobalData.Instance.lastEnemyThatKilledPlayer = enemyID;
+                Debug.Log("Player defeated by enemy ID: " + enemyID);
+            }
+            else
+            {
+                Debug.LogError("GlobalData Instance is NULL!");
+            }
+
             currentHealth = 0f;
             SceneManager.LoadScene(1);
         }
     }
+
 }
