@@ -21,8 +21,48 @@ public class GunOverheat : MonoBehaviour
     public bool isOverheated = false;
     private bool isHoldingFire = false;
 
+    void Start()
+    {
+        slider.minValue = 0f;
+        slider.maxValue = maxHeat;
+        slider.value = currentHeat;
+    }
+
     void Update()
     {
+        // Example input (left mouse button)
+        isHoldingFire = Input.GetMouseButton(0);
+
+        if (isHoldingFire && !isOverheated)
+        {
+            currentHeat += holdHeatPerSecond * Time.deltaTime;
+        }
+        else
+        {
+            currentHeat -= coolingRate * Time.deltaTime;
+        }
+
+        // Clamp heat value
+        currentHeat = Mathf.Clamp(currentHeat, 0f, maxHeat);
+
+        if (currentHeat >= maxHeat)
+        {
+            isOverheated = true;
+        }
+        else if (currentHeat <= maxHeat * 0.3f) // cooldown threshold
+        {
+            isOverheated = false;
+        }
+
         slider.value = currentHeat;
+    }
+
+    // Call this when a shot is fired
+    public void AddShotHeat()
+    {
+        if (isOverheated) return;
+
+        currentHeat += heatPerShot;
+        currentHeat = Mathf.Clamp(currentHeat, 0f, maxHeat);
     }
 }

@@ -1,16 +1,16 @@
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
+    using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour
 {
-    public TextMeshProUGUI killedByText;
-    public Image image;
-
-    void Start()
+    public void RestartGame()
     {
-        killedByText.text =
-            "Killed by: " + GlobalData.Instance.lastEnemyThatKilledPlayer;
+        SceneManager.LoadScene(2);
+    }
 
+    public void RestartGame2()
+    {
+        SceneManager.LoadScene(3);
     }
 }
+

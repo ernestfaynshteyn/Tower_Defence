@@ -24,7 +24,7 @@ public class EnemyDamage : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>().;
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
             if (nextDamageTimer >= damageRate)
             {
                 nextDamageTimer = 0;
@@ -32,7 +32,7 @@ public class EnemyDamage : MonoBehaviour
             }
             if (playerHealth.currentHealth <= 0)
             {
-                GlobalData
+                GlobalData.Instance.sprite = GetComponent<SpriteRenderer>().sprite;
             }
             nextDamageTimer += Time.deltaTime;
         }

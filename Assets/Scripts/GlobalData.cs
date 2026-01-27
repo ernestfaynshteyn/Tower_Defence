@@ -6,7 +6,7 @@ public class GlobalData : MonoBehaviour
     public static GlobalData Instance;
 
     public string lastEnemyThatKilledPlayer;
-    public Image image;
+    public Sprite sprite;
     
     void Awake()
     {
