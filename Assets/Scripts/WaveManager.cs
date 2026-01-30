@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+using TMPro;
 public class WaveManager : MonoBehaviour
 {
     public static WaveManager Instance { get; private set; }
@@ -12,6 +12,7 @@ public class WaveManager : MonoBehaviour
     private bool isWaveActive = false;
     public float timeBetweenWaves = 5f;
     private bool waveRewardGiven = false;
+    private TextMeshProUGUI waveTitleTMP;
 
     public GameObject waveTitle;
 
@@ -21,7 +22,6 @@ public class WaveManager : MonoBehaviour
         // Check if an instance already exists
         if (Instance != null && Instance != this)
         {
-            // If another instance exists, destroy this one;
             Destroy(this.gameObject);
         }
         else
@@ -30,7 +30,6 @@ public class WaveManager : MonoBehaviour
             Instance = this;
         }
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         StartWave();
@@ -51,6 +50,7 @@ public class WaveManager : MonoBehaviour
             waveTitle.SetActive(true);
             CurrencyManager.Instance.AddMoney(200);
             waveRewardGiven = true;
+            Debug.Log("current wave " + currentWave);
         }
     }
 
@@ -78,6 +78,8 @@ public class WaveManager : MonoBehaviour
 
     void StartWave()
     {
+        waveTitleTMP = waveTitle.GetComponent<TextMeshProUGUI>();
+        waveTitleTMP.text = "Wave: " + currentWave.ToString();
         isWaveActive = true;
     }
 }
