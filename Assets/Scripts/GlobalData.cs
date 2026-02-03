@@ -37,8 +37,6 @@ public class GlobalData : MonoBehaviour
     public void SetNormal() => currentDifficulty = Difficulty.Normal;
     public void SetHard() => currentDifficulty = Difficulty.Hard;
     public void SetExtreme() => currentDifficulty = Difficulty.Extreme;
-
-    // ▶ START BUTTON
     public void StartGame()
     {
         Debug.Log("Starting game on " + currentDifficulty);

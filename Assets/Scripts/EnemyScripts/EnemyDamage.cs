@@ -11,7 +11,7 @@ public class EnemyDamage : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        ApplyDifficulty();
     }
 
     // Update is called once per frame
@@ -35,6 +35,32 @@ public class EnemyDamage : MonoBehaviour
                 GlobalData.Instance.sprite = GetComponent<SpriteRenderer>().sprite;
             }
             nextDamageTimer += Time.deltaTime;
+        }
+    }
+
+    void ApplyDifficulty()
+    {
+        switch (GlobalData.Instance.currentDifficulty)
+        {
+            case GlobalData.Difficulty.Easy:
+                damageAmount = 7;
+                damageRate = 1.2f;
+                break;
+
+            case GlobalData.Difficulty.Normal:
+                damageAmount = 10;
+                damageRate = 1f;
+                break;
+
+            case GlobalData.Difficulty.Hard:
+                damageAmount = 13;
+                damageRate = 0.8f;
+                break;
+
+            case GlobalData.Difficulty.Extreme:
+                damageAmount = 15;
+                damageRate = 0.6f;
+                break;
         }
     }
 }

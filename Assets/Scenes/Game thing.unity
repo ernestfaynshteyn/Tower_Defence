@@ -387,80 +387,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1302cd89fef1cce478751b5c6d1f910f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minSpawnTime: 1
+  maxSpawnTime: 3
+  normalEnemies:
+  - {fileID: 8463626256710258506, guid: e373bcdea1e85b94886fc580ba391d79, type: 3}
+  - {fileID: 8463626256710258506, guid: 3914d96c339890646a795568cc03a26d, type: 3}
+  - {fileID: 8463626256710258506, guid: 9826db69588fc494abb1143e6346bdef, type: 3}
+  bossEnemy: {fileID: 8406745479353245597, guid: 4fb29249d062d25458ae1adacaa949d9, type: 3}
   spawnPoints:
-  - minSpawnTime: 0.5
-    maxSpawnTime: 1
-    spawnTime: 0
-    spawnTimer: 1
-    spawnTransform: {fileID: 2072960944}
-    enemyList:
-    - {fileID: 8463626256710258506, guid: e373bcdea1e85b94886fc580ba391d79, type: 3}
-    - {fileID: 8463626256710258506, guid: 3914d96c339890646a795568cc03a26d, type: 3}
-    - {fileID: 8463626256710258506, guid: 9826db69588fc494abb1143e6346bdef, type: 3}
-  - minSpawnTime: 0.5
-    maxSpawnTime: 1
-    spawnTime: 0
-    spawnTimer: 1
-    spawnTransform: {fileID: 94612839}
-    enemyList:
-    - {fileID: 8463626256710258506, guid: e373bcdea1e85b94886fc580ba391d79, type: 3}
-    - {fileID: 8463626256710258506, guid: 3914d96c339890646a795568cc03a26d, type: 3}
-    - {fileID: 8463626256710258506, guid: 9826db69588fc494abb1143e6346bdef, type: 3}
-  - minSpawnTime: 0.5
-    maxSpawnTime: 1
-    spawnTime: 0
-    spawnTimer: 1
-    spawnTransform: {fileID: 182641533}
-    enemyList:
-    - {fileID: 8463626256710258506, guid: e373bcdea1e85b94886fc580ba391d79, type: 3}
-    - {fileID: 8463626256710258506, guid: 3914d96c339890646a795568cc03a26d, type: 3}
-    - {fileID: 8463626256710258506, guid: 9826db69588fc494abb1143e6346bdef, type: 3}
-  - minSpawnTime: 0.5
-    maxSpawnTime: 1
-    spawnTime: 0
-    spawnTimer: 1
-    spawnTransform: {fileID: 573173174}
-    enemyList:
-    - {fileID: 8463626256710258506, guid: e373bcdea1e85b94886fc580ba391d79, type: 3}
-    - {fileID: 8463626256710258506, guid: 3914d96c339890646a795568cc03a26d, type: 3}
-    - {fileID: 8463626256710258506, guid: 9826db69588fc494abb1143e6346bdef, type: 3}
-  - minSpawnTime: 0.5
-    maxSpawnTime: 1
-    spawnTime: 0
-    spawnTimer: 1
-    spawnTransform: {fileID: 875321042}
-    enemyList:
-    - {fileID: 8463626256710258506, guid: e373bcdea1e85b94886fc580ba391d79, type: 3}
-    - {fileID: 8463626256710258506, guid: 3914d96c339890646a795568cc03a26d, type: 3}
-    - {fileID: 8463626256710258506, guid: 9826db69588fc494abb1143e6346bdef, type: 3}
-  - minSpawnTime: 0.5
-    maxSpawnTime: 1
-    spawnTime: 0
-    spawnTimer: 1
-    spawnTransform: {fileID: 2012786145}
-    enemyList:
-    - {fileID: 8463626256710258506, guid: e373bcdea1e85b94886fc580ba391d79, type: 3}
-    - {fileID: 8463626256710258506, guid: 3914d96c339890646a795568cc03a26d, type: 3}
-    - {fileID: 8463626256710258506, guid: 9826db69588fc494abb1143e6346bdef, type: 3}
-  - minSpawnTime: 0.5
-    maxSpawnTime: 1
-    spawnTime: 0
-    spawnTimer: 1
-    spawnTransform: {fileID: 1701078362}
-    enemyList:
-    - {fileID: 8463626256710258506, guid: e373bcdea1e85b94886fc580ba391d79, type: 3}
-    - {fileID: 8463626256710258506, guid: 3914d96c339890646a795568cc03a26d, type: 3}
-    - {fileID: 8463626256710258506, guid: 9826db69588fc494abb1143e6346bdef, type: 3}
-  - minSpawnTime: 0.5
-    maxSpawnTime: 1
-    spawnTime: 0
-    spawnTimer: 1
-    spawnTransform: {fileID: 1879630608}
-    enemyList:
-    - {fileID: 8463626256710258506, guid: e373bcdea1e85b94886fc580ba391d79, type: 3}
-    - {fileID: 8463626256710258506, guid: 3914d96c339890646a795568cc03a26d, type: 3}
-    - {fileID: 8463626256710258506, guid: 9826db69588fc494abb1143e6346bdef, type: 3}
-  spawnTime: 0
+  - {fileID: 2072960944}
+  - {fileID: 94612839}
+  - {fileID: 182641533}
+  - {fileID: 573173174}
+  - {fileID: 875321042}
+  - {fileID: 2012786145}
+  - {fileID: 1701078362}
+  - {fileID: 1879630608}
 --- !u!4 &226775079
 Transform:
   m_ObjectHideFlags: 0
@@ -1333,6 +1275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastEnemyThatKilledPlayer: enemyID
   sprite: {fileID: 0}
+  currentDifficulty: 1
 --- !u!4 &861541249
 Transform:
   m_ObjectHideFlags: 0
@@ -1655,11 +1598,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6684c249d2c47c44b91c631a6da1afd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyleft: 10
+  currentWave: 1
   enemyNeeded: 10
   enemySpawned: 0
-  currentWave: 1
+  enemyleft: 10
   timeBetweenWaves: 5
+  bossWaveInterval: 10
   waveTitle: {fileID: 1530473203}
 --- !u!114 &1213449532
 MonoBehaviour:

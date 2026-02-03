@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public Transform     target;
+    public Transform target;
     public float speed = 3f;
-
     public void Start()
     {
+        ApplyDifficulty();
         GameObject playerObj = GameObject.FindWithTag("Player");
 
         if (playerObj != null)
@@ -21,16 +21,38 @@ public class EnemyMovement : MonoBehaviour
     }
 
     void Update()
-    {   
+    {
         if (target != null)
         {
             // Calculate the step to move this frame    
             float step = speed * Time.deltaTime;
 
             // Move the current object's position towards the target's position
-            if (Vector3.Distance(target.position, transform.position)>1.5f) {
+            if (Vector3.Distance(target.position, transform.position) > 1.5f)
+            {
                 transform.position = Vector3.MoveTowards(transform.position, target.position, step);
             }
+        }
+    }
+    void ApplyDifficulty()
+    {
+        switch (GlobalData.Instance.currentDifficulty)
+        {
+            case GlobalData.Difficulty.Easy:
+                speed = 2f;
+                break;
+
+            case GlobalData.Difficulty.Normal:
+                speed = 3f;
+                break;
+
+            case GlobalData.Difficulty.Hard:
+                speed = 3.5f;
+                break;
+
+            case GlobalData.Difficulty.Extreme:
+                speed = 4f;
+                break;
         }
     }
 }
