@@ -64,22 +64,22 @@ public class WaveManager : MonoBehaviour
     {
         switch (GlobalData.Instance.currentDifficulty)
         {
-            case GlobalData.Difficulty.Easy:
+            case Difficulty.Easy:
                 enemyNeeded = 8;
                 timeBetweenWaves = 6f;
                 break;
 
-            case GlobalData.Difficulty.Normal:
+            case Difficulty.Normal:
                 enemyNeeded = 12;
                 timeBetweenWaves = 5f;
                 break;
 
-            case GlobalData.Difficulty.Hard:
+            case Difficulty.Hard:
                 enemyNeeded = 18;
                 timeBetweenWaves = 4f;
                 break;
 
-            case GlobalData.Difficulty.Extreme:
+            case Difficulty.Extreme:
                 enemyNeeded = 25;
                 timeBetweenWaves = 3f;
                 break;
@@ -119,10 +119,10 @@ public class WaveManager : MonoBehaviour
 
         switch (GlobalData.Instance.currentDifficulty)
         {
-            case GlobalData.Difficulty.Easy: difficultyMultiplier = 0.8f; break;
-            case GlobalData.Difficulty.Normal: difficultyMultiplier = 1f; break;
-            case GlobalData.Difficulty.Hard: difficultyMultiplier = 1.3f; break;
-            case GlobalData.Difficulty.Extreme: difficultyMultiplier = 1.6f; break;
+            case Difficulty.Easy: difficultyMultiplier = 0.8f; break;
+            case Difficulty.Normal: difficultyMultiplier = 1f; break;
+            case Difficulty.Hard: difficultyMultiplier = 1.3f; break;
+            case Difficulty.Extreme: difficultyMultiplier = 1.6f; break;
         }
 
         float curve = Mathf.Pow(currentWave, 1.15f);
@@ -133,10 +133,10 @@ public class WaveManager : MonoBehaviour
     {
         switch (GlobalData.Instance.currentDifficulty)
         {
-            case GlobalData.Difficulty.Easy: return 150;
-            case GlobalData.Difficulty.Normal: return 200;
-            case GlobalData.Difficulty.Hard: return 300;
-            case GlobalData.Difficulty.Extreme: return 450;
+            case Difficulty.Easy: return 150;
+            case Difficulty.Normal: return 200;
+            case Difficulty.Hard: return 300;
+            case Difficulty.Extreme: return 450;
         }
         return 200;
     }

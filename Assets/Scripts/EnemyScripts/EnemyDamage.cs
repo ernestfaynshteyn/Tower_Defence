@@ -42,22 +42,22 @@ public class EnemyDamage : MonoBehaviour
     {
         switch (GlobalData.Instance.currentDifficulty)
         {
-            case GlobalData.Difficulty.Easy:
+            case Difficulty.Easy:
                 damageAmount = 7;
                 damageRate = 1.2f;
                 break;
 
-            case GlobalData.Difficulty.Normal:
+            case Difficulty.Normal:
                 damageAmount = 10;
                 damageRate = 1f;
                 break;
 
-            case GlobalData.Difficulty.Hard:
+            case Difficulty.Hard:
                 damageAmount = 13;
                 damageRate = 0.8f;
                 break;
 
-            case GlobalData.Difficulty.Extreme:
+            case Difficulty.Extreme:
                 damageAmount = 15;
                 damageRate = 0.6f;
                 break;

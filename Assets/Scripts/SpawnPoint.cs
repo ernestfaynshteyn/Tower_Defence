@@ -40,19 +40,19 @@ public class Spawner : MonoBehaviour
     {
         switch (GlobalData.Instance.currentDifficulty)
         {
-            case GlobalData.Difficulty.Easy:
+            case Difficulty.Easy:
                 minSpawnTime = 1f;
                 maxSpawnTime = 3f;
                 break;
-            case GlobalData.Difficulty.Normal:
+            case Difficulty.Normal:
                 minSpawnTime = 0.5f;
                 maxSpawnTime = 2.5f;
                 break;
-            case GlobalData.Difficulty.Hard:
+            case Difficulty.Hard:
                 minSpawnTime = 0.3f;
                 maxSpawnTime = 2f;
                 break;
-            case GlobalData.Difficulty.Extreme:
+            case Difficulty.Extreme:
                 minSpawnTime = 0.1f;
                 maxSpawnTime = 1f;
                 break;

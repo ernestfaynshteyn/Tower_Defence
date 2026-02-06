@@ -1276,6 +1276,7 @@ MonoBehaviour:
   lastEnemyThatKilledPlayer: enemyID
   sprite: {fileID: 0}
   currentDifficulty: 1
+  selectedWeapon: 0
 --- !u!4 &861541249
 Transform:
   m_ObjectHideFlags: 0
@@ -1564,6 +1565,7 @@ GameObject:
   - component: {fileID: 1213449531}
   - component: {fileID: 1213449532}
   - component: {fileID: 1213449534}
+  - component: {fileID: 1213449535}
   m_Layer: 0
   m_Name: RunTimeData
   m_TagString: Untagged
@@ -1629,6 +1631,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 824c95820b695d84c8947603e055b00a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1213449535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213449529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43bfa7b570f2cf041bd76a587ce96ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1280893709

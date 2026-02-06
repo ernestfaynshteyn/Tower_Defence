@@ -92,22 +92,22 @@ public class EnemyHealth : MonoBehaviour
     {
         switch (GlobalData.Instance.currentDifficulty)
         {
-            case GlobalData.Difficulty.Easy:
+            case Difficulty.Easy:
                 health = 75f;
                 moveSpeed = 2f;
                 break;
 
-            case GlobalData.Difficulty.Normal:
+            case Difficulty.Normal:
                 health = 100f;
                 moveSpeed = 2.5f;
                 break;
 
-            case GlobalData.Difficulty.Hard:
+            case Difficulty.Hard:
                 health = 125f;
                 moveSpeed = 3f;
                 break;
 
-            case GlobalData.Difficulty.Extreme:
+            case Difficulty.Extreme:
                 health = 150f;
                 moveSpeed = 2f;
                 break;

@@ -38,19 +38,19 @@ public class EnemyMovement : MonoBehaviour
     {
         switch (GlobalData.Instance.currentDifficulty)
         {
-            case GlobalData.Difficulty.Easy:
+            case Difficulty.Easy:
                 speed = 2f;
                 break;
 
-            case GlobalData.Difficulty.Normal:
+            case Difficulty.Normal:
                 speed = 3f;
                 break;
 
-            case GlobalData.Difficulty.Hard:
+            case Difficulty.Hard:
                 speed = 3.5f;
                 break;
 
-            case GlobalData.Difficulty.Extreme:
+            case Difficulty.Extreme:
                 speed = 4f;
                 break;
         }
