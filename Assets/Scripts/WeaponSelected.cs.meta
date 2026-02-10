@@ -1,2 +1,15 @@
 fileFormatVersion: 2
 guid: 43bfa7b570f2cf041bd76a587ce96ed0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - flamethrower: {fileID: 182542, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
+  - gun1: {fileID: 6898963308910696002, guid: de32a8f7e3d8f3a4fac88a2b4b4df2a8, type: 3}
+  - gun2: {fileID: 5603299098213124397, guid: 9c7c0437db7c91e4bb0795fac58566a5, type: 3}
+  - gun3: {fileID: 4033729804615810371, guid: ea756f0a134eb0142afe1f010af6f129, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

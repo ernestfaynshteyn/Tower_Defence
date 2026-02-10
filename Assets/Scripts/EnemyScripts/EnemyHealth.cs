@@ -40,7 +40,6 @@ public class EnemyHealth : MonoBehaviour
             }
             if (health <= 0f)
             {
-                Debug.Log("CurrencyManager Instance: " + CurrencyManager.Instance);
                 CurrencyManager.Instance.AddMoney(moneyReward);
 
                 WaveManager.Instance.enemyleft = WaveManager.Instance.enemyleft - 1;

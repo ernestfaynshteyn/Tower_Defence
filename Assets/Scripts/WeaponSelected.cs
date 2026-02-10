@@ -7,7 +7,7 @@ public class WeaponSelected : MonoBehaviour
     public GameObject gun2;
     public GameObject gun3;
 
-    void Start()
+    void Awake()
     {
         ApplyWeapon();
     }

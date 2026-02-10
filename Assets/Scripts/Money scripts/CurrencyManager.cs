@@ -36,7 +36,6 @@ public class CurrencyManager : MonoBehaviour
     {
         money += amount;
         UpdateUI();
-        Debug.Log("Money: " + money);
     }
 
     public bool SpendMoney(int amount)
