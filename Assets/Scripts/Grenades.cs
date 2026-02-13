@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public enum GrenadeType
 {
     Frag,
@@ -6,36 +7,42 @@ public enum GrenadeType
     Flash,
     Molotov
 }
+
 public class Grenades : MonoBehaviour
 {
     [Header("Type")]
     public GrenadeType grenadeType;
 
-    [Header("Common")]
-    public float fuseTime = 1.5f;
-    public float radius = 3f;
+    [Header("Common Base Stats")]
+    public float baseFuseTime = 1.5f;
+    public float baseRadius = 3f;
 
     [Header("Frag")]
-    public int damage = 60;
+    public int baseDamage = 60;
 
     [Header("Smoke")]
-    public float smokeDuration = 5f;
-    public float slowMultiplier = 0.5f;
+    public float baseSmokeDuration = 5f;
+    public float baseSlowMultiplier = 0.5f;
 
     [Header("Flash")]
-    public float stunDuration = 2f;
+    public float baseStunDuration = 2f;
 
     [Header("Molotov")]
-    public float fireDuration = 6f;
-    public int fireDamagePerSecond = 8;
+    public float baseFireDuration = 6f;
+    public int baseFireDamagePerSecond = 8;
 
     public GameObject explosionFX;
     public GameObject smokeAreaPrefab;
     public GameObject fireAreaPrefab;
 
+    //private PlayerStats stats;
+    /*8
     void Start()
     {
-        Invoke(nameof(Explode), fuseTime);
+        stats = Object.FindAnyObjectByType<PlayerStats>();
+
+
+        Invoke(nameof(Explode), GetFuseTime());
     }
 
     void Explode()
@@ -60,50 +67,59 @@ public class Grenades : MonoBehaviour
         }
 
         if (explosionFX)
-        {
             Instantiate(explosionFX, transform.position, Quaternion.identity);
 
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
+    }
 
-        void FragExplode()
+    void FragExplode()
+    {
+        float radius = GetRadius();
+        int damage = Mathf.RoundToInt(GetDamage());
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius);
+
+        foreach (Collider2D hit in hits)
         {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius);
-
-            foreach (Collider2D hit in hits)
-            {
-                if (hit.CompareTag("Enemy"))
-                    hit.GetComponent<EnemyHealth>().TakeDamage(damage);
-            }
-        }
-
-        void SmokeExplode()
-        {
-            GameObject smoke = Instantiate(smokeAreaPrefab, transform.position, Quaternion.identity);
-            Destroy(smoke, smokeDuration);
-        }
-
-        void FlashExplode()
-        {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius);
-
-            foreach (Collider2D hit in hits)
-            {
-                if (hit.CompareTag("Enemy"))
-                    hit.GetComponent<EnemyHealth>().Stun(stunDuration);
-            }
-        }
-
-        void MolotovExplode()
-        {
-            GameObject fire = Instantiate(fireAreaPrefab, transform.position, Quaternion.identity);
-            Destroy(fire, fireDuration);
+            if (hit.CompareTag("Enemy"))
+                hit.GetComponent<EnemyHealth>().TakeDamage(damage);
         }
     }
+
+    void SmokeExplode()
+    {
+        float duration = GetSmokeDuration();
+
+        GameObject smoke = Instantiate(smokeAreaPrefab, transform.position, Quaternion.identity);
+        Destroy(smoke, duration);
+    }
+
+    void FlashExplode()
+    {
+        float radius = GetRadius();
+        float stunDuration = GetStunDuration();
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius);
+
+        foreach (Collider2D hit in hits)
+        {
+            if (hit.CompareTag("Enemy"))
+                hit.GetComponent<EnemyHealth>().Stun(stunDuration);
+        }
+    }
+
+    void MolotovExplode()
+    {
+        float duration = GetFireDuration();
+
+        GameObject fire = Instantiate(fireAreaPrefab, transform.position, Quaternion.identity);
+        Destroy(fire, duration);
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
-            other.GetComponent<EnemyHealth>().ApplySlow(slowMultiplier);
+            other.GetComponent<EnemyHealth>().ApplySlow(GetSlowMultiplier());
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -111,5 +127,30 @@ public class Grenades : MonoBehaviour
         if (other.CompareTag("Enemy"))
             other.GetComponent<EnemyHealth>().RemoveSlow();
     }
-}
 
+    // ----------- STAT GETTERS -----------
+
+    float GetFuseTime() =>
+        stats.GetFinalStat("Grenade_FuseTime", baseFuseTime);
+
+    float GetRadius() =>
+        stats.GetFinalStat("Grenade_Radius", baseRadius);
+
+    float GetDamage() =>
+        stats.GetFinalStat("Grenade_Damage", baseDamage);
+
+    float GetSmokeDuration() =>
+        stats.GetFinalStat("Grenade_SmokeDuration", baseSmokeDuration);
+
+    float GetSlowMultiplier() =>
+        stats.GetFinalStat("Grenade_SlowMultiplier", baseSlowMultiplier);
+
+    float GetStunDuration() =>
+        stats.GetFinalStat("Grenade_StunDuration", baseStunDuration);
+
+    float GetFireDuration() =>
+        stats.GetFinalStat("Grenade_FireDuration", baseFireDuration);
+
+    float GetFireDPS() =>
+        stats.GetFinalStat("Grenade_FireDPS", baseFireDamagePerSecond);*/
+}
