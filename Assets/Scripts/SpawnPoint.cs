@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class Spawner : MonoBehaviour
 {
     [Header("Spawn Settings")]
