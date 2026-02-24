@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SkillTree : MonoBehaviour
@@ -20,5 +21,10 @@ public class SkillTree : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public static implicit operator SkillTree(SkillTreeScript v)
+    {
+        throw new NotImplementedException();
     }
 }
