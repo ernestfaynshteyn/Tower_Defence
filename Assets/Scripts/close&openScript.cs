@@ -1,16 +1,23 @@
 using UnityEngine;
 
-public class closeopenScript : MonoBehaviour
+public class CloseOpenScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public GameObject uiPanel;
+
+    public GameObject openButton;
+    public GameObject closeButton;
+
+    public void OpenUI()
     {
-        
+        uiPanel.SetActive(true);
+        openButton.SetActive(false);
+        closeButton.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CloseUI()
     {
-        
+        uiPanel.SetActive(false);
+        openButton.SetActive(true);
+        closeButton.SetActive(false);
     }
 }
