@@ -6,7 +6,7 @@ using UnityEngine;
 public class SkillTreeScript : MonoBehaviour
 {
 
-    public static SkillTree skillTree;
+    public static SkillTreeScript skillTree;
     private void Awake() => skillTree = this;
 
     public int[] SkillLevels;
@@ -14,7 +14,7 @@ public class SkillTreeScript : MonoBehaviour
     public string[] SkillNames;
     public string[] SkillDescription;
 
-    public List<Skill> SkillList;
+    public List<Skills> SkillList;
     public GameObject SkillHolder;
 
     public int SkillPoint;
@@ -38,5 +38,13 @@ public class SkillTreeScript : MonoBehaviour
         };
 
         foreach (var skill in SkillHolder.GetComponentsInChildren<Skill>());
+
+        for (var i = 0; i < SkillList.Count; i++) SkillList[1].id = i;
+
+        UpdateAllSkillUI();
+    }
+    public void UpdateAllSkillUI()
+    {
+        foreach (var Skills in SkillList) Skills.UpdateUI();
     }
 }
