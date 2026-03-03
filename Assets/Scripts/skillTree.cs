@@ -17,6 +17,9 @@ public class SkillTreeScript : MonoBehaviour
     public List<Skills> SkillList;
     public GameObject SkillHolder;
 
+    public List<GameObject> ConnectorList;
+    public GameObject ConnecterHolder;
+
     public int SkillPoint;
 
     private void Start()
@@ -37,7 +40,8 @@ public class SkillTreeScript : MonoBehaviour
             "does this compound thing",
         };
 
-        foreach (var skill in SkillHolder.GetComponentsInChildren<Skill>());
+        foreach (var skill in SkillHolder.GetComponentsInChildren<Skills>() SkillList.Add(skill);
+        foreach (var connecter :RectTransform in SkillHolder.GetComponentsInChildren<RectTransform>() ConnectorList.Add(connecter);
 
         for (var i = 0; i < SkillList.Count; i++) SkillList[1].id = i;
 
