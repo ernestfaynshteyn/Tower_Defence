@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
+using System;
 
 public class SkillTreeScript : MonoBehaviour
 {
@@ -40,10 +41,21 @@ public class SkillTreeScript : MonoBehaviour
             "does this compound thing",
         };
 
-        foreach (var skill in SkillHolder.GetComponentsInChildren<Skills>() SkillList.Add(skill);
-        foreach (var connecter :RectTransform in SkillHolder.GetComponentsInChildren<RectTransform>() ConnectorList.Add(connecter);
+        foreach (var skill in SkillHolder.GetComponentsInChildren<Skills>())
+        {
+            SkillList.Add(skill);
+        }
+        foreach (RectTransform connecter in ConnecterHolder.GetComponentsInChildren<RectTransform>())
+        {
+            ConnectorList.Add(connecter.gameObject);
+        }
+        for (var i = 0; i < SkillList.Count; i++)
+        {
+            SkillList[i].id = i;
+        }
 
-        for (var i = 0; i < SkillList.Count; i++) SkillList[1].id = i;
+        SkillList[0].Connectedskills = new[] { 1, 2, 3 };
+        SkillList[2].Connectedskills = new[] { 4,5 };
 
         UpdateAllSkillUI();
     }
