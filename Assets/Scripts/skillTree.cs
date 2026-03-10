@@ -1,12 +1,8 @@
 using System.Collections.Generic;
-using System.Collections;
-using NUnit.Framework;
 using UnityEngine;
-using System;
 
 public class SkillTreeScript : MonoBehaviour
 {
-
     public static SkillTreeScript skillTree;
     private void Awake() => skillTree = this;
 
@@ -15,10 +11,10 @@ public class SkillTreeScript : MonoBehaviour
     public string[] SkillNames;
     public string[] SkillDescription;
 
-    public List<Skills> SkillList;
+    public List<Skills> SkillList = new List<Skills>();
     public GameObject SkillHolder;
 
-    public List<GameObject> ConnectorList;
+    public List<GameObject> ConnectorList = new List<GameObject>();
     public GameObject ConnecterHolder;
 
     public int SkillPoint;
@@ -28,39 +24,51 @@ public class SkillTreeScript : MonoBehaviour
         SkillPoint = 20;
 
         SkillLevels = new int[6];
-        SkillCaps = new int[] {1, 5, 5, 2, 10, 10};
+        SkillCaps = new int[] { 1, 5, 5, 2, 10, 10 };
 
-        SkillNames = new string[] {"upgrade 1", "upgrade 2", "upgrade 3", "upgrade 4", "upgrade 5", "upgrade 6"};
+        SkillNames = new string[]
+        {
+            "upgrade 1",
+            "upgrade 2",
+            "upgrade 3",
+            "upgrade 4",
+            "upgrade 5",
+            "upgrade 6"
+        };
+
         SkillDescription = new string[]
         {
             "does a thing",
             "does a cool thing",
             "does a really cool thing",
-            "Does an awesome thing",
+            "does an awesome thing",
             "does this math thing",
-            "does this compound thing",
+            "does this compound thing"
         };
 
-        foreach (var skill in SkillHolder.GetComponentsInChildren<Skills>())
+        foreach (var skill in SkillHolder.GetComponentsInChildren<Skills>(true))
         {
             SkillList.Add(skill);
         }
+
         foreach (RectTransform connecter in ConnecterHolder.GetComponentsInChildren<RectTransform>())
         {
             ConnectorList.Add(connecter.gameObject);
         }
-        for (var i = 0; i < SkillList.Count; i++)
+
+        for (int i = 0; i < SkillList.Count; i++)
         {
             SkillList[i].id = i;
         }
 
-        SkillList[0].Connectedskills = new[] { 1, 2, 3 };
-        SkillList[2].Connectedskills = new[] { 4,5 };
-
         UpdateAllSkillUI();
     }
+
     public void UpdateAllSkillUI()
     {
-        foreach (var Skills in SkillList) Skills.UpdateUI();
+        foreach (var skill in SkillList)
+        {
+            skill.UpdateUI();
+        }
     }
 }
