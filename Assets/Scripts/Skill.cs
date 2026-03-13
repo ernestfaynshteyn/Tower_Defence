@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -48,16 +48,12 @@ public class Skills : MonoBehaviour
         var tree = SkillTreeScript.skillTree;
 
         bool reqMet = RequirementsMet();
-        if (tree.SkillPoint[TreeID] >= Cost)
-        {
-
-        }
-        bool affordable = tree.SkillPoint[TreeID] >= Cost;
+        bool affordable = tree.SkillPoints[TreeID] >= Cost;
 
         if (tree.SkillLevels[id] >= SkillCap)
             img.color = Color.yellow;          // maxed out
         else if (!reqMet)
-            img.color = DimColor;              // requirements not met ? dimmed
+            img.color = DimColor;              // requirements not met → dimmed
         else if (affordable)
             img.color = Color.green;           // available and can buy
         else
