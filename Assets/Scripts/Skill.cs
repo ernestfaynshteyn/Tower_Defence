@@ -4,42 +4,45 @@ using TMPro;
 
 public class Skills : MonoBehaviour
 {
-    [Header("General Info")]
-    public int id;
-    public int TreeID = 0;          // Which tree this skill belongs to
+    [Header("Info")]
     public string SkillName;
     public string Description;
+
+    public int Level = 0;
     public int SkillCap = 1;
-    public int Cost = 1;             // Variable SP cost
+    public int Cost = 1;
 
-    [Header("Requirements")]
-    public int[] RequiredSkills;      // IDs of skills required
-    public int[] ConnectedSkills;     // IDs of skills this unlocks
+    [Header("Dependencies")]
+    public Skills[] RequiredSkills;
 
-    [Header("UI References")]
+    [Header("UI")]
     public TMP_Text TitleText;
     public TMP_Text DescriptionText;
-    public Color DimColor = new Color(0.5f, 0.5f, 0.5f, 1f); // dim for locked
+
+    public Color LockedColor = Color.gray;
+    public Color AvailableColor = Color.green;
+    public Color MaxedColor = Color.yellow;
 
     private Image img;
     private Button button;
 
-    private void Awake()
+    void Awake()
     {
         img = GetComponent<Image>();
         button = GetComponent<Button>();
     }
 
-    // Check if all required skills are unlocked
-    private bool RequirementsMet()
+    bool RequirementsMet()
     {
-        var tree = SkillTreeScript.skillTree;
+        if (RequiredSkills == null || RequiredSkills.Length == 0)
+            return true;
 
-        foreach (int req in RequiredSkills)
+        foreach (var skill in RequiredSkills)
         {
-            if (tree.SkillLevels[req] <= 0)
+            if (skill.Level <= 0)
                 return false;
         }
+
         return true;
     }
 
@@ -48,45 +51,30 @@ public class Skills : MonoBehaviour
         var tree = SkillTreeScript.skillTree;
 
         bool reqMet = RequirementsMet();
-        bool affordable = tree.SkillPoints[TreeID] >= Cost;
+        bool affordable = tree.SkillPoint >= Cost;
 
-        if (tree.SkillLevels[id] >= SkillCap)
-            img.color = Color.yellow;          // maxed out
+        if (Level >= SkillCap)
+            img.color = MaxedColor;
         else if (!reqMet)
-            img.color = DimColor;              // requirements not met → dimmed
+            img.color = LockedColor;
         else if (affordable)
-            img.color = Color.green;           // available and can buy
+            img.color = AvailableColor;
         else
-            img.color = Color.white;           // affordable but no skill points
+            img.color = Color.white;
 
-        // Button interactable
-        if (button != null)
-            button.interactable = reqMet && affordable && tree.SkillLevels[id] < SkillCap;
-
-        // Show connected skills only if this skill bought
-        foreach (int connected in ConnectedSkills)
-        {
-            tree.SkillList[connected].gameObject.SetActive(tree.SkillLevels[id] > 0);
-            if (tree.ConnectorList.Count > connected)
-                tree.ConnectorList[connected].SetActive(tree.SkillLevels[id] > 0);
-        }
+        button.interactable = reqMet && affordable && Level < SkillCap;
     }
 
     public void Buy()
     {
         var tree = SkillTreeScript.skillTree;
 
-        Debug.Log($"Trying to buy skill {id}, level {tree.SkillLevels[id]}, cost {Cost}, SP available {tree.SkillPoints[TreeID]}");
+        if (!RequirementsMet()) return;
+        if (Level >= SkillCap) return;
+        if (tree.SkillPoint < Cost) return;
 
-        if (tree.SkillLevels[id] >= SkillCap || tree.SkillPoints[TreeID] < Cost || !RequirementsMet())
-        {
-            Debug.Log("Cannot buy: maxed, not enough SP, or requirements not met");
-            return;
-        }
-
-        tree.SkillPoints[TreeID] -= Cost;
-        tree.SkillLevels[id]++;
-        Debug.Log($"Bought skill {id}. New level: {tree.SkillLevels[id]}");
+        tree.SkillPoint -= Cost;
+        Level++;
 
         tree.UpdateAllSkillUI();
     }

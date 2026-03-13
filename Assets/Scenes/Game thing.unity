@@ -509,15 +509,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02b64ee256af48443bc31fe9892edc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillLevels: 
-  SkillCaps: 
-  SkillNames: []
-  SkillDescription: []
+  SkillPoint: 0
   SkillList: []
   SkillHolder: {fileID: 91034845}
-  ConnectorList: []
-  ConnecterHolder: {fileID: 6984788435433198600}
-  SkillPoint: 0
 --- !u!1 &182641532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1931,17 +1925,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7691291246695342105, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
   m_PrefabInstance: {fileID: 1447512056963651756}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &746463604 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
-  m_PrefabInstance: {fileID: 1447512056963651756}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &790895749 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3997131002464116358, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
@@ -2808,17 +2791,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 598951253818072533, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
   m_PrefabInstance: {fileID: 2050350784680435490}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1350495587 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
-  m_PrefabInstance: {fileID: 2050350784680435490}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1375475679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5116,7 +5088,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1542, y: -958}
+  m_AnchoredPosition: {x: -1404, y: -745}
   m_SizeDelta: {x: -404.5629, y: -996.7252}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3415702121330473233
@@ -5730,12 +5702,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: 'ConnectedSkills.Array.data[0]'
-      value: 
-      objectReference: {fileID: 746463604}
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: 'ConnectedSkills.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1350495587}
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: 'Connectedskills.Array.data[0]'
       value: 5
