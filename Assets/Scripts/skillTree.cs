@@ -17,19 +17,23 @@ public class SkillTreeScript : MonoBehaviour
 
     void Start()
     {
+        SkillList.Clear();
+
         foreach (var skill in SkillHolder.GetComponentsInChildren<Skills>(true))
         {
             SkillList.Add(skill);
         }
 
-        UpdateAllSkillUI();
+        
+        Invoke(nameof(UpdateAllSkillUI), 0.05f);
     }
 
     public void UpdateAllSkillUI()
     {
         foreach (var skill in SkillList)
         {
-            skill.UpdateUI();
+            if (skill != null)
+                skill.UpdateUI();
         }
     }
 }

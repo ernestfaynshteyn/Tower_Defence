@@ -30,6 +30,14 @@ public class Skills : MonoBehaviour
     {
         img = GetComponent<Image>();
         button = GetComponent<Button>();
+
+        // Auto-hook button click (so you don’t rely on inspector)
+        button.onClick.AddListener(Buy);
+    }
+
+    void Start()
+    {
+        UpdateUI(); // ensure correct state at start
     }
 
     bool RequirementsMet()
@@ -50,31 +58,69 @@ public class Skills : MonoBehaviour
     {
         var tree = SkillTreeScript.skillTree;
 
+        if (tree == null)
+        {
+            Debug.LogError("SkillTreeScript not found!");
+            return;
+        }
+
         bool reqMet = RequirementsMet();
         bool affordable = tree.SkillPoint >= Cost;
 
         if (Level >= SkillCap)
+        {
             img.color = MaxedColor;
+        }
         else if (!reqMet)
-            img.color = LockedColor;
+        {
+            Color c = LockedColor;
+            c.a = LockedColor.a;
+            img.color = c;
+        }
         else if (affordable)
+        {
             img.color = AvailableColor;
+        }
         else
+        {
             img.color = Color.white;
-
+        }
+        Debug.Log("reqMet" + reqMet);
+        Debug.Log("affordable" + affordable);
+        Debug.Log("Level < SkillCap"+ (Level < SkillCap));
         button.interactable = reqMet && affordable && Level < SkillCap;
+
+        // Optional UI text updates
+        if (TitleText != null)
+            TitleText.text = SkillName;
+
+        if (DescriptionText != null)
+            DescriptionText.text = Description;
+
+        // Debug
+        Debug.Log($"{SkillName} | Interactable: {button.interactable} | Level: {Level}");
     }
 
     public void Buy()
     {
         var tree = SkillTreeScript.skillTree;
 
-        if (!RequirementsMet()) return;
-        if (Level >= SkillCap) return;
-        if (tree.SkillPoint < Cost) return;
+        if (tree == null)
+        {
+            Debug.LogError("SkillTreeScript missing!");
+            return;
+        }
+
+        Debug.Log($"Trying to buy {SkillName}");
+
+        if (!RequirementsMet()) { Debug.Log("Requirements not met"); return; }
+        if (Level >= SkillCap) { Debug.Log("Already maxed"); return; }
+        if (tree.SkillPoint < Cost) { Debug.Log("Not enough points"); return; }
 
         tree.SkillPoint -= Cost;
         Level++;
+
+        Debug.Log($"Bought {SkillName}, new level: {Level}");
 
         tree.UpdateAllSkillUI();
     }

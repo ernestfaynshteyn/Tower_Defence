@@ -37,5 +37,4 @@ public class PlayerHealth : MonoBehaviour
             SceneManager.LoadScene(1);
         }
     }
-
 }
