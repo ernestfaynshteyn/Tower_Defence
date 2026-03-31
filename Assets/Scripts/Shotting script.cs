@@ -4,6 +4,9 @@ public class Shottingscript : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
+
+
+    [SerializeField] private float damage;
     [Range(0.00000000001f, 3f)]
     [SerializeField] private float firingrate = 0.1f;
     [Range(0f, 10f)]
@@ -96,5 +99,14 @@ public class Shottingscript : MonoBehaviour
     {
         reloading = false;
         currentMag = maxMagSize;
+    }
+
+    public float GetDamage()
+    {
+        return damage;
+    }
+    public void SetDamage(float newDamage)
+    {
+        damage = newDamage;
     }
 }

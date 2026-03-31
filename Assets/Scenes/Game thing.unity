@@ -1607,6 +1607,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: Attacks
+      objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
       value: 1
@@ -1734,6 +1738,10 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: no perks
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -2097,6 +2105,26 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_text
+      value: 3% lower reload per upgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_fontSize
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_margin.w
+      value: 39.27366
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_margin.y
+      value: 12.164898
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: id
       value: 6
@@ -2117,6 +2145,10 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1306156379}
+    - target: {fileID: 5259978551695877241, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 27
+      objectReference: {fileID: 0}
     - target: {fileID: 6296602602893028856, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_Name
       value: skill 8 (attack)
@@ -2128,6 +2160,14 @@ PrefabInstance:
     - target: {fileID: 6474596650186123603, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6860555215656721980, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -29
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204232510854928942, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_text
+      value: reload/cooldown
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3630,7 +3670,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 268, y: 101}
+  m_AnchoredPosition: {x: -293, y: -59}
   m_SizeDelta: {x: -404.1448, y: -996.44885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180448452
@@ -6097,6 +6137,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: Better chances
+      objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
       value: 1
@@ -6240,6 +6284,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -26
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: +3% chance for multishot
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -6846,6 +6898,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: MORE Crit damage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_fontSize
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 22
+      objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
       value: 1
@@ -6985,6 +7049,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -27.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: +3% crit damage per upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -8712,6 +8784,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: Lifesteal?
+      objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
       value: 1
@@ -8852,6 +8928,10 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: 10% for lifesteal
+      objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
       value: skill 20 (attack)
@@ -8870,6 +8950,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: Multishot
+      objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
       value: 1
@@ -9013,6 +9097,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -29
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: 5% chance for shot to double
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -9406,6 +9498,10 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_text
+      value: Another 10%
+      objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: id
       value: 6
@@ -9437,6 +9533,10 @@ PrefabInstance:
     - target: {fileID: 6474596650186123603, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204232510854928942, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_text
+      value: faster attack
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13676,6 +13776,10 @@ PrefabInstance:
       propertyPath: Description
       value: more stuff
       objectReference: {fileID: 0}
+    - target: {fileID: 1408965159452312679, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: m_text
+      value: space saving upgrade
+      objectReference: {fileID: 0}
     - target: {fileID: 4040706562217464987, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: m_Name
       value: skill 2
@@ -13823,6 +13927,26 @@ PrefabInstance:
     - target: {fileID: 6442150968445979064, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6898986915422004389, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: m_text
+      value: Progression Upgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 6898986915422004389, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: m_fontSize
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 6898986915422004389, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: m_margin.w
+      value: 34.654305
+      objectReference: {fileID: 0}
+    - target: {fileID: 6898986915422004389, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: m_margin.x
+      value: 5.4812775
+      objectReference: {fileID: 0}
+    - target: {fileID: 6898986915422004389, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 21
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14442,6 +14566,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: Lifesteal gain
+      objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
       value: 1
@@ -14581,6 +14709,18 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: 10% more lifesteal gain
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -15161,6 +15301,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1482244775745115220, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: m_text
+      value: 10% faster attack speed
+      objectReference: {fileID: 0}
     - target: {fileID: 1487000035589518462, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -15253,6 +15397,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2077141149514673863, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: m_text
+      value: Attack speed
+      objectReference: {fileID: 0}
     - target: {fileID: 2262872824053918813, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: m_text
       value: 
@@ -15313,6 +15461,22 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Skills, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6830819940718782433, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: SkillName
       value: 3
@@ -15320,6 +15484,10 @@ PrefabInstance:
     - target: {fileID: 6830819940718782433, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: Description
       value: yay
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773132485355190634, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -32
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15334,6 +15502,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: Crit damage
+      objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
       value: 1
@@ -15473,6 +15645,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -29
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: +10% more crit damage
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -16377,6 +16557,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: What$ th1s d0?
+      objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
       value: 1
@@ -16516,6 +16700,10 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: '##############'
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -18191,6 +18379,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: Vampire?
+      objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
       value: 1
@@ -18334,6 +18526,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -27
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: 15% more gain and chance
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -19023,6 +19223,18 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_text
+      value: 20% faster cooldown/reload, and speed
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_fontSize
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: id
       value: 6
@@ -19047,6 +19259,10 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[1]'
       value: 
       objectReference: {fileID: 476538931}
+    - target: {fileID: 5259978551695877241, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 28
+      objectReference: {fileID: 0}
     - target: {fileID: 6296602602893028856, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_Name
       value: skill 11 (attack)
@@ -19058,6 +19274,14 @@ PrefabInstance:
     - target: {fileID: 6474596650186123603, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6860555215656721980, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -21
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204232510854928942, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_text
+      value: MORE SPEEEED
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20726,6 +20950,7 @@ GameObject:
   - component: {fileID: 1393480305}
   - component: {fileID: 1393480304}
   - component: {fileID: 1393480303}
+  - component: {fileID: 1393480306}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -20878,6 +21103,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &1393480306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393480300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236346889ab0bdd4598ac469de169733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guns: []
 --- !u!1 &1398994601
 GameObject:
   m_ObjectHideFlags: 0
@@ -21982,6 +22220,10 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1864226669105769950, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: m_text
+      value: Attack Damage
+      objectReference: {fileID: 0}
     - target: {fileID: 2159065781844971859, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: SkillName
       value: 4
@@ -22169,6 +22411,10 @@ PrefabInstance:
     - target: {fileID: 6624673970110515497, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6953486776809145459, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: m_text
+      value: 10% more
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22885,6 +23131,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5853978869159862557, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: m_text
+      value: More Damage!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252448475578029872, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: m_text
+      value: 2% more damage per upgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 8731585863211902821, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -26
+      objectReference: {fileID: 0}
     - target: {fileID: 8755905617424571159, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: m_Name
       value: skill 5
@@ -22930,6 +23188,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: MAX crit
+      objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
       value: 1
@@ -23073,6 +23335,18 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427130029497265356, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -26
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: +20% crit damage/chance
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -23825,6 +24099,10 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_text
+      value: +2% range per upgrade
+      objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: id
       value: 6
@@ -23856,6 +24134,14 @@ PrefabInstance:
     - target: {fileID: 6474596650186123603, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6860555215656721980, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204232510854928942, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_text
+      value: MORE range
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24170,6 +24456,10 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_text
+      value: faster cooldown, 10%
+      objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: id
       value: 6
@@ -24205,6 +24495,10 @@ PrefabInstance:
     - target: {fileID: 6474596650186123603, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204232510854928942, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_text
+      value: Faster Cooldown
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24447,6 +24741,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: MORE lifesteal
+      objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
       value: 1
@@ -24590,6 +24888,18 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427130029497265356, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -27
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: 2% more chance per upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -25555,6 +25865,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: Useless Upgrade
+      objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
       value: 1
@@ -25694,6 +26008,10 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: waste your points
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -26421,6 +26739,10 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_text
+      value: more range
+      objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: id
       value: 6
@@ -26448,6 +26770,10 @@ PrefabInstance:
     - target: {fileID: 6474596650186123603, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204232510854928942, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: m_text
+      value: Range +10%
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26736,6 +27062,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: MORE lifesteal (again)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_fontSize
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_margin.w
+      value: 32.50584
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 22
+      objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
       value: 1
@@ -26879,6 +27221,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -27
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: 2% more gain per upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -29181,6 +29531,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: MORE Crit %
+      objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
       value: 1
@@ -29287,7 +29641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3997131002464116358, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 9
+      value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 3997131002464116358, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -29320,6 +29674,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: +3% crit chance per upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -29891,6 +30253,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: Crit chance
+      objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
       value: 1
@@ -30030,6 +30396,10 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_text
+      value: +10% crit chance
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
