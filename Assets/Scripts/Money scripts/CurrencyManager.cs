@@ -13,12 +13,9 @@ public class CurrencyManager : MonoBehaviour
 
     void Awake()
     {
-        // Singleton pattern
         if (Instance == null)
         {
             Instance = this;
-            // Uncomment if you want money to persist between scenes
-            // DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -29,9 +26,6 @@ public class CurrencyManager : MonoBehaviour
         UpdateUI();
     }
 
-    // =====================
-    // PUBLIC API
-    // =====================
     public void AddMoney(int amount)
     {
         money += amount;
@@ -53,15 +47,12 @@ public class CurrencyManager : MonoBehaviour
         return money;
     }
 
-    // =====================
-    // UI
-    // =====================
     void UpdateUI()
     {
         if (moneyText != null)
-        {
             moneyText.text = money.ToString();
-        }
+
+        if (SkillTreeScript.skillTree != null)
+            SkillTreeScript.skillTree.UpdateAllSkillUI();
     }
 }
-    

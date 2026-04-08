@@ -5,26 +5,53 @@ public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats instance;
 
-    Dictionary<string, float> statModifiers = new Dictionary<string, float>();
+    private Dictionary<string, float> flatModifiers = new Dictionary<string, float>();
+    private Dictionary<string, float> percentModifiers = new Dictionary<string, float>();
 
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
     }
 
-    public void AddModifier(string statName, float value)
+    public void AddFlatModifier(string statName, float value)
     {
-        if (!statModifiers.ContainsKey(statName))
-            statModifiers[statName] = 0;
+        if (!flatModifiers.ContainsKey(statName))
+            flatModifiers[statName] = 0f;
 
-        statModifiers[statName] += value;
+        flatModifiers[statName] += value;
     }
 
-    public float GetFinalStat(string statName, float baseValue)
+    public void AddPercentModifier(string statName, float value)
     {
-        if (!statModifiers.ContainsKey(statName))
-            return baseValue;
+        if (!percentModifiers.ContainsKey(statName))
+            percentModifiers[statName] = 0f;
 
-        return baseValue + statModifiers[statName];
+        percentModifiers[statName] += value;
+    }
+
+    public float GetFlatModifier(string statName)
+    {
+        if (!flatModifiers.ContainsKey(statName))
+            return 0f;
+
+        return flatModifiers[statName];
+    }
+
+    public float GetPercentModifier(string statName)
+    {
+        if (!percentModifiers.ContainsKey(statName))
+            return 0f;
+
+        return percentModifiers[statName];
+    }
+
+    public float GetModifiedValue(string statName, float baseValue)
+    {
+        float flat = GetFlatModifier(statName);
+        float percent = GetPercentModifier(statName);
+        return (baseValue + flat) * (1f + percent);
     }
 }

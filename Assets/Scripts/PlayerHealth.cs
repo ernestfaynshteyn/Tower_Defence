@@ -12,11 +12,25 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = health;
         healthBar.SetMaxHealth(health);
     }
+
     public void TakeDamage(float damage, string enemyID)
     {
         currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
+        currentHealth = Mathf.Max(currentHealth, 0f);
+
+        if (healthBar != null)
+            healthBar.SetHealth(currentHealth);
+
         CheckForHealth(enemyID);
+    }
+
+    public void Heal(float amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, health);
+
+        if (healthBar != null)
+            healthBar.SetHealth(currentHealth);
     }
 
     public void CheckForHealth(string enemyID)

@@ -322,7 +322,6 @@ GameObject:
   - component: {fileID: 5664737752559100747}
   - component: {fileID: 9027175985013571258}
   - component: {fileID: 5806901676119539436}
-  - component: {fileID: 2913839030649236723}
   m_Layer: 5
   m_Name: skill 1
   m_TagString: Untagged
@@ -433,7 +432,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2913839030649236723}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
@@ -445,25 +444,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2913839030649236723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9215603795874435504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 1
-  SkillName: 1
-  Description: stuff
-  SkillCap: 1
-  ConnectedSkills:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  TitleText: {fileID: 1381572361895919195}
-  DescriptionText: {fileID: 9187141530741787786}
