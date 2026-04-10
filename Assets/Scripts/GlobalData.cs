@@ -38,6 +38,7 @@ public class GlobalData : MonoBehaviour
         }
     }
 
+
     // Difficulty buttons
     public void SetEasy() => currentDifficulty = Difficulty.Easy;
     public void SetNormal() => currentDifficulty = Difficulty.Normal;
@@ -53,6 +54,13 @@ public class GlobalData : MonoBehaviour
     {
         Debug.Log("Difficulty: " + currentDifficulty);
         Debug.Log("Weapon: " + selectedWeapon);
+
+        // Reset skill tree if it exists
+        if (SkillTreeScript.skillTree != null)
+        {
+            SkillTreeScript.skillTree.ResetAllSkills();
+        }
+
         SceneManager.LoadScene("Game thing");
     }
 }

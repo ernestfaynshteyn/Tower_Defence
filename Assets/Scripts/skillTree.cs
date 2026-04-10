@@ -36,4 +36,17 @@ public class SkillTreeScript : MonoBehaviour
                 skill.UpdateUI();
         }
     }
+
+    public void ResetAllSkills()
+{
+    foreach (var skill in SkillList)
+    {
+        if (skill != null)
+        {
+            skill.Level = 0;
+        }
+    }
+    SkillPoint = 20; // reset points back to default
+    UpdateAllSkillUI();
+}
 }

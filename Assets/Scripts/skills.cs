@@ -52,8 +52,17 @@ public class Skills : MonoBehaviour
 
     void Awake()
     {
+        SkillName = gameObject.name;
         img = GetComponent<Image>();
         button = GetComponent<Button>();
+
+        if (button == null)
+        {
+            Debug.LogError("No Button component on " + gameObject.name);
+            return;
+        }
+
+        button.onClick.RemoveAllListeners();
         button.onClick.AddListener(Buy);
     }
 
@@ -69,8 +78,17 @@ public class Skills : MonoBehaviour
 
         foreach (var skill in RequiredSkills)
         {
-            if (skill == null || skill.Level <= 0)
+            if (skill == null)
+            {
+                Debug.LogError(SkillName + " has a NULL entry in RequiredSkills!");
                 return false;
+            }
+
+            if (skill.Level <= 0)
+            {
+                Debug.Log(SkillName + " locked by: " + skill.SkillName);
+                return false;
+            }
         }
 
         return true;
@@ -81,13 +99,18 @@ public class Skills : MonoBehaviour
         if (PurchaseWith == PurchaseType.Money)
         {
             if (CurrencyManager.Instance == null)
+            {
+                Debug.LogError("CurrencyManager.Instance is null!");
                 return false;
-
+            }
             return CurrencyManager.Instance.GetMoney() >= Cost;
         }
 
         if (SkillTreeScript.skillTree == null)
+        {
+            Debug.LogError("SkillTreeScript.skillTree is null!");
             return false;
+        }
 
         return SkillTreeScript.skillTree.SkillPoint >= Cost;
     }
@@ -112,8 +135,11 @@ public class Skills : MonoBehaviour
             return;
         }
 
-        if (Effects == null)
+        if (Effects == null || Effects.Length == 0)
+        {
+            Debug.LogWarning(SkillName + " has no Effects assigned.");
             return;
+        }
 
         foreach (var effect in Effects)
         {
@@ -121,35 +147,64 @@ public class Skills : MonoBehaviour
                 continue;
 
             if (effect.modifierType == ModifierType.Flat)
+            {
                 PlayerStats.instance.AddFlatModifier(effect.statName, effect.value);
+                Debug.Log("Applied FLAT " + effect.statName + " = " + effect.value);
+            }
             else
+            {
                 PlayerStats.instance.AddPercentModifier(effect.statName, effect.value);
+                Debug.Log("Applied PERCENT " + effect.statName + " = " + effect.value);
+            }
+        }
+    }
+
+    public void ResetEffects()
+    {
+        if (PlayerStats.instance == null) return;
+
+        if (Effects == null || Effects.Length == 0) return;
+
+        foreach (var effect in Effects)
+        {
+            if (effect == null || string.IsNullOrEmpty(effect.statName))
+                continue;
+
+            if (effect.modifierType == ModifierType.Flat)
+                PlayerStats.instance.AddFlatModifier(effect.statName, -effect.value);
+            else
+                PlayerStats.instance.AddPercentModifier(effect.statName, -effect.value);
         }
     }
 
     public void UpdateUI()
     {
+        if (img == null || button == null)
+            return;
+
         bool reqMet = RequirementsMet();
         bool affordable = CanAfford();
 
         if (Level >= SkillCap)
         {
             img.color = MaxedColor;
+            button.interactable = false;
         }
         else if (!reqMet)
         {
             img.color = LockedColor;
+            button.interactable = false;
         }
         else if (affordable)
         {
             img.color = AvailableColor;
+            button.interactable = true;
         }
         else
         {
             img.color = Color.white;
+            button.interactable = false;
         }
-
-        button.interactable = reqMet && affordable && Level < SkillCap;
 
         if (TitleText != null)
             TitleText.text = SkillName;
@@ -160,20 +215,35 @@ public class Skills : MonoBehaviour
 
     public void Buy()
     {
-        if (!RequirementsMet())
-            return;
+        Debug.Log("Clicked buy on " + SkillName);
+
 
         if (Level >= SkillCap)
+        {
+            Debug.Log(SkillName + ": Buy failed: already maxed, level: " + Level + ", " + SkillCap);
             return;
+        }
 
-        if (!CanAfford())
+        else if (!CanAfford())
+        {
+            Debug.Log(SkillName + ": Buy failed: cannot afford");
             return;
+        }
+        else if (!RequirementsMet())
+        {
+            Debug.Log(SkillName + ": Buy failed: requirements not met");
+            return;
+        }
+        else
+        {
+            SpendCost();
+            //Level++;
+            Debug.Log("Bought " + SkillName + ". New level: " + Level);
 
-        SpendCost();
-        Level++;
-        ApplyEffects();
+            ApplyEffects();
 
-        if (SkillTreeScript.skillTree != null)
-            SkillTreeScript.skillTree.UpdateAllSkillUI();
+            if (SkillTreeScript.skillTree != null)
+                SkillTreeScript.skillTree.UpdateAllSkillUI();
+        }
     }
 }

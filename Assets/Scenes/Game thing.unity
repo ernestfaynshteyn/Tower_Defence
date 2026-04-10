@@ -991,8 +991,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 2122137825}
+  Effects: []
   TitleText: {fileID: 1757593398}
   DescriptionText: {fileID: 1052382054}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -1724,6 +1726,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.a
       value: 1
       objectReference: {fileID: 0}
@@ -1750,7 +1756,7 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 367358503}
+      objectReference: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -1791,7 +1797,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: skill 1 (attack)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
     m_RemovedGameObjects:
     - {fileID: 571943524254660566, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
     m_AddedGameObjects: []
@@ -2824,8 +2831,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 54227726}
+  Effects: []
   TitleText: {fileID: 1664298005}
   DescriptionText: {fileID: 801456196}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -2983,9 +2992,11 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 109404939}
   - {fileID: 2000615091}
+  Effects: []
   TitleText: {fileID: 983787087}
   DescriptionText: {fileID: 1735554019}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -3623,13 +3634,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillPoint: 20
   SkillList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  SkillHolder: {fileID: 0}
+  - {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+  - {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+  - {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+  - {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+  - {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+  - {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+  SkillHolder: {fileID: 172713714}
 --- !u!1 &175130012
 GameObject:
   m_ObjectHideFlags: 0
@@ -3718,7 +3729,7 @@ GameObject:
   - component: {fileID: 180448453}
   - component: {fileID: 180448452}
   m_Layer: 5
-  m_Name: skill Tree 1 window (2)
+  m_Name: skill Tree 1 window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3747,7 +3758,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -293, y: -59}
+  m_AnchoredPosition: {x: -290.06183, y: -0.42089844}
   m_SizeDelta: {x: -404.1448, y: -996.44885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180448452
@@ -4276,8 +4287,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 561743386}
+  Effects: []
   TitleText: {fileID: 559162844}
   DescriptionText: {fileID: 1558365826}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -4586,8 +4599,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 561743386}
+  Effects: []
   TitleText: {fileID: 1128826996}
   DescriptionText: {fileID: 721172558}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -4745,8 +4760,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 561743386}
+  Effects: []
   TitleText: {fileID: 199358681}
   DescriptionText: {fileID: 1220757450}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -5152,8 +5169,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 1381529127}
+  Effects: []
   TitleText: {fileID: 1915768465}
   DescriptionText: {fileID: 52659135}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -5660,8 +5679,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 1219296041}
+  Effects: []
   TitleText: {fileID: 1475703299}
   DescriptionText: {fileID: 1621555383}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -5938,7 +5959,9 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills: []
+  Effects: []
   TitleText: {fileID: 0}
   DescriptionText: {fileID: 0}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -6215,6 +6238,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: RequiredSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1996148926}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Better chances
@@ -6362,6 +6397,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 745416557}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
       objectReference: {fileID: 0}
     - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6976,6 +7019,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: RequiredSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1746481990}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: MORE Crit damage
@@ -7127,6 +7182,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634673039}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
       objectReference: {fileID: 0}
     - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7432,8 +7495,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 561743386}
+  Effects: []
   TitleText: {fileID: 530354464}
   DescriptionText: {fileID: 836108944}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -7809,8 +7874,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 561743386}
+  Effects: []
   TitleText: {fileID: 1751743417}
   DescriptionText: {fileID: 1868916019}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -8508,8 +8575,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 1043958870}
+  Effects: []
   TitleText: {fileID: 1663014988}
   DescriptionText: {fileID: 1940567114}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -8851,6 +8920,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: RequiredSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1518332132}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Lifesteal?
@@ -8995,6 +9076,14 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1996366063}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
+      objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: 10% for lifesteal
@@ -9017,6 +9106,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: RequiredSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1391862575}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 776113801}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Multishot
@@ -9164,6 +9269,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1996148926}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
       objectReference: {fileID: 0}
     - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9316,8 +9429,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 561743386}
+  Effects: []
   TitleText: {fileID: 1831078876}
   DescriptionText: {fileID: 160859890}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -10389,9 +10504,11 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 1423277857}
   - {fileID: 110005775}
+  Effects: []
   TitleText: {fileID: 324844583}
   DescriptionText: {fileID: 805926563}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -12018,6 +12135,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 598951253818072533, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
   m_PrefabInstance: {fileID: 1265392078}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &745416557 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+  m_PrefabInstance: {fileID: 415563271}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &746637074
 GameObject:
   m_ObjectHideFlags: 0
@@ -12288,8 +12416,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 561743386}
+  Effects: []
   TitleText: {fileID: 748443206}
   DescriptionText: {fileID: 1719687892}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -12584,8 +12714,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 561743386}
+  Effects: []
   TitleText: {fileID: 688213091}
   DescriptionText: {fileID: 2074782173}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -13383,8 +13515,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 561743386}
+  Effects: []
   TitleText: {fileID: 672198109}
   DescriptionText: {fileID: 1494522871}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -13595,6 +13729,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1687616219}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &882677514 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+  m_PrefabInstance: {fileID: 1218882982}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &883321314 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
@@ -13878,7 +14023,7 @@ PrefabInstance:
     - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 367358503}
     - target: {fileID: 5102164469878706668, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -13993,6 +14138,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6442150968445979064, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693364136809871078, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: m_RaycastTarget
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6898986915422004389, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
@@ -14132,8 +14281,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 1666236537}
+  Effects: []
   TitleText: {fileID: 1054467962}
   DescriptionText: {fileID: 53022118}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -14449,8 +14600,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 1043958870}
+  Effects: []
   TitleText: {fileID: 71660981}
   DescriptionText: {fileID: 733460705}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -14633,6 +14786,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: RequiredSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1518332132}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Lifesteal gain
@@ -14776,6 +14941,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1518780719}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
@@ -15511,7 +15684,7 @@ PrefabInstance:
     - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 367358503}
     - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: m_Colors.m_DisabledColor.a
       value: 1
@@ -15530,19 +15703,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 367358503}
+    - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: Skills, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6830819940718782433, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: SkillName
@@ -15569,6 +15754,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: RequiredSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1484962511}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Crit damage
@@ -15712,6 +15909,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1746481990}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
       objectReference: {fileID: 0}
     - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -16210,7 +16415,9 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills: []
+  Effects: []
   TitleText: {fileID: 412580851}
   DescriptionText: {fileID: 1811943831}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -16613,6 +16820,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: RequiredSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 367358503}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: What$ th1s d0?
@@ -16756,6 +16975,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1518332132}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
@@ -17886,7 +18113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Content: {fileID: 0}
+  m_Content: {fileID: 180448451}
   m_Horizontal: 1
   m_Vertical: 1
   m_MovementType: 1
@@ -18413,6 +18640,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: RequiredSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1371409534}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1784290649}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Vampire?
@@ -18561,6 +18804,14 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 882677514}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
+      objectReference: {fileID: 0}
     - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -27
@@ -18616,8 +18867,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 923466173}
+  Effects: []
   TitleText: {fileID: 2142248233}
   DescriptionText: {fileID: 679750622}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -19008,8 +19261,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 561743386}
+  Effects: []
   TitleText: {fileID: 71558943}
   DescriptionText: {fileID: 970938322}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -19462,8 +19717,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 651781451}
+  Effects: []
   TitleText: {fileID: 93858699}
   DescriptionText: {fileID: 16183875}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -19642,8 +19899,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 651781451}
+  Effects: []
   TitleText: {fileID: 1860392762}
   DescriptionText: {fileID: 426197569}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -20572,6 +20831,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3997131002464116358, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
   m_PrefabInstance: {fileID: 1656539265}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1371409534 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+  m_PrefabInstance: {fileID: 1656539265}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1381529126
 GameObject:
   m_ObjectHideFlags: 0
@@ -20609,8 +20879,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 1219296041}
+  Effects: []
   TitleText: {fileID: 577503443}
   DescriptionText: {fileID: 1028477614}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -20843,8 +21115,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 561743386}
+  Effects: []
   TitleText: {fileID: 1218024114}
   DescriptionText: {fileID: 531572632}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -21045,14 +21319,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393480300}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1920, y: -1080, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 735492693}
   - {fileID: 583988916}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1814437462}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1393480303
 MonoBehaviour:
@@ -21307,6 +21581,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3997131002464116358, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
   m_PrefabInstance: {fileID: 1962821790}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1406752157 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+  m_PrefabInstance: {fileID: 1962821790}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1423277856
 GameObject:
   m_ObjectHideFlags: 0
@@ -21344,8 +21629,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 110005775}
+  Effects: []
   TitleText: {fileID: 2036715062}
   DescriptionText: {fileID: 55312837}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -21811,6 +22098,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3997131002464116358, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
   m_PrefabInstance: {fileID: 2041428507}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1484962511 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+  m_PrefabInstance: {fileID: 2041428507}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1487422764
 GameObject:
   m_ObjectHideFlags: 0
@@ -21870,8 +22168,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 561743386}
+  Effects: []
   TitleText: {fileID: 1555413014}
   DescriptionText: {fileID: 2132988038}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -22194,11 +22494,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502199604}
   m_CullTransparentMesh: 1
+--- !u!114 &1518332132 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+  m_PrefabInstance: {fileID: 1078032955}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1518780718 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3997131002464116358, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
   m_PrefabInstance: {fileID: 940521846}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1518780719 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+  m_PrefabInstance: {fileID: 940521846}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1519587993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22370,7 +22692,7 @@ PrefabInstance:
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 367358503}
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: 'ConnectedSkills.Array.data[0]'
       value: 0
@@ -23180,6 +23502,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: RequiredSkills.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 745416557}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1634673039}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1406752157}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: MAX crit
@@ -23327,6 +23669,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1664425682}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
       objectReference: {fileID: 0}
     - target: {fileID: 7427130029497265356, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -23788,6 +24138,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621555381}
   m_CullTransparentMesh: 1
+--- !u!114 &1634673039 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+  m_PrefabInstance: {fileID: 472673787}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1638249468
 GameObject:
   m_ObjectHideFlags: 0
@@ -23825,8 +24186,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 54227726}
+  Effects: []
   TitleText: {fileID: 1303254807}
   DescriptionText: {fileID: 106457288}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -24199,8 +24562,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 561743386}
+  Effects: []
   TitleText: {fileID: 475621142}
   DescriptionText: {fileID: 1852835245}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -24722,6 +25087,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: RequiredSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1518780719}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1996366063}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: MORE lifesteal
@@ -24869,6 +25250,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1371409534}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
       objectReference: {fileID: 0}
     - target: {fileID: 7427130029497265356, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -25241,6 +25630,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 14}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1664425682 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+  m_PrefabInstance: {fileID: 1612142968}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1666236536
 GameObject:
   m_ObjectHideFlags: 0
@@ -25278,8 +25678,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 1638249469}
+  Effects: []
   TitleText: {fileID: 1652987139}
   DescriptionText: {fileID: 1127619133}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -25592,8 +25994,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 561743386}
+  Effects: []
   TitleText: {fileID: 551104667}
   DescriptionText: {fileID: 617687715}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -25846,6 +26250,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: RequiredSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1518332132}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Useless Upgrade
@@ -25989,6 +26405,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2055552200}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
@@ -26761,6 +27185,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+--- !u!114 &1746481990 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+  m_PrefabInstance: {fileID: 996702317}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1751743415
 GameObject:
   m_ObjectHideFlags: 0
@@ -27043,6 +27478,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: RequiredSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1518780719}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2055552200}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: MORE lifesteal (again)
@@ -27202,6 +27653,14 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1784290649}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
       objectReference: {fileID: 0}
     - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -27416,6 +27875,17 @@ RectTransform:
   m_AnchoredPosition: {x: 203.025, y: 19.030533}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1784290649 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+  m_PrefabInstance: {fileID: 1759690396}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1795736687
 GameObject:
   m_ObjectHideFlags: 0
@@ -27861,6 +28331,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1393480302}
   - {fileID: 1280893710}
   - {fileID: 1618587569}
   - {fileID: 1829394155}
@@ -28149,8 +28620,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 1286532250}
+  Effects: []
   TitleText: {fileID: 314271882}
   DescriptionText: {fileID: 1165492854}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -28842,8 +29315,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 561743386}
+  Effects: []
   TitleText: {fileID: 1098501421}
   DescriptionText: {fileID: 1620973410}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -29512,6 +29987,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: RequiredSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1746481990}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: MORE Crit %
@@ -29655,6 +30142,18 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1406752157}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
       objectReference: {fileID: 0}
     - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -29824,6 +30323,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1992923577}
   m_CullTransparentMesh: 1
+--- !u!114 &1996148926 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+  m_PrefabInstance: {fileID: 593067132}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1996366063 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+  m_PrefabInstance: {fileID: 590975257}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2000615090
 GameObject:
   m_ObjectHideFlags: 0
@@ -29861,8 +30382,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 1666236537}
+  Effects: []
   TitleText: {fileID: 925860441}
   DescriptionText: {fileID: 1097120735}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -30234,6 +30757,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808917175}
     m_Modifications:
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: RequiredSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'RequiredSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1518332132}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Crit chance
@@ -30378,6 +30913,14 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1484962511}
+    - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
+      objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: +10% crit chance
@@ -30450,8 +30993,10 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills:
   - {fileID: 1043958870}
+  Effects: []
   TitleText: {fileID: 24534503}
   DescriptionText: {fileID: 3538209}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -30551,6 +31096,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2048469172}
   m_CullTransparentMesh: 1
+--- !u!114 &2055552200 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+  m_PrefabInstance: {fileID: 1715044665}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2072960943
 GameObject:
   m_ObjectHideFlags: 0
@@ -30980,7 +31536,9 @@ MonoBehaviour:
   Level: 0
   SkillCap: 1
   Cost: 1
+  PurchaseWith: 0
   RequiredSkills: []
+  Effects: []
   TitleText: {fileID: 280123561}
   DescriptionText: {fileID: 756677819}
   LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
@@ -31900,6 +32458,5 @@ SceneRoots:
   - {fileID: 1687616219}
   - {fileID: 1802887615}
   - {fileID: 1814437462}
-  - {fileID: 1393480302}
   - {fileID: 1213449530}
   - {fileID: 172713716}

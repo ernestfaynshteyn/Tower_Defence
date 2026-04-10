@@ -54,4 +54,9 @@ public class PlayerStats : MonoBehaviour
         float percent = GetPercentModifier(statName);
         return (baseValue + flat) * (1f + percent);
     }
+
+    public float GetFinalStat(string statName, float baseValue)
+    {
+        return GetModifiedValue(statName, baseValue);
+    }
 }
