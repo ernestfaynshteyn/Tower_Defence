@@ -52,7 +52,5 @@ public class CurrencyManager : MonoBehaviour
         if (moneyText != null)
             moneyText.text = money.ToString();
 
-        if (SkillTreeScript.skillTree != null)
-            SkillTreeScript.skillTree.UpdateAllSkillUI();
     }
 }

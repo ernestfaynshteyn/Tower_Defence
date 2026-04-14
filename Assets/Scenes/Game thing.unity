@@ -986,20 +986,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 4
-  Description: hu
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 2122137825}
-  Effects: []
-  TitleText: {fileID: 1757593398}
-  DescriptionText: {fileID: 1052382054}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &54227727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2826,20 +2812,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 1
-  Description: stuff
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 54227726}
-  Effects: []
-  TitleText: {fileID: 1664298005}
-  DescriptionText: {fileID: 801456196}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &109404940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2987,21 +2959,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 1
-  Description: stuff
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 109404939}
-  - {fileID: 2000615091}
-  Effects: []
-  TitleText: {fileID: 983787087}
-  DescriptionText: {fileID: 1735554019}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &110005776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3632,15 +3589,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02b64ee256af48443bc31fe9892edc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillPoint: 20
-  SkillList:
-  - {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
-  - {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
-  - {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
-  - {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
-  - {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
-  - {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
-  SkillHolder: {fileID: 172713714}
 --- !u!1 &175130012
 GameObject:
   m_ObjectHideFlags: 0
@@ -4282,20 +4230,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 6
-  Description: yes
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 561743386}
-  Effects: []
-  TitleText: {fileID: 559162844}
-  DescriptionText: {fileID: 1558365826}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &235239969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4594,20 +4528,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 6
-  Description: yes
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 561743386}
-  Effects: []
-  TitleText: {fileID: 1128826996}
-  DescriptionText: {fileID: 721172558}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &262079578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4755,20 +4675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 6
-  Description: yes
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 561743386}
-  Effects: []
-  TitleText: {fileID: 199358681}
-  DescriptionText: {fileID: 1220757450}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &268537276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5164,20 +5070,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 1
-  Description: stuff
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 1381529127}
-  Effects: []
-  TitleText: {fileID: 1915768465}
-  DescriptionText: {fileID: 52659135}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &311922287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5674,20 +5566,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 1
-  Description: stuff
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 1219296041}
-  Effects: []
-  TitleText: {fileID: 1475703299}
-  DescriptionText: {fileID: 1621555383}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &326485777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5954,19 +5832,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 
-  Description: 
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills: []
-  Effects: []
-  TitleText: {fileID: 0}
-  DescriptionText: {fileID: 0}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!224 &372435931 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3997131002464116358, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
@@ -7490,20 +7355,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 5
-  Description: me?
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 561743386}
-  Effects: []
-  TitleText: {fileID: 530354464}
-  DescriptionText: {fileID: 836108944}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &477733067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7869,20 +7720,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 6
-  Description: yes
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 561743386}
-  Effects: []
-  TitleText: {fileID: 1751743417}
-  DescriptionText: {fileID: 1868916019}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &530806612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8570,20 +8407,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 4
-  Description: hu
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 1043958870}
-  Effects: []
-  TitleText: {fileID: 1663014988}
-  DescriptionText: {fileID: 1940567114}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &561743387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9424,20 +9247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 6
-  Description: yes
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 561743386}
-  Effects: []
-  TitleText: {fileID: 1831078876}
-  DescriptionText: {fileID: 160859890}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &600071759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10499,21 +10308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 1
-  Description: stuff
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 1423277857}
-  - {fileID: 110005775}
-  Effects: []
-  TitleText: {fileID: 324844583}
-  DescriptionText: {fileID: 805926563}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &651781452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12411,20 +12205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 6
-  Description: yes
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 561743386}
-  Effects: []
-  TitleText: {fileID: 748443206}
-  DescriptionText: {fileID: 1719687892}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &753327355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12709,20 +12489,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 6
-  Description: yes
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 561743386}
-  Effects: []
-  TitleText: {fileID: 688213091}
-  DescriptionText: {fileID: 2074782173}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &757481177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13510,20 +13276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 6
-  Description: yes
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 561743386}
-  Effects: []
-  TitleText: {fileID: 672198109}
-  DescriptionText: {fileID: 1494522871}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &839605459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14013,6 +13765,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: Cost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
       objectReference: {fileID: 0}
@@ -14276,20 +14032,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 1
-  Description: stuff
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 1666236537}
-  Effects: []
-  TitleText: {fileID: 1054467962}
-  DescriptionText: {fileID: 53022118}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &923466174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14595,20 +14337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 2
-  Description: more stuff
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 1043958870}
-  Effects: []
-  TitleText: {fileID: 71660981}
-  DescriptionText: {fileID: 733460705}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &930056622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16410,19 +16138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 1
-  Description: stuff
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills: []
-  Effects: []
-  TitleText: {fileID: 412580851}
-  DescriptionText: {fileID: 1811943831}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1043958871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18862,20 +18577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 1
-  Description: stuff
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 923466173}
-  Effects: []
-  TitleText: {fileID: 2142248233}
-  DescriptionText: {fileID: 679750622}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1219296042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19256,20 +18957,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 6
-  Description: yes
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 561743386}
-  Effects: []
-  TitleText: {fileID: 71558943}
-  DescriptionText: {fileID: 970938322}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1232361111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19712,20 +19399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 1
-  Description: stuff
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 651781451}
-  Effects: []
-  TitleText: {fileID: 93858699}
-  DescriptionText: {fileID: 16183875}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1286532251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19894,20 +19567,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 1
-  Description: stuff
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 651781451}
-  Effects: []
-  TitleText: {fileID: 1860392762}
-  DescriptionText: {fileID: 426197569}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1289891290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20874,20 +20533,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 1
-  Description: stuff
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 1219296041}
-  Effects: []
-  TitleText: {fileID: 577503443}
-  DescriptionText: {fileID: 1028477614}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1381529128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21110,20 +20755,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 6
-  Description: yes
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 561743386}
-  Effects: []
-  TitleText: {fileID: 1218024114}
-  DescriptionText: {fileID: 531572632}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1390599005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21624,20 +21255,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 1
-  Description: stuff
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 110005775}
-  Effects: []
-  TitleText: {fileID: 2036715062}
-  DescriptionText: {fileID: 55312837}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1423277858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22163,20 +21780,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 6
-  Description: yes
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 561743386}
-  Effects: []
-  TitleText: {fileID: 1555413014}
-  DescriptionText: {fileID: 2132988038}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1487422767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24181,20 +23784,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 5
-  Description: me?
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 54227726}
-  Effects: []
-  TitleText: {fileID: 1303254807}
-  DescriptionText: {fileID: 106457288}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1638249470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24557,20 +24146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 6
-  Description: yes
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 561743386}
-  Effects: []
-  TitleText: {fileID: 475621142}
-  DescriptionText: {fileID: 1852835245}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1643082187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25673,20 +25248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 2
-  Description: more stuff
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 1638249469}
-  Effects: []
-  TitleText: {fileID: 1652987139}
-  DescriptionText: {fileID: 1127619133}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1666236538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25989,20 +25550,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 6
-  Description: yes
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 561743386}
-  Effects: []
-  TitleText: {fileID: 551104667}
-  DescriptionText: {fileID: 617687715}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1680148438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28615,20 +28162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 1
-  Description: stuff
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 1286532250}
-  Effects: []
-  TitleText: {fileID: 314271882}
-  DescriptionText: {fileID: 1165492854}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1843935619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29310,20 +28843,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 6
-  Description: yes
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 561743386}
-  Effects: []
-  TitleText: {fileID: 1098501421}
-  DescriptionText: {fileID: 1620973410}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1891664995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30377,20 +29896,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 3
-  Description: yay
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 1666236537}
-  Effects: []
-  TitleText: {fileID: 925860441}
-  DescriptionText: {fileID: 1097120735}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2000615092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30988,20 +30493,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 3
-  Description: yay
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills:
-  - {fileID: 1043958870}
-  Effects: []
-  TitleText: {fileID: 24534503}
-  DescriptionText: {fileID: 3538209}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2048469175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31531,19 +31022,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 6
-  Description: yes
-  Level: 0
-  SkillCap: 1
-  Cost: 1
-  PurchaseWith: 0
-  RequiredSkills: []
-  Effects: []
-  TitleText: {fileID: 280123561}
-  DescriptionText: {fileID: 756677819}
-  LockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.78431374}
-  AvailableColor: {r: 0, g: 1, b: 0, a: 1}
-  MaxedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2122137826
 MonoBehaviour:
   m_ObjectHideFlags: 0

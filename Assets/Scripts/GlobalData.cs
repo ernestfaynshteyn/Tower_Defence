@@ -55,11 +55,6 @@ public class GlobalData : MonoBehaviour
         Debug.Log("Difficulty: " + currentDifficulty);
         Debug.Log("Weapon: " + selectedWeapon);
 
-        // Reset skill tree if it exists
-        if (SkillTreeScript.skillTree != null)
-        {
-            SkillTreeScript.skillTree.ResetAllSkills();
-        }
 
         SceneManager.LoadScene("Game thing");
     }
