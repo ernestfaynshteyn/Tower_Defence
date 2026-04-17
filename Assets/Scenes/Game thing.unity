@@ -294,7 +294,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 1% per upgrade
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -737,7 +737,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 5% more poisen per upgrade
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -803,7 +803,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 15.819004, z: 0, w: 29.528831}
+  m_margin: {x: 0, y: 15.819004, z: 0, w: 40.953964}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -986,6 +986,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 1
+  costPerlevel: 1
+  requireSkills:
+  - {fileID: 2122137825}
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &54227727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1139,7 +1148,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 2% more defence per upgrade
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1205,7 +1214,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 15.819004, z: 0, w: 29.528831}
+  m_margin: {x: 0, y: 15.819004, z: 0, w: 42.604588}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1742,7 +1751,7 @@ PrefabInstance:
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      objectReference: {fileID: 367358503}
     - target: {fileID: 5806901676119539436, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -2175,17 +2184,33 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: maxLevel
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: SkillName
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costPerlevel
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1306156379}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -2262,7 +2287,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: MORE dodge
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2579,7 +2604,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 10% mroe health
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2812,6 +2837,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 1
+  costPerlevel: 1
+  requireSkills:
+  - {fileID: 54227726}
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &109404940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2959,6 +2993,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 1
+  costPerlevel: 1
+  requireSkills:
+  - {fileID: 109404939}
+  - {fileID: 2000615091}
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &110005776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3706,7 +3750,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -290.06183, y: -0.42089844}
+  m_AnchoredPosition: {x: 285, y: -0.4194336}
   m_SizeDelta: {x: -404.1448, y: -996.44885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180448452
@@ -4230,6 +4274,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &235239969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4528,6 +4580,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &262079578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4675,6 +4735,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &268537276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4807,7 +4875,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Defense
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5070,6 +5138,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 4
+  costPerlevel: 3
+  requireSkills:
+  - {fileID: 1381529127}
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &311922287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5221,7 +5298,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Even MORE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5414,7 +5491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Dodge
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5566,6 +5643,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 10
+  costPerlevel: 1
+  requireSkills:
+  - {fileID: 1219296041}
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &326485777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5832,6 +5918,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 1
+  costPerlevel: 1
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!224 &372435931 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3997131002464116358, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
@@ -6108,9 +6202,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: maxLevel
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1996148926}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -6439,143 +6553,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 423568507}
   m_CullTransparentMesh: 1
---- !u!1 &426197567
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 426197568}
-  - component: {fileID: 426197570}
-  - component: {fileID: 426197569}
-  m_Layer: 5
-  m_Name: 'desc '
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &426197568
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 426197567}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1289891288}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -35}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &426197569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 426197567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: 
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 19
-  m_fontSizeBase: 19
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_characterHorizontalScale: 1
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 15.819004, z: 0, w: 29.528831}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &426197570
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 426197567}
-  m_CullTransparentMesh: 1
 --- !u!1 &435669444
 GameObject:
   m_ObjectHideFlags: 0
@@ -6889,9 +6866,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: maxLevel
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1746481990}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -7355,6 +7352,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &477733067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7720,6 +7725,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &530806612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8407,6 +8420,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &561743387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8591,7 +8612,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Poisen damage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8748,9 +8769,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: maxLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1518332132}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -8934,9 +8975,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: maxLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 776113801}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1391862575}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -9247,6 +9312,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &600071759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9498,17 +9571,33 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: maxLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: SkillName
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costPerlevel
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1306156379}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -10308,6 +10397,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 1
+  costPerlevel: 1
+  requireSkills:
+  - {fileID: 110005775}
+  - {fileID: 1423277857}
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &651781452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10420,7 +10519,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 65.6, y: -41}
+  m_AnchoredPosition: {x: 74.5, y: -41}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &666687579
@@ -10956,7 +11055,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 10% more damage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11940,81 +12039,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &746637074
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 746637075}
-  - component: {fileID: 746637077}
-  - component: {fileID: 746637076}
-  m_Layer: 5
-  m_Name: connecter (11)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &746637075
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746637074}
-  m_LocalRotation: {x: -0, y: -0, z: -0.38268343, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.50000006, y: 0.50000006, z: 0.5}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1781804081}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -151.03, y: -31.838}
-  m_SizeDelta: {x: 150, y: 25.15572}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &746637076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746637074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &746637077
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746637074}
-  m_CullTransparentMesh: 1
 --- !u!1 &748443204
 GameObject:
   m_ObjectHideFlags: 0
@@ -12205,6 +12229,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &753327355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12337,7 +12369,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: no perks
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12489,6 +12521,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &757481177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12637,7 +12677,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Defence bar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12849,7 +12889,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: You can dodge
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13276,6 +13316,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &839605459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13769,13 +13817,29 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: maxLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 367358503}
     - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -13895,6 +13959,14 @@ PrefabInstance:
     - target: {fileID: 6442150968445979064, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: m_Colors.m_DisabledColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6442150968445979064, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 776113801}
+    - target: {fileID: 6442150968445979064, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Buy
       objectReference: {fileID: 0}
     - target: {fileID: 6693364136809871078, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: m_RaycastTarget
@@ -14032,6 +14104,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 1
+  costPerlevel: 1
+  requireSkills:
+  - {fileID: 1666236537}
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &923466174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14185,7 +14266,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Defence
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14337,6 +14418,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &930056622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14519,9 +14608,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: maxLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1518332132}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -15025,7 +15134,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Health/Defence
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15402,13 +15511,33 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: maxLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 367358503}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: 'requireSkills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 367358503}
     - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -15440,7 +15569,7 @@ PrefabInstance:
     - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 367358503}
+      objectReference: {fileID: 1306156379}
     - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -15448,6 +15577,10 @@ PrefabInstance:
     - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Buy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Skills, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -15487,9 +15620,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: maxLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1484962511}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -15927,7 +16080,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: damage over time
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16138,6 +16291,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1043958871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16291,7 +16452,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 10% more health
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16428,7 +16589,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: pizza circle
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16540,9 +16701,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: maxLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 367358503}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -16826,7 +17007,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: add 20 defence
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17392,7 +17573,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 4% more health per upgrade
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17458,7 +17639,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 15.819004, z: 0, w: 29.528831}
+  m_margin: {x: 0, y: 15.819004, z: 0, w: 41.187347}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -18034,7 +18215,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 20% more dodge chance
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -18100,7 +18281,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 15.819004, z: 0, w: 29.528831}
+  m_margin: {x: 0, y: 15.819004, z: 0, w: 44.360035}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -18180,7 +18361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d62fd58fff16694b99f8d75b7dc5d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 0
+  money: 1000
   moneyText: {fileID: 1502003754}
 --- !u!114 &1213449534
 MonoBehaviour:
@@ -18360,9 +18541,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: maxLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1371409534}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1784290649}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -18577,6 +18782,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 1
+  costPerlevel: 1
+  requireSkills:
+  - {fileID: 923466173}
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1219296042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18957,6 +19171,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1232361111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19216,17 +19438,37 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: maxLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: SkillName
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costPerlevel
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2137306037}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: 'requireSkills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 476538931}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -19399,6 +19641,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 15
+  costPerlevel: 2
+  requireSkills:
+  - {fileID: 651781451}
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1286532251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19514,153 +19765,6 @@ RectTransform:
   m_AnchoredPosition: {x: 25, y: -100.00001}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1289891287
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1289891288}
-  - component: {fileID: 1289891292}
-  - component: {fileID: 1289891291}
-  - component: {fileID: 1289891290}
-  - component: {fileID: 1289891289}
-  m_Layer: 5
-  m_Name: skill 17
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1289891288
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289891287}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 1860392761}
-  - {fileID: 426197568}
-  m_Father: {fileID: 2089973488}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.6, y: 6.2}
-  m_SizeDelta: {x: 200, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1289891289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289891287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1289891290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289891287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1289891291}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1289891289}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
-        m_MethodName: Buy
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1289891291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289891287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 0
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.4
---- !u!222 &1289891292
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289891287}
-  m_CullTransparentMesh: 1
 --- !u!1 &1295044386
 GameObject:
   m_ObjectHideFlags: 0
@@ -19933,7 +20037,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: MORE Health
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -20533,6 +20637,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 1
+  costPerlevel: 1
+  requireSkills:
+  - {fileID: 1219296041}
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1381529128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20755,6 +20868,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1390599005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21255,6 +21376,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 5
+  costPerlevel: 1
+  requireSkills:
+  - {fileID: 110005775}
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1423277858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21480,7 +21610,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: MORE damage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -21780,6 +21910,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1487422767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22285,6 +22423,10 @@ PrefabInstance:
       value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -22292,6 +22434,10 @@ PrefabInstance:
       propertyPath: Connectedskills.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 367358503}
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -23028,13 +23174,29 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: maxLevel
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1876395816}
     - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -23110,9 +23272,37 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: maxLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 745416557}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1406752157}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1634673039}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -23661,7 +23851,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 2% more damage per upgrade
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -23727,7 +23917,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 15.819004, z: 0, w: 29.528831}
+  m_margin: {x: 0, y: 15.819004, z: 0, w: 40.021507}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -23784,6 +23974,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 1
+  costPerlevel: 1
+  requireSkills:
+  - {fileID: 54227726}
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1638249470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24052,17 +24251,33 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: maxLevel
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: SkillName
       value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costPerlevel
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 883321314}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -24146,6 +24361,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1643082187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24397,17 +24620,37 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: maxLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: SkillName
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costPerlevel
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 736036452}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: 'requireSkills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1448105956}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -24475,7 +24718,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: MORE Health?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -24667,9 +24910,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: maxLevel
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1996366063}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1518780719}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -25106,7 +25373,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Add defence
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -25248,6 +25515,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 6
+  costPerlevel: 1
+  requireSkills:
+  - {fileID: 1638249469}
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1666236538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25550,6 +25826,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1680148438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25802,9 +26086,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: maxLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1518332132}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -26227,7 +26531,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 20% more health and defence
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -26293,7 +26597,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 15.819004, z: 0, w: 29.528831}
+  m_margin: {x: 0, y: 15.819004, z: 0, w: 36.793274}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -26700,13 +27004,29 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: maxLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1876395816}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -26918,7 +27238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Health
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -27030,9 +27350,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: maxLevel
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1518780719}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2055552200}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -27407,7 +27751,6 @@ RectTransform:
   - {fileID: 61082637}
   - {fileID: 1739959306}
   - {fileID: 1795736688}
-  - {fileID: 746637075}
   - {fileID: 79436091}
   - {fileID: 307481684}
   - {fileID: 1350760885}
@@ -28162,6 +28505,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 1
+  costPerlevel: 1
+  requireSkills:
+  - {fileID: 1286532250}
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1843935619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28392,143 +28744,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1852835243}
-  m_CullTransparentMesh: 1
---- !u!1 &1860392760
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1860392761}
-  - component: {fileID: 1860392763}
-  - component: {fileID: 1860392762}
-  m_Layer: 5
-  m_Name: title
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1860392761
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860392760}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1289891288}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 14}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1860392762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860392760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: 
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_characterHorizontalScale: 1
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 15.819004, z: 0, w: 20.037413}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1860392763
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860392760}
   m_CullTransparentMesh: 1
 --- !u!1 &1868916017
 GameObject:
@@ -28843,6 +29058,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1891664995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29131,7 +29354,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: MORE damage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -29511,9 +29734,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: maxLevel
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1746481990}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -29896,6 +30139,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills:
+  - {fileID: 1666236537}
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2000615092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30155,7 +30407,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: MORE Defence
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -30267,9 +30519,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: maxLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requireSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: 'requireSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1518332132}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
@@ -30493,6 +30765,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 3
+  costPerlevel: 0
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2048469175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30885,7 +31165,6 @@ RectTransform:
   - {fileID: 651781455}
   - {fileID: 1286532254}
   - {fileID: 1843935617}
-  - {fileID: 1289891288}
   m_Father: {fileID: 1471450224}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -31022,6 +31301,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnlock: 0
+  level: 0
+  maxLevel: 1
+  costPerlevel: 1
+  requireSkills: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2122137826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31403,7 +31690,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: More damage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

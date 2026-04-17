@@ -26,8 +26,7 @@ public class Skills : MonoBehaviour
 {
     public bool isUnlock = false;
     public int level = 0;
-    public int maxLevel = 3;
-
+    public int maxLevel = 1;
     public int costPerlevel;
 
     public Skills[] requireSkills;
@@ -36,55 +35,92 @@ public class Skills : MonoBehaviour
     public Color unlockColor = Color.green;
     public Color maxColor = Color.yellow;
 
-    Button button;
+    private Button button;
 
     private void Awake()
     {
-        button = gameObject.GetComponent<Button>();
+        button = GetComponent<Button>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         isUnlock = CheckUnlock();
+        UpdateButtonColor();
+    }
 
+    public bool CheckUnlock()
+    {
+        if (requireSkills == null || requireSkills.Length == 0)
+        {
+            return true;
+        }
+
+        foreach (Skills skill in requireSkills)
+        {
+            if (skill == null)
+            {
+                return false;
+            }
+
+            if (skill.level <= 0)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void UpdateButtonColor()
+    {
         ColorBlock colors = button.colors;
 
-        if (isUnlock)
+        if (!isUnlock)
         {
-            if (maxLevel >= level) {
-                colors.normalColor = maxColor;
-            }
-            else
-            {
-                colors.normalColor = unlockColor;
-            }
+            colors.normalColor = lockColor;
+        }
+        else if (level >= maxLevel)
+        {
+            colors.normalColor = maxColor;
         }
         else
         {
-            colors.normalColor = lockColor;
+            colors.normalColor = unlockColor;
         }
 
         button.colors = colors;
     }
 
-    public bool CheckUnlock()
-    {
-        foreach (Skills skill in requireSkills)
-        {
-            if (skill.isUnlock == false)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public void Buy()
     {
-        if(CurrencyManager.Instance.money >= costPerlevel)
+        if (!isUnlock) 
         {
-
+            Debug.Log("Not unlock yet");
+            return;
         }
 
+
+        if (level >= maxLevel)
+        {
+            Debug.Log("max level");
+            return;
+        }
+
+
+        if (CurrencyManager.Instance == null)
+        {
+            Debug.LogError("CurrencyManager.Instance is null");
+            return;
+        }
+
+        if (CurrencyManager.Instance.SpendMoney(costPerlevel))
+        {
+            level++;
+            Debug.Log("Skill bought. Current level: " + level);
+        }
+        else
+        {
+            Debug.Log("Not enough money");
+        }
     }
 }
