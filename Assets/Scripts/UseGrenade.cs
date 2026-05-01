@@ -9,16 +9,44 @@ public class UseGrenade : MonoBehaviour
 
     public float throwForce = 8f;
 
+    [Header("Cursor")]
+    public Texture2D defaultCursor;
+    public Texture2D equippedCursor;
+    public Vector2 hotspot = Vector2.zero;
+
+    public bool isEquipped = false;
+
+    void Start()
+    {
+        UpdateCursor();
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        // Test key to equip / unequip
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ToggleEquip();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             ThrowGrenade();
         }
     }
 
+    void UpdateCursor()
+    {
+        if (isEquipped)
+            Cursor.SetCursor(equippedCursor, hotspot, CursorMode.Auto);
+        else
+            Cursor.SetCursor(defaultCursor, hotspot, CursorMode.Auto);
+    }
+
     void ThrowGrenade()
     {
+        if (!isEquipped) return;
+
         if (!Inventory.instance.UseGrenade(selectedGrenade))
             return;
 
@@ -34,4 +62,22 @@ public class UseGrenade : MonoBehaviour
             rb.linearVelocity = transform.right * throwForce;
         }
     }
-}
+
+    public void EquipGrenade()
+    {
+        isEquipped = true;
+        UpdateCursor();
+    }
+
+    public void UnequipGrenade()
+    {
+        isEquipped = false;
+        UpdateCursor();
+    }
+
+    public void ToggleEquip()
+    {
+        isEquipped = !isEquipped;
+        UpdateCursor();
+    }
+}q
