@@ -80,4 +80,4 @@ public class UseGrenade : MonoBehaviour
         isEquipped = !isEquipped;
         UpdateCursor();
     }
-}q
+}
