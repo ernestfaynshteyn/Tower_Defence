@@ -5,7 +5,7 @@ public enum GrenadeType
     Frag,
     Smoke,
     Flash,
-    Molotov
+    Molotov 
 }
 
 public class Grenades : MonoBehaviour
@@ -84,10 +84,24 @@ public class Grenades : MonoBehaviour
             if (hit.CompareTag("Enemy"))
             {
                 EnemyHealth enemy = hit.GetComponent<EnemyHealth>();
+
+                if (enemy == null)
+                {
+                    enemy = hit.GetComponentInParent<EnemyHealth>();
+                }
+
                 if (enemy != null)
+                {
                     enemy.TakeDamage(damage);
+                }
             }
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, baseRadius);
     }
 
     void SmokeExplode()

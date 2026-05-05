@@ -1,91 +1,120 @@
 using UnityEngine;
 using System.Collections;
+
 public class EnemyHealth : MonoBehaviour
+{
+    [Header("Stats")]
+    public float health = 100f;
+    public float moveSpeed = 0f;
+
+    [Header("Resistances")]
+    [Range(0f, 1f)] public float slowResistance = 0f;
+    [Range(0f, 1f)] public float stunResistance = 0f;
+
+    public int moneyReward = 10;
+
+    float baseSpeed;
+    bool isStunned;
+    bool isDead;
+
+    public Animator animator;
+
+    public void Start()
     {
+        ApplyDifficulty();
 
-        [Header("Stats")]
-        public float health = 100f;
-        public float moveSpeed = 0f;
+        baseSpeed = moveSpeed;
 
-        [Header("Resistances")]
-        [Range(0f, 1f)] public float slowResistance = 0f; // 0 = full effect
-        [Range(0f, 1f)] public float stunResistance = 0f;
+        animator = GetComponent<Animator>();
+    }
 
-        public int moneyReward = 10;
+    public void TakeDamage(float damage)
+    {
+        if (isDead) return;
 
-        float baseSpeed;
-        bool isStunned;
+        health -= damage;
 
+        Debug.Log(gameObject.name + " took " + damage + " damage. Health: " + health);
 
+        CheckForHealth();
+    }
 
-        public Animator animator;
-
-        public void Start()
+    public void CheckForHealth()
+    {
+        if (health <= 75f)
         {
-            ApplyDifficulty();
-            animator = GetComponent<Animator>();
+            // animator.SetTrigger("HurtPhase");
         }
 
-        public void TakeDamage(float damage)
+        if (health <= 0f)
         {
-            health -= damage;
-            CheckForHealth();
-
+            Die();
         }
-        public void CheckForHealth()
-        {
-            if (health <= 75f)
-            {
-                //animator.SetTrigger("HurtPhase");
-            }
-            if (health <= 0f)
-            {
-                CurrencyManager.Instance.AddMoney(moneyReward);
+    }
 
-                WaveManager.Instance.enemyleft = WaveManager.Instance.enemyleft - 1;
-                Destroy(gameObject);
-                Die();
-            }
-        }
-        void Die()
-        {
-            //CurrencyManager.Instance.AddMoney(moneyReward);
-        
+    void Die()
+    {
+        if (isDead) return;
 
+        isDead = true;
+
+        CurrencyManager.Instance.AddMoney(moneyReward);
+        WaveManager.Instance.enemyleft -= 1;
+
+        if (animator != null)
+        {
             animator.SetTrigger("Die");
-            // Disable the enemy
-            GetComponent<Collider2D>().enabled = false;
-            this.enabled = false;
         }
 
-        public void ApplySlow(float multiplier)
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null)
         {
-            float resisted = Mathf.Lerp(1f, multiplier, 1f - slowResistance);
-            moveSpeed = baseSpeed * resisted;
+            col.enabled = false;
         }
 
-        public void RemoveSlow()
+        moveSpeed = 0f;
+
+        Destroy(gameObject, 1f);
+    }
+
+    public void ApplySlow(float multiplier)
+    {
+        if (isDead) return;
+
+        float resisted = Mathf.Lerp(1f, multiplier, 1f - slowResistance);
+        moveSpeed = baseSpeed * resisted;
+    }
+
+    public void RemoveSlow()
+    {
+        if (isDead) return;
+
+        moveSpeed = baseSpeed;
+    }
+
+    public void Stun(float duration)
+    {
+        if (isDead) return;
+        if (isStunned) return;
+
+        float resistedDuration = duration * (1f - stunResistance);
+        StartCoroutine(StunRoutine(resistedDuration));
+    }
+
+    IEnumerator StunRoutine(float duration)
+    {
+        isStunned = true;
+        moveSpeed = 0f;
+
+        yield return new WaitForSeconds(duration);
+
+        isStunned = false;
+
+        if (!isDead)
         {
             moveSpeed = baseSpeed;
         }
-
-        // =====================
-        // STUN (FLASH)
-        // =====================
-        public void Stun(float duration)
-        {
-            if (isStunned) return;
-
-            float resistedDuration = duration * (1f - stunResistance);
-            StartCoroutine(StunRoutine(resistedDuration));
-        }
-
-        System.Collections.IEnumerator StunRoutine(float duration)
-        {
-            isStunned = true;
-            yield return new WaitForSeconds(duration);
-            isStunned = false;
-        }
+    }
 
     void ApplyDifficulty()
     {
