@@ -45,24 +45,21 @@ public class UseGrenade : MonoBehaviour
 
     void Update()
     {
-        void Update()
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                ToggleEquip();
-            }
+            ToggleEquip();
+        }
 
-            if (isEquipped)
-            {
-                HandleGrenadeSelection();
-            }
+        if (isEquipped)
+        {
+            HandleGrenadeSelection();
+        }
 
-            UpdateTrajectoryLine();
+        UpdateTrajectoryLine();
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                ThrowGrenadeToMouse();
-            }
+        if (Input.GetMouseButtonDown(0))
+        {
+            ThrowGrenadeToMouse();
         }
     }
 
@@ -206,6 +203,7 @@ public class UseGrenade : MonoBehaviour
         {
             rb.MovePosition(target);
             rb.linearVelocity = Vector2.zero;
+            rb.gameObject.GetComponent<grenadedamage>().Explosion();
         }
     }
 
