@@ -2,23 +2,34 @@ using UnityEngine;
 
 public class Shottingscript : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
+    [SerializeField] private UseGrenade usingGrenades;
 
+    [Header("Gun Stats")]
     [SerializeField] private float damage;
+
     [Range(0.00000000001f, 3f)]
     [SerializeField] private float firingrate = 0.1f;
+
     [Range(0f, 10f)]
     [SerializeField] private float spread = 0.5f;
+
     [Range(1f, 12f)]
     [SerializeField] private int bulletPerShot = 1;
+
     private float MaxHeat = 100;
+
     [Range(0, 100f)]
     [SerializeField] private float currentHeat = 0;
+
     [SerializeField] private float HeatPerSec;
     [SerializeField] private float coolingRate;
+
     [Range(0, 100)]
     [SerializeField] private int maxMagSize;
+
     [SerializeField] private int currentMag = 0;
     [SerializeField] private float reloadTime = 1;
 
@@ -26,12 +37,17 @@ public class Shottingscript : MonoBehaviour
     private bool canShoot = true;
     private bool reloading = false;
 
-    void Start()
+    private void Start()
     {
         currentMag = maxMagSize;
+
+        if (usingGrenades == null)
+        {
+            usingGrenades = GetComponent<UseGrenade>();
+        }
     }
 
-    void Update()
+    private void Update()
     {
         HandlingShooting();
     }
@@ -39,13 +55,20 @@ public class Shottingscript : MonoBehaviour
     private float GetModifiedDamage()
     {
         if (PlayerStats.instance == null)
+        {
             return damage;
+        }
 
         return PlayerStats.instance.GetModifiedValue("Damage", damage);
     }
 
     private void HandlingShooting()
     {
+        if (usingGrenades != null && usingGrenades.isEquipped)
+        {
+            return;
+        }
+
         if (Input.GetMouseButton(0) && canShoot && !overheated && !reloading)
         {
             canShoot = false;
@@ -68,6 +91,7 @@ public class Shottingscript : MonoBehaviour
                 {
                     reloading = true;
                     Invoke(nameof(Reload), reloadTime);
+                    break;
                 }
             }
 
@@ -90,14 +114,23 @@ public class Shottingscript : MonoBehaviour
     private void Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
-        Vector3 directionOffset = new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread), 0);
+
+        Vector3 directionOffset = new Vector3(
+            Random.Range(-spread, spread),
+            Random.Range(-spread, spread),
+            0
+        );
 
         Bullet bulletScript = bullet.GetComponent<Bullet>();
-        bulletScript.direction = transform.right + directionOffset;
-        bulletScript.playerTransform = transform;
-        bulletScript.damage = GetModifiedDamage();
 
-        bullet.gameObject.transform.right = transform.up;
+        if (bulletScript != null)
+        {
+            bulletScript.direction = transform.right + directionOffset;
+            bulletScript.playerTransform = transform;
+            bulletScript.damage = GetModifiedDamage();
+        }
+
+        bullet.transform.right = transform.right;
     }
 
     private void CanShot()

@@ -2948,6 +2948,7 @@ MonoBehaviour:
   heatPerSecond: 25
   coolingRate: 10
   particle: {fileID: 107088331}
+  grenade: {fileID: 1393480308}
 --- !u!198 &107088331 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 19801364, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
@@ -34511,6 +34512,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9041571278830701093, guid: ea756f0a134eb0142afe1f010af6f129, type: 3}
+      propertyPath: usingGrenades
+      value: 
+      objectReference: {fileID: 1393480308}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34573,6 +34578,10 @@ PrefabInstance:
       propertyPath: firingPoint
       value: 
       objectReference: {fileID: 414682418}
+    - target: {fileID: 6246017183279194712, guid: de32a8f7e3d8f3a4fac88a2b4b4df2a8, type: 3}
+      propertyPath: usingGrenades
+      value: 
+      objectReference: {fileID: 1393480308}
     - target: {fileID: 6898963308910696002, guid: de32a8f7e3d8f3a4fac88a2b4b4df2a8, type: 3}
       propertyPath: m_Name
       value: Minigun
@@ -34825,6 +34834,10 @@ PrefabInstance:
       propertyPath: firingPoint
       value: 
       objectReference: {fileID: 414682418}
+    - target: {fileID: 5132126697532426273, guid: 9c7c0437db7c91e4bb0795fac58566a5, type: 3}
+      propertyPath: usingGrenades
+      value: 
+      objectReference: {fileID: 1393480308}
     - target: {fileID: 5603299098213124397, guid: 9c7c0437db7c91e4bb0795fac58566a5, type: 3}
       propertyPath: m_Name
       value: Shotgun

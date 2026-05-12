@@ -203,7 +203,7 @@ public class UseGrenade : MonoBehaviour
         {
             rb.MovePosition(target);
             rb.linearVelocity = Vector2.zero;
-            rb.gameObject.GetComponent<grenadedamage>().Explosion();
+            rb.gameObject.GetComponent<GrenadeDamage>().Explosion();
         }
     }
 

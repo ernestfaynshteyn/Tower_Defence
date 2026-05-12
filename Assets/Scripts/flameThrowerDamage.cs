@@ -12,6 +12,8 @@ public class flameThrowerDamage : MonoBehaviour
 
     [SerializeField] private ParticleSystem particle;
 
+    public UseGrenade grenade;
+
     private bool overheated = false;
 
     void Update()
@@ -61,7 +63,7 @@ public class flameThrowerDamage : MonoBehaviour
             return;
 
         EnemyHealth enemy = collision.GetComponent<EnemyHealth>();
-        if (enemy != null)
+        if (enemy != null&& !grenade.isEquipped)
         {
             enemy.TakeDamage(flameDamage * Time.deltaTime);
         }

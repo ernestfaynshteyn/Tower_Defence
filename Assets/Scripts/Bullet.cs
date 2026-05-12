@@ -6,7 +6,10 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float lifeTime = 6f;
     [SerializeField] private float maxDistance = 3f;
 
-    public float damage = 50f;
+    [SerializeField] private float defaultDamage = 50f;
+
+    public float damage;
+
     private float critChance = 0f;
     private float critMultiplier = 2f;
     private float lifestealChance = 0f;
@@ -21,17 +24,22 @@ public class Bullet : MonoBehaviour
     public float BaseSpeed => speed;
     public float BaseMaxDistance => maxDistance;
 
-    void Awake()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        if (damage <= 0f)
+        {
+            damage = defaultDamage;
+        }
     }
 
-    void Start()
+    private void Start()
     {
         Destroy(gameObject, lifeTime);
     }
 
-    void Update()
+    private void Update()
     {
         if (playerTransform != null && Vector3.Distance(transform.position, playerTransform.position) > maxDistance)
         {
@@ -39,10 +47,12 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (rb != null)
-            rb.linearVelocity = direction * speed;
+        {
+            rb.linearVelocity = direction.normalized * speed;
+        }
     }
 
     public void Setup(
@@ -57,7 +67,16 @@ public class Bullet : MonoBehaviour
         Transform shooterTransform
     )
     {
-        damage = newDamage;
+        if (newDamage <= 0f)
+        {
+            Debug.LogWarning("Bullet Setup received 0 damage. Using default damage instead.");
+            damage = defaultDamage;
+        }
+        else
+        {
+            damage = newDamage;
+        }
+
         speed = newSpeed;
         maxDistance = newMaxDistance;
         critChance = Mathf.Clamp01(newCritChance);
@@ -66,18 +85,32 @@ public class Bullet : MonoBehaviour
         lifestealAmount = Mathf.Max(0f, newLifestealAmount);
         ownerHealth = newOwnerHealth;
         playerTransform = shooterTransform;
+
+        Debug.Log("Bullet damage set to: " + damage);
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        EnemyHealth enemy = collision.GetComponent<EnemyHealth>();
+        Debug.Log("Bullet hit: " + collision.gameObject.name);
+
+        EnemyHealth enemy = collision.GetComponentInParent<EnemyHealth>();
 
         if (enemy != null)
         {
+            Debug.Log("EnemyHealth found on: " + enemy.gameObject.name);
+
             float finalDamage = damage;
 
+            if (finalDamage <= 0f)
+            {
+                Debug.LogWarning("Bullet tried to deal 0 damage. Using default damage.");
+                finalDamage = defaultDamage;
+            }
+
             if (Random.value < critChance)
+            {
                 finalDamage *= critMultiplier;
+            }
 
             enemy.TakeDamage(finalDamage);
 
@@ -85,8 +118,8 @@ public class Bullet : MonoBehaviour
             {
                 ownerHealth.Heal(finalDamage * lifestealAmount);
             }
-        }
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 }

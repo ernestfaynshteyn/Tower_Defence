@@ -13,19 +13,22 @@ public class EnemyHealth : MonoBehaviour
 
     public int moneyReward = 10;
 
-    float baseSpeed;
-    bool isStunned;
-    bool isDead;
+    private float baseSpeed;
+    private bool isStunned;
+    private bool isDead;
 
     public Animator animator;
 
-    public void Start()
+    private void Start()
     {
         ApplyDifficulty();
 
         baseSpeed = moveSpeed;
 
-        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
     }
 
     public void TakeDamage(float damage)
@@ -39,7 +42,7 @@ public class EnemyHealth : MonoBehaviour
         CheckForHealth();
     }
 
-    public void CheckForHealth()
+    private void CheckForHealth()
     {
         if (health <= 75f)
         {
@@ -52,14 +55,21 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    void Die()
+    private void Die()
     {
         if (isDead) return;
 
         isDead = true;
 
-        CurrencyManager.Instance.AddMoney(moneyReward);
-        WaveManager.Instance.enemyleft -= 1;
+        if (CurrencyManager.Instance != null)
+        {
+            CurrencyManager.Instance.AddMoney(moneyReward);
+        }
+
+        if (WaveManager.Instance != null)
+        {
+            WaveManager.Instance.enemyleft -= 1;
+        }
 
         if (animator != null)
         {
@@ -67,6 +77,7 @@ public class EnemyHealth : MonoBehaviour
         }
 
         Collider2D col = GetComponent<Collider2D>();
+
         if (col != null)
         {
             col.enabled = false;
@@ -101,7 +112,7 @@ public class EnemyHealth : MonoBehaviour
         StartCoroutine(StunRoutine(resistedDuration));
     }
 
-    IEnumerator StunRoutine(float duration)
+    private IEnumerator StunRoutine(float duration)
     {
         isStunned = true;
         moveSpeed = 0f;
@@ -116,8 +127,13 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    void ApplyDifficulty()
+    private void ApplyDifficulty()
     {
+        if (GlobalData.Instance == null)
+        {
+            return;
+        }
+
         switch (GlobalData.Instance.currentDifficulty)
         {
             case Difficulty.Easy:

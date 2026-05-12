@@ -2,14 +2,24 @@ using UnityEngine;
 
 public class GrenadeDamage : MonoBehaviour
 {
- public void Explosion()
-    {
-        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(
-            transf    public float explosionRadius = 2f;
+    public float explosionRadius = 2f;
     public float damage = 50f;
     public LayerMask enemyLayer;
 
-   orm.position,
+    private bool hasExploded = false;
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (hasExploded) return;
+
+        hasExploded = true;
+        Explosion();
+    }
+
+    public void Explosion()
+    {
+        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(
+            transform.position,
             explosionRadius,
             enemyLayer
         );
