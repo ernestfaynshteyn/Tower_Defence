@@ -8,6 +8,7 @@ public class GrenadeDamage : MonoBehaviour
 
     private bool hasExploded = false;
 
+    public GameObject explosion;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (hasExploded) return;
@@ -33,7 +34,7 @@ public class GrenadeDamage : MonoBehaviour
                 enemyHealth.TakeDamage(damage);
             }
         }
-
+        Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
