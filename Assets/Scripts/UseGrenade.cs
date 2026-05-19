@@ -21,6 +21,12 @@ public class UseGrenade : MonoBehaviour
     public Texture2D equippedCursor;
     public Vector2 hotspot = Vector2.zero;
 
+    [Header("Grenade Prefabs")]
+    public GameObject fragPrefab;
+    public GameObject smokePrefab;
+    public GameObject flashPrefab;
+    public GameObject molotovPrefab;
+
     public bool isEquipped = false;
 
     private Camera mainCamera;
@@ -60,6 +66,27 @@ public class UseGrenade : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             ThrowGrenadeToMouse();
+        }
+    }
+
+    GameObject GetSelectedGrenadePrefab()
+    {
+        switch (selectedGrenade)
+        {
+            case GrenadeType.Frag:
+                return fragPrefab;
+
+            case GrenadeType.Smoke:
+                return smokePrefab;
+
+            case GrenadeType.Flash:
+                return flashPrefab;
+
+            case GrenadeType.Molotov:
+                return molotovPrefab;
+
+            default:
+                return fragPrefab;
         }
     }
 
