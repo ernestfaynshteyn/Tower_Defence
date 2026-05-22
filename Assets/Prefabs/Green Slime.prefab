@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -6530119443742562313}
   - component: {fileID: 3639659780231680501}
   - component: {fileID: 4379852410278357318}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Green Slime
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -217,6 +217,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53914c51dae6d14d95d482089f004a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  moveSpeed: 2
+  slowResistance: 0
+  stunResistance: 0
+  moneyReward: 10
   animator: {fileID: 0}
 --- !u!114 &3639659780231680501
 MonoBehaviour:

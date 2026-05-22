@@ -100,7 +100,11 @@ public class UseGrenade : MonoBehaviour
 
     void UpdateTrajectoryLine()
     {
-        if (trajectoryLine == null) return;
+        if (trajectoryLine == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         if (!isEquipped)
         {
@@ -159,7 +163,7 @@ public class UseGrenade : MonoBehaviour
 
         Vector2 startPos = throwPoint.position;
         Vector2 targetPos = GetMouseWorldPosition();
-
+        grenadePrefab = GetSelectedGrenadePrefab();
         GameObject grenade = Instantiate(grenadePrefab, startPos, Quaternion.identity);
 
         Grenades grenadeScript = grenade.GetComponent<Grenades>();

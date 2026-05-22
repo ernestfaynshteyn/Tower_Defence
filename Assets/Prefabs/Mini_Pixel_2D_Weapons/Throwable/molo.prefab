@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3033451765619115012}
   - component: {fileID: 644249104245144453}
   - component: {fileID: 8102634210257739404}
+  - component: {fileID: 6949272383145877043}
   m_Layer: 5
   m_Name: molo
   m_TagString: Untagged
@@ -75,3 +76,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6949272383145877043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9064642680956286913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a20b35d84557e24f9e783782a4c58ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionRadius: 2
+  damage: 50
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  explosion: {fileID: 0}
