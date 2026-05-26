@@ -107,7 +107,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  explosion: {fileID: 0}
+  explosion: {fileID: 8755545323428625349, guid: 53b2ac7e418cd9d40844d081a972bea0, type: 3}
 --- !u!50 &6343099017442192758
 Rigidbody2D:
   serializedVersion: 5

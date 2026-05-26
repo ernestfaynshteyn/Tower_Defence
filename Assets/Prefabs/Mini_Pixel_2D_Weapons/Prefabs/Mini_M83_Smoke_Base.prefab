@@ -106,8 +106,8 @@ MonoBehaviour:
   damage: 50
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
-  explosion: {fileID: 0}
+    m_Bits: 64
+  explosion: {fileID: 1478294788913505688, guid: cacbc7f26768f254a94ce55acdfafc95, type: 3}
 --- !u!50 &-6398675198878261922
 Rigidbody2D:
   serializedVersion: 5

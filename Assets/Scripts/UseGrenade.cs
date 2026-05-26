@@ -11,6 +11,7 @@ public class UseGrenade : MonoBehaviour
     [Header("Throw Settings")]
     public float flightTime = 0.8f;
     public float curveHeight = 2f;
+    public float throwAnimationDelay = 0.25f;
 
     [Header("Trajectory Line")]
     public LineRenderer trajectoryLine;
@@ -27,9 +28,13 @@ public class UseGrenade : MonoBehaviour
     public GameObject flashPrefab;
     public GameObject molotovPrefab;
 
+    [Header("Grenade Animations")]
+    public Animator playerAnimator;
+
     public bool isEquipped = false;
 
     private Camera mainCamera;
+    private bool isThrowing = false;
 
     void Start()
     {
@@ -65,13 +70,43 @@ public class UseGrenade : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            ThrowGrenadeToMouse();
+            StartCoroutine(ThrowGrenadeRoutine());
         }
     }
 
-    GameObject GetSelectedGrenadePrefab()
+    void HandleGrenadeSelection()
     {
-        switch (selectedGrenade)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SelectGrenade(GrenadeType.Frag);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SelectGrenade(GrenadeType.Smoke);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SelectGrenade(GrenadeType.Flash);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            SelectGrenade(GrenadeType.Molotov);
+        }
+    }
+
+    void SelectGrenade(GrenadeType grenadeType)
+    {
+        selectedGrenade = grenadeType;
+
+        Debug.Log("Selected " + selectedGrenade + " Grenade");
+    }
+
+    GameObject GetSelectedGrenadePrefab(GrenadeType grenadeType)
+    {
+        switch (grenadeType)
         {
             case GrenadeType.Frag:
                 return fragPrefab;
@@ -90,19 +125,76 @@ public class UseGrenade : MonoBehaviour
         }
     }
 
+
+    IEnumerator ThrowGrenadeRoutine()
+    {
+        if (!isEquipped) yield break;
+        if (isThrowing) yield break;
+
+        GrenadeType grenadeToThrow = selectedGrenade;
+
+        if (!Inventory.instance.UseGrenade(grenadeToThrow))
+            yield break;
+
+        isThrowing = true;
+
+        yield return new WaitForSeconds(throwAnimationDelay);
+
+        SpawnGrenadeToMouse(grenadeToThrow);
+
+        isThrowing = false;
+    }
+
+    void SpawnGrenadeToMouse(GrenadeType grenadeType)
+    {
+        Vector2 startPos = throwPoint.position;
+        Vector2 targetPos = GetMouseWorldPosition();
+
+        grenadePrefab = GetSelectedGrenadePrefab(grenadeType);
+
+        if (grenadePrefab == null)
+        {
+            Debug.LogWarning("No grenade prefab assigned for " + grenadeType);
+            return;
+        }
+
+        GameObject grenade = Instantiate(grenadePrefab, startPos, Quaternion.identity);
+
+        Grenades grenadeScript = grenade.GetComponent<Grenades>();
+
+        if (grenadeScript != null)
+        {
+            grenadeScript.grenadeType = grenadeType;
+        }
+
+        Rigidbody2D rb = grenade.GetComponent<Rigidbody2D>();
+
+        if (rb != null)
+        {
+            rb.gravityScale = 0f;
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+
+            StartCoroutine(MoveGrenadeInCurve(rb, startPos, targetPos));
+        }
+    }
+
     void UpdateCursor()
     {
         if (isEquipped)
+        {
             Cursor.SetCursor(equippedCursor, hotspot, CursorMode.Auto);
+        }
         else
+        {
             Cursor.SetCursor(defaultCursor, hotspot, CursorMode.Auto);
+        }
     }
 
     void UpdateTrajectoryLine()
     {
         if (trajectoryLine == null)
         {
-            Destroy(gameObject);
             return;
         }
 
@@ -125,62 +217,6 @@ public class UseGrenade : MonoBehaviour
             Vector2 point = GetBezierPoint(startPos, controlPoint, targetPos, t);
 
             trajectoryLine.SetPosition(i, new Vector3(point.x, point.y, 0f));
-        }
-    }
-
-    void HandleGrenadeSelection()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            selectedGrenade = GrenadeType.Frag;
-            Debug.Log("Selected Frag Grenade");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            selectedGrenade = GrenadeType.Smoke;
-            Debug.Log("Selected Smoke Grenade");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            selectedGrenade = GrenadeType.Flash;
-            Debug.Log("Selected Flash Grenade");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            selectedGrenade = GrenadeType.Molotov;
-            Debug.Log("Selected Molotov Grenade");
-        }
-    }
-    void ThrowGrenadeToMouse()
-    {
-        if (!isEquipped) return;
-
-        if (!Inventory.instance.UseGrenade(selectedGrenade))
-            return;
-
-        Vector2 startPos = throwPoint.position;
-        Vector2 targetPos = GetMouseWorldPosition();
-        grenadePrefab = GetSelectedGrenadePrefab();
-        GameObject grenade = Instantiate(grenadePrefab, startPos, Quaternion.identity);
-
-        Grenades grenadeScript = grenade.GetComponent<Grenades>();
-        if (grenadeScript != null)
-        {
-            grenadeScript.grenadeType = selectedGrenade;
-        }
-
-        Rigidbody2D rb = grenade.GetComponent<Rigidbody2D>();
-
-        if (rb != null)
-        {
-            rb.gravityScale = 0f;
-            rb.linearVelocity = Vector2.zero;
-            rb.angularVelocity = 0f;
-
-            StartCoroutine(MoveGrenadeInCurve(rb, startPos, targetPos));
         }
     }
 
@@ -234,7 +270,13 @@ public class UseGrenade : MonoBehaviour
         {
             rb.MovePosition(target);
             rb.linearVelocity = Vector2.zero;
-            rb.gameObject.GetComponent<GrenadeDamage>().Explosion();
+
+            GrenadeDamage grenadeDamage = rb.gameObject.GetComponent<GrenadeDamage>();
+
+            if (grenadeDamage != null)
+            {
+                grenadeDamage.Explosion();
+            }
         }
     }
 
