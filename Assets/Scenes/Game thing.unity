@@ -1075,9 +1075,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 2122137825}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -2992,9 +2993,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 54227726}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -3148,10 +3150,11 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 109404939}
   - {fileID: 2000615091}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -3764,7 +3767,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 285, y: -0.4194336}
+  m_AnchoredPosition: {x: 289.6316, y: -0.4196167}
   m_SizeDelta: {x: -404.1448, y: -996.44885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180448452
@@ -4576,9 +4579,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 0
+  costPerLevel: 10
   requireSkills:
   - {fileID: 1043958870}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -4732,9 +4736,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 0
+  costPerLevel: 10
   requireSkills:
   - {fileID: 757481176}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -5134,10 +5139,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUnlock: 0
   level: 0
-  maxLevel: 4
-  costPerlevel: 3
+  maxLevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 1381529127}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -5637,10 +5643,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUnlock: 0
   level: 0
-  maxLevel: 10
-  costPerlevel: 1
+  maxLevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 1219296041}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -5913,8 +5920,9 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 1
+  costPerLevel: 10
   requireSkills: []
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -7190,7 +7198,7 @@ GameObject:
   - component: {fileID: 477733069}
   - component: {fileID: 477733068}
   - component: {fileID: 477733067}
-  - component: {fileID: 477733066}
+  - component: {fileID: 477733070}
   m_Layer: 5
   m_Name: skill 1
   m_TagString: Untagged
@@ -7219,26 +7227,6 @@ RectTransform:
   m_AnchoredPosition: {x: 265.6, y: 90.1}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &477733066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477733064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isUnlock: 0
-  level: 0
-  maxLevel: 1
-  costPerlevel: 0
-  requireSkills: []
-  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
-  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &477733067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7283,9 +7271,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 477733066}
+      - m_Target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
         m_TargetAssemblyTypeName: Skills, Assembly-CSharp
-        m_MethodName: Buy
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7333,6 +7321,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477733064}
   m_CullTransparentMesh: 1
+--- !u!114 &477733070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477733064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::skills
+  isUnlock: 1
+  level: 0
+  maxLevel: 1
+  costPerLevel: 10
+  requireSkills: []
+  effects: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!224 &501683857 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3997131002464116358, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
@@ -7605,10 +7614,11 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 0
+  costPerLevel: 10
   requireSkills:
-  - {fileID: 268537275}
   - {fileID: 2048469174}
+  - {fileID: 268537275}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -8063,9 +8073,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 0
+  costPerLevel: 10
   requireSkills:
-  - {fileID: 477733066}
+  - {fileID: 477733070}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -8955,9 +8966,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 0
+  costPerLevel: 10
   requireSkills:
   - {fileID: 757481176}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -10015,10 +10027,11 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 110005775}
   - {fileID: 1423277857}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -11843,10 +11856,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUnlock: 0
   level: 0
-  maxLevel: 10
-  costPerlevel: 0
+  maxLevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 561743386}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -12749,9 +12763,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 0
+  costPerLevel: 10
   requireSkills:
   - {fileID: 268537275}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -13462,9 +13477,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 1666236537}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -13774,10 +13790,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUnlock: 0
   level: 0
-  maxLevel: 100
-  costPerlevel: 0
+  maxLevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 1043958870}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -15944,9 +15961,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 0
+  costPerLevel: 10
   requireSkills:
   - {fileID: 561743386}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -18655,9 +18673,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 923466173}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -18999,6 +19018,7 @@ GameObject:
   - component: {fileID: 1232361113}
   - component: {fileID: 1232361112}
   - component: {fileID: 1232361111}
+  - component: {fileID: 1232361114}
   m_Layer: 5
   m_Name: skill 9
   m_TagString: Untagged
@@ -19121,6 +19141,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232361108}
   m_CullTransparentMesh: 1
+--- !u!114 &1232361114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232361108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::skills
+  isUnlock: 0
+  level: 0
+  maxLevel: 1
+  costPerLevel: 10
+  requireSkills:
+  - {fileID: 268537275}
+  - {fileID: 600071758}
+  effects: []
+  lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &1240688691
 GameObject:
   m_ObjectHideFlags: 0
@@ -19774,10 +19817,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUnlock: 0
   level: 0
-  maxLevel: 15
-  costPerlevel: 2
+  maxLevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 651781451}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -20648,9 +20692,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 1219296041}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -20878,9 +20923,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 0
+  costPerLevel: 10
   requireSkills:
   - {fileID: 262079577}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -21548,10 +21594,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUnlock: 0
   level: 0
-  maxLevel: 5
-  costPerlevel: 1
+  maxLevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 110005775}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -22081,9 +22128,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 0
+  costPerLevel: 10
   requireSkills:
   - {fileID: 268537275}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -24237,9 +24285,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 54227726}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -24623,11 +24672,12 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 0
+  costPerLevel: 10
   requireSkills:
   - {fileID: 839605458}
   - {fileID: 1487422766}
   - {fileID: 530806611}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -25776,10 +25826,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUnlock: 0
   level: 0
-  maxLevel: 6
-  costPerlevel: 1
+  maxLevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 1638249469}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -28621,9 +28672,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 1286532250}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -29318,9 +29370,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 0
+  costPerLevel: 10
   requireSkills:
   - {fileID: 1390599004}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -30260,10 +30313,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUnlock: 0
   level: 0
-  maxLevel: 3
-  costPerlevel: 0
+  maxLevel: 1
+  costPerLevel: 10
   requireSkills:
   - {fileID: 1666236537}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -30886,9 +30940,10 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 0
+  costPerLevel: 10
   requireSkills:
   - {fileID: 1043958870}
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -31437,8 +31492,9 @@ MonoBehaviour:
   isUnlock: 0
   level: 0
   maxLevel: 1
-  costPerlevel: 1
+  costPerLevel: 10
   requireSkills: []
+  effects: []
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
