@@ -3767,11 +3767,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-<<<<<<< HEAD
   m_AnchoredPosition: {x: 14, y: -11.499756}
-=======
-  m_AnchoredPosition: {x: 289.6316, y: -0.4196167}
->>>>>>> 821d1959ea9b3b32bf76f411b3e37f00f7592e95
   m_SizeDelta: {x: -404.1448, y: -996.44885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180448452
@@ -19156,16 +19152,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
-<<<<<<< HEAD
-  m_EditorClassIdentifier: Assembly-CSharp::Skills
-  isUnlock: 0
-  level: 0
-  maxLevel: 1
-  costPerlevel: 0
-  requireSkills:
-  - {fileID: 268537275}
-  - {fileID: 600071758}
-=======
   m_EditorClassIdentifier: Assembly-CSharp::skills
   isUnlock: 0
   level: 0
@@ -19175,7 +19161,6 @@ MonoBehaviour:
   - {fileID: 268537275}
   - {fileID: 600071758}
   effects: []
->>>>>>> 821d1959ea9b3b32bf76f411b3e37f00f7592e95
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   unlockColor: {r: 0, g: 1, b: 0, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
