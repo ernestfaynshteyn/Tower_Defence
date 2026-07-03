@@ -1,17 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public enum ModifierType
 {
     Flat,
     Percent
-}
-
-public enum PurchaseType
-{
-    SkillPoints,
-    Money
 }
 
 [System.Serializable]
@@ -22,15 +15,17 @@ public class SkillEffect
     public float value = 0f;
 }
 
-public class Skills : MonoBehaviour
+public class skills : MonoBehaviour
 {
     public bool isUnlock = false;
 
     public int level = 0;
     public int maxLevel = 1;
-    public int costPerlevel;
+    public int costPerLevel = 10;
 
-    public Skills[] requireSkills;
+    public skills[] requireSkills;
+
+    public SkillEffect[] effects;
 
     public Color lockColor = Color.gray;
     public Color unlockColor = Color.green;
@@ -41,6 +36,11 @@ public class Skills : MonoBehaviour
     private void Awake()
     {
         button = GetComponent<Button>();
+
+        if (button == null)
+        {
+            Debug.LogError("Skills script requires a Button component.");
+        }
     }
 
     private void Update()
@@ -52,21 +52,15 @@ public class Skills : MonoBehaviour
     public bool CheckUnlock()
     {
         if (requireSkills == null || requireSkills.Length == 0)
-        {
             return true;
-        }
 
-        foreach (Skills skill in requireSkills)
+        foreach (skills skill in requireSkills)
         {
             if (skill == null)
-            {
                 return false;
-            }
 
             if (skill.level <= 0)
-            {
                 return false;
-            }
         }
 
         return true;
@@ -74,6 +68,8 @@ public class Skills : MonoBehaviour
 
     private void UpdateButtonColor()
     {
+        if (button == null) return;
+
         ColorBlock colors = button.colors;
 
         if (!isUnlock)
@@ -96,13 +92,13 @@ public class Skills : MonoBehaviour
     {
         if (!isUnlock)
         {
-            Debug.Log("Not unlock yet");
+            Debug.Log("Skill not unlocked yet");
             return;
         }
 
         if (level >= maxLevel)
         {
-            Debug.Log("max level");
+            Debug.Log("Skill already max level");
             return;
         }
 
@@ -112,15 +108,28 @@ public class Skills : MonoBehaviour
             return;
         }
 
-        if (CurrencyManager.Instance.SpendMoney(costPerlevel))
+        if (CurrencyManager.Instance.SpendMoney(costPerLevel))
         {
             level++;
 
-            Debug.Log("Skill bought. Current level: " + level);
+            Debug.Log("Skill bought. Level: " + level);
+
+            ApplyEffects();
         }
         else
         {
             Debug.Log("Not enough money");
+        }
+    }
+
+    private void ApplyEffects()
+    {
+        if (effects == null) return;
+
+        foreach (SkillEffect effect in effects)
+        {
+            Debug.Log($"Applying {effect.statName}: {effect.value} ({effect.modifierType})");
+            // Hook into your stat system here
         }
     }
 }
