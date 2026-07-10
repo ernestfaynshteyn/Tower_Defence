@@ -2933,6 +2933,8 @@ MonoBehaviour:
   heatPerSecond: 25
   coolingRate: 10
   particle: {fileID: 107088331}
+  burnDuration: 0.5
+  burnDamage: 2
   grenade: {fileID: 1393480308}
 --- !u!198 &107088331 stripped
 ParticleSystem:
@@ -4631,7 +4633,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 262079577}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
@@ -4788,7 +4790,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 268537275}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
@@ -7271,9 +7273,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 477733070}
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
+        m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7667,7 +7669,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 530806611}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
@@ -8125,7 +8127,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 561743386}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
@@ -9018,7 +9020,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 600071758}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
@@ -11909,7 +11911,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 757481176}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
@@ -12815,7 +12817,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 839605458}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
@@ -13843,7 +13845,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 930056621}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
@@ -16013,7 +16015,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1043958870}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
@@ -19091,8 +19093,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+      - m_Target: {fileID: 1232361114}
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
@@ -20975,7 +20977,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1390599004}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
@@ -22180,7 +22182,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1487422766}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
@@ -24726,7 +24728,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1643082186}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
@@ -29422,7 +29424,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1891664994}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
@@ -30992,7 +30994,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2048469174}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
