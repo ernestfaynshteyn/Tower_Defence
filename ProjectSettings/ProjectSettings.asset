@@ -960,7 +960,13 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -982,11 +988,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 06df72de-890c-40b6-8a52-c9f468e7341d
+  cloudProjectId: b8d25f14-404b-436a-8052-eb9d25317f67
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Ernest TD game
-  organizationId: kufbsrieewz
+  organizationId: unity_772a4bd2401afb601928
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
