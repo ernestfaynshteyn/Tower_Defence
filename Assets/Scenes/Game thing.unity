@@ -1072,15 +1072,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 2122137825}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &54227727
 MonoBehaviour:
@@ -2992,15 +3001,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 54227726}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &109404940
 MonoBehaviour:
@@ -3149,16 +3167,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 109404939}
-  - {fileID: 2000615091}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &110005776
 MonoBehaviour:
@@ -3652,6 +3678,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02b64ee256af48443bc31fe9892edc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  treeId: MainTree
+  collectChildrenOnAwake: 1
+  nodes: []
+  refundRate: 1
+  saveToPlayerPrefs: 1
+  loadOnStart: 1
+  totalSpentText: {fileID: 0}
+  refreshInterval: 0.2
 --- !u!1 &175130012
 GameObject:
   m_ObjectHideFlags: 0
@@ -4578,15 +4612,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 1043958870}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &262079578
 MonoBehaviour:
@@ -4735,15 +4778,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 757481176}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &268537276
 MonoBehaviour:
@@ -5139,15 +5191,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 1381529127}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &311922287
 MonoBehaviour:
@@ -5643,15 +5704,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 1219296041}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &326485777
 MonoBehaviour:
@@ -5919,14 +5989,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills: []
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!224 &372435931 stripped
 RectTransform:
@@ -7335,14 +7415,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::skills
-  isUnlock: 1
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills: []
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!224 &501683857 stripped
 RectTransform:
@@ -7613,16 +7703,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 2048469174}
-  - {fileID: 268537275}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &530806612
 MonoBehaviour:
@@ -8072,15 +8170,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 477733070}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &561743387
 MonoBehaviour:
@@ -8965,15 +9072,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 757481176}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &600071759
 MonoBehaviour:
@@ -10026,16 +10142,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 110005775}
-  - {fileID: 1423277857}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &651781452
 MonoBehaviour:
@@ -11856,15 +11980,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 561743386}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &757481177
 MonoBehaviour:
@@ -12762,15 +12895,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 268537275}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &839605459
 MonoBehaviour:
@@ -13476,15 +13618,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 1666236537}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &923466174
 MonoBehaviour:
@@ -13790,15 +13941,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 1043958870}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &930056622
 MonoBehaviour:
@@ -15960,15 +16120,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 561743386}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1043958871
 MonoBehaviour:
@@ -18672,15 +18841,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 923466173}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1219296042
 MonoBehaviour:
@@ -19155,16 +19333,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::skills
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 268537275}
-  - {fileID: 600071758}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &1240688691
 GameObject:
@@ -19817,15 +20003,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 651781451}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1286532251
 MonoBehaviour:
@@ -20691,15 +20886,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 1219296041}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1381529128
 MonoBehaviour:
@@ -20922,15 +21126,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 262079577}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1390599005
 MonoBehaviour:
@@ -21594,15 +21807,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 110005775}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1423277858
 MonoBehaviour:
@@ -22127,15 +22349,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 268537275}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1487422767
 MonoBehaviour:
@@ -24284,15 +24515,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 54227726}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1638249470
 MonoBehaviour:
@@ -24671,17 +24911,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 839605458}
-  - {fileID: 1487422766}
-  - {fileID: 530806611}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1643082187
 MonoBehaviour:
@@ -25826,15 +26073,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 1638249469}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1666236538
 MonoBehaviour:
@@ -28671,15 +28927,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 1286532250}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1843935619
 MonoBehaviour:
@@ -29369,15 +29634,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 1390599004}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1891664995
 MonoBehaviour:
@@ -30313,15 +30587,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 1666236537}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2000615092
 MonoBehaviour:
@@ -30939,15 +31222,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills:
-  - {fileID: 1043958870}
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2048469175
 MonoBehaviour:
@@ -31491,14 +31783,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUnlock: 0
+  skillId: 
+  displayName: 
+  description: 
   level: 0
   maxLevel: 1
-  costPerLevel: 10
-  requireSkills: []
+  baseCost: 10
+  costAddPerLevel: 0
+  costMultiplierPerLevel: 1
+  requirements: []
   effects: []
+  autoWireButton: 1
+  iconImage: {fileID: 0}
+  levelText: {fileID: 0}
+  costText: {fileID: 0}
+  maxLevelLabel: MAX
   lockColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  unlockColor: {r: 0, g: 1, b: 0, a: 1}
+  affordableColor: {r: 0, g: 1, b: 0, a: 1}
+  unaffordableColor: {r: 0.35, g: 0.5, b: 0.35, a: 1}
   maxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2122137826
 MonoBehaviour:

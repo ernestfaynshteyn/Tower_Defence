@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-/// <summary>
-/// Owns one tree's worth of nodes. Put it on the panel that parents the skill buttons.
-/// </summary>
+
 public class SkillTreeScript : MonoBehaviour
 {
     [Header("Setup")]
