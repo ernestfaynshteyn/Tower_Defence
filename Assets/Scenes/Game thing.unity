@@ -1072,7 +1072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 27
   displayName: 
   description: 
   level: 0
@@ -1080,7 +1080,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 2122137825}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -2274,6 +2276,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: skillId
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: maxLevel
       value: 10
       objectReference: {fileID: 0}
@@ -2288,6 +2294,10 @@ PrefabInstance:
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requireSkills.Array.size
@@ -2305,6 +2315,14 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1306156379}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 1306156379}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5259978551695877241, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 27
@@ -3001,7 +3019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 29
   displayName: 
   description: 
   level: 0
@@ -3009,7 +3027,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 54227726}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -3167,7 +3187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 34
   displayName: 
   description: 
   level: 0
@@ -3175,7 +3195,11 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 109404939}
+    requiredLevel: 1
+  - skill: {fileID: 2000615091}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -3803,7 +3827,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 14, y: -11.499756}
+  m_AnchoredPosition: {x: -290.05585, y: -11.500977}
   m_SizeDelta: {x: -404.1448, y: -996.44885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180448452
@@ -4612,7 +4636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 57
   displayName: 
   description: 
   level: 0
@@ -4620,7 +4644,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 1043958870}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -4778,7 +4804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 51
   displayName: 
   description: 
   level: 0
@@ -4786,7 +4812,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 757481176}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -5191,7 +5219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 42
   displayName: 
   description: 
   level: 0
@@ -5199,7 +5227,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 1381529127}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -5704,7 +5734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 43
   displayName: 
   description: 
   level: 0
@@ -5712,7 +5742,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 1219296041}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -5989,7 +6021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 1
   displayName: 
   description: 
   level: 0
@@ -6287,11 +6319,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: skillId
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
@@ -6310,6 +6350,22 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1996148926}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 1996148926}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[1].skill
+      value: 
+      objectReference: {fileID: 1996148926}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[1].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Better chances
@@ -6915,11 +6971,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: skillId
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
@@ -6938,6 +7002,14 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1746481990}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 1746481990}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: MORE Crit damage
@@ -7415,7 +7487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::skills
-  skillId: 
+  skillId: 44
   displayName: 
   description: 
   level: 0
@@ -7703,7 +7775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 55
   displayName: 
   description: 
   level: 0
@@ -7711,7 +7783,11 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 1043958870}
+    requiredLevel: 1
+  - skill: {fileID: 530806611}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -8170,7 +8246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 45
   displayName: 
   description: 
   level: 0
@@ -8178,7 +8254,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 477733070}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -8533,11 +8611,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: skillId
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
@@ -8556,6 +8642,14 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1518332132}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 1518332132}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Lifesteal?
@@ -8739,12 +8833,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: skillId
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requireSkills.Array.size
@@ -8770,6 +8872,22 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[1]'
       value: 
       objectReference: {fileID: 776113801}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 776113801}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[1].skill
+      value: 
+      objectReference: {fileID: 1391862575}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[1].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Multishot
@@ -9072,7 +9190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 50
   displayName: 
   description: 
   level: 0
@@ -9080,7 +9198,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 757481176}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -9342,6 +9462,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: skillId
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
@@ -9356,6 +9480,10 @@ PrefabInstance:
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requireSkills.Array.size
@@ -9373,6 +9501,14 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1306156379}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 1306156379}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6296602602893028856, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_Name
       value: skill 7 (attack)
@@ -10142,7 +10278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 36
   displayName: 
   description: 
   level: 0
@@ -10150,7 +10286,11 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 110005775}
+    requiredLevel: 1
+  - skill: {fileID: 1423277857}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -11980,7 +12120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 46
   displayName: 
   description: 
   level: 0
@@ -11988,7 +12128,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 561743386}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -12895,7 +13037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 53
   displayName: 
   description: 
   level: 0
@@ -12903,7 +13045,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 839605458}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -13195,6 +13339,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: skillId
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
@@ -13205,6 +13353,10 @@ PrefabInstance:
     - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: requirements.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: requireSkills.Array.size
@@ -13222,6 +13374,14 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 367358503}
+    - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 367358503}
+    - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5102164469878706668, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -13618,7 +13778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 39
   displayName: 
   description: 
   level: 0
@@ -13626,7 +13786,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 1666236537}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -13941,7 +14103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 48
   displayName: 
   description: 
   level: 0
@@ -13949,7 +14111,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 1043958870}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -14146,11 +14310,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: skillId
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
@@ -14169,6 +14341,14 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1518332132}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 1518332132}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Lifesteal gain
@@ -15341,6 +15521,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: skillId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
@@ -15351,6 +15535,10 @@ PrefabInstance:
     - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: requirements.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: requireSkills.Array.size
@@ -15372,6 +15560,14 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 367358503}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 367358503}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4805520148928916355, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: m_Colors.m_DisabledColor.a
       value: 1
@@ -15454,11 +15650,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: skillId
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
@@ -15477,6 +15681,14 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1484962511}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 1484962511}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Crit damage
@@ -16120,7 +16332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 47
   displayName: 
   description: 
   level: 0
@@ -16128,7 +16340,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 561743386}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -16543,11 +16757,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: skillId
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
@@ -16566,9 +16788,17 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 367358503}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 367358503}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: What$ th1s d0?
+      value: More UPs :)
       objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
@@ -16720,7 +16950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: '##############'
+      value: yay
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -18604,12 +18834,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: skillId
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requireSkills.Array.size
@@ -18635,6 +18873,22 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[1]'
       value: 
       objectReference: {fileID: 1784290649}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 1371409534}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[1].skill
+      value: 
+      objectReference: {fileID: 1784290649}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[1].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Vampire?
@@ -18841,7 +19095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 40
   displayName: 
   description: 
   level: 0
@@ -18849,7 +19103,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 923466173}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -19333,7 +19589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::skills
-  skillId: 
+  skillId: 52
   displayName: 
   description: 
   level: 0
@@ -19341,7 +19597,11 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 268537275}
+    requiredLevel: 1
+  - skill: {fileID: 600071758}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -19800,6 +20060,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: skillId
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
@@ -19814,6 +20078,10 @@ PrefabInstance:
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requireSkills.Array.size
@@ -19839,6 +20107,22 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[1]'
       value: 
       objectReference: {fileID: 476538931}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 2137306037}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.data[1].skill
+      value: 
+      objectReference: {fileID: 476538931}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.data[1].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5259978551695877241, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 28
@@ -20003,7 +20287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 37
   displayName: 
   description: 
   level: 0
@@ -20011,7 +20295,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 651781451}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -20886,7 +21172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 41
   displayName: 
   description: 
   level: 0
@@ -20894,7 +21180,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 923466173}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -21126,7 +21414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 58
   displayName: 
   description: 
   level: 0
@@ -21134,7 +21422,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 262079577}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -21807,7 +22097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 35
   displayName: 
   description: 
   level: 0
@@ -21815,7 +22105,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 110005775}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -22349,7 +22641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 54
   displayName: 
   description: 
   level: 0
@@ -22357,7 +22649,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 268537275}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -23094,8 +23388,16 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: skillId
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: requirements.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: requireSkills.Array.size
@@ -23132,6 +23434,14 @@ PrefabInstance:
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: 'Connectedskills.Array.data[1]'
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 367358503}
+    - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4714993326682629511, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: m_Name
@@ -23717,6 +24027,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: skillId
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: maxLevel
       value: 10
       objectReference: {fileID: 0}
@@ -23727,6 +24041,10 @@ PrefabInstance:
     - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: requirements.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: requireSkills.Array.size
@@ -23744,6 +24062,14 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1876395816}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 1876395816}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3030259248146008853, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: m_text
       value: 
@@ -23819,12 +24145,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: skillId
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requireSkills.Array.size
@@ -23858,6 +24192,30 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[2]'
       value: 
       objectReference: {fileID: 1406752157}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 745416557}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[1].skill
+      value: 
+      objectReference: {fileID: 1406752157}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[2].skill
+      value: 
+      objectReference: {fileID: 1634673039}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[1].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[2].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: MAX crit
@@ -24515,7 +24873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 28
   displayName: 
   description: 
   level: 0
@@ -24523,7 +24881,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 54227726}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -24802,6 +25162,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: skillId
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: maxLevel
       value: 10
       objectReference: {fileID: 0}
@@ -24816,6 +25180,10 @@ PrefabInstance:
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requireSkills.Array.size
@@ -24833,6 +25201,14 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 883321314}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 883321314}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6296602602893028856, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_Name
       value: skill 10 (attack)
@@ -24911,7 +25287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 56
   displayName: 
   description: 
   level: 0
@@ -24919,7 +25295,13 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 839605458}
+    requiredLevel: 1
+  - skill: {fileID: 1487422766}
+    requiredLevel: 1
+  - skill: {fileID: 530806611}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -25181,6 +25563,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: skillId
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
@@ -25195,6 +25581,10 @@ PrefabInstance:
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requireSkills.Array.size
@@ -25220,6 +25610,22 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[1]'
       value: 
       objectReference: {fileID: 1448105956}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 736036452}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.data[1].skill
+      value: 
+      objectReference: {fileID: 1448105956}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.data[1].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6296602602893028856, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_Name
       value: skill 9 (attack)
@@ -25474,12 +25880,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: skillId
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requireSkills.Array.size
@@ -25505,6 +25919,22 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[1]'
       value: 
       objectReference: {fileID: 1996366063}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 1996366063}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[1].skill
+      value: 
+      objectReference: {fileID: 1518780719}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[1].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: MORE lifesteal
@@ -26073,7 +26503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 30
   displayName: 
   description: 
   level: 0
@@ -26081,7 +26511,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 1638249469}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -26577,11 +27009,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: skillId
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
@@ -26600,6 +27040,14 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1518332132}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 1518332132}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Useless Upgrade
@@ -27353,6 +27801,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: skillId
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
@@ -27363,6 +27815,10 @@ PrefabInstance:
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requireSkills.Array.size
@@ -27378,6 +27834,10 @@ PrefabInstance:
       objectReference: {fileID: 1876395816}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: 'RequiredSkills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1876395816}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1876395816}
     - target: {fileID: 6296602602893028856, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
@@ -27701,12 +28161,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: skillId
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requireSkills.Array.size
@@ -27732,6 +28200,22 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[1]'
       value: 
       objectReference: {fileID: 2055552200}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 1518780719}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[1].skill
+      value: 
+      objectReference: {fileID: 2055552200}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[1].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: MORE lifesteal (again)
@@ -28927,7 +29411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 38
   displayName: 
   description: 
   level: 0
@@ -28935,8 +29419,14 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
-  effects: []
+  requirements:
+  - skill: {fileID: 1286532250}
+    requiredLevel: 1
+  effects:
+  - statName: 
+    modifierType: 0
+    value: 0
+    perLevel: 0
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -29634,7 +30124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 59
   displayName: 
   description: 
   level: 0
@@ -29642,7 +30132,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 1390599004}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -30186,11 +30678,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: skillId
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
@@ -30209,6 +30709,14 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1746481990}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 1746481990}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: MORE Crit %
@@ -30587,7 +31095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 33
   displayName: 
   description: 
   level: 0
@@ -30595,7 +31103,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 1666236537}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -30980,11 +31490,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: skillId
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
@@ -31003,6 +31521,14 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1518332132}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].skill
+      value: 
+      objectReference: {fileID: 1518332132}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: requirements.Array.data[0].requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
       value: Crit chance
@@ -31222,7 +31748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 49
   displayName: 
   description: 
   level: 0
@@ -31230,7 +31756,9 @@ MonoBehaviour:
   baseCost: 10
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
-  requirements: []
+  requirements:
+  - skill: {fileID: 1043958870}
+    requiredLevel: 1
   effects: []
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -31783,7 +32311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 
+  skillId: 26
   displayName: 
   description: 
   level: 0
