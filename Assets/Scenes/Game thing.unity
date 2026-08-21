@@ -214,6 +214,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -331,6 +332,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -486,6 +488,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -863,6 +866,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -980,6 +984,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1284,6 +1289,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1514,6 +1520,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1650,6 +1657,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2280,8 +2288,12 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: baseCost
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: maxLevel
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: SkillName
@@ -2294,6 +2306,14 @@ PrefabInstance:
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costAddPerLevel
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.size
@@ -2433,6 +2453,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2822,6 +2843,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -3580,6 +3602,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -3827,7 +3850,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -290.05585, y: -11.500977}
+  m_AnchoredPosition: {x: 289.63083, y: -11.500977}
   m_SizeDelta: {x: -404.1448, y: -996.44885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180448452
@@ -4121,6 +4144,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -4257,6 +4281,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -4809,7 +4834,7 @@ MonoBehaviour:
   description: 
   level: 0
   maxLevel: 1
-  baseCost: 10
+  baseCost: 25
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
   requirements:
@@ -4995,6 +5020,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -5429,6 +5455,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -5621,6 +5648,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -6237,6 +6265,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -6323,12 +6352,24 @@ PrefabInstance:
       value: 13
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: baseCost
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costAddPerLevel
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.size
@@ -6975,12 +7016,24 @@ PrefabInstance:
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: baseCost
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costAddPerLevel
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.size
@@ -7283,6 +7336,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -7681,6 +7735,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -7987,6 +8042,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -8250,10 +8306,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
+  maxLevel: 3
   baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  costAddPerLevel: 4
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 477733070}
     requiredLevel: 1
@@ -8489,6 +8545,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -8613,6 +8670,10 @@ PrefabInstance:
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: skillId
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: baseCost
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
@@ -8835,6 +8896,10 @@ PrefabInstance:
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: skillId
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: baseCost
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
@@ -9194,10 +9259,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 3
+  baseCost: 60
+  costAddPerLevel: 24
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 757481176}
     requiredLevel: 1
@@ -9466,8 +9531,12 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: baseCost
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: maxLevel
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: SkillName
@@ -9480,6 +9549,14 @@ PrefabInstance:
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costAddPerLevel
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.size
@@ -10719,6 +10796,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -10986,6 +11064,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -11141,6 +11220,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -11502,6 +11582,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -11713,6 +11794,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -11773,6 +11855,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &735492692
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -11818,6 +11901,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 0.24313726}
   m_FlipX: 0
@@ -11827,7 +11911,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &735492693
 Transform:
@@ -12007,6 +12090,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -12124,10 +12208,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 20
+  baseCost: 30
+  costAddPerLevel: 10
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 561743386}
     requiredLevel: 1
@@ -12346,6 +12430,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -12577,6 +12662,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -12788,6 +12874,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -12943,6 +13030,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -13041,10 +13129,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 3
+  baseCost: 60
+  costAddPerLevel: 24
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 839605458}
     requiredLevel: 1
@@ -13630,6 +13718,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -13990,6 +14079,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -14107,10 +14197,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 20
+  baseCost: 30
+  costAddPerLevel: 8
+  costMultiplierPerLevel: 1.09
   requirements:
   - skill: {fileID: 1043958870}
     requiredLevel: 1
@@ -14314,12 +14404,24 @@ PrefabInstance:
       value: 21
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: baseCost
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costAddPerLevel
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.size
@@ -14769,6 +14871,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -14905,6 +15008,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -15320,6 +15424,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -15526,7 +15631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: maxLevel
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: costPerlevel
@@ -15535,6 +15640,14 @@ PrefabInstance:
     - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: costAddPerLevel
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: requirements.Array.size
@@ -15654,12 +15767,24 @@ PrefabInstance:
       value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: baseCost
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costAddPerLevel
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.size
@@ -16160,6 +16285,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -16336,10 +16462,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
+  maxLevel: 2
   baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  costAddPerLevel: 4
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 561743386}
     requiredLevel: 1
@@ -16544,6 +16670,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -16680,6 +16807,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -17113,6 +17241,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -17343,6 +17472,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -17616,6 +17746,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -17771,6 +17902,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -18235,6 +18367,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -18408,6 +18541,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -18544,6 +18678,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -18776,6 +18911,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -18838,6 +18974,10 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: baseCost
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
@@ -18891,7 +19031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: Vampire?
+      value: Vampire
       objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
@@ -19326,6 +19466,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -19593,10 +19734,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 3
+  baseCost: 70
+  costAddPerLevel: 15
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 268537275}
     requiredLevel: 1
@@ -19854,6 +19995,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -20062,6 +20204,10 @@ PrefabInstance:
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: skillId
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: baseCost
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: maxLevel
@@ -20611,6 +20757,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -21572,6 +21719,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &1393480301
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -21617,6 +21765,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.4901961, g: 0.5019608, b: 0.5294118, a: 1}
   m_FlipX: 0
@@ -21626,7 +21775,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1393480302
 Transform:
@@ -21791,7 +21939,7 @@ MonoBehaviour:
   numberOfMolotov: {fileID: 897372488}
 --- !u!120 &1393480310
 LineRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -21837,6 +21985,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
@@ -21895,7 +22044,6 @@ LineRenderer:
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
@@ -22381,6 +22529,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -22645,10 +22794,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 3
+  baseCost: 60
+  costAddPerLevel: 24
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 268537275}
     requiredLevel: 1
@@ -22756,96 +22905,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487422764}
   m_CullTransparentMesh: 1
---- !u!1 &1491879170
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1491879172}
-  - component: {fileID: 1491879171}
-  m_Layer: 0
-  m_Name: Triangle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!212 &1491879171
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1491879170}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!4 &1491879172
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1491879170}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.50528, y: 2.2863598, z: 0.39934844}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1494522869
 GameObject:
   m_ObjectHideFlags: 0
@@ -22941,6 +23000,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -23163,6 +23223,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -23392,8 +23453,24 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: baseCost
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: maxLevel
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: costAddPerLevel
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: requirements.Array.size
@@ -23586,14 +23663,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1555164614}
   m_Enabled: 1
-  serializedVersion: 11
+  serializedVersion: 12
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
@@ -23782,6 +23859,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -24031,8 +24109,12 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: baseCost
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: maxLevel
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: costPerlevel
@@ -24041,6 +24123,14 @@ PrefabInstance:
     - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: costAddPerLevel
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: requirements.Array.size
@@ -24147,6 +24237,10 @@ PrefabInstance:
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: skillId
       value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: baseCost
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
@@ -24653,6 +24747,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -24789,6 +24884,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -25166,8 +25262,12 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: baseCost
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: maxLevel
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: SkillName
@@ -25180,6 +25280,14 @@ PrefabInstance:
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costAddPerLevel
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.size
@@ -25567,8 +25675,12 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: baseCost
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: maxLevel
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: SkillName
@@ -25581,6 +25693,14 @@ PrefabInstance:
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costAddPerLevel
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.size
@@ -25723,6 +25843,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -25884,12 +26005,24 @@ PrefabInstance:
       value: 23
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: baseCost
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
-      value: 7
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costAddPerLevel
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.size
@@ -26264,6 +26397,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -26400,6 +26534,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -27013,6 +27148,10 @@ PrefabInstance:
       value: 22
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: baseCost
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
       value: 1
       objectReference: {fileID: 0}
@@ -27367,6 +27506,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -27805,8 +27945,12 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: baseCost
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: maxLevel
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: costPerlevel
@@ -27815,6 +27959,14 @@ PrefabInstance:
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costAddPerLevel
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.size
@@ -27967,6 +28119,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -28084,6 +28237,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -28165,12 +28319,24 @@ PrefabInstance:
       value: 24
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: baseCost
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
-      value: 7
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costAddPerLevel
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.size
@@ -28972,6 +29138,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -29242,6 +29409,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -29772,6 +29940,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -29908,6 +30077,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -30334,6 +30504,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -30451,6 +30622,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -30682,12 +30854,24 @@ PrefabInstance:
       value: 17
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: baseCost
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costAddPerLevel
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.size
@@ -31413,6 +31597,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -31494,12 +31679,24 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: baseCost
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: maxLevel
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costPerlevel
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costAddPerLevel
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: costMultiplierPerLevel
+      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.size
@@ -31752,10 +31949,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 3
+  baseCost: 25
+  costAddPerLevel: 10
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 1043958870}
     requiredLevel: 1
@@ -32000,6 +32197,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -32615,6 +32813,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -32748,6 +32947,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -33403,4 +33603,3 @@ SceneRoots:
   - {fileID: 1213449530}
   - {fileID: 172713716}
   - {fileID: 1814437462}
-  - {fileID: 1491879172}
