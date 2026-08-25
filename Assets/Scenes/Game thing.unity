@@ -1081,10 +1081,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
+  maxLevel: 3
   baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  costAddPerLevel: 4
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 2122137825}
     requiredLevel: 1
@@ -3046,7 +3046,7 @@ MonoBehaviour:
   description: 
   level: 0
   maxLevel: 1
-  baseCost: 10
+  baseCost: 25
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
   requirements:
@@ -3214,7 +3214,7 @@ MonoBehaviour:
   description: 
   level: 0
   maxLevel: 1
-  baseCost: 10
+  baseCost: 60
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
   requirements:
@@ -3850,7 +3850,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 289.63083, y: -11.500977}
+  m_AnchoredPosition: {x: -250, y: -11.500977}
   m_SizeDelta: {x: -404.1448, y: -996.44885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180448452
@@ -4666,7 +4666,7 @@ MonoBehaviour:
   description: 
   level: 0
   maxLevel: 1
-  baseCost: 10
+  baseCost: 500
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
   requirements:
@@ -5250,7 +5250,7 @@ MonoBehaviour:
   description: 
   level: 0
   maxLevel: 1
-  baseCost: 10
+  baseCost: 400
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
   requirements:
@@ -5766,14 +5766,18 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 20
+  baseCost: 150
+  costAddPerLevel: 38
+  costMultiplierPerLevel: 1.09
   requirements:
   - skill: {fileID: 1219296041}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: 
+    modifierType: 0
+    value: 0
+    perLevel: 0
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -6058,7 +6062,19 @@ MonoBehaviour:
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
   requirements: []
-  effects: []
+  effects:
+  - statName: AttackCooldown
+    modifierType: 1
+    value: -20
+    perLevel: 0
+  - statName: ReloadTime
+    modifierType: 1
+    value: -20
+    perLevel: 0
+  - statName: AttackSpeed
+    modifierType: 1
+    value: 20
+    perLevel: 0
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -10360,7 +10376,7 @@ MonoBehaviour:
   description: 
   level: 0
   maxLevel: 1
-  baseCost: 10
+  baseCost: 100
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
   requirements:
@@ -12014,6 +12030,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &755501269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 755501271}
+  - component: {fileID: 755501270}
+  - component: {fileID: 755501272}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &755501270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755501269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e64cd088a77eb94e992b77b663598f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Upgrades
+--- !u!4 &755501271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755501269}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3430.9895, y: 667.9944, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &755501272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755501269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d62fd58fff16694b99f8d75b7dc5d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CurrencyManager
+  money: 0
+  moneyText: {fileID: 0}
 --- !u!1 &756677818
 GameObject:
   m_ObjectHideFlags: 0
@@ -12836,7 +12911,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can dodge
+  m_text: You can dodge (sometimes)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12932,7 +13007,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -35}
+  m_AnchoredPosition: {x: 0, y: -25}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &836108942
@@ -13872,7 +13947,7 @@ MonoBehaviour:
   description: 
   level: 0
   maxLevel: 1
-  baseCost: 10
+  baseCost: 140
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
   requirements:
@@ -19239,10 +19314,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 3
+  baseCost: 140
+  costAddPerLevel: 56
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 923466173}
     requiredLevel: 1
@@ -20226,6 +20301,10 @@ PrefabInstance:
       value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -20253,6 +20332,10 @@ PrefabInstance:
       propertyPath: 'RequiredSkills.Array.data[1]'
       value: 
       objectReference: {fileID: 476538931}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: atta
+      objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
@@ -20437,10 +20520,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 20
+  baseCost: 80
+  costAddPerLevel: 24
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 651781451}
     requiredLevel: 1
@@ -21323,10 +21406,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 2
+  baseCost: 300
+  costAddPerLevel: 120
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 923466173}
     requiredLevel: 1
@@ -21565,8 +21648,8 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
+  maxLevel: 3
+  baseCost: 250
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
   requirements:
@@ -22249,10 +22332,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 20
+  baseCost: 70
+  costAddPerLevel: 18
+  costMultiplierPerLevel: 1.09
   requirements:
   - skill: {fileID: 110005775}
     requiredLevel: 1
@@ -24973,10 +25056,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 3
+  baseCost: 25
+  costAddPerLevel: 10
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 54227726}
     requiredLevel: 1
@@ -26642,9 +26725,9 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
+  maxLevel: 15
+  baseCost: 30
+  costAddPerLevel: 8
   costMultiplierPerLevel: 1
   requirements:
   - skill: {fileID: 1638249469}
@@ -29583,10 +29666,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 3
+  baseCost: 150
+  costAddPerLevel: 38
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 1286532250}
     requiredLevel: 1
@@ -30298,8 +30381,8 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
+  maxLevel: 3
+  baseCost: 700
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
   requirements:
@@ -31283,10 +31366,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 3
+  baseCost: 60
+  costAddPerLevel: 24
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 1666236537}
     requiredLevel: 1
@@ -33603,3 +33686,4 @@ SceneRoots:
   - {fileID: 1213449530}
   - {fileID: 172713716}
   - {fileID: 1814437462}
+  - {fileID: 755501271}
