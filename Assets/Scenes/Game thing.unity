@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 15%
+  m_text: 15% more Dmg
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1088,7 +1088,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 2122137825}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: Health
+    modifierType: 1
+    value: 10
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -2312,6 +2316,10 @@ PrefabInstance:
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: costMultiplierPerLevel
       value: 1.09
       objectReference: {fileID: 0}
@@ -2328,6 +2336,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1306156379}
@@ -2336,9 +2348,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1306156379}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: ReloadSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1306156379}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -2365,7 +2389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8204232510854928942, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_text
-      value: reload/cooldown
+      value: Cooler Cooldown
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3052,7 +3076,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 54227726}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: DefenceUnlocked
+    modifierType: 0
+    value: 50
+    perLevel: 0
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -3220,9 +3248,15 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 109404939}
     requiredLevel: 1
-  - skill: {fileID: 2000615091}
-    requiredLevel: 1
-  effects: []
+  effects:
+  - statName: Health
+    modifierType: 1
+    value: 20
+    perLevel: 1
+  - statName: Defence
+    modifierType: 1
+    value: 20
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -3850,7 +3884,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -250, y: -11.500977}
+  m_AnchoredPosition: {x: -290.0561, y: -11.500916}
   m_SizeDelta: {x: -404.1448, y: -996.44885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180448452
@@ -4106,7 +4140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Brun upgrades
+  m_text: Burn upgrades
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4672,7 +4706,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 1043958870}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: NukeUnlocked
+    modifierType: 0
+    value: 0
+    perLevel: 0
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -5256,7 +5294,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 1381529127}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: PizzaPermanent
+    modifierType: 0
+    value: 1
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -5774,10 +5816,10 @@ MonoBehaviour:
   - skill: {fileID: 1219296041}
     requiredLevel: 1
   effects:
-  - statName: 
-    modifierType: 0
-    value: 0
-    perLevel: 0
+  - statName: PizzaDamage
+    modifierType: 1
+    value: 2
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -6384,6 +6426,10 @@ PrefabInstance:
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costMultiplierPerLevel
       value: 1.09
       objectReference: {fileID: 0}
@@ -6400,6 +6446,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1996148926}
@@ -6408,6 +6458,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1996148926}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: MultishotChance
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1996148926}
@@ -6415,6 +6473,10 @@ PrefabInstance:
       propertyPath: requirements.Array.data[1].skill
       value: 
       objectReference: {fileID: 1996148926}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -7048,6 +7110,10 @@ PrefabInstance:
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costMultiplierPerLevel
       value: 1.09
       objectReference: {fileID: 0}
@@ -7064,6 +7130,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1746481990}
@@ -7072,9 +7142,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1746481990}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: CritDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1746481990}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -7850,16 +7932,20 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 3
+  baseCost: 18
+  costAddPerLevel: 13
+  costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 1043958870}
     requiredLevel: 1
   - skill: {fileID: 530806611}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: MolotovDamage
+    modifierType: 1
+    value: 10
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -8329,7 +8415,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 477733070}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: ThrowableRadius
+    modifierType: 1
+    value: 10
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -8700,6 +8790,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -8712,6 +8806,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1518332132}
@@ -8720,16 +8818,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1518332132}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: LifestealChance
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1518332132}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: Lifesteal?
+      value: Lifesteal
       objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
@@ -8926,6 +9036,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -8936,6 +9050,10 @@ PrefabInstance:
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
@@ -8954,6 +9072,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 776113801}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: MultishotChance
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 776113801}
@@ -8961,6 +9087,10 @@ PrefabInstance:
       propertyPath: requirements.Array.data[1].skill
       value: 
       objectReference: {fileID: 1391862575}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -9282,7 +9412,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 757481176}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: FlashDuration
+    modifierType: 1
+    value: 13
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -9536,7 +9670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_text
-      value: Another 10%
+      value: 3% faster
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: id
@@ -9552,7 +9686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: maxLevel
-      value: 3
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: SkillName
@@ -9571,8 +9705,12 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: costMultiplierPerLevel
-      value: 1.12
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.size
@@ -9587,6 +9725,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1306156379}
@@ -9595,9 +9737,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1306156379}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: AttackSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1306156379}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -9616,7 +9770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8204232510854928942, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_text
-      value: faster attack
+      value: faster reload
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10384,7 +10538,11 @@ MonoBehaviour:
     requiredLevel: 1
   - skill: {fileID: 1423277857}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: DodgeChance
+    modifierType: 0
+    value: 10
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -11772,7 +11930,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2% mroe damage Per upg
+  m_text: 2% more Dmg Per upg
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12290,7 +12448,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 561743386}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: ThrowableRadius
+    modifierType: 1
+    value: 3
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -13204,14 +13366,18 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 3
+  maxLevel: 5
   baseCost: 60
   costAddPerLevel: 24
   costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 839605458}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: BurnDuration
+    modifierType: 1
+    value: 10
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -13953,7 +14119,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 1666236537}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: PizzaUnlocked
+    modifierType: 0
+    value: 20
+    perLevel: 0
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -14279,7 +14449,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 1043958870}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: ThrowableDamage
+    modifierType: 1
+    value: 2
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -14495,6 +14669,10 @@ PrefabInstance:
       value: 24
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costMultiplierPerLevel
       value: 1.12
       objectReference: {fileID: 0}
@@ -14511,6 +14689,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1518332132}
@@ -14519,9 +14701,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1518332132}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: LifestealAmount
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1518332132}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -15721,6 +15915,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: costMultiplierPerLevel
       value: 1.12
       objectReference: {fileID: 0}
@@ -15737,6 +15935,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 367358503}
@@ -15749,9 +15951,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 367358503}
     - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: AttackSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 367358503}
+    - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4457825761187782712, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -15858,6 +16072,10 @@ PrefabInstance:
       value: 24
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costMultiplierPerLevel
       value: 1.12
       objectReference: {fileID: 0}
@@ -15874,6 +16092,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1484962511}
@@ -15882,9 +16104,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1484962511}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: CritDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1484962511}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -16544,7 +16778,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 561743386}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: ThrowableDamage
+    modifierType: 1
+    value: 10
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -17001,7 +17239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: More UPs :)
+      value: More UPGs :)
       objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
@@ -19061,6 +19299,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -19071,6 +19313,14 @@ PrefabInstance:
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[1].value
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
@@ -19089,6 +19339,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1784290649}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: LifestealAmount
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[1].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[1].statName
+      value: LifestealChance
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1371409534}
@@ -19096,6 +19362,14 @@ PrefabInstance:
       propertyPath: requirements.Array.data[1].skill
       value: 
       objectReference: {fileID: 1784290649}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[1].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -19321,7 +19595,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 923466173}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: PizzaDamage
+    modifierType: 1
+    value: 10
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -19818,7 +20096,11 @@ MonoBehaviour:
     requiredLevel: 1
   - skill: {fileID: 600071758}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: FlashDamage
+    modifierType: 1
+    value: 15
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -20302,7 +20584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: effects.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.size
@@ -20315,6 +20597,14 @@ PrefabInstance:
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[1].value
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
@@ -20333,8 +20623,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 476538931}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: effects.Array.data[0].statName
-      value: atta
+      value: AttackSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[1].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[1].statName
+      value: ReloadSpeed
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.data[0].skill
@@ -20344,6 +20646,14 @@ PrefabInstance:
       propertyPath: requirements.Array.data[1].skill
       value: 
       objectReference: {fileID: 476538931}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[1].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -20527,7 +20837,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 651781451}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: DodgeChance
+    modifierType: 1
+    value: 1
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -21413,7 +21727,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 923466173}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: PizzaDuration
+    modifierType: 1
+    value: 25
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -21655,7 +21973,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 262079577}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: ThrowableReloadSpeed
+    modifierType: 0
+    value: 35
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -22339,7 +22661,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 110005775}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: Defence
+    modifierType: 1
+    value: 2
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -22877,14 +23203,18 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 3
+  maxLevel: 25
   baseCost: 60
   costAddPerLevel: 24
   costMultiplierPerLevel: 1.12
   requirements:
   - skill: {fileID: 268537275}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: MolotovDamage
+    modifierType: 1
+    value: 3
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -23552,6 +23882,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: costMultiplierPerLevel
       value: 1.12
       objectReference: {fileID: 0}
@@ -23570,6 +23904,10 @@ PrefabInstance:
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: Connectedskills.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
@@ -23596,9 +23934,21 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: AttackDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 367358503}
+    - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3382768463722006646, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -24212,6 +24562,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: costMultiplierPerLevel
       value: 1.09
       objectReference: {fileID: 0}
@@ -24228,6 +24582,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1876395816}
@@ -24236,9 +24594,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1876395816}
     - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: AttackDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1876395816}
+    - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2707700298204493147, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -24334,6 +24704,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -24344,6 +24718,14 @@ PrefabInstance:
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[1].value
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
@@ -24370,6 +24752,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1406752157}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: CritChance
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[1].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[1].statName
+      value: CritDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 745416557}
@@ -24381,6 +24779,14 @@ PrefabInstance:
       propertyPath: requirements.Array.data[2].skill
       value: 
       objectReference: {fileID: 1634673039}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[1].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -25063,7 +25469,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 54227726}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: Health
+    modifierType: 1
+    value: 10
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -25369,6 +25779,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: costMultiplierPerLevel
       value: 1.09
       objectReference: {fileID: 0}
@@ -25385,6 +25799,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 883321314}
@@ -25393,9 +25811,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 883321314}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: Range
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 883321314}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -25482,10 +25912,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 1
-  baseCost: 10
-  costAddPerLevel: 0
-  costMultiplierPerLevel: 1
+  maxLevel: 5
+  baseCost: 75
+  costAddPerLevel: 18
+  costMultiplierPerLevel: 1.09
   requirements:
   - skill: {fileID: 839605458}
     requiredLevel: 1
@@ -25493,7 +25923,11 @@ MonoBehaviour:
     requiredLevel: 1
   - skill: {fileID: 530806611}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: BurnRate
+    modifierType: 1
+    value: 15
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -25782,6 +26216,10 @@ PrefabInstance:
       value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: costMultiplierPerLevel
       value: 1.12
       objectReference: {fileID: 0}
@@ -25796,6 +26234,10 @@ PrefabInstance:
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: RequiredSkills.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
@@ -25814,6 +26256,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1448105956}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: CooldownReduction
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 736036452}
@@ -25821,6 +26271,10 @@ PrefabInstance:
       propertyPath: requirements.Array.data[1].skill
       value: 
       objectReference: {fileID: 1448105956}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -26104,6 +26558,10 @@ PrefabInstance:
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costMultiplierPerLevel
       value: 1.09
       objectReference: {fileID: 0}
@@ -26117,6 +26575,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].value
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
@@ -26136,6 +26598,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1996366063}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: LifestealChance
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1996366063}
@@ -26143,6 +26613,10 @@ PrefabInstance:
       propertyPath: requirements.Array.data[1].skill
       value: 
       objectReference: {fileID: 1518780719}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -26732,7 +27206,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 1638249469}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: Health
+    modifierType: 1
+    value: 4
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -27243,6 +27721,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -27255,6 +27737,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[1].value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1518332132}
@@ -27263,16 +27753,40 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1518332132}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: LifestealChance
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[1].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[1].statName
+      value: LifestealAmount
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1518332132}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[1].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: Useless Upgrade
+      value: lifesteal UPG
       objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
@@ -27424,7 +27938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: waste your points
+      value: 5% for % and DMG
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -28048,6 +28562,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: costMultiplierPerLevel
       value: 1.12
       objectReference: {fileID: 0}
@@ -28064,6 +28582,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1876395816}
@@ -28072,9 +28594,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1876395816}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: Range
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1876395816}
+    - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6296602602893028856, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_Name
       value: skill 6 (attack)
@@ -28418,6 +28952,10 @@ PrefabInstance:
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costMultiplierPerLevel
       value: 1.09
       objectReference: {fileID: 0}
@@ -28431,6 +28969,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: RequiredSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].value
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
@@ -28450,6 +28992,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2055552200}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: LifestealAmount
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1518780719}
@@ -28457,6 +29007,10 @@ PrefabInstance:
       propertyPath: requirements.Array.data[1].skill
       value: 
       objectReference: {fileID: 2055552200}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -29674,10 +30228,10 @@ MonoBehaviour:
   - skill: {fileID: 1286532250}
     requiredLevel: 1
   effects:
-  - statName: 
-    modifierType: 0
-    value: 0
-    perLevel: 0
+  - statName: DodgeChance
+    modifierType: 1
+    value: 20
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -30388,7 +30942,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 1390599004}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: ThrowableReloadSpeed
+    modifierType: 0
+    value: 40
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -30953,6 +31511,10 @@ PrefabInstance:
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costMultiplierPerLevel
       value: 1.09
       objectReference: {fileID: 0}
@@ -30969,6 +31531,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1746481990}
@@ -30977,9 +31543,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1746481990}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: CritChance
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1746481990}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -31373,7 +31951,13 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 1666236537}
     requiredLevel: 1
-  effects: []
+  - skill: {fileID: 109404939}
+    requiredLevel: 1
+  effects:
+  - statName: Defence
+    modifierType: 0
+    value: 20
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -31778,6 +32362,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: costMultiplierPerLevel
       value: 1.12
       objectReference: {fileID: 0}
@@ -31794,6 +32382,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: 'requireSkills.Array.data[0]'
       value: 
       objectReference: {fileID: 1518332132}
@@ -31802,9 +32394,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1518332132}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].perLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].statName
+      value: CritChance
+      objectReference: {fileID: 0}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].skill
       value: 
       objectReference: {fileID: 1518332132}
+    - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: effects.Array.data[0].modifierType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
       value: 1
@@ -32039,7 +32643,11 @@ MonoBehaviour:
   requirements:
   - skill: {fileID: 1043958870}
     requiredLevel: 1
-  effects: []
+  effects:
+  - statName: ThrowableDamage
+    modifierType: 1
+    value: 15
+    perLevel: 1
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
