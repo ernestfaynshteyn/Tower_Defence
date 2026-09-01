@@ -1,4 +1,4 @@
-/// <summary>
+    /// <summary>
 /// Central list of stat keys so SkillEffect.statName and gameplay code
 /// (Upgrades.Instance.GetValue(...)) always agree on spelling.
 /// </summary>
@@ -27,7 +27,7 @@ public static class StatNames
     public const string ThrowableReloadSpeed = "ThrowableReloadSpeed";
     public const string NukeUnlocked = "NukeUnlocked"; // treat as a 0/1 flag stat
 
-    // ---- Defense tree ----
+    // ---- Defense tree ----   
     public const string Health = "Health";
     public const string Defence = "Defence";
     public const string DefenceUnlocked = "DefenceUnlocked"; // 0/1 flag
