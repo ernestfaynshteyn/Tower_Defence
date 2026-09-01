@@ -3761,10 +3761,67 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treeId: MainTree
   collectChildrenOnAwake: 1
-  nodes: []
+  nodes:
+  - {fileID: 367358503}
+  - {fileID: 776113801}
+  - {fileID: 1306156379}
+  - {fileID: 1876395816}
+  - {fileID: 1391862575}
+  - {fileID: 883321314}
+  - {fileID: 736036452}
+  - {fileID: 1448105956}
+  - {fileID: 2137306037}
+  - {fileID: 476538931}
+  - {fileID: 1651649171}
+  - {fileID: 1996148926}
+  - {fileID: 745416557}
+  - {fileID: 1518332132}
+  - {fileID: 1484962511}
+  - {fileID: 1746481990}
+  - {fileID: 1406752157}
+  - {fileID: 1634673039}
+  - {fileID: 1664425682}
+  - {fileID: 1996366063}
+  - {fileID: 1518780719}
+  - {fileID: 2055552200}
+  - {fileID: 1371409534}
+  - {fileID: 1784290649}
+  - {fileID: 882677514}
+  - {fileID: 2122137825}
+  - {fileID: 54227726}
+  - {fileID: 109404939}
+  - {fileID: 1638249469}
+  - {fileID: 1666236537}
+  - {fileID: 2000615091}
+  - {fileID: 110005775}
+  - {fileID: 923466173}
+  - {fileID: 1219296041}
+  - {fileID: 1381529127}
+  - {fileID: 311922286}
+  - {fileID: 326485776}
+  - {fileID: 1423277857}
+  - {fileID: 651781451}
+  - {fileID: 1286532250}
+  - {fileID: 1843935618}
+  - {fileID: 477733070}
+  - {fileID: 561743386}
+  - {fileID: 757481176}
+  - {fileID: 1043958870}
+  - {fileID: 930056621}
+  - {fileID: 2048469174}
+  - {fileID: 268537275}
+  - {fileID: 600071758}
+  - {fileID: 1232361114}
+  - {fileID: 839605458}
+  - {fileID: 1487422766}
+  - {fileID: 530806611}
+  - {fileID: 262079577}
+  - {fileID: 1390599004}
+  - {fileID: 1643082186}
+  - {fileID: 1891664994}
   refundRate: 1
-  saveToPlayerPrefs: 1
-  loadOnStart: 1
+  saveToPlayerPrefs: 0
+  loadOnStart: 0
   totalSpentText: {fileID: 0}
   refreshInterval: 0.2
 --- !u!1 &175130012
@@ -3884,7 +3941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -202.07, y: -11.500909}
+  m_AnchoredPosition: {x: 135, y: -11.499277}
   m_SizeDelta: {x: -404.1448, y: -996.44885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180448452
@@ -7937,9 +7994,9 @@ MonoBehaviour:
   costAddPerLevel: 13
   costMultiplierPerLevel: 1.12
   requirements:
-  - skill: {fileID: 1043958870}
+  - skill: {fileID: 2048469174}
     requiredLevel: 1
-  - skill: {fileID: 530806611}
+  - skill: {fileID: 268537275}
     requiredLevel: 1
   effects:
   - statName: MolotovDamage
@@ -9710,7 +9767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: costMultiplierPerLevel
-      value: 1.2
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: requirements.Array.size
@@ -12199,6 +12256,7 @@ GameObject:
   - component: {fileID: 755501271}
   - component: {fileID: 755501270}
   - component: {fileID: 755501272}
+  - component: {fileID: 755501273}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -12245,8 +12303,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d62fd58fff16694b99f8d75b7dc5d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrencyManager
-  money: 0
+  money: 1000000000
   moneyText: {fileID: 0}
+--- !u!114 &755501273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755501269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643f2820663c5784a95112d5aed5b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  statDefinitions:
+  - statName: AttackDamage
+    baseValue: 10
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  changeEpsilon: 0.0001
+  logChanges: 1
 --- !u!1 &756677818
 GameObject:
   m_ObjectHideFlags: 0
@@ -13371,7 +13450,7 @@ MonoBehaviour:
   costAddPerLevel: 24
   costMultiplierPerLevel: 1.12
   requirements:
-  - skill: {fileID: 839605458}
+  - skill: {fileID: 268537275}
     requiredLevel: 1
   effects:
   - statName: BurnDuration
@@ -13682,6 +13761,10 @@ PrefabInstance:
     - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: LockedColor.a
       value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
+      propertyPath: autoWireButton
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4599062723812095284, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: requirements.Array.size
@@ -22111,7 +22194,6 @@ GameObject:
   - component: {fileID: 1393480304}
   - component: {fileID: 1393480303}
   - component: {fileID: 1393480306}
-  - component: {fileID: 1393480307}
   - component: {fileID: 1393480309}
   - component: {fileID: 1393480308}
   - component: {fileID: 1393480310}
@@ -22284,18 +22366,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guns: []
---- !u!114 &1393480307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393480300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 643f2820663c5784a95112d5aed5b9da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1393480308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26304,6 +26374,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+--- !u!114 &1651649171 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
+  m_PrefabInstance: {fileID: 1265392078}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0621087a9f80f164cb540792064e7e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1652987138
 GameObject:
   m_ObjectHideFlags: 0
