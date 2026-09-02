@@ -3819,7 +3819,7 @@ MonoBehaviour:
   - {fileID: 1390599004}
   - {fileID: 1643082186}
   - {fileID: 1891664994}
-  refundRate: 1
+  refundRate: 0.5
   saveToPlayerPrefs: 0
   loadOnStart: 0
   totalSpentText: {fileID: 0}
@@ -3941,7 +3941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 135, y: -11.499277}
+  m_AnchoredPosition: {x: 289.63153, y: -11.500483}
   m_SizeDelta: {x: -404.1448, y: -996.44885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180448452
@@ -12324,6 +12324,168 @@ MonoBehaviour:
     minValue: 0
     clampMax: 0
     maxValue: 0
+  - statName: AttackSpeed
+    baseValue: 1
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: CooldownReduction
+    baseValue: 0
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: ReloadSpeed
+    baseValue: 10
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: Range
+    baseValue: 1
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: MultishotChance
+    baseValue: 0
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: CritChance
+    baseValue: 0
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: CritDamage
+    baseValue: 20
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: LifestealChance
+    baseValue: 0
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: LifestealAmount
+    baseValue: 0
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: Burnrate
+    baseValue: 1
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: BurnDuration
+    baseValue: 1
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: MolotovDamage
+    baseValue: 1
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: FlashDamage
+    baseValue: 1
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: FlashDuration
+    baseValue: 1
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: ThrowableDamage
+    baseValue: 1
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: ThrowableRadius
+    baseValue: 1
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: ThrowableDamage
+    baseValue: 1
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: ThrowableReloadSpeed
+    baseValue: 1
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: NukeUnlocked
+    baseValue: 0
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: Health
+    baseValue: 100
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: DefenceUnlocked
+    baseValue: 0
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: Defence
+    baseValue: 50
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: Dodgechance
+    baseValue: 0
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: PizzaUnlocked
+    baseValue: 0
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: PIzzaDamage
+    baseValue: 30
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: PIzzaDuration
+    baseValue: 10
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
+  - statName: PIzzaPermanent
+    baseValue: 10
+    clampMin: 0
+    minValue: 0
+    clampMax: 0
+    maxValue: 0
   changeEpsilon: 0.0001
   logChanges: 1
 --- !u!1 &756677818
@@ -19864,7 +20026,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: molotov upgrades
+  m_text: Fire upgrades
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
