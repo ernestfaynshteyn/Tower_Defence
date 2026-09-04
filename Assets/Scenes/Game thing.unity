@@ -3941,7 +3941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 289.63153, y: -11.500483}
+  m_AnchoredPosition: {x: 289.63104, y: -11.500732}
   m_SizeDelta: {x: -404.1448, y: -996.44885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180448452
@@ -8888,7 +8888,7 @@ PrefabInstance:
       objectReference: {fileID: 1518332132}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: effects.Array.data[0].modifierType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
@@ -9146,7 +9146,7 @@ PrefabInstance:
       objectReference: {fileID: 1391862575}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: effects.Array.data[0].modifierType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
@@ -9462,10 +9462,10 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 3
-  baseCost: 60
-  costAddPerLevel: 24
-  costMultiplierPerLevel: 1.12
+  maxLevel: 20
+  baseCost: 30
+  costAddPerLevel: 12
+  costMultiplierPerLevel: 1.09
   requirements:
   - skill: {fileID: 757481176}
     requiredLevel: 1
@@ -12445,7 +12445,7 @@ MonoBehaviour:
     clampMax: 0
     maxValue: 0
   - statName: DefenceUnlocked
-    baseValue: 0
+    baseValue: 50
     clampMin: 0
     minValue: 0
     clampMax: 0
@@ -12456,7 +12456,7 @@ MonoBehaviour:
     minValue: 0
     clampMax: 0
     maxValue: 0
-  - statName: Dodgechance
+  - statName: DodgeChance
     baseValue: 0
     clampMin: 0
     minValue: 0
@@ -14959,7 +14959,7 @@ PrefabInstance:
       objectReference: {fileID: 1518332132}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: effects.Array.data[0].modifierType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
@@ -16362,7 +16362,7 @@ PrefabInstance:
       objectReference: {fileID: 1484962511}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: effects.Array.data[0].modifierType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
@@ -16801,7 +16801,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: the pizza lasts longer
+  m_text: the ring lasts longer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17327,7 +17327,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: pizza circle
+  m_text: pulsar ring
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -28017,11 +28017,11 @@ PrefabInstance:
       objectReference: {fileID: 1518332132}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: effects.Array.data[0].modifierType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: effects.Array.data[1].modifierType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
@@ -31350,7 +31350,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Permanent Circle
+  m_text: Permanent ring
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -32650,7 +32650,7 @@ PrefabInstance:
       objectReference: {fileID: 1518332132}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: effects.Array.data[0].modifierType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -463448849467315430, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: requirements.Array.data[0].requiredLevel
