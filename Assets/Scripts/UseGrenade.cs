@@ -31,6 +31,17 @@ public class UseGrenade : MonoBehaviour
     [Header("Grenade Animations")]
     public Animator playerAnimator;
 
+    [Header("Explosion Settings")]
+    public float explosionRadius = 2.5f;
+    public int explosionDamage = 25;
+    public LayerMask enemyLayer;
+    public Color explosionColor = Color.red;
+    public int explosionCircleSegments = 40;
+    public float explosionLineWidth = 0.05f;
+    public float stunDuration = 2f;
+    public float molotovBurnDuration = 3f;
+    public float molotovBurnDamage = 5f;
+
     public bool isEquipped = false;
 
     private Camera mainCamera;
@@ -175,7 +186,7 @@ public class UseGrenade : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0f;
 
-            StartCoroutine(MoveGrenadeInCurve(rb, startPos, targetPos));
+            StartCoroutine(MoveGrenadeInCurve(rb, startPos, targetPos, grenadeType));
         }
     }
 
@@ -246,7 +257,7 @@ public class UseGrenade : MonoBehaviour
         return Vector2.Lerp(posA, posB, t);
     }
 
-    IEnumerator MoveGrenadeInCurve(Rigidbody2D rb, Vector2 start, Vector2 target)
+    IEnumerator MoveGrenadeInCurve(Rigidbody2D rb, Vector2 start, Vector2 target, GrenadeType grenadeType)
     {
         float timer = 0f;
 
@@ -277,7 +288,63 @@ public class UseGrenade : MonoBehaviour
             {
                 grenadeDamage.Explosion();
             }
+
+            Explode(target, grenadeType);
         }
+    }
+
+    void Explode(Vector2 position, GrenadeType grenadeType)
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(position, explosionRadius, enemyLayer);
+
+        foreach (Collider2D enemyCollider in hitEnemies)
+        {
+            EnemyHealth enemyHealth = enemyCollider.GetComponent<EnemyHealth>();
+
+            if (enemyHealth == null) continue;
+
+            if (grenadeType == GrenadeType.Flash)
+            {
+                enemyHealth.Stun(stunDuration);
+            }
+            else if (grenadeType == GrenadeType.Molotov)
+            {
+                enemyHealth.ApplyBurn(molotovBurnDuration, molotovBurnDamage);
+            }
+            else
+            {
+                enemyHealth.TakeDamage(explosionDamage);
+            }
+        }
+
+        StartCoroutine(ShowExplosionCircle(position));
+    }
+
+    IEnumerator ShowExplosionCircle(Vector2 position)
+    {
+        GameObject circleObj = new GameObject("ExplosionRadius");
+        circleObj.transform.position = position;
+
+        LineRenderer lr = circleObj.AddComponent<LineRenderer>();
+        lr.useWorldSpace = true;
+        lr.loop = true;
+        lr.startWidth = explosionLineWidth;
+        lr.endWidth = explosionLineWidth;
+        lr.material = new Material(Shader.Find("Sprites/Default"));
+        lr.startColor = explosionColor;
+        lr.endColor = explosionColor;
+        lr.positionCount = explosionCircleSegments;
+
+        for (int i = 0; i < explosionCircleSegments; i++)
+        {
+            float angle = i * (2f * Mathf.PI / explosionCircleSegments);
+            Vector3 point = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * explosionRadius + (Vector3)position;
+            lr.SetPosition(i, point);
+        }
+
+        yield return null; // wait exactly one frame
+
+        Destroy(circleObj);
     }
 
     public void EquipGrenade()

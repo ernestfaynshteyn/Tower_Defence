@@ -22556,6 +22556,17 @@ MonoBehaviour:
   flashPrefab: {fileID: 2112484380415924803, guid: 9230b131bcd97754d80749554d4bbf9d, type: 3}
   molotovPrefab: {fileID: 9064642680956286913, guid: 8b9c8274149e3f243a896cfce71d1a50, type: 3}
   playerAnimator: {fileID: 0}
+  explosionRadius: 2.5
+  explosionDamage: 25
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  explosionColor: {r: 1, g: 0, b: 0, a: 1}
+  explosionCircleSegments: 40
+  explosionLineWidth: 0.05
+  stunDuration: 2
+  molotovBurnDuration: 3
+  molotovBurnDamage: 5
   isEquipped: 0
 --- !u!114 &1393480309
 MonoBehaviour:
