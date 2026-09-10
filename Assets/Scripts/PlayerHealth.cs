@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0f, health);
-
+        healthBar.SetHealth(currentHealth); 
         if (healthBar != null)
             healthBar.SetHealth(currentHealth);
     }
