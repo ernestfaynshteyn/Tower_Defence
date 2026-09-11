@@ -995,11 +995,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 223b280d-b384-4bfe-b99b-139876d3d064
+  cloudProjectId: 38870c3a-f4f5-4224-8b08-896a04772bd8
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Ernest TD game
-  organizationId: ernest-faynshteyn
+  organizationId: cnstouffvilleai
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

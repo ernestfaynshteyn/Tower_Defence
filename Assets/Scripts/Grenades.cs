@@ -41,7 +41,7 @@ public class Grenades : MonoBehaviour
     void Start()
     {
         stats = PlayerStats.instance;
-
+        //baseSmokeDuration = stats.Get("attack_speed");
         Invoke(nameof(Explode), GetFuseTime());
     }
 

@@ -46,11 +46,11 @@ public static class SkillSeedData
             // left column: cooldown / attack speed spine, bottom to top
             new SkillSeed("attack_speed", "Attack speed", "10% faster attack speed", 10, 5,
                 R("attacks"), E(StatNames.AttackSpeed, ModifierType.Percent, 10)),
-            new SkillSeed("faster_attack", "faster attack", "Another 10%", 20, 5,
+            new SkillSeed("faster_attack", "faster reload", "Another 10%", 20, 5,
                 R("attack_speed"), E(StatNames.AttackSpeed, ModifierType.Percent, 10)),
             new SkillSeed("faster_cooldown", "Faster Cooldown", "faster cooldown, 10%", 30, 5,
                 R("faster_attack"), E(StatNames.CooldownReduction, ModifierType.Percent, 10)),
-            new SkillSeed("reload_cooldown", "reload/cooldown", "3% lower reload per upgrade", 25, 10,
+            new SkillSeed("reload_cooldown", "Cooler Cooldown", "3% lower reload per upgrade", 25, 10,
                 R("faster_cooldown"), E(StatNames.ReloadSpeed, ModifierType.Percent, 3)),
 
             // middle column: range spine, bottom to top
@@ -93,13 +93,13 @@ public static class SkillSeedData
                 E(StatNames.CritDamage, ModifierType.Percent, 20, false)),
 
             // mystery / lifesteal cluster
-            new SkillSeed("what_is_this", "What$ th1s d0?", "??????????????? (no effect text visible - fill in)", 5, 1,
+            new SkillSeed("what_is_this", "More UPGs :)", "yay", 5, 1,
                 R("crit_chance")),
-            new SkillSeed("lifesteal_q", "Lifesteal?", "10% for lifesteal", 30, 1,
+            new SkillSeed("lifesteal_q", "Lifesteal", "10% for lifesteal", 30, 1,
                 R("what_is_this"), E(StatNames.LifestealChance, ModifierType.Percent, 10, false)),
             new SkillSeed("lifesteal_gain", "Lifesteal gain", "10% more lifesteal gain", 25, 10,
                 R("lifesteal_q"), E(StatNames.LifestealAmount, ModifierType.Percent, 10)),
-            new SkillSeed("useless_upgrade", "Useless Upgrade", "waste your points (troll node - intentionally no effect)", 5, 10,
+            new SkillSeed("useless_upgrade", "lifesteal UPG", "5% for % and DMG", 5, 10,
                 R("lifesteal_gain")),
             new SkillSeed("more_lifesteal", "MORE lifesteal", "2% more chance per upgrade", 25, 10,
                 R("lifesteal_q"), E(StatNames.LifestealChance, ModifierType.Percent, 2)),
@@ -122,7 +122,7 @@ public static class SkillSeedData
                 R("support"), E(StatNames.BurnRate, ModifierType.Percent, 10)),
             new SkillSeed("incremental_burn", "Incremental burn", "More Burn Per upg", 15, 10,
                 R("burn_rate"), E(StatNames.BurnRate, ModifierType.Percent, 5)),
-            new SkillSeed("brun_upgrades", "Brun upgrades", "molotov upgrades", 0, 1,
+            new SkillSeed("brun_upgrades", "Burn upgrades", "molotov upgrades", 0, 1,
                 R("incremental_burn")),
             new SkillSeed("longer_burn", "Longer Burn", "they can burn longer", 25, 5,
                 R("brun_upgrades"), E(StatNames.BurnDuration, ModifierType.Percent, 10)),
@@ -183,7 +183,7 @@ public static class SkillSeedData
             new SkillSeed("even_more_dodge", "Even MORE", "20% more dodge chance", 90, 1,
                 R("more_dodge"), E(StatNames.DodgeChance, ModifierType.Percent, 20, false)),
 
-            new SkillSeed("pizza_circle", "pizza circle", "there lactose intollerant? (unlock ability)", 60, 1,
+            new SkillSeed("pizza_circle", "pulsar ring", "there lactose intollerant? (unlock ability)", 60, 1,
                 R("more_health_q"), E(StatNames.PizzaUnlocked, ModifierType.Flat, 1, false)),
             new SkillSeed("pizza_more_damage", "More damage", "10% more damage", 30, 5,
                 R("pizza_circle"), E(StatNames.PizzaDamage, ModifierType.Percent, 10)),
@@ -191,8 +191,26 @@ public static class SkillSeedData
                 R("pizza_circle"), E(StatNames.PizzaDuration, ModifierType.Percent, 10)),
             new SkillSeed("pizza_more_damage2", "MORE damage", "2% more damage per upgrade", 25, 20,
                 R("pizza_more_damage"), E(StatNames.PizzaDamage, ModifierType.Percent, 2)),
-            new SkillSeed("pizza_permanent", "Permanent Circle", "doesnt dissapear anymore", 80, 1,
+            new SkillSeed("pizza_permanent", "Permanent ring", "doesnt dissapear anymore", 80, 1,
                 R("pizza_last_longer"), E(StatNames.PizzaPermanent, ModifierType.Flat, 1, false)),
         };
+    }
+
+    // Combined lookup so requirementIds (and anything else) can resolve a skill by id in O(1).
+    public static Dictionary<string, SkillSeed> BuildSkillDictionary()
+    {
+        var dict = new Dictionary<string, SkillSeed>();
+
+        foreach (var tree in new[] { AttacksTree(), SupportTree(), DefenseTree() })
+        {
+            foreach (var skill in tree)
+            {
+                if (dict.ContainsKey(skill.id))
+                    throw new Exception($"Duplicate skill id: {skill.id}");
+                dict[skill.id] = skill;
+            }
+        }
+
+        return dict;
     }
 }
