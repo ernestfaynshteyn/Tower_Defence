@@ -14,6 +14,7 @@ public class Spawner : MonoBehaviour
 
     private float spawnTimer;
     private float currentSpawnTime;
+    private bool warnedAboutInvalidBossPrefab;
 
     void Start()
     {
@@ -23,6 +24,9 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
+        if (WaveManager.Instance == null)
+            return;
+
         if (WaveManager.Instance.enemySpawned >= WaveManager.Instance.enemyNeeded)
             return;
 
@@ -59,21 +63,55 @@ public class Spawner : MonoBehaviour
     }
     void SpawnEnemy()
     {
+        if (spawnPoints == null || spawnPoints.Length == 0)
+        {
+            Debug.LogError("Spawner has no spawn points assigned; disabling it to avoid repeated errors.", this);
+            enabled = false;
+            return;
+        }
+
+        GameObject enemyPrefab = GetEnemyPrefabForCurrentWave();
+        if (enemyPrefab == null)
+        {
+            Debug.LogError("Spawner has no valid enemy prefab with EnemyHealth; disabling it to avoid a stuck wave.", this);
+            enabled = false;
+            return;
+        }
+
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-
-        if (WaveManager.Instance.IsBossWave)
-        {
-            Instantiate(bossEnemy, spawnPoint.position, Quaternion.identity);
-        }
-        else
-        {
-            GameObject enemy =
-                normalEnemies[Random.Range(0, normalEnemies.Length)];
-
-            Instantiate(enemy, spawnPoint.position, Quaternion.identity);
-        }
+        Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
 
         WaveManager.Instance.enemySpawned++;
+    }
+
+    private GameObject GetEnemyPrefabForCurrentWave()
+    {
+        if (WaveManager.Instance.IsBossWave && HasEnemyHealth(bossEnemy))
+            return bossEnemy;
+
+        if (WaveManager.Instance.IsBossWave && !warnedAboutInvalidBossPrefab)
+        {
+            warnedAboutInvalidBossPrefab = true;
+            Debug.LogWarning("Boss wave prefab has no EnemyHealth. Spawning a normal enemy instead so the wave can finish. Assign a real boss prefab when one is ready.", this);
+        }
+
+        if (normalEnemies == null)
+            return null;
+
+        int startIndex = Random.Range(0, normalEnemies.Length);
+        for (int i = 0; i < normalEnemies.Length; i++)
+        {
+            GameObject candidate = normalEnemies[(startIndex + i) % normalEnemies.Length];
+            if (HasEnemyHealth(candidate))
+                return candidate;
+        }
+
+        return null;
+    }
+
+    private bool HasEnemyHealth(GameObject prefab)
+    {
+        return prefab != null && prefab.GetComponent<EnemyHealth>() != null;
     }
 
     void ResetSpawnTime()

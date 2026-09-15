@@ -168,29 +168,27 @@ public class Grenades : MonoBehaviour
         }
     }
 
-//stat getter with random stuff idek how works i forgor
-
     float GetFuseTime() =>
-        stats != null ? stats.GetFinalStat("Grenade_FuseTime", baseFuseTime) : baseFuseTime;
+        baseFuseTime;
 
     float GetRadius() =>
-        stats != null ? stats.GetFinalStat("Grenade_Radius", baseRadius) : baseRadius;
+        stats != null ? stats.GetFinalStat(StatNames.ThrowableRadius, baseRadius) : baseRadius;
 
     float GetDamage() =>
-        stats != null ? stats.GetFinalStat("Grenade_Damage", baseDamage) : baseDamage;
+        stats != null ? stats.GetFinalStat(StatNames.ThrowableDamage, baseDamage) : baseDamage;
 
     float GetSmokeDuration() =>
-        stats != null ? stats.GetFinalStat("Grenade_SmokeDuration", baseSmokeDuration) : baseSmokeDuration;
+        baseSmokeDuration;
 
     float GetSlowMultiplier() =>
-        stats != null ? stats.GetFinalStat("Grenade_SlowMultiplier", baseSlowMultiplier) : baseSlowMultiplier;
+        baseSlowMultiplier;
 
     float GetStunDuration() =>
-        stats != null ? stats.GetFinalStat("Grenade_StunDuration", baseStunDuration) : baseStunDuration;
+        stats != null ? stats.GetFinalStat(StatNames.FlashDuration, baseStunDuration) : baseStunDuration;
 
     float GetFireDuration() =>
-        stats != null ? stats.GetFinalStat("Grenade_FireDuration", baseFireDuration) : baseFireDuration;
+        stats != null ? stats.GetFinalStat(StatNames.BurnDuration, baseFireDuration) : baseFireDuration;
 
     float GetFireDPS() =>
-        stats != null ? stats.GetFinalStat("Grenade_FireDPS", baseFireDamagePerSecond) : baseFireDamagePerSecond;
+        stats != null ? stats.GetFinalStat(StatNames.MolotovDamage, baseFireDamagePerSecond) : baseFireDamagePerSecond;
 }

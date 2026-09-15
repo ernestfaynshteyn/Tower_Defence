@@ -8,7 +8,7 @@ public class Shottingscript : MonoBehaviour
     [SerializeField] private UseGrenade usingGrenades;
 
     [Header("Gun Stats")]
-    [SerializeField] private float damage;
+    [SerializeField] private float damage = 50f;
 
     [Range(0.00000000001f, 3f)]
     [SerializeField] private float firingrate = 0.1f;
@@ -43,7 +43,13 @@ public class Shottingscript : MonoBehaviour
 
         if (usingGrenades == null)
         {
-            usingGrenades = GetComponent<UseGrenade>();
+            usingGrenades = GetComponentInParent<UseGrenade>();
+        }
+
+        if (firingPoint == null)
+        {
+            firingPoint = transform;
+            Debug.LogWarning($"[{name}] has no firing point assigned; using the weapon transform instead.", this);
         }
     }
 
@@ -59,7 +65,25 @@ public class Shottingscript : MonoBehaviour
             return damage;
         }
 
-        return PlayerStats.instance.GetModifiedValue("Damage", damage);
+        return PlayerStats.instance.GetModifiedValue(StatNames.AttackDamage, damage);
+    }
+
+    private float GetPercentModifier(string statName)
+    {
+        return PlayerStats.instance != null ? PlayerStats.instance.GetPercentModifier(statName) : 0f;
+    }
+
+    private float GetFiringDelay()
+    {
+        float speedBonus = GetPercentModifier(StatNames.AttackSpeed) +
+                           GetPercentModifier(StatNames.CooldownReduction);
+        return firingrate / Mathf.Max(0.01f, 1f + speedBonus / 100f);
+    }
+
+    private float GetReloadTime()
+    {
+        float reloadBonus = GetPercentModifier(StatNames.ReloadSpeed);
+        return reloadTime / Mathf.Max(0.01f, 1f + reloadBonus / 100f);
     }
 
     private void HandlingShooting()
@@ -90,12 +114,12 @@ public class Shottingscript : MonoBehaviour
                 if (currentMag <= 0)
                 {
                     reloading = true;
-                    Invoke(nameof(Reload), reloadTime);
+                    Invoke(nameof(Reload), GetReloadTime());
                     break;
                 }
             }
 
-            Invoke(nameof(CanShot), firingrate);
+            Invoke(nameof(CanShot), GetFiringDelay());
         }
 
         if (!Input.GetMouseButton(0) && currentHeat > 0)
@@ -113,6 +137,12 @@ public class Shottingscript : MonoBehaviour
 
     private void Shoot()
     {
+        if (bulletPrefab == null)
+        {
+            Debug.LogError($"[{name}] cannot shoot because no bullet prefab is assigned.", this);
+            return;
+        }
+
         GameObject bullet = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
 
         Vector3 directionOffset = new Vector3(
@@ -125,9 +155,24 @@ public class Shottingscript : MonoBehaviour
 
         if (bulletScript != null)
         {
+            float rangeMultiplier = 1f + GetPercentModifier(StatNames.Range) / 100f;
+            float critChance = Mathf.Clamp01(GetPercentModifier(StatNames.CritChance) / 100f);
+            float critMultiplier = 2f * (1f + GetPercentModifier(StatNames.CritDamage) / 100f);
+            float lifestealChance = Mathf.Clamp01(GetPercentModifier(StatNames.LifestealChance) / 100f);
+            float lifestealAmount = Mathf.Max(0f, GetPercentModifier(StatNames.LifestealAmount) / 100f);
+
+            bulletScript.Setup(
+                GetModifiedDamage(),
+                bulletScript.BaseSpeed,
+                bulletScript.BaseMaxDistance * Mathf.Max(0.01f, rangeMultiplier),
+                critChance,
+                critMultiplier,
+                lifestealChance,
+                lifestealAmount,
+                GetComponentInParent<PlayerHealth>(),
+                transform
+            );
             bulletScript.direction = transform.right + directionOffset;
-            bulletScript.playerTransform = transform;
-            bulletScript.damage = GetModifiedDamage();
         }
 
         bullet.transform.right = transform.right;

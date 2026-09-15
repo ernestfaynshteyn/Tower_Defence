@@ -11,6 +11,7 @@ public class EnemyHealth : MonoBehaviour
     [Range(0f, 1f)] public float burnResistance = 0f;
     public int moneyReward = 10;
     private float baseSpeed;
+    private float slowMultiplier = 1f;
     private bool isStunned;
     private bool isDead;
     public float burnDuration;
@@ -18,10 +19,13 @@ public class EnemyHealth : MonoBehaviour
     private float burnTickTimer;
     private const float burnTickInterval = 0.33f;
     public Animator animator;
+    public float CurrentMoveSpeed => isDead || isStunned ? 0f : baseSpeed * slowMultiplier;
+
     private void Start()
     {
         ApplyDifficulty();
         baseSpeed = moveSpeed;
+        RefreshMoveSpeed();
         if (animator == null)
         {
             animator = GetComponent<Animator>();
@@ -104,11 +108,16 @@ public class EnemyHealth : MonoBehaviour
         if (finalDuration <= 0f || finalDamage <= 0f)
             return; // fully resistant to burn
 
+        bool isFreshBurn = burnDuration <= 0f;
+
         // Refresh duration (whoever applies burn last keeps it going)
         burnDuration = Mathf.Max(burnDuration, finalDuration);
 
-        // Only upgrade damage per tick, never downgrade it
-        if (finalDamage > burnDamage)
+        // A fresh burn must use its own damage, rather than the serialized
+        // value left over from a previous effect. Active burns only upgrade.
+        if (isFreshBurn)
+            burnDamage = finalDamage;
+        else if (finalDamage > burnDamage)
             burnDamage = finalDamage;
 
         // If this is a fresh burn (timer was at 0), start ticking immediately
@@ -119,31 +128,39 @@ public class EnemyHealth : MonoBehaviour
     public void ApplySlow(float multiplier)
     {
         if (isDead) return;
-        float resisted = Mathf.Lerp(1f, multiplier, 1f - slowResistance);
-        moveSpeed = baseSpeed * resisted;
+        float resisted = Mathf.Lerp(1f, Mathf.Clamp01(multiplier), 1f - slowResistance);
+        slowMultiplier = resisted;
+        RefreshMoveSpeed();
     }
     public void RemoveSlow()
     {
         if (isDead) return;
-        moveSpeed = baseSpeed;
+        slowMultiplier = 1f;
+        RefreshMoveSpeed();
     }
     public void Stun(float duration)
     {
         if (isDead) return;
         if (isStunned) return;
         float resistedDuration = duration * (1f - stunResistance);
+        if (resistedDuration <= 0f) return;
         StartCoroutine(StunRoutine(resistedDuration));
     }
     private IEnumerator StunRoutine(float duration)
     {
         isStunned = true;
-        moveSpeed = 0f;
+        RefreshMoveSpeed();
         yield return new WaitForSeconds(duration);
         isStunned = false;
         if (!isDead)
         {
-            moveSpeed = baseSpeed;
+            RefreshMoveSpeed();
         }
+    }
+
+    private void RefreshMoveSpeed()
+    {
+        moveSpeed = CurrentMoveSpeed;
     }
     private void ApplyDifficulty()
     {

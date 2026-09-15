@@ -67,7 +67,7 @@ public class skills : MonoBehaviour
     public SkillEffect[] effects;
 
     [Header("UI")]
-    [Tooltip("Wires Buy() to the Button in Awake. If ON, do NOT also add Buy() to the Button's OnClick list in the Inspector, or every click buys twice.")]
+    [Tooltip("Wires Buy() to the Button in Awake only when the Button has no Inspector OnClick calls. This avoids duplicate purchases on existing scene buttons.")]
     public bool autoWireButton = true;
     public Image iconImage;
     public TMP_Text levelText;
@@ -96,7 +96,8 @@ public class skills : MonoBehaviour
     {
         _button = GetComponent<Button>();
         if (string.IsNullOrEmpty(skillId)) skillId = gameObject.name;
-        if (autoWireButton && _button != null) _button.onClick.AddListener(Buy);
+        if (autoWireButton && _button != null && _button.onClick.GetPersistentEventCount() == 0)
+            _button.onClick.AddListener(Buy);
     }
 
     private void Start()

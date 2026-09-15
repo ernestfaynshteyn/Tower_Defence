@@ -5,12 +5,12 @@ public class GameOverUI : MonoBehaviour
 {
     public void RestartGame()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Game thing");
     }
 
     public void RestartGame2()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("Game thing");
     }
 }
 

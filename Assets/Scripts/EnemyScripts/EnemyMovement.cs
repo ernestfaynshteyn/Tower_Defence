@@ -4,9 +4,14 @@ public class EnemyMovement : MonoBehaviour
 {
     public Transform target;
     public float speed = 3f;
+    private EnemyHealth enemyHealth;
+
     public void Start()
     {
-        ApplyDifficulty();
+        enemyHealth = GetComponent<EnemyHealth>();
+        if (enemyHealth == null)
+            ApplyDifficulty();
+
         GameObject playerObj = GameObject.FindWithTag("Player");
 
         if (playerObj != null)
@@ -25,7 +30,8 @@ public class EnemyMovement : MonoBehaviour
         if (target != null)
         {
             // Calculate the step to move this frame    
-            float step = speed * Time.deltaTime;
+            float activeSpeed = enemyHealth != null ? enemyHealth.CurrentMoveSpeed : speed;
+            float step = activeSpeed * Time.deltaTime;
 
             // Move the current object's position towards the target's position
             if (Vector3.Distance(target.position, transform.position) > 1.5f)
@@ -36,6 +42,9 @@ public class EnemyMovement : MonoBehaviour
     }
     void ApplyDifficulty()
     {
+        if (GlobalData.Instance == null)
+            return;
+
         switch (GlobalData.Instance.currentDifficulty)
         {
             case Difficulty.Easy:

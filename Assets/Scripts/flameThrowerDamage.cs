@@ -23,20 +23,21 @@ public class flameThrowerDamage : MonoBehaviour
         // FIRING
         if (firing && !overheated)
         {
-            if (!particle.isPlaying)
+            if (particle != null && !particle.isPlaying)
                 particle.Play();
             currentHeat += heatPerSecond * Time.deltaTime;
             if (currentHeat >= maxHeat)
             {
                 currentHeat = maxHeat;
                 overheated = true;
-                particle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                if (particle != null)
+                    particle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
             }
         }
         // COOLING
         else
         {
-            if (particle.isPlaying)
+            if (particle != null && particle.isPlaying)
                 particle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
             currentHeat -= coolingRate * Time.deltaTime;
             currentHeat = Mathf.Clamp(currentHeat, 0, maxHeat);
@@ -52,13 +53,23 @@ public class flameThrowerDamage : MonoBehaviour
         if (!Input.GetMouseButton(0) || overheated)
             return;
         EnemyHealth enemy = collision.GetComponent<EnemyHealth>();
-        if (enemy != null && !grenade.isEquipped)
+        if (enemy != null && (grenade == null || !grenade.isEquipped))
         {
             // Direct damage while inside the flame
-            enemy.TakeDamage(flameDamage * Time.deltaTime);
+            float directDamage = GetModifiedStat(StatNames.AttackDamage, flameDamage);
+            enemy.TakeDamage(directDamage * Time.deltaTime);
 
             // Apply/refresh burn DoT (only the flamethrower calls this)
-            enemy.ApplyBurn(burnDuration, burnDamage);
+            enemy.ApplyBurn(
+                GetModifiedStat(StatNames.BurnDuration, burnDuration),
+                GetModifiedStat(StatNames.BurnRate, burnDamage));
         }
+    }
+
+    private float GetModifiedStat(string statName, float baseValue)
+    {
+        return PlayerStats.instance != null
+            ? PlayerStats.instance.GetModifiedValue(statName, baseValue)
+            : baseValue;
     }
 }

@@ -79,7 +79,7 @@ public class UseGrenade : MonoBehaviour
 
         UpdateTrajectoryLine();
 
-        if (Input.GetMouseButtonDown(0))
+        if (isEquipped && !isThrowing && Input.GetMouseButtonDown(0))
         {
             StartCoroutine(ThrowGrenadeRoutine());
         }
@@ -143,6 +143,19 @@ public class UseGrenade : MonoBehaviour
         if (isThrowing) yield break;
 
         GrenadeType grenadeToThrow = selectedGrenade;
+        GameObject prefabToThrow = GetSelectedGrenadePrefab(grenadeToThrow);
+
+        if (Inventory.instance == null)
+        {
+            Debug.LogError("Cannot throw a grenade because no Inventory is active.", this);
+            yield break;
+        }
+
+        if (prefabToThrow == null || throwPoint == null || mainCamera == null)
+        {
+            Debug.LogWarning($"Cannot throw {grenadeToThrow}: assign its prefab, a throw point, and a main camera.", this);
+            yield break;
+        }
 
         if (!Inventory.instance.UseGrenade(grenadeToThrow))
             yield break;
@@ -178,16 +191,14 @@ public class UseGrenade : MonoBehaviour
             grenadeScript.grenadeType = grenadeType;
         }
 
-        Rigidbody2D rb = grenade.GetComponent<Rigidbody2D>();
+        // The old prefabs carry GrenadeDamage while this component owns the
+        // selected-type behaviour. Disable its collision callback so a frag is
+        // not damaged twice and smoke/flash/moltov do not become frag grenades.
+        GrenadeDamage grenadeDamage = grenade.GetComponent<GrenadeDamage>();
+        if (grenadeDamage != null)
+            grenadeDamage.enabled = false;
 
-        if (rb != null)
-        {
-            rb.gravityScale = 0f;
-            rb.linearVelocity = Vector2.zero;
-            rb.angularVelocity = 0f;
-
-            StartCoroutine(MoveGrenadeInCurve(rb, startPos, targetPos, grenadeType));
-        }
+        StartCoroutine(MoveGrenadeInCurve(grenade, startPos, targetPos, grenadeType));
     }
 
     void UpdateCursor()
@@ -209,7 +220,7 @@ public class UseGrenade : MonoBehaviour
             return;
         }
 
-        if (!isEquipped)
+        if (!isEquipped || throwPoint == null || mainCamera == null || trajectoryPoints < 2)
         {
             trajectoryLine.enabled = false;
             return;
@@ -257,70 +268,103 @@ public class UseGrenade : MonoBehaviour
         return Vector2.Lerp(posA, posB, t);
     }
 
-    IEnumerator MoveGrenadeInCurve(Rigidbody2D rb, Vector2 start, Vector2 target, GrenadeType grenadeType)
+    IEnumerator MoveGrenadeInCurve(GameObject grenade, Vector2 start, Vector2 target, GrenadeType grenadeType)
     {
+        Rigidbody2D rb = grenade.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.gravityScale = 0f;
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+        }
+
         float timer = 0f;
+        float duration = Mathf.Max(0.01f, flightTime);
 
         Vector2 controlPoint = GetCurveControlPoint(start, target);
 
-        while (timer < flightTime)
+        while (timer < duration)
         {
-            if (rb == null) yield break;
+            if (grenade == null) yield break;
 
             timer += Time.fixedDeltaTime;
-            float t = Mathf.Clamp01(timer / flightTime);
+            float t = Mathf.Clamp01(timer / duration);
 
             Vector2 curvePos = GetBezierPoint(start, controlPoint, target, t);
 
-            rb.MovePosition(curvePos);
+            if (rb != null)
+                rb.MovePosition(curvePos);
+            else
+                grenade.transform.position = curvePos;
 
             yield return new WaitForFixedUpdate();
         }
 
-        if (rb != null)
+        if (grenade != null)
         {
-            rb.MovePosition(target);
-            rb.linearVelocity = Vector2.zero;
+            if (rb != null)
+            {
+                rb.MovePosition(target);
+                rb.linearVelocity = Vector2.zero;
+            }
+            else
+            {
+                grenade.transform.position = target;
+            }
 
-            GrenadeDamage grenadeDamage = rb.gameObject.GetComponent<GrenadeDamage>();
+            GrenadeDamage grenadeDamage = grenade.GetComponent<GrenadeDamage>();
 
             if (grenadeDamage != null)
             {
-                grenadeDamage.Explosion();
+                grenadeDamage.SpawnExplosionEffect();
             }
 
             Explode(target, grenadeType);
+            Destroy(grenade);
         }
     }
 
     void Explode(Vector2 position, GrenadeType grenadeType)
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(position, explosionRadius, enemyLayer);
+        float radius = GetModifiedStat(StatNames.ThrowableRadius, explosionRadius);
+        float damage = GetModifiedStat(StatNames.ThrowableDamage, explosionDamage);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(position, radius, enemyLayer);
 
         foreach (Collider2D enemyCollider in hitEnemies)
         {
-            EnemyHealth enemyHealth = enemyCollider.GetComponent<EnemyHealth>();
+            EnemyHealth enemyHealth = enemyCollider.GetComponentInParent<EnemyHealth>();
 
             if (enemyHealth == null) continue;
 
-            if (grenadeType == GrenadeType.Flash)
+            switch (grenadeType)
             {
-                enemyHealth.Stun(stunDuration);
-            }
-            else if (grenadeType == GrenadeType.Molotov)
-            {
-                enemyHealth.ApplyBurn(molotovBurnDuration, molotovBurnDamage);
-            }
-            else
-            {
-                enemyHealth.TakeDamage(explosionDamage);
+                case GrenadeType.Frag:
+                    enemyHealth.TakeDamage(damage);
+                    break;
+                case GrenadeType.Flash:
+                    enemyHealth.Stun(GetModifiedStat(StatNames.FlashDuration, stunDuration));
+                    break;
+                case GrenadeType.Molotov:
+                    enemyHealth.ApplyBurn(
+                        GetModifiedStat(StatNames.BurnDuration, molotovBurnDuration),
+                        GetModifiedStat(StatNames.MolotovDamage, molotovBurnDamage));
+                    break;
+                // Smoke is deliberately non-damaging. Its area behaviour can be
+                // added later without changing the other grenade types.
             }
         }
 
-        StartCoroutine(ShowExplosionCircle(position));
+        StartCoroutine(ShowExplosionCircle(position, radius));
     }
 
-    IEnumerator ShowExplosionCircle(Vector2 position)
+    private float GetModifiedStat(string statName, float baseValue)
+    {
+        return PlayerStats.instance != null
+            ? PlayerStats.instance.GetModifiedValue(statName, baseValue)
+            : baseValue;
+    }
+
+    IEnumerator ShowExplosionCircle(Vector2 position, float radius)
     {
         GameObject circleObj = new GameObject("ExplosionRadius");
         circleObj.transform.position = position;
@@ -338,7 +382,7 @@ public class UseGrenade : MonoBehaviour
         for (int i = 0; i < explosionCircleSegments; i++)
         {
             float angle = i * (2f * Mathf.PI / explosionCircleSegments);
-            Vector3 point = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * explosionRadius + (Vector3)position;
+            Vector3 point = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * radius + (Vector3)position;
             lr.SetPosition(i, point);
         }
 

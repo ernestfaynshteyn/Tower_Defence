@@ -86,7 +86,6 @@ public class Bullet : MonoBehaviour
         ownerHealth = newOwnerHealth;
         playerTransform = shooterTransform;
 
-        Debug.Log("Bullet damage set to: " + damage);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

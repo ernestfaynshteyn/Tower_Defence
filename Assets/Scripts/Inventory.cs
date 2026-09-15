@@ -15,40 +15,21 @@ public class Inventory : MonoBehaviour
     public TextMeshProUGUI numberOfMolotov;
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+
         instance = this;
+        RefreshUI();
     }
 
     public void AddGrenade(GrenadeType type)
     {
         grenades.Add(type);
         Debug.Log(type + " added to inventory");
-        int newNumberOfFrag = 0;
-        int newNumberOfSmoke = 0;
-        int newNumberOfFlash = 0;
-        int newNumberOfMolotov = 0;
-        for (int i = 0; i < grenades.Count;i++)
-        {
-            Debug.Log("grenades[i]"+ grenades[i]);
-            if (grenades[i] == GrenadeType.Frag)
-            {
-                newNumberOfFrag = newNumberOfFrag + 1;
-            }else if(grenades[i] == GrenadeType.Smoke)
-            {
-                newNumberOfSmoke = newNumberOfSmoke + 1;
-            }
-            else if (grenades[i] == GrenadeType.Flash)
-            {
-                newNumberOfFlash = newNumberOfFlash + 1;
-            }
-            else if (grenades[i] == GrenadeType.Molotov)
-            {
-                newNumberOfMolotov = newNumberOfMolotov + 1;
-            }
-        }
-        numberOfFrag.text = "newNumberOfFrag";
-        numberOfSmoke.text = "newNumberOfSmoke" ;
-        numberOfFlash.text = "newNumberOfFlash";
-        numberOfMolotov.text = "newNumberOfMolotov" ;
+        RefreshUI();
     }
 
     public bool HasGrenade(GrenadeType type)
@@ -61,10 +42,35 @@ public class Inventory : MonoBehaviour
         if (grenades.Contains(type))
         {
             grenades.Remove(type);
+            RefreshUI();
             return true;
         }
 
         Debug.Log("You do not have " + type);
         return false;
     }
-}   
+
+    private void RefreshUI()
+    {
+        int frag = 0;
+        int smoke = 0;
+        int flash = 0;
+        int molotov = 0;
+
+        foreach (GrenadeType grenade in grenades)
+        {
+            switch (grenade)
+            {
+                case GrenadeType.Frag: frag++; break;
+                case GrenadeType.Smoke: smoke++; break;
+                case GrenadeType.Flash: flash++; break;
+                case GrenadeType.Molotov: molotov++; break;
+            }
+        }
+
+        if (numberOfFrag != null) numberOfFrag.text = frag.ToString();
+        if (numberOfSmoke != null) numberOfSmoke.text = smoke.ToString();
+        if (numberOfFlash != null) numberOfFlash.text = flash.ToString();
+        if (numberOfMolotov != null) numberOfMolotov.text = molotov.ToString();
+    }
+}

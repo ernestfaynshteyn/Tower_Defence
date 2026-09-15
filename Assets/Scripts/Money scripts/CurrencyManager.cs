@@ -19,11 +19,30 @@ public class CurrencyManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
-            return;
+            // A second currency component must not remove the GameObject it sits on:
+            // in the gameplay scene those objects also own wave, player-stat, and UI
+            // components. Prefer the manager that has a money UI assigned, then keep
+            // the existing instance for an otherwise ambiguous duplicate.
+            if (moneyText != null && Instance.moneyText == null)
+            {
+                CurrencyManager previous = Instance;
+                Instance = this;
+                Destroy(previous);
+            }
+            else
+            {
+                Destroy(this);
+                return;
+            }
         }
 
         UpdateUI();
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
     }
 
     public void AddMoney(int amount)

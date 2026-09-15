@@ -59,6 +59,12 @@ public class GrenadeDamage : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void SpawnExplosionEffect()
+    {
+        if (explosion != null)
+            Instantiate(explosion, transform.position, Quaternion.identity);
+    }
+
     private void SpawnFlashCube()
     {
         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
