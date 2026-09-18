@@ -316,7 +316,11 @@ public class UseGrenade : MonoBehaviour
 
             if (grenadeDamage != null)
             {
-                grenadeDamage.SpawnExplosionEffect();
+                GameObject explosionEffect = grenadeDamage.SpawnExplosionEffect();
+                if (grenadeType == GrenadeType.Frag)
+                {
+                    FragExplosionEffect.Play(explosionEffect);
+                }
             }
 
             Explode(target, grenadeType);

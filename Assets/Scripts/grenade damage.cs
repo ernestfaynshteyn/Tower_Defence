@@ -51,18 +51,52 @@ public class GrenadeDamage : MonoBehaviour
             SpawnFlashCube();
         }
 
-        if (explosion != null)
+        GameObject explosionEffect = SpawnExplosionEffect();
+        if (grenadeType == GrenadeType.Frag)
         {
-            Instantiate(explosion, transform.position, Quaternion.identity);
+            FragExplosionEffect.Play(explosionEffect);
         }
 
         Destroy(gameObject);
     }
 
-    public void SpawnExplosionEffect()
+    public GameObject SpawnExplosionEffect()
     {
         if (explosion != null)
-            Instantiate(explosion, transform.position, Quaternion.identity);
+            return Instantiate(explosion, transform.position, Quaternion.identity);
+
+        return null;
+    }
+
+    /// <summary>
+    /// Plays the authored particle systems stored in the frag explosion prefab.
+    /// Particle timings and appearance live in the prefab so they remain editable
+    /// in Unity's Inspector.
+    /// </summary>
+    public static void ConfigureFragExplosionEffect(GameObject effectInstance)
+    {
+        if (effectInstance == null)
+            return;
+
+        foreach (ParticleSystem particles in effectInstance.GetComponentsInChildren<ParticleSystem>(true))
+        {
+            particles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+
+        ParticleSystem rootParticles = effectInstance.GetComponent<ParticleSystem>();
+        if (rootParticles != null)
+        {
+            rootParticles.Play(true);
+        }
+        else
+        {
+            foreach (ParticleSystem particles in effectInstance.GetComponentsInChildren<ParticleSystem>(true))
+            {
+                particles.Play(true);
+            }
+        }
+
+        Destroy(effectInstance, 1.95f);
     }
 
     private void SpawnFlashCube()

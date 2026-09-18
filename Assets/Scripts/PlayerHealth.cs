@@ -6,8 +6,20 @@ public class PlayerHealth : MonoBehaviour
     public float health = 100f;
     public float currentHealth;
     public HealthBar healthBar;
+
+    [Header("Defence")]
+    [Tooltip("Defence capacity granted when the Defence Bar upgrade is unlocked.")]
+    public float baseDefence = 20f;
+    [Tooltip("Defence restored per second after the player has taken damage.")]
+    public float defenceRegenPerSecond = 4f;
+    public HealthBar defenceBar;
+
+    public float currentDefence { get; private set; }
+    public float maxDefence { get; private set; }
+
     private float baseHealth;
     private bool isDefeated;
+    private bool defenceUnlocked;
 
     private void Awake()
     {
@@ -27,6 +39,17 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         ApplyMaximumHealth(false);
+        ApplyMaximumDefence(false);
+    }
+
+    private void Update()
+    {
+        if (isDefeated || !defenceUnlocked || currentDefence >= maxDefence)
+            return;
+
+        currentDefence = Mathf.Min(maxDefence, currentDefence + defenceRegenPerSecond * Time.deltaTime);
+        if (defenceBar != null)
+            defenceBar.SetHealth(currentDefence);
     }
 
     public void TakeDamage(float damage, string enemyID)
@@ -34,7 +57,19 @@ public class PlayerHealth : MonoBehaviour
         if (isDefeated || damage <= 0f)
             return;
 
-        currentHealth -= damage;
+        float remainingDamage = damage;
+
+        if (defenceUnlocked && currentDefence > 0f)
+        {
+            float absorbedDamage = Mathf.Min(currentDefence, remainingDamage);
+            currentDefence -= absorbedDamage;
+            remainingDamage -= absorbedDamage;
+
+            if (defenceBar != null)
+                defenceBar.SetHealth(currentDefence);
+        }
+
+        currentHealth -= remainingDamage;
         currentHealth = Mathf.Max(currentHealth, 0f);
 
         if (healthBar != null)
@@ -75,6 +110,9 @@ public class PlayerHealth : MonoBehaviour
     {
         if (statName == StatNames.Health)
             ApplyMaximumHealth(true);
+
+        if (statName == StatNames.Defence || statName == StatNames.DefenceUnlocked)
+            ApplyMaximumDefence(true);
     }
 
     private void ApplyMaximumHealth(bool preserveHealthPercentage)
@@ -94,6 +132,43 @@ public class PlayerHealth : MonoBehaviour
         {
             healthBar.SetMaxHealth(health);
             healthBar.SetHealth(currentHealth);
+        }
+    }
+
+    private void ApplyMaximumDefence(bool preserveDefencePercentage)
+    {
+        float previousMaxDefence = maxDefence;
+        float defenceRatio = previousMaxDefence > 0f
+            ? currentDefence / previousMaxDefence
+            : 1f;
+        bool wasDefenceUnlocked = defenceUnlocked;
+
+        defenceUnlocked = PlayerStats.instance != null &&
+            PlayerStats.instance.GetModifiedValue(StatNames.DefenceUnlocked, 0f) > 0.5f;
+
+        if (!defenceUnlocked)
+        {
+            maxDefence = 0f;
+            currentDefence = 0f;
+            if (defenceBar != null)
+                defenceBar.gameObject.SetActive(false);
+            return;
+        }
+
+        maxDefence = PlayerStats.instance != null
+            ? PlayerStats.instance.GetModifiedValue(StatNames.Defence, baseDefence)
+            : baseDefence;
+        maxDefence = Mathf.Max(0f, maxDefence);
+
+        currentDefence = preserveDefencePercentage && wasDefenceUnlocked
+            ? Mathf.Clamp(maxDefence * defenceRatio, 0f, maxDefence)
+            : maxDefence;
+
+        if (defenceBar != null)
+        {
+            defenceBar.gameObject.SetActive(true);
+            defenceBar.SetMaxHealth(maxDefence);
+            defenceBar.SetHealth(currentDefence);
         }
     }
 }
