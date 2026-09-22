@@ -41,7 +41,7 @@ public class Spawner : MonoBehaviour
     }
     void ApplyDifficulty()
     {
-        switch (GlobalData.Instance.currentDifficulty)
+        switch (GlobalData.ActiveDifficulty)
         {
             case Difficulty.Easy:
                 minSpawnTime = 1f;

@@ -15,6 +15,9 @@ public class WaveManager : MonoBehaviour
     [Header("Timing")]
     public float timeBetweenWaves = 5f;
 
+    [Header("Enemy Growth")]
+    [Min(1.01f)] public float enemyGrowthMultiplier = 2.1f;
+
     [Header("Boss Waves")]
     public int bossWaveInterval = 5; // every X waves
     public bool IsBossWave => currentWave % bossWaveInterval == 0;
@@ -26,7 +29,7 @@ public class WaveManager : MonoBehaviour
     private bool isWaveActive;
     private bool waitingForNextWave;
     private bool rewardGiven;
-    private int normalWaveEnemyNeeded;
+    private int baseEnemyNeeded;
 
     void Awake()
     {
@@ -38,6 +41,7 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
+        currentWave = Mathf.Max(1, currentWave);
         ApplyDifficulty();
         StartWave();
     }
@@ -50,20 +54,14 @@ public class WaveManager : MonoBehaviour
             !waitingForNextWave)
         {
             waitingForNextWave = true;
+            GiveWaveReward();
             StartCoroutine(NextWaveRoutine());
-        }
-
-        if (enemyleft <= 0 && !rewardGiven)
-        {
-            rewardGiven = true;
-            CurrencyManager.Instance.AddMoney(GetWaveReward());
-            currentWave++;
         }
     }
 
     void ApplyDifficulty()
     {
-        switch (GlobalData.Instance.currentDifficulty)
+        switch (GlobalData.ActiveDifficulty)
         {
             case Difficulty.Easy:
                 enemyNeeded = 8;
@@ -88,7 +86,7 @@ public class WaveManager : MonoBehaviour
 
         enemyleft = enemyNeeded;
         enemySpawned = 0;
-        normalWaveEnemyNeeded = enemyNeeded;
+        baseEnemyNeeded = enemyNeeded;
     }
 
     IEnumerator NextWaveRoutine()
@@ -97,14 +95,17 @@ public class WaveManager : MonoBehaviour
 
         yield return new WaitForSeconds(timeBetweenWaves);
 
+        // Wave 1 is the starting wave. Every following wave advances once,
+        // immediately before its enemies and label are prepared.
+        currentWave++;
+
         if (IsBossWave)
         {
             enemyNeeded = 1; // boss only
         }
         else
         {
-            normalWaveEnemyNeeded += GetEndlessScaling();
-            enemyNeeded = normalWaveEnemyNeeded;
+            enemyNeeded = GetNormalWaveEnemyCount();
         }
 
         enemySpawned = 0;
@@ -116,25 +117,27 @@ public class WaveManager : MonoBehaviour
         StartWave();
     }
 
-    int GetEndlessScaling()
+    private void GiveWaveReward()
     {
-        float difficultyMultiplier = 1f;
+        if (rewardGiven)
+            return;
 
-        switch (GlobalData.Instance.currentDifficulty)
-        {
-            case Difficulty.Easy: difficultyMultiplier = 0.8f; break;
-            case Difficulty.Normal: difficultyMultiplier = 1f; break;
-            case Difficulty.Hard: difficultyMultiplier = 1.3f; break;
-            case Difficulty.Extreme: difficultyMultiplier = 1.6f; break;
-        }
+        rewardGiven = true;
+        if (CurrencyManager.Instance != null)
+            CurrencyManager.Instance.AddMoney(GetWaveReward());
+    }
 
-        float curve = Mathf.Pow(currentWave, 1.15f);
-        return Mathf.RoundToInt(curve * difficultyMultiplier);
+    private int GetNormalWaveEnemyCount()
+    {
+        int completedWaveCount = Mathf.Max(0, currentWave - 1);
+        float growthMultiplier = Mathf.Max(1.01f, enemyGrowthMultiplier);
+        float enemyCount = baseEnemyNeeded * Mathf.Pow(growthMultiplier, completedWaveCount);
+        return Mathf.Max(1, Mathf.CeilToInt(enemyCount));
     }
 
     int GetWaveReward()
     {
-        switch (GlobalData.Instance.currentDifficulty)
+        switch (GlobalData.ActiveDifficulty)
         {
             case Difficulty.Easy: return 150;
             case Difficulty.Normal: return 200;
@@ -146,13 +149,29 @@ public class WaveManager : MonoBehaviour
 
     void StartWave()
     {
-        waveTitleTMP = waveTitle.GetComponent<TextMeshProUGUI>();
+        if (waveTitle == null)
+        {
+            Debug.LogWarning("WaveManager has no wave title assigned.", this);
+        }
+        else
+        {
+            if (waveTitleTMP == null)
+                waveTitleTMP = waveTitle.GetComponent<TextMeshProUGUI>();
 
-        waveTitleTMP.text = IsBossWave
-            ? "BOSS WAVE"
-            : "Wave: " + currentWave;
+            if (waveTitleTMP != null)
+            {
+                waveTitleTMP.text = IsBossWave
+                    ? "Wave: " + currentWave + " (BOSS)"
+                    : "Wave: " + currentWave;
+            }
+            else
+            {
+                Debug.LogWarning("Wave title needs a TextMeshProUGUI component.", waveTitle);
+            }
 
-        waveTitle.SetActive(true);
+            waveTitle.SetActive(true);
+        }
+
         isWaveActive = true;
     }
 }

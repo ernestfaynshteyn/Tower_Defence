@@ -21,7 +21,7 @@ public class WeaponSelected : MonoBehaviour
         gun3.SetActive(false);
 
         // Show selected
-        switch (GlobalData.Instance.selectedWeapon)
+        switch (GlobalData.ActiveWeapon)
         {
             case Weapon.flamethrower:
                 flamethrower.SetActive(true);

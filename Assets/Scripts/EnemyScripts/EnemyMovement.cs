@@ -42,10 +42,7 @@ public class EnemyMovement : MonoBehaviour
     }
     void ApplyDifficulty()
     {
-        if (GlobalData.Instance == null)
-            return;
-
-        switch (GlobalData.Instance.currentDifficulty)
+        switch (GlobalData.ActiveDifficulty)
         {
             case Difficulty.Easy:
                 speed = 2f;

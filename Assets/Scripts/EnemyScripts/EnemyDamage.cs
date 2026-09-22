@@ -30,7 +30,7 @@ public class EnemyDamage : MonoBehaviour
                 nextDamageTimer = 0;
                 playerHealth.TakeDamage(damageAmount, enemyID);
             }
-            if (playerHealth.currentHealth <= 0)
+            if (playerHealth.currentHealth <= 0 && GlobalData.Instance != null)
             {
                 GlobalData.Instance.sprite = GetComponent<SpriteRenderer>().sprite;
             }
@@ -40,7 +40,7 @@ public class EnemyDamage : MonoBehaviour
 
     void ApplyDifficulty()
     {
-        switch (GlobalData.Instance.currentDifficulty)
+        switch (GlobalData.ActiveDifficulty)
         {
             case Difficulty.Easy:
                 damageAmount = 7;

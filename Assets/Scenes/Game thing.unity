@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +15% Molotov burn damage.
+  m_text: 15% more Molotov damage.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +1% dodge chance per level.
+  m_text: 1% more dodge chance per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -844,7 +844,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Makes the Pulsar Ring permanent.
+  m_text: Pulsar Ring stays active.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -962,7 +962,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Unlocks the Pulsar Ring ability.
+  m_text: Unlocks Pulsar Ring.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1271,7 +1271,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +2% maximum defense per level.
+  m_text: 2% more defense per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1729,7 +1729,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: Attacks
+      value: Combat Training
       objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
@@ -1909,7 +1909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: Unlocks attack upgrades; no direct bonus.
+      value: Unlocks combat upgrades.
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -2281,7 +2281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_text
-      value: 3% lower reload per upgrade
+      value: 3% faster reload per level.
       objectReference: {fileID: 0}
     - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_fontSize
@@ -2845,7 +2845,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +10% maximum health per level.
+  m_text: 10% more health per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3614,7 +3614,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +13% flashbang stun duration per level.
+  m_text: 10% longer flash per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3957,7 +3957,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -112, y: -11.500977}
+  m_AnchoredPosition: {x: -278, y: -11.500972}
   m_SizeDelta: {x: -404.1448, y: -996.44885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180448452
@@ -4350,7 +4350,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Throwable Effects
+  m_text: Throwable Mastery
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5230,7 +5230,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Defense
+  m_text: Defensive Training
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6857,7 +6857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: +3% multishot chance per level.
+      value: 3% higher multishot chance per level.
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -6978,7 +6978,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 80}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -223.99994, y: 116.50003}
+  m_AnchoredPosition: {x: -226.5, y: 109.7}
   m_SizeDelta: {x: 150, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &423568509
@@ -7531,13 +7531,17 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Buy
       objectReference: {fileID: 0}
+    - target: {fileID: 7427130029497265356, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 20.9
+      objectReference: {fileID: 0}
     - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -27.4
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: +3% critical-hit damage per level.
+      value: 3% more crit damage per level.
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -8005,7 +8009,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Support
+  m_text: Tactical Support
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8316,7 +8320,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +35% throwable reload speed per level.
+  m_text: 35% faster throwable reload.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9201,7 +9205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: +10% chance to trigger lifesteal. Requires Lifesteal Healing.
+      value: 10% higher lifesteal chance.
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -9471,7 +9475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: +5% chance to fire an additional shot per level.
+      value: 5% higher multishot chance per level.
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -9955,7 +9959,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_text
-      value: +3% attack speed per level.
+      value: 3% faster reload per level.
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: id
@@ -10703,81 +10707,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636679438}
   m_CullTransparentMesh: 1
---- !u!1 &648733804
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 648733805}
-  - component: {fileID: 648733807}
-  - component: {fileID: 648733806}
-  m_Layer: 5
-  m_Name: cursor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &648733805
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 648733804}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1814437462}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &648733806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 648733804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &648733807
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 648733804}
-  m_CullTransparentMesh: 1
 --- !u!1 &651781450
 GameObject:
   m_ObjectHideFlags: 0
@@ -11485,7 +11414,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10% more damage
+  m_text: 10% more damage per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12003,7 +11932,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Unlocks the nuke throwable.
+  m_text: Unlocks the nuke.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12215,7 +12144,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +2% frag grenade damage per level.
+  m_text: 2% more frag damage per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12696,20 +12625,20 @@ MonoBehaviour:
     minValue: 0
     clampMax: 0
     maxValue: 0
-  - statName: PIzzaDamage
+  - statName: PizzaDamage
     baseValue: 30
     clampMin: 0
     minValue: 0
     clampMax: 0
     maxValue: 0
-  - statName: PIzzaDuration
+  - statName: PizzaDuration
     baseValue: 10
     clampMin: 0
     minValue: 0
     clampMax: 0
     maxValue: 0
-  - statName: PIzzaPermanent
-    baseValue: 10
+  - statName: PizzaPermanent
+    baseValue: 0
     clampMin: 0
     minValue: 0
     clampMax: 0
@@ -12754,7 +12683,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Unlocks this upgrade tree; no direct bonus.
+  m_text: Unlocks this upgrade path.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13542,7 +13471,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Unlocks a 10% dodge chance.
+  m_text: 10% dodge chance.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13698,7 +13627,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Unlocks this upgrade tree; no direct bonus.
+  m_text: Unlocks this upgrade path.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14110,7 +14039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1408965159452312679, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: m_text
-      value: Unlocks damage and range upgrades; no direct bonus.
+      value: Unlocks damage and range.
       objectReference: {fileID: 0}
     - target: {fileID: 4040706562217464987, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: m_Name
@@ -14314,7 +14243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6898986915422004389, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: m_text
-      value: Damage Path
+      value: Offensive Mastery
       objectReference: {fileID: 0}
     - target: {fileID: 6898986915422004389, guid: c1fe1bc88ba87c9449f38a6d4a1f1c7e, type: 3}
       propertyPath: m_fontSize
@@ -14759,7 +14688,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Defense
+  m_text: Defensive Training
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15347,7 +15276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: Heal for +10% of damage dealt per level when lifesteal triggers.
+      value: 10% more lifesteal healing per level.
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_fontSize
@@ -15712,7 +15641,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +15% flashbang damage per level.
+  m_text: 10% more flash damage per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16273,7 +16202,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1482244775745115220, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: m_text
-      value: +10% attack speed per level.
+      value: 10% faster attacks per level.
       objectReference: {fileID: 0}
     - target: {fileID: 1487000035589518462, guid: f6acb6e0f01384347a54f7f069599102, type: 3}
       propertyPath: m_Pivot.x
@@ -16790,7 +16719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: +10% critical-hit damage per level.
+      value: 10% more crit damage per level.
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -17140,7 +17069,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +25% Pulsar Ring duration per level.
+  m_text: 10% longer Pulsar per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17529,7 +17458,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +10% maximum health per level.
+  m_text: 10% more health per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17823,7 +17752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1381572361895919195, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: Vampiric Path
+      value: Vampiric Arts
       objectReference: {fileID: 0}
     - target: {fileID: 2913839030649236723, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: id
@@ -17975,7 +17904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: Unlocks lifesteal upgrades; no direct bonus.
+      value: Unlocks lifesteal upgrades.
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -18100,7 +18029,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +20 maximum defense per level.
+  m_text: 20 more defense.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -18605,7 +18534,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +4% maximum health per level.
+  m_text: 4% more health per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -19400,7 +19329,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +20% dodge chance per level.
+  m_text: 20% more dodge chance.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -19774,6 +19703,7 @@ MonoBehaviour:
   enemySpawned: 0
   enemyleft: 10
   timeBetweenWaves: 5
+  enemyGrowthMultiplier: 1.2
   bossWaveInterval: 10
   waveTitle: {fileID: 1530473203}
 --- !u!114 &1213449532
@@ -20229,7 +20159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: +15% lifesteal chance and +15% healing.
+      value: 15% more lifesteal chance and healing.
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -21233,7 +21163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_text
-      value: +20% attack speed, cooldown reduction, and reload speed.
+      value: 20% faster attacks, cooldowns, and reloads.
       objectReference: {fileID: 0}
     - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_fontSize
@@ -22817,6 +22747,7 @@ GameObject:
   - component: {fileID: 1393480309}
   - component: {fileID: 1393480308}
   - component: {fileID: 1393480310}
+  - component: {fileID: 1393480311}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -23156,6 +23087,27 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &1393480311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393480300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b66744d3db20466e9b9678634a715f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 30
+  baseDuration: 10
+  radius: 3
+  pulseInterval: 1
+  cooldown: 4
+  ringColor: {r: 0.44163224, g: 0, b: 0.4943396, a: 0.9}
+  ringSegments: 48
+  ringWidth: 0.08
+  ringSortingOrder: 10
 --- !u!1 &1399134518
 GameObject:
   m_ObjectHideFlags: 0
@@ -24079,7 +24031,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +10% burn duration per level.
+  m_text: 10% longer burn per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -24687,7 +24639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6953486776809145459, guid: 77e5d663165163d46b9ca510f8843d28, type: 3}
       propertyPath: m_text
-      value: +10% attack damage per level.
+      value: 10% more damage per level.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25480,7 +25432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6252448475578029872, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: m_text
-      value: +2% attack damage per level.
+      value: 2% more damage per level.
       objectReference: {fileID: 0}
     - target: {fileID: 8731585863211902821, guid: fc106eb8024f7794ba3611ed59094a12, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -25806,7 +25758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: +20% critical-hit chance and critical-hit damage.
+      value: 20% higher crit chance and damage.
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -26041,7 +25993,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +40% throwable reload speed per level.
+  m_text: 40% faster throwable reload.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -26178,7 +26130,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +2% Pulsar Ring damage per level.
+  m_text: 2% more Pulsar damage per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -26587,7 +26539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_text
-      value: +2% projectile range per level.
+      value: 2% more range per level.
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: id
@@ -27024,7 +26976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_text
-      value: +10% cooldown reduction per level.
+      value: 10% shorter cooldown per level.
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: id
@@ -27645,7 +27597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: +2% lifesteal chance per level.
+      value: 2% higher lifesteal chance per level.
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -28792,7 +28744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: +5% lifesteal chance and +5% healing per level.
+      value: 5% more lifesteal chance and healing per level.
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -28919,7 +28871,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +20% maximum health and maximum defense.
+  m_text: 20% more health and defense.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -29385,7 +29337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3845224575802465801, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: m_text
-      value: +10% projectile range per level.
+      value: 10% more range per level.
       objectReference: {fileID: 0}
     - target: {fileID: 4143109143908455820, guid: fa9205105ae6b984aa76aa93f8a3044b, type: 3}
       propertyPath: id
@@ -30047,7 +29999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: +2% lifesteal healing per level.
+      value: 2% more lifesteal healing per level.
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -30591,7 +30543,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +10% Pulsar Ring damage per level.
+  m_text: 10% more Pulsar damage per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -30793,7 +30745,6 @@ RectTransform:
   - {fileID: 189700878}
   - {fileID: 1389434920}
   - {fileID: 534783434}
-  - {fileID: 648733805}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -30806,6 +30757,26 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6530306941374269524, guid: 8e0c64d535e13ac4fa2aabcd7b8bba3c, type: 3}
   m_PrefabInstance: {fileID: 2401638049824429357}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1829394159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530473203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6684c249d2c47c44b91c631a6da1afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  currentWave: 1
+  enemyNeeded: 0
+  enemySpawned: 0
+  enemyleft: 0
+  timeBetweenWaves: 5
+  enemyGrowthMultiplier: 2.1
+  bossWaveInterval: 10
+  waveTitle: {fileID: 393800231405178202, guid: 8e0c64d535e13ac4fa2aabcd7b8bba3c, type: 3}
 --- !u!1 &1831078874
 GameObject:
   m_ObjectHideFlags: 0
@@ -31394,7 +31365,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +15% burn damage per level.
+  m_text: 5% more burn damage per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -31531,7 +31502,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +10% Molotov burn damage per level.
+  m_text: 10% more Molotov damage per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -32080,7 +32051,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +10% radius for all throwables per level.
+  m_text: 10% larger throwable radius per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -32573,13 +32544,17 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Buy
       objectReference: {fileID: 0}
+    - target: {fileID: 7427130029497265356, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 19.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8790839610720358414, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: +3% critical-hit chance per level.
+      value: 3% higher crit chance per level.
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -33422,7 +33397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187141530741787786, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_text
-      value: +10% critical-hit chance per level.
+      value: 10% higher crit chance per level.
       objectReference: {fileID: 0}
     - target: {fileID: 9215603795874435504, guid: 7e8975d51aaa25a4494d7269f14d9c91, type: 3}
       propertyPath: m_Name
@@ -33705,7 +33680,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +3% throwable radius per level.
+  m_text: 3% larger blast per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -33923,11 +33898,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c54a66793d4f74b07f6c2687f9f79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  valueText: {fileID: 180898153}
-  screenOffset: {x: 12, y: 0}
-  labelSize: {x: 120, y: 32}
-  fontSize: 18
-  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &2100000002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33940,11 +33910,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c54a66793d4f74b07f6c2687f9f79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  valueText: {fileID: 2100766482}
-  screenOffset: {x: 12, y: 0}
-  labelSize: {x: 120, y: 32}
-  fontSize: 18
-  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &2100000003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33957,11 +33922,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c54a66793d4f74b07f6c2687f9f79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  valueText: {fileID: 1570471446}
-  screenOffset: {x: 12, y: 0}
-  labelSize: {x: 120, y: 32}
-  fontSize: 18
-  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2100766480
 GameObject:
   m_ObjectHideFlags: 0
@@ -34521,7 +34481,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Increases burn damage per level.
+  m_text: 10% more burn damage per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -35059,7 +35019,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1150016261432064177, guid: 8e0c64d535e13ac4fa2aabcd7b8bba3c, type: 3}
       propertyPath: m_text
-      value: 
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1150016261432064177, guid: 8e0c64d535e13ac4fa2aabcd7b8bba3c, type: 3}
+      propertyPath: m_fontStyle
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6530306941374269524, guid: 8e0c64d535e13ac4fa2aabcd7b8bba3c, type: 3}
       propertyPath: m_Pivot.x
@@ -35144,7 +35108,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 393800231405178202, guid: 8e0c64d535e13ac4fa2aabcd7b8bba3c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1829394159}
   m_SourcePrefab: {fileID: 100100000, guid: 8e0c64d535e13ac4fa2aabcd7b8bba3c, type: 3}
 --- !u!1001 &6550360930661843659
 PrefabInstance:
@@ -35157,6 +35124,10 @@ PrefabInstance:
     - target: {fileID: 1582364358566884515, guid: ad6b89a453723404787547f56bc5ea57, type: 3}
       propertyPath: m_Name
       value: MoneyUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548400802287693660, guid: ad6b89a453723404787547f56bc5ea57, type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7548400802287693660, guid: ad6b89a453723404787547f56bc5ea57, type: 3}
       propertyPath: m_margin.x

@@ -19,11 +19,37 @@ public class GlobalData : MonoBehaviour
 {
     public static GlobalData Instance;
 
+    private static bool warnedAboutMissingGlobalData;
+
      public string lastEnemyThatKilledPlayer;
     public Sprite sprite;
 
     public Difficulty currentDifficulty = Difficulty.Normal;
     public Weapon selectedWeapon = Weapon.flamethrower;
+
+    // When the gameplay scene is launched directly from the Unity Editor, the
+    // menu's GlobalData object does not exist. Use the first difficulty (Easy)
+    // and the default weapon so gameplay can still start safely.
+    public static Difficulty ActiveDifficulty
+    {
+        get
+        {
+            if (Instance != null)
+                return Instance.currentDifficulty;
+
+            if (!warnedAboutMissingGlobalData)
+            {
+                warnedAboutMissingGlobalData = true;
+                Debug.Log("GlobalData was not loaded. Starting this direct scene launch on Easy difficulty.");
+            }
+
+            return Difficulty.Easy;
+        }
+    }
+
+    public static Weapon ActiveWeapon => Instance != null
+        ? Instance.selectedWeapon
+        : Weapon.flamethrower;
 
     void Awake()
     {

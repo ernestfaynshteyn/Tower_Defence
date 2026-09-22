@@ -164,11 +164,7 @@ public class EnemyHealth : MonoBehaviour
     }
     private void ApplyDifficulty()
     {
-        if (GlobalData.Instance == null)
-        {
-            return;
-        }
-        switch (GlobalData.Instance.currentDifficulty)
+        switch (GlobalData.ActiveDifficulty)
         {
             case Difficulty.Easy:
                 health = 75f;

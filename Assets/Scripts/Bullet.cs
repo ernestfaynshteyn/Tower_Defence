@@ -24,6 +24,11 @@ public class Bullet : MonoBehaviour
     public float BaseSpeed => speed;
     public float BaseMaxDistance => maxDistance;
 
+    // Cached normalized movement to avoid repeated normalization every FixedUpdate
+    private Vector2 cachedDirection = Vector2.zero;
+    private Vector3 lastDirection = Vector3.zero;
+    private bool isDirectionCached = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,9 +46,13 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        if (playerTransform != null && Vector3.Distance(transform.position, playerTransform.position) > maxDistance)
+        if (playerTransform != null)
         {
-            Destroy(gameObject);
+            float maxDistSqr = maxDistance * maxDistance;
+            if ((transform.position - playerTransform.position).sqrMagnitude > maxDistSqr)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -51,7 +60,22 @@ public class Bullet : MonoBehaviour
     {
         if (rb != null)
         {
-            rb.linearVelocity = direction.normalized * speed;
+            // Cache normalized direction and only recompute when direction changes
+            if (!isDirectionCached || lastDirection != direction)
+            {
+                if (direction == Vector3.zero)
+                {
+                    cachedDirection = Vector2.zero;
+                }
+                else
+                {
+                    cachedDirection = ((Vector2)direction).normalized;
+                }
+                lastDirection = direction;
+                isDirectionCached = true;
+            }
+
+            rb.linearVelocity = cachedDirection * speed;
         }
     }
 
@@ -69,7 +93,6 @@ public class Bullet : MonoBehaviour
     {
         if (newDamage <= 0f)
         {
-            Debug.LogWarning("Bullet Setup received 0 damage. Using default damage instead.");
             damage = defaultDamage;
         }
         else
@@ -86,23 +109,26 @@ public class Bullet : MonoBehaviour
         ownerHealth = newOwnerHealth;
         playerTransform = shooterTransform;
 
+        // Prime cached direction if direction already set by spawner before Setup is called
+        if (direction != Vector3.zero)
+        {
+            cachedDirection = ((Vector2)direction).normalized;
+            lastDirection = direction;
+            isDirectionCached = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Bullet hit: " + collision.gameObject.name);
-
+        // Avoid logging in hot collision code paths
         EnemyHealth enemy = collision.GetComponentInParent<EnemyHealth>();
 
         if (enemy != null)
         {
-            Debug.Log("EnemyHealth found on: " + enemy.gameObject.name);
-
             float finalDamage = damage;
 
             if (finalDamage <= 0f)
             {
-                Debug.LogWarning("Bullet tried to deal 0 damage. Using default damage.");
                 finalDamage = defaultDamage;
             }
 
