@@ -57,6 +57,18 @@ public class PlayerHealth : MonoBehaviour
         if (isDefeated || damage <= 0f)
             return;
 
+        float dodgeChance = PlayerStats.instance != null
+            ? PlayerStats.instance.Get(StatNames.DodgeChance)
+            : 0f;
+
+        dodgeChance = Mathf.Clamp(dodgeChance, 0f, 100f);
+
+        if (Random.value < dodgeChance / 100f)
+        {
+            Debug.Log($"Dodged {damage} damage.");
+            return;
+        }
+
         float remainingDamage = damage;
 
         if (defenceUnlocked && currentDefence > 0f)

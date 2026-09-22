@@ -26,6 +26,7 @@ public class WaveManager : MonoBehaviour
     private bool isWaveActive;
     private bool waitingForNextWave;
     private bool rewardGiven;
+    private int normalWaveEnemyNeeded;
 
     void Awake()
     {
@@ -87,6 +88,7 @@ public class WaveManager : MonoBehaviour
 
         enemyleft = enemyNeeded;
         enemySpawned = 0;
+        normalWaveEnemyNeeded = enemyNeeded;
     }
 
     IEnumerator NextWaveRoutine()
@@ -101,7 +103,8 @@ public class WaveManager : MonoBehaviour
         }
         else
         {
-            enemyNeeded += GetEndlessScaling();
+            normalWaveEnemyNeeded += GetEndlessScaling();
+            enemyNeeded = normalWaveEnemyNeeded;
         }
 
         enemySpawned = 0;

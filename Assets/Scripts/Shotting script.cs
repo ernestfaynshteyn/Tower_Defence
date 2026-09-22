@@ -109,14 +109,16 @@ public class Shottingscript : MonoBehaviour
                 }
 
                 Shoot();
-                currentMag -= 1;
+            }
 
-                if (currentMag <= 0)
-                {
-                    reloading = true;
-                    Invoke(nameof(Reload), GetReloadTime());
-                    break;
-                }
+            // A multi-projectile weapon still fires one magazine round per
+            // trigger pull. Pellets/projectiles must not each consume ammo.
+            currentMag -= 1;
+
+            if (currentMag <= 0)
+            {
+                reloading = true;
+                Invoke(nameof(Reload), GetReloadTime());
             }
 
             Invoke(nameof(CanShot), GetFiringDelay());

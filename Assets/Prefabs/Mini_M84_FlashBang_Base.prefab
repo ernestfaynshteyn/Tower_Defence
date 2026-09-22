@@ -112,7 +112,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   explosion: {fileID: 3157460767785262535, guid: b38e9008537318c409a29f8067cda465, type: 3}
-  flashCubeFadeDuration: 3
+  flashCubeFadeDuration: 5
 --- !u!1 &3437635547483331599
 GameObject:
   m_ObjectHideFlags: 0
