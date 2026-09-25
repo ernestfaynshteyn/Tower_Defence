@@ -38,6 +38,9 @@ public class UseGrenade : MonoBehaviour
     public Color explosionColor = Color.red;
     public int explosionCircleSegments = 40;
     public float explosionLineWidth = 0.05f;
+
+    [Header("Flash Settings")]
+    [Min(0f)] public float flashDamage = 10f;
     public float stunDuration = 2f;
     public float molotovBurnDuration = 3f;
     public float molotovBurnDamage = 5f;
@@ -346,6 +349,7 @@ public class UseGrenade : MonoBehaviour
                     enemyHealth.TakeDamage(damage);
                     break;
                 case GrenadeType.Flash:
+                    enemyHealth.TakeDamage(GetModifiedStat(StatNames.FlashDamage, flashDamage));
                     enemyHealth.Stun(GetModifiedStat(StatNames.FlashDuration, stunDuration));
                     break;
                 case GrenadeType.Molotov:

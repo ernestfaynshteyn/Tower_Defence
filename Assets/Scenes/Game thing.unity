@@ -4919,7 +4919,7 @@ MonoBehaviour:
   effects:
   - statName: NukeUnlocked
     modifierType: 0
-    value: 0
+    value: 1
     perLevel: 0
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -6315,13 +6315,13 @@ MonoBehaviour:
   costMultiplierPerLevel: 1
   requirements: []
   effects:
-  - statName: AttackCooldown
+  - statName: CooldownReduction
     modifierType: 1
-    value: -20
+    value: 20
     perLevel: 0
-  - statName: ReloadTime
+  - statName: ReloadSpeed
     modifierType: 1
-    value: -20
+    value: 20
     perLevel: 0
   - statName: AttackSpeed
     modifierType: 1
@@ -8320,7 +8320,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 35% faster throwable reload.
+  m_text: 35% shorter Nuke cooldown.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12460,8 +12460,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d62fd58fff16694b99f8d75b7dc5d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrencyManager
-  money: 1000000000
-  moneyText: {fileID: 0}
+  money: 1000000
+  moneyText: {fileID: 1502003754}
 --- !u!114 &755501273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14430,7 +14430,7 @@ RectTransform:
   m_GameObject: {fileID: 914801614}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.02, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 302644927}
@@ -14452,7 +14452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
   m_Color: {r: 0.86415094, g: 0.5696389, b: 0.044022713, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -16867,12 +16867,12 @@ MonoBehaviour:
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 3
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 2
 --- !u!222 &1002847485
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18260,7 +18260,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Faster Throwable Reload
+  m_text: Nuke Cooldown I
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -19805,7 +19805,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Maximum Throwable Reload
+  m_text: Nuke Cooldown II
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -22599,7 +22599,7 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 3
+  maxLevel: 1
   baseCost: 250
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
@@ -22608,9 +22608,9 @@ MonoBehaviour:
     requiredLevel: 1
   effects:
   - statName: ThrowableReloadSpeed
-    modifierType: 0
+    modifierType: 1
     value: 35
-    perLevel: 1
+    perLevel: 0
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -22748,6 +22748,7 @@ GameObject:
   - component: {fileID: 1393480308}
   - component: {fileID: 1393480310}
   - component: {fileID: 1393480311}
+  - component: {fileID: 2100000010}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -25993,7 +25994,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 40% faster throwable reload.
+  m_text: 40% shorter Nuke cooldown.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -31761,7 +31762,7 @@ MonoBehaviour:
   displayName: 
   description: 
   level: 0
-  maxLevel: 3
+  maxLevel: 1
   baseCost: 700
   costAddPerLevel: 0
   costMultiplierPerLevel: 1
@@ -31770,9 +31771,9 @@ MonoBehaviour:
     requiredLevel: 1
   effects:
   - statName: ThrowableReloadSpeed
-    modifierType: 0
+    modifierType: 1
     value: 40
-    perLevel: 1
+    perLevel: 0
   autoWireButton: 1
   iconImage: {fileID: 0}
   levelText: {fileID: 0}
@@ -33922,6 +33923,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c54a66793d4f74b07f6c2687f9f79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2100000010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393480300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d8f5d8f8014a6f9d16bb3fbe36cc21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nukePrefab: {fileID: 100100000, guid: 64c2d169f4ab4d2394536e0275307d46, type: 3}
+  activationKey: 110
+  baseCooldown: 45
+  minimumCooldown: 6
 --- !u!1 &2100766480
 GameObject:
   m_ObjectHideFlags: 0

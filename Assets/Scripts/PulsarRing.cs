@@ -18,7 +18,7 @@ public class PulsarRing : MonoBehaviour
 
     [Header("Ring Look")]
     [SerializeField] private Color ringColor = new Color(0.2f, 0.85f, 1f, 0.9f);
-    [SerializeField, Range(12, 96)] private int ringSegments = 48;
+    [SerializeField, Range(12, 1000)] private int ringSegments = 48;
     [SerializeField] private float ringWidth = 0.08f;
     [SerializeField] private int ringSortingOrder = 10;
 

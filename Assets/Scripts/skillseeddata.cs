@@ -148,9 +148,9 @@ public static class SkillSeedData
 
             new SkillSeed("nuke", "Nuke", "Unlocks the nuke.", 200, 1,
                 R("more_damage_10"), E(StatNames.NukeUnlocked, ModifierType.Flat, 1, false)),
-            new SkillSeed("shorter_reload_35", "Faster Throwable Reload", "35% faster throwable reload.", 60, 1,
+            new SkillSeed("shorter_reload_35", "Nuke Cooldown I", "35% shorter Nuke cooldown.", 60, 1,
                 R("nuke"), E(StatNames.ThrowableReloadSpeed, ModifierType.Percent, 35, false)),
-            new SkillSeed("shorter_reload_40", "Maximum Throwable Reload", "40% faster throwable reload.", 80, 1,
+            new SkillSeed("shorter_reload_40", "Nuke Cooldown II", "40% shorter Nuke cooldown.", 80, 1,
                 R("shorter_reload_35"), E(StatNames.ThrowableReloadSpeed, ModifierType.Percent, 40, false)),
         };
     }
