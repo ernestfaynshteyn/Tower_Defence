@@ -13,9 +13,38 @@ public class flameThrowerDamage : MonoBehaviour
     [SerializeField] private float burnDamage = 2f;
     public UseGrenade grenade;
     private bool overheated = false;
+    private ParticleSystem[] flameParticles;
+    private ParticleSystem.MinMaxCurve[] baseStartLifetimes;
+
+    private void Awake()
+    {
+        flameParticles = particle != null
+            ? particle.GetComponentsInChildren<ParticleSystem>(true)
+            : System.Array.Empty<ParticleSystem>();
+
+        baseStartLifetimes = new ParticleSystem.MinMaxCurve[flameParticles.Length];
+        for (int i = 0; i < flameParticles.Length; i++)
+            baseStartLifetimes[i] = flameParticles[i].main.startLifetime;
+    }
+
+    private void OnEnable()
+    {
+        PlayerStats.OnStatChanged += HandleStatChanged;
+    }
+
+    private void OnDisable()
+    {
+        PlayerStats.OnStatChanged -= HandleStatChanged;
+    }
+
+    private void Start()
+    {
+        RefreshParticleLifetime();
+    }
     void Update()
     {
         HandleFlamethrower();
+        HealthBar.SetOverheat(currentHeat, maxHeat);
     }
     private void HandleFlamethrower()
     {
@@ -71,5 +100,43 @@ public class flameThrowerDamage : MonoBehaviour
         return PlayerStats.instance != null
             ? PlayerStats.instance.GetModifiedValue(statName, baseValue)
             : baseValue;
+    }
+
+    private void HandleStatChanged(string statName, float oldValue, float newValue)
+    {
+        if (statName == StatNames.BurnDuration)
+            RefreshParticleLifetime();
+    }
+
+    private void RefreshParticleLifetime()
+    {
+        float durationMultiplier = PlayerStats.instance != null
+            ? 1f + PlayerStats.instance.GetPercentModifier(StatNames.BurnDuration) / 100f
+            : 1f;
+
+        for (int i = 0; i < flameParticles.Length; i++)
+        {
+            if (flameParticles[i] == null)
+                continue;
+
+            ParticleSystem.MinMaxCurve lifetime = baseStartLifetimes[i];
+            switch (lifetime.mode)
+            {
+                case ParticleSystemCurveMode.Constant:
+                    lifetime.constant *= durationMultiplier;
+                    break;
+                case ParticleSystemCurveMode.TwoConstants:
+                    lifetime.constantMin *= durationMultiplier;
+                    lifetime.constantMax *= durationMultiplier;
+                    break;
+                case ParticleSystemCurveMode.Curve:
+                case ParticleSystemCurveMode.TwoCurves:
+                    lifetime.curveMultiplier *= durationMultiplier;
+                    break;
+            }
+
+            ParticleSystem.MainModule main = flameParticles[i].main;
+            main.startLifetime = lifetime;
+        }
     }
 }

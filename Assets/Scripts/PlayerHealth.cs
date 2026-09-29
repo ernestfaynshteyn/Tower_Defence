@@ -24,6 +24,14 @@ public class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         baseHealth = Mathf.Max(1f, health);
+
+        // The range visual belongs to the player, so attach its lightweight
+        // stat listener here instead of duplicating it on every weapon.
+        if (GetComponent<RangeIndicatorScaler>() == null)
+            gameObject.AddComponent<RangeIndicatorScaler>();
+
+        if (GetComponent<SlimeUiSkin>() == null)
+            gameObject.AddComponent<SlimeUiSkin>();
     }
 
     private void OnEnable()
@@ -182,5 +190,56 @@ public class PlayerHealth : MonoBehaviour
             defenceBar.SetMaxHealth(maxDefence);
             defenceBar.SetHealth(currentDefence);
         }
+    }
+}
+
+/// <summary>
+/// Keeps the player's authored range circle in lockstep with projectile range.
+/// </summary>
+public class RangeIndicatorScaler : MonoBehaviour
+{
+    [SerializeField] private Transform rangeIndicator;
+
+    private Vector3 baseScale;
+
+    private void Awake()
+    {
+        if (rangeIndicator == null)
+            rangeIndicator = transform.Find("RangeIndicator");
+
+        if (rangeIndicator != null)
+            baseScale = rangeIndicator.localScale;
+    }
+
+    private void OnEnable()
+    {
+        PlayerStats.OnStatChanged += HandleStatChanged;
+    }
+
+    private void OnDisable()
+    {
+        PlayerStats.OnStatChanged -= HandleStatChanged;
+    }
+
+    private void Start()
+    {
+        RefreshScale();
+    }
+
+    private void HandleStatChanged(string statName, float oldValue, float newValue)
+    {
+        if (statName == StatNames.Range)
+            RefreshScale();
+    }
+
+    private void RefreshScale()
+    {
+        if (rangeIndicator == null)
+            return;
+
+        float multiplier = PlayerStats.instance != null
+            ? 1f + PlayerStats.instance.GetPercentModifier(StatNames.Range) / 100f
+            : 1f;
+        rangeIndicator.localScale = baseScale * Mathf.Max(0.01f, multiplier);
     }
 }

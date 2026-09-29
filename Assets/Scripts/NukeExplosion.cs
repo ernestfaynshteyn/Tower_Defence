@@ -66,6 +66,9 @@ public class NukeExplosion : MonoBehaviour
         if (spriteRenderer != null)
             spriteRenderer.enabled = false;
 
+        // Projectile artwork scale must not multiply the blast radius.
+        transform.localScale = Vector3.one;
+
         SpawnExplosionEffect();
         DestroyAllActiveEnemies();
         StartCoroutine(PlayBlastRing());
@@ -78,17 +81,29 @@ public class NukeExplosion : MonoBehaviour
 
         GameObject effect = Instantiate(explosionEffect, transform.position, Quaternion.identity);
         effect.transform.localScale *= explosionEffectScale;
+        foreach (ParticleSystem particles in effect.GetComponentsInChildren<ParticleSystem>(true))
+        {
+            // Child particles must inherit the scaled nuke effect root.
+            ParticleSystem.MainModule main = particles.main;
+            main.scalingMode = ParticleSystemScalingMode.Hierarchy;
+        }
         FragExplosionEffect.Play(effect);
     }
 
     private static void DestroyAllActiveEnemies()
     {
         EnemyHealth[] enemies = FindObjectsByType<EnemyHealth>(FindObjectsSortMode.None);
+        int defeated = 0;
         foreach (EnemyHealth enemy in enemies)
         {
-            if (enemy != null && enemy.gameObject.activeInHierarchy)
+            if (enemy != null && enemy.gameObject.activeInHierarchy && enemy.health > 0f)
+            {
                 enemy.TakeDamage(float.MaxValue);
+                if (enemy.health <= 0f)
+                    defeated++;
+            }
         }
+        Debug.Log($"[Nuke] Detonated: defeated {defeated} active enemies. Rewards and wave counts use the normal enemy death flow.");
     }
 
     private IEnumerator PlayBlastRing()

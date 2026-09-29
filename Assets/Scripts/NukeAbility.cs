@@ -105,8 +105,9 @@ public class NukeAbility : MonoBehaviour
             ? PlayerStats.instance.GetPercentModifier(StatNames.ThrowableReloadSpeed)
             : 0f;
 
-        // "Faster reload" stacks as a speed bonus: 35% gives 45 / 1.35 seconds.
-        float cooldown = baseCooldown / (1f + Mathf.Max(0f, reloadSpeedPercent) / 100f);
+        // The tree describes a direct cooldown reduction, so 35% means the
+        // displayed cooldown is genuinely 35% shorter.
+        float cooldown = baseCooldown * (1f - Mathf.Clamp(reloadSpeedPercent, 0f, 100f) / 100f);
         return Mathf.Max(minimumCooldown, cooldown);
     }
 }

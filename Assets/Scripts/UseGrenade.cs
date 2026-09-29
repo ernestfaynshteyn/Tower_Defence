@@ -45,6 +45,11 @@ public class UseGrenade : MonoBehaviour
     public float molotovBurnDuration = 3f;
     public float molotovBurnDamage = 5f;
 
+    [Header("Persistent Areas")]
+    [Min(0.1f)] public float smokeAreaDuration = 5f;
+    [Range(0f, 1f)] public float smokeSlowMultiplier = 0.5f;
+    [Min(0.05f)] public float areaTickInterval = 0.25f;
+
     public bool isEquipped = false;
 
     private Camera mainCamera;
@@ -324,6 +329,15 @@ public class UseGrenade : MonoBehaviour
                 {
                     FragExplosionEffect.Play(explosionEffect);
                 }
+                else if (explosionEffect != null)
+                {
+                    // Smoke and Molotov effects are area visuals. They now
+                    // clean themselves up with the matching gameplay area.
+                    float visualDuration = grenadeType == GrenadeType.Smoke
+                        ? smokeAreaDuration
+                        : GetModifiedStat(StatNames.BurnDuration, molotovBurnDuration);
+                    Destroy(explosionEffect, visualDuration);
+                }
             }
 
             Explode(target, grenadeType);
@@ -353,16 +367,68 @@ public class UseGrenade : MonoBehaviour
                     enemyHealth.Stun(GetModifiedStat(StatNames.FlashDuration, stunDuration));
                     break;
                 case GrenadeType.Molotov:
-                    enemyHealth.ApplyBurn(
-                        GetModifiedStat(StatNames.BurnDuration, molotovBurnDuration),
-                        GetModifiedStat(StatNames.MolotovDamage, molotovBurnDamage));
                     break;
-                // Smoke is deliberately non-damaging. Its area behaviour can be
-                // added later without changing the other grenade types.
             }
         }
 
+        if (grenadeType == GrenadeType.Smoke)
+            StartCoroutine(ApplySmokeArea(position, radius));
+        else if (grenadeType == GrenadeType.Molotov)
+            StartCoroutine(ApplyMolotovArea(position, radius));
+
         StartCoroutine(ShowExplosionCircle(position, radius));
+    }
+
+    private IEnumerator ApplySmokeArea(Vector2 position, float radius)
+    {
+        float elapsed = 0f;
+        var slowedEnemies = new System.Collections.Generic.HashSet<EnemyHealth>();
+
+        while (elapsed < smokeAreaDuration)
+        {
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(position, radius, enemyLayer);
+            foreach (Collider2D enemyCollider in hitEnemies)
+            {
+                EnemyHealth enemy = enemyCollider.GetComponentInParent<EnemyHealth>();
+                if (enemy == null) continue;
+
+                enemy.ApplySlow(smokeSlowMultiplier);
+                slowedEnemies.Add(enemy);
+            }
+
+            yield return new WaitForSeconds(areaTickInterval);
+            elapsed += areaTickInterval;
+        }
+
+        foreach (EnemyHealth enemy in slowedEnemies)
+        {
+            if (enemy != null)
+                enemy.RemoveSlow();
+        }
+    }
+
+    private IEnumerator ApplyMolotovArea(Vector2 position, float radius)
+    {
+        float areaDuration = GetModifiedStat(StatNames.BurnDuration, molotovBurnDuration);
+        float elapsed = 0f;
+
+        while (elapsed < areaDuration)
+        {
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(position, radius, enemyLayer);
+            foreach (Collider2D enemyCollider in hitEnemies)
+            {
+                EnemyHealth enemy = enemyCollider.GetComponentInParent<EnemyHealth>();
+                if (enemy != null)
+                {
+                    enemy.ApplyBurn(
+                        areaDuration,
+                        GetModifiedStat(StatNames.MolotovDamage, molotovBurnDamage));
+                }
+            }
+
+            yield return new WaitForSeconds(areaTickInterval);
+            elapsed += areaTickInterval;
+        }
     }
 
     private float GetModifiedStat(string statName, float baseValue)

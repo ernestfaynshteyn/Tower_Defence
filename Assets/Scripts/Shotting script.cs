@@ -56,6 +56,7 @@ public class Shottingscript : MonoBehaviour
     private void Update()
     {
         HandlingShooting();
+        HealthBar.SetOverheat(currentHeat, MaxHeat);
     }
 
     private float GetModifiedDamage()
@@ -71,6 +72,17 @@ public class Shottingscript : MonoBehaviour
     private float GetPercentModifier(string statName)
     {
         return PlayerStats.instance != null ? PlayerStats.instance.GetPercentModifier(statName) : 0f;
+    }
+
+    private float GetChanceModifier(string statName)
+    {
+        if (PlayerStats.instance == null)
+            return 0f;
+
+        // Older scene nodes authored chance bonuses as flat values. Treat both
+        // forms as percentage points so those purchased upgrades remain valid.
+        return PlayerStats.instance.GetPercentModifier(statName) +
+               PlayerStats.instance.GetFlatModifier(statName);
     }
 
     private float GetFiringDelay()
@@ -96,6 +108,7 @@ public class Shottingscript : MonoBehaviour
         if (Input.GetMouseButton(0) && canShoot && !overheated && !reloading)
         {
             canShoot = false;
+            float multishotChance = Mathf.Clamp01(GetChanceModifier(StatNames.MultishotChance) / 100f);
 
             for (int i = 0; i < bulletPerShot; i++)
             {
@@ -109,6 +122,12 @@ public class Shottingscript : MonoBehaviour
                 }
 
                 Shoot();
+
+                // Each original projectile gets its own independent chance to
+                // create one extra projectile. A six-pellet shotgun can thus
+                // produce between six and twelve pellets without using extra ammo.
+                if (Random.value < multishotChance)
+                    Shoot();
             }
 
             // A multi-projectile weapon still fires one magazine round per
@@ -158,8 +177,8 @@ public class Shottingscript : MonoBehaviour
         if (bulletScript != null)
         {
             float rangeMultiplier = 1f + GetPercentModifier(StatNames.Range) / 100f;
-            float critChance = Mathf.Clamp01(GetPercentModifier(StatNames.CritChance) / 100f);
-            float critMultiplier = 2f * (1f + GetPercentModifier(StatNames.CritDamage) / 100f);
+            float critChance = Mathf.Clamp01(GetChanceModifier(StatNames.CritChance) / 100f);
+            float critMultiplier = 2f * (1f + GetChanceModifier(StatNames.CritDamage) / 100f);
             float lifestealChance = Mathf.Clamp01(GetPercentModifier(StatNames.LifestealChance) / 100f);
             float lifestealAmount = Mathf.Max(0f, GetPercentModifier(StatNames.LifestealAmount) / 100f);
 

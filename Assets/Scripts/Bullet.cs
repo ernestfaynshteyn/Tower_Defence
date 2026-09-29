@@ -141,7 +141,9 @@ public class Bullet : MonoBehaviour
 
             if (ownerHealth != null && lifestealAmount > 0f && Random.value < lifestealChance)
             {
-                ownerHealth.Heal(finalDamage * lifestealAmount);
+                // Lifesteal is intentionally based on the defeated target's
+                // maximum health, rather than shrinking with a weak hit.
+                ownerHealth.Heal(enemy.MaxHealth * lifestealAmount);
             }
 
             Destroy(gameObject);

@@ -34,9 +34,20 @@ public class WaveManager : MonoBehaviour
     void Awake()
     {
         if (Instance != null && Instance != this)
-            Destroy(gameObject);
+        {
+            // A duplicate manager must not delete unrelated components that
+            // happen to share its scene object.
+            Destroy(this);
+            return;
+        }
         else
             Instance = this;
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
     }
 
     void Start()

@@ -19,11 +19,13 @@ public class EnemyHealth : MonoBehaviour
     private float burnTickTimer;
     private const float burnTickInterval = 0.33f;
     public Animator animator;
+    public float MaxHealth { get; private set; }
     public float CurrentMoveSpeed => isDead || isStunned ? 0f : baseSpeed * slowMultiplier;
 
     private void Start()
     {
         ApplyDifficulty();
+        MaxHealth = health;
         baseSpeed = moveSpeed;
         RefreshMoveSpeed();
         if (animator == null)
@@ -61,7 +63,7 @@ public class EnemyHealth : MonoBehaviour
         {
             WaveManager.Instance.enemyleft -= 1;
         }
-        if (animator != null)
+        if (animator != null && HasAnimatorParameter(animator, "Die"))
         {
             animator.SetTrigger("Die");
         }
@@ -72,6 +74,17 @@ public class EnemyHealth : MonoBehaviour
         }
         moveSpeed = 0f;
         Destroy(gameObject, 1f);
+    }
+
+    private static bool HasAnimatorParameter(Animator targetAnimator, string parameterName)
+    {
+        foreach (AnimatorControllerParameter parameter in targetAnimator.parameters)
+        {
+            if (parameter.type == AnimatorControllerParameterType.Trigger && parameter.name == parameterName)
+                return true;
+        }
+
+        return false;
     }
     private void Update()
     {
