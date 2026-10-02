@@ -36,10 +36,17 @@ public class Shottingscript : MonoBehaviour
     private bool overheated = false;
     private bool canShoot = true;
     private bool reloading = false;
+    private AudioSource firingAudio;
+    private bool shotgunSound;
+    private float lastAudibleShot = float.NegativeInfinity;
 
     private void Start()
     {
         currentMag = maxMagSize;
+
+        firingAudio = BackgroundMusic.CreateSource(gameObject, true, 0.5f);
+        shotgunSound = name.ToLowerInvariant().Contains("shotgun");
+        firingAudio.clip = BackgroundMusic.WeaponLoop(false, name.ToLowerInvariant().Contains("minigun"));
 
         if (usingGrenades == null)
         {
@@ -56,6 +63,14 @@ public class Shottingscript : MonoBehaviour
     private void Update()
     {
         HandlingShooting();
+        bool sounding = Time.timeScale > 0f && Input.GetMouseButton(0) && !overheated && !reloading &&
+            (usingGrenades == null || !usingGrenades.isEquipped) &&
+            Time.time - lastAudibleShot <= Mathf.Max(0.1f, GetFiringDelay() * 1.5f);
+        if (firingAudio != null && !shotgunSound)
+        {
+            if (sounding && firingAudio.clip != null && !firingAudio.isPlaying) firingAudio.Play();
+            else if (!sounding && firingAudio.isPlaying) firingAudio.Stop();
+        }
         HealthBar.SetOverheat(currentHeat, MaxHeat);
     }
 
@@ -122,6 +137,11 @@ public class Shottingscript : MonoBehaviour
                 }
 
                 Shoot();
+                if (i == 0 && bulletPrefab != null)
+                {
+                    lastAudibleShot = Time.time;
+                    if (shotgunSound) BackgroundMusic.Shotgun();
+                }
 
                 // Each original projectile gets its own independent chance to
                 // create one extra projectile. A six-pellet shotgun can thus
@@ -202,6 +222,12 @@ public class Shottingscript : MonoBehaviour
     private void CanShot()
     {
         canShoot = true;
+    }
+
+    private void OnDisable()
+    {
+        if (firingAudio != null) firingAudio.Stop();
+        lastAudibleShot = float.NegativeInfinity;
     }
 
     private void Reload()

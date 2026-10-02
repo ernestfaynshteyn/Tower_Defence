@@ -347,6 +347,7 @@ public class UseGrenade : MonoBehaviour
 
     void Explode(Vector2 position, GrenadeType grenadeType)
     {
+        if (grenadeType == GrenadeType.Frag) BackgroundMusic.Explosion(false);
         float radius = GetModifiedStat(StatNames.ThrowableRadius, explosionRadius);
         float damage = GetModifiedStat(StatNames.ThrowableDamage, explosionDamage);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(position, radius, enemyLayer);

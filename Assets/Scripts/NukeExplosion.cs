@@ -63,6 +63,7 @@ public class NukeExplosion : MonoBehaviour
             return;
 
         hasDetonated = true;
+        BackgroundMusic.Explosion(true);
         if (spriteRenderer != null)
             spriteRenderer.enabled = false;
 

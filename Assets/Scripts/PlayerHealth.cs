@@ -30,8 +30,6 @@ public class PlayerHealth : MonoBehaviour
         if (GetComponent<RangeIndicatorScaler>() == null)
             gameObject.AddComponent<RangeIndicatorScaler>();
 
-        if (GetComponent<SlimeUiSkin>() == null)
-            gameObject.AddComponent<SlimeUiSkin>();
     }
 
     private void OnEnable()

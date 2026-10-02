@@ -57,6 +57,7 @@ public class GlobalData : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
         }
         else
         {

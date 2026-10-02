@@ -37,6 +37,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (isDead) return;
         health -= damage;
+        if (damage > 0f && health > 0f) BackgroundMusic.EnemyHit(false);
         Debug.Log(gameObject.name + " took " + damage + " damage. Health: " + health);
         CheckForHealth();
     }
@@ -55,6 +56,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
+        BackgroundMusic.EnemyHit(true);
         if (CurrencyManager.Instance != null)
         {
             CurrencyManager.Instance.AddMoney(moneyReward);

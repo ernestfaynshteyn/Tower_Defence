@@ -103,6 +103,7 @@ public class WaveManager : MonoBehaviour
     IEnumerator NextWaveRoutine()
     {
         isWaveActive = false;
+        BackgroundMusic.WaveEnded();
 
         yield return new WaitForSeconds(timeBetweenWaves);
 
@@ -160,6 +161,7 @@ public class WaveManager : MonoBehaviour
 
     void StartWave()
     {
+        BackgroundMusic.WaveStarted(IsBossWave);
         if (waveTitle == null)
         {
             Debug.LogWarning("WaveManager has no wave title assigned.", this);

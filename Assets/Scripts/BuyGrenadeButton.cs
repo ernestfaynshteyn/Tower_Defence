@@ -7,5 +7,6 @@ public class BuyGrenadeButton : MonoBehaviour
     public void BuyGrenade()
     {
         Inventory.instance.AddGrenade(grenadeToBuy);
+        BackgroundMusic.Purchase();
     }
 }

@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1001}
+  - component: {fileID: 1002}
+  m_Layer: 0
+  m_Name: GameAudio
+  m_TagString: Untagged
+  m_IsActive: 1
+--- !u!4 &1001
+Transform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &1002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 579a6172831bfad44892d27a401cf9e9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  music: {fileID: 8300000, guid: d18ff662fecffa14298a17f9dc77da0e, type: 3}
+  bossMusic: {fileID: 8300000, guid: fd05bffcfeb0c244187945328df2d58a, type: 3}
+  bossEncounter: {fileID: 8300000, guid: ad12f336ab0e6ed48a7aa51c5f2a1821, type: 3}
+  wave: {fileID: 8300000, guid: f143c8b5d8136e2479e08d8b66b8d3c1, type: 3}
+  purchase: {fileID: 8300000, guid: a3229d269a1d0624ea7cab26eea0be68, type: 3}
+  hover: {fileID: 8300000, guid: 1955c705816a40147aeb765050f7edfc, type: 3}
+  hit: {fileID: 8300000, guid: 1cbc55f7c74f21246aedd659fa8869b6, type: 3}
+  death: {fileID: 8300000, guid: 75954bcfcc60ceb458669daed56281eb, type: 3}
+  frag: {fileID: 8300000, guid: 5bf87cad3375f134792c0ce7ab8a4831, type: 3}
+  nuke: {fileID: 8300000, guid: 9c503d557ee67614a831a133bb7a7cab, type: 3}
+  shotgun: {fileID: 8300000, guid: 2015ac2c5695f9d40b8f1cd75c9f91b7, type: 3}
+  ak: {fileID: 8300000, guid: 4be2163c4b9c6824a83a7879c645e88c, type: 3}
+  minigun: {fileID: 8300000, guid: a9a1ecad09e94aa44b481976d360b7b3, type: 3}
+  flame: {fileID: 8300000, guid: 02b6eb523f4091140bd803aaf938a296, type: 3}

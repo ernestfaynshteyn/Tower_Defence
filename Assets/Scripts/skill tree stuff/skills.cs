@@ -177,6 +177,7 @@ public class skills : MonoBehaviour
         }
 
         level++;
+        BackgroundMusic.Purchase();
         ApplyEffects();
         OnSkillChanged?.Invoke(this);
     }

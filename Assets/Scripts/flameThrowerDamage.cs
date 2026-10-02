@@ -13,6 +13,7 @@ public class flameThrowerDamage : MonoBehaviour
     [SerializeField] private float burnDamage = 2f;
     public UseGrenade grenade;
     private bool overheated = false;
+    private AudioSource firingAudio;
     private ParticleSystem[] flameParticles;
     private ParticleSystem.MinMaxCurve[] baseStartLifetimes;
 
@@ -34,16 +35,26 @@ public class flameThrowerDamage : MonoBehaviour
 
     private void OnDisable()
     {
+        if (firingAudio != null) firingAudio.Stop();
         PlayerStats.OnStatChanged -= HandleStatChanged;
     }
 
     private void Start()
     {
+        firingAudio = BackgroundMusic.CreateSource(gameObject, true, 0.5f);
+        firingAudio.clip = BackgroundMusic.WeaponLoop(true, false);
         RefreshParticleLifetime();
     }
     void Update()
     {
         HandleFlamethrower();
+        bool sounding = Time.timeScale > 0f && Input.GetMouseButton(0) && !overheated &&
+            (grenade == null || !grenade.isEquipped);
+        if (firingAudio != null)
+        {
+            if (sounding && firingAudio.clip != null && !firingAudio.isPlaying) firingAudio.Play();
+            else if (!sounding && firingAudio.isPlaying) firingAudio.Stop();
+        }
         HealthBar.SetOverheat(currentHeat, maxHeat);
     }
     private void HandleFlamethrower()
