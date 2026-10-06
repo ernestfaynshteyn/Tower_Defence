@@ -349,6 +349,13 @@ public class UseGrenade : MonoBehaviour
     {
         if (grenadeType == GrenadeType.Frag) BackgroundMusic.Explosion(false);
         float radius = GetModifiedStat(StatNames.ThrowableRadius, explosionRadius);
+        if (grenadeType == GrenadeType.Smoke)
+            BackgroundMusic.SmokeStarted(position, smokeAreaDuration);
+        else if (grenadeType == GrenadeType.Molotov)
+            BackgroundMusic.MolotovStarted(position, GetModifiedStat(StatNames.BurnDuration, molotovBurnDuration));
+        else if (grenadeType == GrenadeType.Flash)
+            BackgroundMusic.FlashStarted(position, GetModifiedStat(StatNames.FlashDuration, stunDuration));
+
         float damage = GetModifiedStat(StatNames.ThrowableDamage, explosionDamage);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(position, radius, enemyLayer);
 

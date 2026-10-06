@@ -133,6 +133,7 @@ public class Shottingscript : MonoBehaviour
                 {
                     currentHeat = MaxHeat;
                     overheated = true;
+                    BackgroundMusic.Overheated(false);
                     return;
                 }
 
@@ -157,6 +158,7 @@ public class Shottingscript : MonoBehaviour
             if (currentMag <= 0)
             {
                 reloading = true;
+                BackgroundMusic.Reload();
                 Invoke(nameof(Reload), GetReloadTime());
             }
 

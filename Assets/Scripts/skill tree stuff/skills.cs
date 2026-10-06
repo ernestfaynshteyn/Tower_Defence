@@ -171,6 +171,7 @@ public class skills : MonoBehaviour
         int cost = NextCost;
         if (!CurrencyBridge.Spend(cost))
         {
+            BackgroundMusic.PurchaseDenied();
             Debug.Log($"[{name}] not enough currency ({CurrencyBridge.Current}/{cost}).");
             Refresh();
             return;

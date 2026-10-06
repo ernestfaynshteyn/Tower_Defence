@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier:
   fallHeight: 12
-  fallDuration: 0.65
+  fallDuration: 3
   blastVisualRadius: 12
   blastVisualDuration: 0.65
   explosionEffect: {fileID: 4340095826868270019, guid: 53b2ac7e418cd9d40844d081a972bea0, type: 3}

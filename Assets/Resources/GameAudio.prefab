@@ -34,7 +34,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier:
   music: {fileID: 8300000, guid: d18ff662fecffa14298a17f9dc77da0e, type: 3}
-  bossMusic: {fileID: 8300000, guid: fd05bffcfeb0c244187945328df2d58a, type: 3}
+  bossMusic: {fileID: 8300000, guid: a6d6a2bd04579bb47808471ef5bcafd4, type: 3}
   bossEncounter: {fileID: 8300000, guid: ad12f336ab0e6ed48a7aa51c5f2a1821, type: 3}
   wave: {fileID: 8300000, guid: f143c8b5d8136e2479e08d8b66b8d3c1, type: 3}
   purchase: {fileID: 8300000, guid: a3229d269a1d0624ea7cab26eea0be68, type: 3}
@@ -47,3 +47,15 @@ MonoBehaviour:
   ak: {fileID: 8300000, guid: 4be2163c4b9c6824a83a7879c645e88c, type: 3}
   minigun: {fileID: 8300000, guid: a9a1ecad09e94aa44b481976d360b7b3, type: 3}
   flame: {fileID: 8300000, guid: 02b6eb523f4091140bd803aaf938a296, type: 3}
+  playerHurt: {fileID: 8300000, guid: e3d657dd7a1b4294978681469c086d9a, type: 3}
+  playerDeath: {fileID: 8300000, guid: dfbe3c3c67670c24db4b6c7fd60da45c, type: 3}
+  purchaseDenied: {fileID: 8300000, guid: 840ae28205bd4fbca8dc34783891a1c7, type: 3}
+  buttonClick: {fileID: 8300000, guid: fbc6b78746c009940af16ff66cb9e2f9, type: 3}
+  reload: {fileID: 8300000, guid: 5e53551685263f94a87fceb2a1b3e5ac, type: 3}
+  gunOverheatStart: {fileID: 8300000, guid: ee9d0c2325b6f1242a2137be5f01122f, type: 3}
+  flameOverheatStart: {fileID: 8300000, guid: 7d4461fccd50d56409bed4ed32a4c9a7, type: 3}
+  overheatSound: {fileID: 8300000, guid: d9c8efabcf896034ea88471149cf83f9, type: 3}
+  smokeStart: {fileID: 8300000, guid: af64986937df05243b591b354f99d1c9, type: 3}
+  smokeLoop: {fileID: 8300000, guid: 20cba46bd34b3c0458c98710a2848b8a, type: 3}
+  molotovLoop: {fileID: 8300000, guid: 78613df50b5de3743afd03e5e828655b, type: 3}
+  flashRinging: {fileID: 8300000, guid: bcdde637e7c84d041b860452d6b31b28, type: 3}

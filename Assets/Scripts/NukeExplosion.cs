@@ -10,7 +10,7 @@ public class NukeExplosion : MonoBehaviour
 {
     [Header("Impact")]
     [SerializeField, Min(0f)] private float fallHeight = 12f;
-    [SerializeField, Min(0.05f)] private float fallDuration = 0.65f;
+    [SerializeField, Min(0.05f)] private float fallDuration = 3f;
     [SerializeField, Min(0.1f)] private float blastVisualRadius = 12f;
     [SerializeField, Min(0.05f)] private float blastVisualDuration = 0.65f;
 
@@ -30,6 +30,7 @@ public class NukeExplosion : MonoBehaviour
 
         hasLaunched = true;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        BackgroundMusic.Explosion(true);
         StartCoroutine(FallAndDetonate(targetPosition));
     }
 
@@ -63,7 +64,6 @@ public class NukeExplosion : MonoBehaviour
             return;
 
         hasDetonated = true;
-        BackgroundMusic.Explosion(true);
         if (spriteRenderer != null)
             spriteRenderer.enabled = false;
 

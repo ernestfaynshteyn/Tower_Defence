@@ -70,6 +70,7 @@ public class flameThrowerDamage : MonoBehaviour
             {
                 currentHeat = maxHeat;
                 overheated = true;
+                BackgroundMusic.Overheated(true);
                 if (particle != null)
                     particle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
             }

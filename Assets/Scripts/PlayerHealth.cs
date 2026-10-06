@@ -75,6 +75,8 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
 
+        BackgroundMusic.PlayerHurt();
+
         float remainingDamage = damage;
 
         if (defenceUnlocked && currentDefence > 0f)
@@ -109,6 +111,7 @@ public class PlayerHealth : MonoBehaviour
         if (!isDefeated && currentHealth <= 0.01f)
         {
             isDefeated = true;
+            BackgroundMusic.PlayerDeath();
             if (GlobalData.Instance != null)
             {
                 GlobalData.Instance.lastEnemyThatKilledPlayer = enemyID;
