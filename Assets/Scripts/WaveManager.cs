@@ -16,11 +16,12 @@ public class WaveManager : MonoBehaviour
     public float timeBetweenWaves = 5f;
 
     [Header("Enemy Growth")]
-    [Min(1.01f)] public float enemyGrowthMultiplier = 2.1f;
+    [Min(1.01f)] public float enemyGrowthMultiplier = 1.2f;
+    [Min(1)] public int maxEnemiesPerWave = 200;
 
     [Header("Boss Waves")]
     public int bossWaveInterval = 5; // every X waves
-    public bool IsBossWave => currentWave % bossWaveInterval == 0;
+    public bool IsBossWave => currentWave % Mathf.Max(1, bossWaveInterval) == 0;
 
     [Header("UI")]
     public GameObject waveTitle;
@@ -144,7 +145,8 @@ public class WaveManager : MonoBehaviour
         int completedWaveCount = Mathf.Max(0, currentWave - 1);
         float growthMultiplier = Mathf.Max(1.01f, enemyGrowthMultiplier);
         float enemyCount = baseEnemyNeeded * Mathf.Pow(growthMultiplier, completedWaveCount);
-        return Mathf.Max(1, Mathf.CeilToInt(enemyCount));
+        int cap = Mathf.Max(1, maxEnemiesPerWave);
+        return Mathf.Clamp(Mathf.CeilToInt(Mathf.Min(enemyCount, cap)), 1, cap);
     }
 
     int GetWaveReward()

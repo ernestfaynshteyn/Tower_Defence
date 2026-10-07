@@ -102,6 +102,9 @@ public class Bullet : MonoBehaviour
 
         speed = newSpeed;
         maxDistance = newMaxDistance;
+        // Keep the safety lifetime from cutting off a projectile before its
+        // upgraded travel distance has been reached.
+        lifeTime = Mathf.Max(lifeTime, maxDistance / Mathf.Max(0.01f, speed) + 0.5f);
         critChance = Mathf.Clamp01(newCritChance);
         critMultiplier = Mathf.Max(1f, newCritMultiplier);
         lifestealChance = Mathf.Clamp01(newLifestealChance);

@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 15% more Molotov damage.
+  m_text: 15% more Molotov damage per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: More Damage
+  m_text: Greater Molotov Damage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3030,25 +3030,6 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 19801364, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
   m_PrefabInstance: {fileID: 609256761}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &107088333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107088324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0fe0a5173688994d9eec03772247d84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 1618587571}
-  currentHeat: 0
-  maxHeat: 100
-  heatPerShot: 10
-  holdHeatPerSecond: 25
-  coolingRate: 10
-  isOverheated: 0
 --- !u!1 &109404938
 GameObject:
   m_ObjectHideFlags: 0
@@ -3095,7 +3076,7 @@ MonoBehaviour:
   effects:
   - statName: DefenceUnlocked
     modifierType: 0
-    value: 50
+    value: 1
     perLevel: 0
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -6499,7 +6480,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: More damage
+  m_text: Throwable Damage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10461,9 +10442,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 182542, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
       insertIndex: -1
       addedObject: {fileID: 107088329}
-    - targetCorrespondingSourceObject: {fileID: 182542, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 107088333}
   m_SourcePrefab: {fileID: 100100000, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
 --- !u!1 &617335158
 GameObject:
@@ -12416,7 +12394,6 @@ GameObject:
   m_Component:
   - component: {fileID: 755501271}
   - component: {fileID: 755501270}
-  - component: {fileID: 755501272}
   - component: {fileID: 755501273}
   m_Layer: 0
   m_Name: GameManager
@@ -12452,20 +12429,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &755501272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 755501269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d62fd58fff16694b99f8d75b7dc5d05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CurrencyManager
-  money: 1000000
-  moneyText: {fileID: 1502003754}
 --- !u!114 &755501273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12606,7 +12569,7 @@ MonoBehaviour:
     clampMax: 0
     maxValue: 0
   - statName: Defence
-    baseValue: 50
+    baseValue: 20
     clampMin: 0
     minValue: 0
     clampMax: 0
@@ -12642,7 +12605,7 @@ MonoBehaviour:
     clampMax: 0
     maxValue: 0
   changeEpsilon: 0.0001
-  logChanges: 1
+  logChanges: 0
 --- !u!1 &756677818
 GameObject:
   m_ObjectHideFlags: 0
@@ -14522,7 +14485,7 @@ MonoBehaviour:
   effects:
   - statName: PizzaUnlocked
     modifierType: 0
-    value: 20
+    value: 1
     perLevel: 0
   autoWireButton: 1
   iconImage: {fileID: 0}
@@ -14686,7 +14649,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Defensive Training
+  m_text: Defense Capacity
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15772,6 +15735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grenadeToBuy: 2
+  cost: 50
 --- !u!114 &971941298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17290,7 +17254,7 @@ MonoBehaviour:
   - skill: {fileID: 561743386}
     requiredLevel: 1
   effects:
-  - statName: PizzaDamage
+  - statName: ThrowableDamage
     modifierType: 1
     value: 10
     perLevel: 1
@@ -18027,7 +17991,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 20 more defense.
+  m_text: 20 more defense per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -19418,7 +19382,6 @@ GameObject:
   - component: {fileID: 1195026329}
   - component: {fileID: 1195026331}
   - component: {fileID: 1195026330}
-  - component: {fileID: 2100000001}
   m_Layer: 5
   m_Name: defence bar
   m_TagString: Untagged
@@ -19461,6 +19424,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1195026331}
+  valueLabel: {fileID: 180898153}
+  labelOffset: {x: 12, y: 0}
+  labelSize: {x: 120, y: 32}
+  labelFontSize: 18
+  labelColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1195026331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19702,6 +19670,7 @@ MonoBehaviour:
   enemyleft: 10
   timeBetweenWaves: 5
   enemyGrowthMultiplier: 1.2
+  maxEnemiesPerWave: 200
   bossWaveInterval: 10
   waveTitle: {fileID: 1530473203}
 --- !u!114 &1213449532
@@ -20780,6 +20749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grenadeToBuy: 1
+  cost: 50
 --- !u!114 &1240688694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21319,7 +21289,6 @@ GameObject:
   - component: {fileID: 1280893710}
   - component: {fileID: 1280893712}
   - component: {fileID: 1280893711}
-  - component: {fileID: 2100000002}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -21362,6 +21331,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1280893712}
+  valueLabel: {fileID: 2100766482}
+  labelOffset: {x: 12, y: 0}
+  labelSize: {x: 120, y: 32}
+  labelFontSize: 18
+  labelColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1280893712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25855,7 +25829,6 @@ GameObject:
   - component: {fileID: 1618587569}
   - component: {fileID: 1618587571}
   - component: {fileID: 2100000004}
-  - component: {fileID: 2100000003}
   m_Layer: 5
   m_Name: overheat Bar
   m_TagString: Untagged
@@ -25950,6 +25923,10 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   slider: {fileID: 1618587571}
   valueLabel: {fileID: 1570471446}
+  labelOffset: {x: 12, y: 0}
+  labelSize: {x: 120, y: 32}
+  labelFontSize: 18
+  labelColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1620973408
 GameObject:
   m_ObjectHideFlags: 0
@@ -30573,7 +30550,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10% more Pulsar damage per level.
+  m_text: 10% more frag damage per level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -30787,26 +30764,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6530306941374269524, guid: 8e0c64d535e13ac4fa2aabcd7b8bba3c, type: 3}
   m_PrefabInstance: {fileID: 2401638049824429357}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1829394159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530473203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6684c249d2c47c44b91c631a6da1afd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
-  currentWave: 1
-  enemyNeeded: 0
-  enemySpawned: 0
-  enemyleft: 0
-  timeBetweenWaves: 5
-  enemyGrowthMultiplier: 2.1
-  bossWaveInterval: 10
-  waveTitle: {fileID: 393800231405178202, guid: 8e0c64d535e13ac4fa2aabcd7b8bba3c, type: 3}
 --- !u!1 &1831078874
 GameObject:
   m_ObjectHideFlags: 0
@@ -31244,6 +31201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grenadeToBuy: 3
+  cost: 50
 --- !u!114 &1848936740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33916,42 +33874,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.23090494, y: 0.14597005}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2100000001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1195026328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7c54a66793d4f74b07f6c2687f9f79a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2100000002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1280893709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7c54a66793d4f74b07f6c2687f9f79a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2100000003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1618587568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7c54a66793d4f74b07f6c2687f9f79a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2100000010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34661,7 +34583,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: More damage
+  m_text: Pulsar Ring Damage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -34813,6 +34735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grenadeToBuy: 0
+  cost: 50
 --- !u!114 &2143935751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35037,10 +34960,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minigun
       objectReference: {fileID: 0}
-    - target: {fileID: 9052052166710257786, guid: de32a8f7e3d8f3a4fac88a2b4b4df2a8, type: 3}
-      propertyPath: slider
-      value: 
-      objectReference: {fileID: 1618587571}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -35154,10 +35073,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 393800231405178202, guid: 8e0c64d535e13ac4fa2aabcd7b8bba3c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1829394159}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e0c64d535e13ac4fa2aabcd7b8bba3c, type: 3}
 --- !u!1001 &6550360930661843659
 PrefabInstance:
@@ -35288,10 +35204,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 735492693}
     m_Modifications:
-    - target: {fileID: 3009248160060134124, guid: 9c7c0437db7c91e4bb0795fac58566a5, type: 3}
-      propertyPath: slider
-      value: 
-      objectReference: {fileID: 1618587571}
     - target: {fileID: 5132126697532426273, guid: 9c7c0437db7c91e4bb0795fac58566a5, type: 3}
       propertyPath: firingPoint
       value: 

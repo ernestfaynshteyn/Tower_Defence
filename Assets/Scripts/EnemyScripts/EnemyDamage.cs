@@ -25,6 +25,9 @@ public class EnemyDamage : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            if (playerHealth == null)
+                return;
+
             if (nextDamageTimer >= damageRate)
             {
                 nextDamageTimer = 0;
@@ -40,28 +43,32 @@ public class EnemyDamage : MonoBehaviour
 
     void ApplyDifficulty()
     {
+        float damageMultiplier = 1f;
+        float rateMultiplier = 1f;
+
         switch (GlobalData.ActiveDifficulty)
         {
             case Difficulty.Easy:
-                damageAmount = 7;
-                damageRate = 1.2f;
+                damageMultiplier = 0.7f;
+                rateMultiplier = 1.2f;
                 break;
 
             case Difficulty.Normal:
-                damageAmount = 10;
-                damageRate = 1f;
                 break;
 
             case Difficulty.Hard:
-                damageAmount = 13;
-                damageRate = 0.8f;
+                damageMultiplier = 1.3f;
+                rateMultiplier = 0.8f;
                 break;
 
             case Difficulty.Extreme:
-                damageAmount = 15;
-                damageRate = 0.6f;
+                damageMultiplier = 1.5f;
+                rateMultiplier = 0.6f;
                 break;
         }
+
+        damageAmount = Mathf.Max(0, Mathf.RoundToInt(damageAmount * damageMultiplier));
+        damageRate = Mathf.Max(0.05f, damageRate * rateMultiplier);
     }
 }
 

@@ -34,8 +34,9 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier:
   music: {fileID: 8300000, guid: d18ff662fecffa14298a17f9dc77da0e, type: 3}
-  bossMusic: {fileID: 8300000, guid: a6d6a2bd04579bb47808471ef5bcafd4, type: 3}
+  bossMusic: {fileID: 8300000, guid: fd05bffcfeb0c244187945328df2d58a, type: 3}
   bossEncounter: {fileID: 8300000, guid: ad12f336ab0e6ed48a7aa51c5f2a1821, type: 3}
+  bossDefeat: {fileID: 8300000, guid: a6d6a2bd04579bb47808471ef5bcafd4, type: 3}
   wave: {fileID: 8300000, guid: f143c8b5d8136e2479e08d8b66b8d3c1, type: 3}
   purchase: {fileID: 8300000, guid: a3229d269a1d0624ea7cab26eea0be68, type: 3}
   hover: {fileID: 8300000, guid: 1955c705816a40147aeb765050f7edfc, type: 3}

@@ -10,6 +10,10 @@ public class EnemyHealth : MonoBehaviour
     [Range(0f, 1f)] public float stunResistance = 0f;
     [Range(0f, 1f)] public float burnResistance = 0f;
     public int moneyReward = 10;
+    [Tooltip("Boss enemies use the boss-defeat sound when they die.")]
+    public bool isBoss;
+    [Tooltip("Enable only while diagnosing damage calculations. Per-hit logging is expensive.")]
+    public bool logDamage;
     private float baseSpeed;
     private float slowMultiplier = 1f;
     private bool isStunned;
@@ -38,7 +42,8 @@ public class EnemyHealth : MonoBehaviour
         if (isDead) return;
         health -= damage;
         if (damage > 0f && health > 0f) BackgroundMusic.EnemyHit(false);
-        Debug.Log(gameObject.name + " took " + damage + " damage. Health: " + health);
+        if (logDamage)
+            Debug.Log(gameObject.name + " took " + damage + " damage. Health: " + health);
         CheckForHealth();
     }
     private void CheckForHealth()
@@ -56,7 +61,10 @@ public class EnemyHealth : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
-        BackgroundMusic.EnemyHit(true);
+        if (isBoss)
+            BackgroundMusic.BossDefeated();
+        else
+            BackgroundMusic.EnemyHit(true);
         if (CurrencyManager.Instance != null)
         {
             CurrencyManager.Instance.AddMoney(moneyReward);
@@ -179,24 +187,30 @@ public class EnemyHealth : MonoBehaviour
     }
     private void ApplyDifficulty()
     {
+        float healthMultiplier = 1f;
+        float speedMultiplier = 1f;
+
         switch (GlobalData.ActiveDifficulty)
         {
             case Difficulty.Easy:
-                health = 75f;
-                moveSpeed = 2f;
+                healthMultiplier = 0.75f;
+                speedMultiplier = 0.8f;
                 break;
             case Difficulty.Normal:
-                health = 100f;
-                moveSpeed = 2.5f;
                 break;
             case Difficulty.Hard:
-                health = 125f;
-                moveSpeed = 3f;
+                healthMultiplier = 1.25f;
+                speedMultiplier = 1.15f;
                 break;
             case Difficulty.Extreme:
-                health = 150f;
-                moveSpeed = 2f;
+                healthMultiplier = 1.5f;
+                speedMultiplier = 1.3f;
                 break;
         }
+
+        // Scale each prefab's authored stats so blue/green/red enemies and
+        // bosses keep their intended differences on every difficulty.
+        health = Mathf.Max(1f, health * healthMultiplier);
+        moveSpeed = Mathf.Max(0f, moveSpeed * speedMultiplier);
     }
 }

@@ -9,7 +9,8 @@ using UnityEngine;
 // -----------------------------------------------------------------------------
 
 /// <summary>
-/// Authored base value for one stat, before any skill-tree modifiers.
+/// Optional authored base used by Get(). Gameplay systems that call
+/// GetModifiedValue(statName, suppliedBase) use their own component value.
 /// </summary>
 [Serializable]
 public class StatDefinition
@@ -17,7 +18,7 @@ public class StatDefinition
     [Tooltip("Must match the statName used by SkillEffect, e.g. \"Damage\".")]
     public string statName = "";
 
-    [Tooltip("The value with zero skill levels bought.")]
+    [Tooltip("Base used by PlayerStats.Get(). Systems using GetModifiedValue supply their own base instead.")]
     public float baseValue = 0f;
 
     [Tooltip("Floor the final value. Useful for cooldowns that must never reach 0.")]
@@ -46,8 +47,8 @@ public class PlayerStats : MonoBehaviour
     /// <summary>Raised once per frame per stat whose final value actually moved. (statName, oldValue, newValue)</summary>
     public static event Action<string, float, float> OnStatChanged;
 
-    [Header("Base values")]
-    [Tooltip("One entry per stat. A stat queried but not listed here is treated as base 0.")]
+    [Header("Defaults for Get()")]
+    [Tooltip("Used by Get(). Weapon/player components may intentionally supply their own base through GetModifiedValue.")]
     public List<StatDefinition> statDefinitions = new List<StatDefinition>();
 
     [Header("Behaviour")]

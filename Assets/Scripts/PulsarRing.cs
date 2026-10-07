@@ -163,7 +163,11 @@ public class PulsarRing : MonoBehaviour
 
     private void PulseEnemies()
     {
-        int hitCount = Physics2D.OverlapCircleNonAlloc(transform.position, radius, overlapResults);
+        int hitCount = Physics2D.OverlapCircle(
+            transform.position,
+            radius,
+            ContactFilter2D.noFilter,
+            overlapResults);
         if (hitCount <= 0)
             return;
 

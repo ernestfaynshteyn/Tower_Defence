@@ -16,6 +16,8 @@ public class flameThrowerDamage : MonoBehaviour
     private AudioSource firingAudio;
     private ParticleSystem[] flameParticles;
     private ParticleSystem.MinMaxCurve[] baseStartLifetimes;
+    private PolygonCollider2D flameCollider;
+    private Vector2[][] baseColliderPaths;
 
     private void Awake()
     {
@@ -26,6 +28,14 @@ public class flameThrowerDamage : MonoBehaviour
         baseStartLifetimes = new ParticleSystem.MinMaxCurve[flameParticles.Length];
         for (int i = 0; i < flameParticles.Length; i++)
             baseStartLifetimes[i] = flameParticles[i].main.startLifetime;
+
+        flameCollider = GetComponent<PolygonCollider2D>();
+        if (flameCollider != null)
+        {
+            baseColliderPaths = new Vector2[flameCollider.pathCount][];
+            for (int i = 0; i < flameCollider.pathCount; i++)
+                baseColliderPaths[i] = flameCollider.GetPath(i);
+        }
     }
 
     private void OnEnable()
@@ -43,7 +53,7 @@ public class flameThrowerDamage : MonoBehaviour
     {
         firingAudio = BackgroundMusic.CreateSource(gameObject, true, 0.5f);
         firingAudio.clip = BackgroundMusic.WeaponLoop(true, false);
-        RefreshParticleLifetime();
+        RefreshRange();
     }
     void Update()
     {
@@ -59,7 +69,8 @@ public class flameThrowerDamage : MonoBehaviour
     }
     private void HandleFlamethrower()
     {
-        bool firing = Input.GetMouseButton(0);
+        bool firing = Input.GetMouseButton(0) &&
+            (grenade == null || !grenade.isEquipped);
         // FIRING
         if (firing && !overheated)
         {
@@ -93,7 +104,7 @@ public class flameThrowerDamage : MonoBehaviour
     {
         if (!Input.GetMouseButton(0) || overheated)
             return;
-        EnemyHealth enemy = collision.GetComponent<EnemyHealth>();
+        EnemyHealth enemy = collision.GetComponentInParent<EnemyHealth>();
         if (enemy != null && (grenade == null || !grenade.isEquipped))
         {
             // Direct damage while inside the flame
@@ -116,15 +127,16 @@ public class flameThrowerDamage : MonoBehaviour
 
     private void HandleStatChanged(string statName, float oldValue, float newValue)
     {
-        if (statName == StatNames.BurnDuration)
-            RefreshParticleLifetime();
+        if (statName == StatNames.Range)
+            RefreshRange();
     }
 
-    private void RefreshParticleLifetime()
+    private void RefreshRange()
     {
-        float durationMultiplier = PlayerStats.instance != null
-            ? 1f + PlayerStats.instance.GetPercentModifier(StatNames.BurnDuration) / 100f
+        float rangeMultiplier = PlayerStats.instance != null
+            ? 1f + PlayerStats.instance.GetPercentModifier(StatNames.Range) / 100f
             : 1f;
+        rangeMultiplier = Mathf.Max(0.01f, rangeMultiplier);
 
         for (int i = 0; i < flameParticles.Length; i++)
         {
@@ -135,20 +147,34 @@ public class flameThrowerDamage : MonoBehaviour
             switch (lifetime.mode)
             {
                 case ParticleSystemCurveMode.Constant:
-                    lifetime.constant *= durationMultiplier;
+                    lifetime.constant *= rangeMultiplier;
                     break;
                 case ParticleSystemCurveMode.TwoConstants:
-                    lifetime.constantMin *= durationMultiplier;
-                    lifetime.constantMax *= durationMultiplier;
+                    lifetime.constantMin *= rangeMultiplier;
+                    lifetime.constantMax *= rangeMultiplier;
                     break;
                 case ParticleSystemCurveMode.Curve:
                 case ParticleSystemCurveMode.TwoCurves:
-                    lifetime.curveMultiplier *= durationMultiplier;
+                    lifetime.curveMultiplier *= rangeMultiplier;
                     break;
             }
 
             ParticleSystem.MainModule main = flameParticles[i].main;
             main.startLifetime = lifetime;
+        }
+
+        // Match the damaging cone to the visible flame. Only the local forward
+        // axis grows, so wider range does not also make the flame unnaturally wide.
+        if (flameCollider != null && baseColliderPaths != null)
+        {
+            for (int pathIndex = 0; pathIndex < baseColliderPaths.Length; pathIndex++)
+            {
+                Vector2[] points = (Vector2[])baseColliderPaths[pathIndex].Clone();
+                for (int pointIndex = 0; pointIndex < points.Length; pointIndex++)
+                    points[pointIndex].x *= rangeMultiplier;
+
+                flameCollider.SetPath(pathIndex, points);
+            }
         }
     }
 }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4789078679574231205}
   - component: {fileID: 6246017183279194712}
-  - component: {fileID: 9052052166710257786}
   m_Layer: 0
   m_Name: Minigun
   m_TagString: Untagged
@@ -40,38 +39,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6898963308910696002}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 547fe388d9ce20e408a5073093e42b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3328988234981050647, guid: a023bf2382cc0b74d9c4aaa9db16e76c, type: 3}
   firingPoint: {fileID: 0}
-  firingrate: 1e-11
-  spread: 10
-  bulletPerShot: 12
+  firingrate: 0.08
+  spread: 0.2
+  bulletPerShot: 1
   currentHeat: 0
-  HeatPerSec: 0
-  coolingRate: 0
+  HeatPerSec: 2
+  coolingRate: 20
   maxMagSize: 100
   currentMag: 100
-  reloadTime: 0
---- !u!114 &9052052166710257786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6898963308910696002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0fe0a5173688994d9eec03772247d84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 0}
-  currentHeat: 0
-  maxHeat: 100
-  heatPerShot: 10
-  holdHeatPerSecond: 30
-  coolingRate: 25
-  isOverheated: 0
+  reloadTime: 2.5

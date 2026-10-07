@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6870040113770278705}
   - component: {fileID: 5132126697532426273}
-  - component: {fileID: 3009248160060134124}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -40,7 +39,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5603299098213124397}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 547fe388d9ce20e408a5073093e42b21, type: 3}
   m_Name: 
@@ -51,27 +50,8 @@ MonoBehaviour:
   spread: 0.5
   bulletPerShot: 12
   currentHeat: 0
-  HeatPerSec: 0
-  coolingRate: 0
+  HeatPerSec: 15
+  coolingRate: 25
   maxMagSize: 6
   currentMag: 0
   reloadTime: 1
---- !u!114 &3009248160060134124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5603299098213124397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0fe0a5173688994d9eec03772247d84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 0}
-  currentHeat: 0
-  maxHeat: 100
-  heatPerShot: 10
-  holdHeatPerSecond: 30
-  coolingRate: 25
-  isOverheated: 0

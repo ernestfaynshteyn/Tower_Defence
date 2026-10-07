@@ -1,30 +1,66 @@
-    
-
 using UnityEngine;
-using UnityEngine.UI; // Required for accessing UI components
+using UnityEngine.UI;
 using TMPro;
 
+[ExecuteAlways]
+[DisallowMultipleComponent]
+[RequireComponent(typeof(Slider))]
 public class HealthBar : MonoBehaviour
 {
     public Slider slider;
 
+    [Header("Value Label")]
     [SerializeField] private TMP_Text valueLabel;
+    [SerializeField] private Vector2 labelOffset = new Vector2(12f, 0f);
+    [SerializeField] private Vector2 labelSize = new Vector2(120f, 32f);
+    [Min(1f)] [SerializeField] private float labelFontSize = 18f;
+    [SerializeField] private Color labelColor = Color.white;
+
+    private float displayedValue = float.NaN;
+    private float displayedMaxValue = float.NaN;
 
     /// <summary>The single HUD bar used by the currently equipped weapon.</summary>
     public static HealthBar OverheatBar { get; private set; }
 
     private void Awake()
     {
-        if (slider == null)
-            slider = GetComponent<Slider>();
-
-        if (valueLabel == null)
-            valueLabel = GetComponentInChildren<TMP_Text>(true);
+        FindReferences();
+        ApplyLabelAppearanceAndLayout();
 
         if (gameObject.name == "overheat Bar")
             OverheatBar = this;
 
         RefreshLabel();
+    }
+
+    private void OnEnable()
+    {
+        FindReferences();
+        ApplyLabelAppearanceAndLayout();
+        RefreshLabel();
+    }
+
+    private void OnValidate()
+    {
+        labelFontSize = Mathf.Max(1f, labelFontSize);
+        labelSize.x = Mathf.Max(1f, labelSize.x);
+        labelSize.y = Mathf.Max(1f, labelSize.y);
+
+        FindReferences();
+        ApplyLabelAppearanceAndLayout();
+        RefreshLabel();
+    }
+
+    private void LateUpdate()
+    {
+        if (slider == null || valueLabel == null)
+            return;
+
+        if (!Mathf.Approximately(displayedValue, slider.value) ||
+            !Mathf.Approximately(displayedMaxValue, slider.maxValue))
+        {
+            RefreshLabel();
+        }
     }
 
     private void OnDestroy()
@@ -72,7 +108,50 @@ public class HealthBar : MonoBehaviour
 
     private void RefreshLabel()
     {
-        if (slider != null && valueLabel != null)
-            valueLabel.SetText("{0:0.#}/{1:0.#}", slider.value, slider.maxValue);
+        if (slider == null || valueLabel == null)
+            return;
+
+        displayedValue = slider.value;
+        displayedMaxValue = slider.maxValue;
+        valueLabel.SetText("{0:0.#}/{1:0.#}", displayedValue, displayedMaxValue);
+    }
+
+    private void FindReferences()
+    {
+        if (slider == null)
+            slider = GetComponent<Slider>();
+
+        if (valueLabel == null)
+        {
+            Transform labelTransform = transform.Find("ValueLabel");
+            if (labelTransform != null)
+                valueLabel = labelTransform.GetComponent<TMP_Text>();
+        }
+    }
+
+    private void ApplyLabelAppearanceAndLayout()
+    {
+        if (slider == null || valueLabel == null)
+            return;
+
+        RectTransform labelRect = valueLabel.rectTransform;
+        if (labelRect.parent == slider.transform)
+        {
+            labelRect.anchorMin = new Vector2(1f, 0.5f);
+            labelRect.anchorMax = new Vector2(1f, 0.5f);
+            labelRect.pivot = new Vector2(0f, 0.5f);
+
+            float scaleX = Mathf.Max(0.0001f, Mathf.Abs(slider.transform.localScale.x));
+            float scaleY = Mathf.Max(0.0001f, Mathf.Abs(slider.transform.localScale.y));
+            labelRect.anchoredPosition = new Vector2(labelOffset.x / scaleX, labelOffset.y / scaleY);
+            labelRect.sizeDelta = labelSize;
+            labelRect.localScale = new Vector3(1f / scaleX, 1f / scaleY, 1f);
+        }
+
+        valueLabel.alignment = TextAlignmentOptions.MidlineLeft;
+        valueLabel.fontSize = labelFontSize;
+        valueLabel.color = labelColor;
+        valueLabel.raycastTarget = false;
+        valueLabel.overflowMode = TextOverflowModes.Overflow;
     }
 }

@@ -325,17 +325,31 @@ public class UseGrenade : MonoBehaviour
             if (grenadeDamage != null)
             {
                 GameObject explosionEffect = grenadeDamage.SpawnExplosionEffect();
+                ScaleEffectToThrowableRadius(explosionEffect, grenadeDamage.explosionRadius);
                 if (grenadeType == GrenadeType.Frag)
                 {
                     FragExplosionEffect.Play(explosionEffect);
                 }
                 else if (explosionEffect != null)
                 {
-                    // Smoke and Molotov effects are area visuals. They now
-                    // clean themselves up with the matching gameplay area.
-                    float visualDuration = grenadeType == GrenadeType.Smoke
-                        ? smokeAreaDuration
-                        : GetModifiedStat(StatNames.BurnDuration, molotovBurnDuration);
+                    // Persistent/lingering effects clean themselves up with
+                    // the matching gameplay duration for their grenade type.
+                    float visualDuration;
+                    switch (grenadeType)
+                    {
+                        case GrenadeType.Smoke:
+                            visualDuration = smokeAreaDuration;
+                            break;
+                        case GrenadeType.Flash:
+                            visualDuration = GetModifiedStat(StatNames.FlashDuration, stunDuration);
+                            break;
+                        case GrenadeType.Molotov:
+                            visualDuration = GetModifiedStat(StatNames.BurnDuration, molotovBurnDuration);
+                            break;
+                        default:
+                            visualDuration = 1f;
+                            break;
+                    }
                     Destroy(explosionEffect, visualDuration);
                 }
             }
@@ -444,6 +458,17 @@ public class UseGrenade : MonoBehaviour
         return PlayerStats.instance != null
             ? PlayerStats.instance.GetModifiedValue(statName, baseValue)
             : baseValue;
+    }
+
+    private void ScaleEffectToThrowableRadius(GameObject effect, float authoredRadius)
+    {
+        if (effect == null)
+            return;
+
+        float upgradedRadius = GetModifiedStat(StatNames.ThrowableRadius, explosionRadius);
+        float referenceRadius = authoredRadius > 0f ? authoredRadius : explosionRadius;
+        float scaleMultiplier = upgradedRadius / Mathf.Max(0.01f, referenceRadius);
+        effect.transform.localScale *= Mathf.Max(0.01f, scaleMultiplier);
     }
 
     IEnumerator ShowExplosionCircle(Vector2 position, float radius)

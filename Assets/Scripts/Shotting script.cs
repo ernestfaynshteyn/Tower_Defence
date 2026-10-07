@@ -115,28 +115,26 @@ public class Shottingscript : MonoBehaviour
 
     private void HandlingShooting()
     {
-        if (usingGrenades != null && usingGrenades.isEquipped)
-        {
-            return;
-        }
+        bool grenadeEquipped = usingGrenades != null && usingGrenades.isEquipped;
 
-        if (Input.GetMouseButton(0) && canShoot && !overheated && !reloading)
+        if (!grenadeEquipped && Input.GetMouseButton(0) && canShoot && !overheated && !reloading)
         {
             canShoot = false;
             float multishotChance = Mathf.Clamp01(GetChanceModifier(StatNames.MultishotChance) / 100f);
 
+            // Heat is a cost per trigger pull, not per projectile. Applying it
+            // inside the loop made shotguns gain heat once for every pellet.
+            currentHeat = Mathf.Min(MaxHeat, currentHeat + Mathf.Max(0f, HeatPerSec));
+
+            if (currentHeat >= MaxHeat)
+            {
+                overheated = true;
+                BackgroundMusic.Overheated(false);
+                return;
+            }
+
             for (int i = 0; i < bulletPerShot; i++)
             {
-                currentHeat += HeatPerSec;
-
-                if (currentHeat >= MaxHeat)
-                {
-                    currentHeat = MaxHeat;
-                    overheated = true;
-                    BackgroundMusic.Overheated(false);
-                    return;
-                }
-
                 Shoot();
                 if (i == 0 && bulletPrefab != null)
                 {
@@ -165,7 +163,10 @@ public class Shottingscript : MonoBehaviour
             Invoke(nameof(CanShot), GetFiringDelay());
         }
 
-        if (!Input.GetMouseButton(0) && currentHeat > 0)
+        // Cooling must continue while reloading, overheated, or using a grenade;
+        // otherwise holding the mouse button can leave the weapon hot forever.
+        if (currentHeat > 0f &&
+            (!Input.GetMouseButton(0) || grenadeEquipped || overheated || reloading))
         {
             currentHeat -= coolingRate * Time.deltaTime;
             currentHeat = Mathf.Clamp(currentHeat, 0, MaxHeat);

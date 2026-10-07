@@ -202,6 +202,9 @@ public class RangeIndicatorScaler : MonoBehaviour
     [SerializeField] private Transform rangeIndicator;
 
     private Vector3 baseScale;
+    private Transform[] rangeIndependentChildren = System.Array.Empty<Transform>();
+    private Vector3[] baseChildLocalPositions = System.Array.Empty<Vector3>();
+    private Vector3[] baseChildLocalScales = System.Array.Empty<Vector3>();
 
     private void Awake()
     {
@@ -209,7 +212,10 @@ public class RangeIndicatorScaler : MonoBehaviour
             rangeIndicator = transform.Find("RangeIndicator");
 
         if (rangeIndicator != null)
+        {
             baseScale = rangeIndicator.localScale;
+            CacheRangeIndependentChildren();
+        }
     }
 
     private void OnEnable()
@@ -241,6 +247,45 @@ public class RangeIndicatorScaler : MonoBehaviour
         float multiplier = PlayerStats.instance != null
             ? 1f + PlayerStats.instance.GetPercentModifier(StatNames.Range) / 100f
             : 1f;
-        rangeIndicator.localScale = baseScale * Mathf.Max(0.01f, multiplier);
+        multiplier = Mathf.Max(0.01f, multiplier);
+        rangeIndicator.localScale = baseScale * multiplier;
+
+        // The current scene stores all weapon objects beneath RangeIndicator.
+        // Counter-scale those children so buying range grows only the circle,
+        // rather than making the gun, firing point, and collider grow as well.
+        for (int i = 0; i < rangeIndependentChildren.Length; i++)
+        {
+            Transform child = rangeIndependentChildren[i];
+            if (child == null)
+                continue;
+
+            child.localPosition = baseChildLocalPositions[i] / multiplier;
+            child.localScale = baseChildLocalScales[i] / multiplier;
+        }
+    }
+
+    private void CacheRangeIndependentChildren()
+    {
+        var children = new System.Collections.Generic.List<Transform>();
+        var positions = new System.Collections.Generic.List<Vector3>();
+        var scales = new System.Collections.Generic.List<Vector3>();
+
+        for (int i = 0; i < rangeIndicator.childCount; i++)
+        {
+            Transform child = rangeIndicator.GetChild(i);
+            if (child.GetComponent<Shottingscript>() == null &&
+                child.GetComponent<flameThrowerDamage>() == null)
+            {
+                continue;
+            }
+
+            children.Add(child);
+            positions.Add(child.localPosition);
+            scales.Add(child.localScale);
+        }
+
+        rangeIndependentChildren = children.ToArray();
+        baseChildLocalPositions = positions.ToArray();
+        baseChildLocalScales = scales.ToArray();
     }
 }

@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Title card.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/Scenes/Gameplay.unity
-    guid: f70b7aa58b05cd24a8b3f895b2b9fce4
   - enabled: 1
     path: Assets/Scenes/You lost! hahaha.unity
     guid: 6128c83592662d142bb0b2e20d2fd64d

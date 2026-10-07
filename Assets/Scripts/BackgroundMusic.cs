@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class BackgroundMusic : MonoBehaviour
 {
-    public AudioClip music, bossMusic, bossEncounter, wave, purchase, hover;
+    public AudioClip music, bossMusic, bossEncounter, bossDefeat, wave, purchase, hover;
     public AudioClip hit, death, playerHurt, playerDeath, purchaseDenied;
     public AudioClip buttonClick, reload;
     public AudioClip gunOverheatStart, flameOverheatStart, overheatSound;
@@ -79,6 +79,12 @@ public class BackgroundMusic : MonoBehaviour
     }
 
     public static void WaveEnded() { if (instance != null) instance.SetMusic(false); }
+    public static void BossDefeated()
+    {
+        if (instance == null) return;
+        instance.Play(instance.bossDefeat);
+        instance.SetMusic(false);
+    }
     private void Play(AudioClip clip, float volume = 1f, float pitch = 1f)
     {
         if (clip == null) return;
