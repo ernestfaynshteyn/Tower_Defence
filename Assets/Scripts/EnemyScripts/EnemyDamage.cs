@@ -6,11 +6,15 @@ public class EnemyDamage : MonoBehaviour
     public float damageRate = 1f;       // Time between hits
 
     private float nextDamageTimer  = 0f;
+    private IEnemyAttackEffect attackEffect;
+    private SlimeCombatVfx combatVfx;
 
     public string enemyID;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        attackEffect = GetComponent<IEnemyAttackEffect>();
+        combatVfx = GetComponent<SlimeCombatVfx>();
         ApplyDifficulty();
     }
 
@@ -31,7 +35,13 @@ public class EnemyDamage : MonoBehaviour
             if (nextDamageTimer >= damageRate)
             {
                 nextDamageTimer = 0;
-                playerHealth.TakeDamage(damageAmount, enemyID);
+                Vector3 impactPosition = playerHealth.transform.position;
+                if (attackEffect != null)
+                    attackEffect.DealDamage(playerHealth, damageAmount, enemyID);
+                else
+                    playerHealth.TakeDamage(damageAmount, enemyID);
+
+                combatVfx?.PlayAttackEffect(impactPosition);
             }
             if (playerHealth.currentHealth <= 0 && GlobalData.Instance != null)
             {

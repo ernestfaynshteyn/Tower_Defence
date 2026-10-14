@@ -37,12 +37,16 @@ public class Shottingscript : MonoBehaviour
     private bool canShoot = true;
     private bool reloading = false;
     private AudioSource firingAudio;
+    private PlayerHealth playerHealth;
+    private RangeIndicatorScaler rangeIndicator;
     private bool shotgunSound;
     private float lastAudibleShot = float.NegativeInfinity;
 
     private void Start()
     {
         currentMag = maxMagSize;
+        playerHealth = GetComponentInParent<PlayerHealth>();
+        rangeIndicator = playerHealth != null ? playerHealth.GetComponent<RangeIndicatorScaler>() : null;
 
         firingAudio = BackgroundMusic.CreateSource(gameObject, true, 0.5f);
         shotgunSound = name.ToLowerInvariant().Contains("shotgun");
@@ -62,8 +66,10 @@ public class Shottingscript : MonoBehaviour
 
     private void Update()
     {
-        HandlingShooting();
+        bool towerStunned = playerHealth != null && playerHealth.IsStunned;
+        HandlingShooting(towerStunned);
         bool sounding = Time.timeScale > 0f && Input.GetMouseButton(0) && !overheated && !reloading &&
+            !towerStunned &&
             (usingGrenades == null || !usingGrenades.isEquipped) &&
             Time.time - lastAudibleShot <= Mathf.Max(0.1f, GetFiringDelay() * 1.5f);
         if (firingAudio != null && !shotgunSound)
@@ -113,11 +119,11 @@ public class Shottingscript : MonoBehaviour
         return reloadTime / Mathf.Max(0.01f, 1f + reloadBonus / 100f);
     }
 
-    private void HandlingShooting()
+    private void HandlingShooting(bool towerStunned)
     {
         bool grenadeEquipped = usingGrenades != null && usingGrenades.isEquipped;
 
-        if (!grenadeEquipped && Input.GetMouseButton(0) && canShoot && !overheated && !reloading)
+        if (!towerStunned && !grenadeEquipped && Input.GetMouseButton(0) && canShoot && !overheated && !reloading)
         {
             canShoot = false;
             float multishotChance = Mathf.Clamp01(GetChanceModifier(StatNames.MultishotChance) / 100f);
@@ -166,7 +172,7 @@ public class Shottingscript : MonoBehaviour
         // Cooling must continue while reloading, overheated, or using a grenade;
         // otherwise holding the mouse button can leave the weapon hot forever.
         if (currentHeat > 0f &&
-            (!Input.GetMouseButton(0) || grenadeEquipped || overheated || reloading))
+            (!Input.GetMouseButton(0) || towerStunned || grenadeEquipped || overheated || reloading))
         {
             currentHeat -= coolingRate * Time.deltaTime;
             currentHeat = Mathf.Clamp(currentHeat, 0, MaxHeat);
@@ -187,13 +193,16 @@ public class Shottingscript : MonoBehaviour
             return;
         }
 
-        GameObject bullet = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
-
         Vector3 directionOffset = new Vector3(
             Random.Range(-spread, spread),
             Random.Range(-spread, spread),
             0
         );
+        Vector2 shotDirection = ((Vector2)transform.right + (Vector2)directionOffset).normalized;
+        if (shotDirection.sqrMagnitude <= 0.0001f)
+            shotDirection = transform.right;
+
+        GameObject bullet = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
 
         Bullet bulletScript = bullet.GetComponent<Bullet>();
 
@@ -204,22 +213,27 @@ public class Shottingscript : MonoBehaviour
             float critMultiplier = 2f * (1f + GetChanceModifier(StatNames.CritDamage) / 100f);
             float lifestealChance = Mathf.Clamp01(GetPercentModifier(StatNames.LifestealChance) / 100f);
             float lifestealAmount = Mathf.Max(0f, GetPercentModifier(StatNames.LifestealAmount) / 100f);
+            float maxDistance = bulletScript.BaseMaxDistance * Mathf.Max(0.01f, rangeMultiplier);
+            if (rangeIndicator != null)
+                maxDistance = rangeIndicator.ClampDistanceToIndicator(firingPoint.position, shotDirection, maxDistance);
 
+            bulletScript.direction = shotDirection;
             bulletScript.Setup(
                 GetModifiedDamage(),
                 bulletScript.BaseSpeed,
-                bulletScript.BaseMaxDistance * Mathf.Max(0.01f, rangeMultiplier),
+                maxDistance,
                 critChance,
                 critMultiplier,
                 lifestealChance,
                 lifestealAmount,
-                GetComponentInParent<PlayerHealth>(),
-                transform
+                playerHealth,
+                playerHealth != null ? playerHealth.transform : transform
             );
-            bulletScript.direction = transform.right + directionOffset;
         }
 
-        bullet.transform.right = transform.right;
+        // The bullet sprite and capsule are authored vertically, so its local
+        // up axis—not its right axis—must face along the travel direction.
+        bullet.transform.up = shotDirection;
     }
 
     private void CanShot()

@@ -35,6 +35,12 @@ public class LevelManager : MonoBehaviour
     {
         SceneManager.LoadScene(index);
     }
+
+    public void ChangeToArmoryPrototypeSelection()
+    {
+        SceneManager.LoadScene(PrototypeSceneRoutes.SelectionScene);
+    }
+
     public void QuitGame()
     {
         Application.Quit();

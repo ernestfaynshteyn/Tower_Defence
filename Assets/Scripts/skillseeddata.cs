@@ -50,7 +50,7 @@ public static class SkillSeedData
                 R("attack_speed"), E(StatNames.AttackSpeed, ModifierType.Percent, 10)),
             new SkillSeed("faster_cooldown", "Faster Cooldown", "10% shorter cooldown per level.", 30, 5,
                 R("faster_attack"), E(StatNames.CooldownReduction, ModifierType.Percent, 10)),
-            new SkillSeed("reload_cooldown", "Faster Reload", "3% faster reload per level.", 25, 10,
+            new SkillSeed("reload_cooldown", "Faster Reload", "3% faster reload and heat recovery per level.", 25, 10,
                 R("faster_cooldown"), E(StatNames.ReloadSpeed, ModifierType.Percent, 3)),
 
             // middle column: range spine, bottom to top
@@ -64,7 +64,7 @@ public static class SkillSeedData
                 R("range10"), E(StatNames.Range, ModifierType.Percent, 2)),
 
             // apex capstone joining both spines
-            new SkillSeed("more_speeeed", "Maximum Speed", "20% faster attacks, cooldowns, and reloads.", 100, 1,
+            new SkillSeed("more_speeeed", "Maximum Speed", "20% faster attacks, cooldowns, reloads, and heat recovery.", 100, 1,
                 R("faster_cooldown", "more_range"),
                 E(StatNames.AttackSpeed, ModifierType.Percent, 20, false),
                 E(StatNames.CooldownReduction, ModifierType.Percent, 20, false),

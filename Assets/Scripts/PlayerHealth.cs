@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
+    private const float LowHealthThreshold = 0.25f;
+    private const float LowHealthResetThreshold = 0.35f;
+
     public float health = 100f;
     public float currentHealth;
     public HealthBar healthBar;
@@ -20,6 +23,10 @@ public class PlayerHealth : MonoBehaviour
     private float baseHealth;
     private bool isDefeated;
     private bool defenceUnlocked;
+    private bool lowHealthWarningActive;
+    private float stunRemaining;
+
+    public bool IsStunned => stunRemaining > 0f;
 
     private void Awake()
     {
@@ -50,6 +57,9 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
+        if (stunRemaining > 0f)
+            stunRemaining = Mathf.Max(0f, stunRemaining - Time.deltaTime);
+
         if (isDefeated || !defenceUnlocked || currentDefence >= maxDefence)
             return;
 
@@ -59,6 +69,16 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void TakeDamage(float damage, string enemyID)
+    {
+        TakeDamageInternal(damage, enemyID, 1f);
+    }
+
+    public void TakeCorrosiveDamage(float damage, string enemyID, float defenceDamageMultiplier)
+    {
+        TakeDamageInternal(damage, enemyID, Mathf.Max(1f, defenceDamageMultiplier));
+    }
+
+    private void TakeDamageInternal(float damage, string enemyID, float defenceDamageMultiplier)
     {
         if (isDefeated || damage <= 0f)
             return;
@@ -72,22 +92,34 @@ public class PlayerHealth : MonoBehaviour
         if (Random.value < dodgeChance / 100f)
         {
             Debug.Log($"Dodged {damage} damage.");
+            BackgroundMusic.PlayerDodged();
             return;
         }
-
-        BackgroundMusic.PlayerHurt();
 
         float remainingDamage = damage;
 
         if (defenceUnlocked && currentDefence > 0f)
         {
-            float absorbedDamage = Mathf.Min(currentDefence, remainingDamage);
-            currentDefence -= absorbedDamage;
+            float defenceDamage = remainingDamage * defenceDamageMultiplier;
+            float absorbedDefence = Mathf.Min(currentDefence, defenceDamage);
+            float absorbedDamage = absorbedDefence / defenceDamageMultiplier;
+            currentDefence -= absorbedDefence;
             remainingDamage -= absorbedDamage;
+
+            if (absorbedDamage > 0f)
+            {
+                if (currentDefence <= 0.01f)
+                    BackgroundMusic.DefenceBroken();
+                else
+                    BackgroundMusic.DefenceHit();
+            }
 
             if (defenceBar != null)
                 defenceBar.SetHealth(currentDefence);
         }
+
+        if (remainingDamage > 0f)
+            BackgroundMusic.PlayerHurt();
 
         currentHealth -= remainingDamage;
         currentHealth = Mathf.Max(currentHealth, 0f);
@@ -95,7 +127,18 @@ public class PlayerHealth : MonoBehaviour
         if (healthBar != null)
             healthBar.SetHealth(currentHealth);
 
+        if (currentHealth > 0f)
+            UpdateLowHealthWarning(true);
+
         CheckForHealth(enemyID);
+    }
+
+    public void ApplyStun(float duration)
+    {
+        if (isDefeated || duration <= 0f)
+            return;
+
+        stunRemaining = Mathf.Max(stunRemaining, duration);
     }
 
     public void Heal(float amount)
@@ -104,6 +147,8 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0f, health);
         if (healthBar != null)
             healthBar.SetHealth(currentHealth);
+
+        UpdateLowHealthWarning(false);
     }
 
     public void CheckForHealth(string enemyID)
@@ -123,7 +168,10 @@ public class PlayerHealth : MonoBehaviour
             }
 
             currentHealth = 0f;
-            SceneManager.LoadScene("You lost! hahaha");
+            string activeScene = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(PrototypeSceneRoutes.IsPrototypeGameplay(activeScene)
+                ? PrototypeSceneRoutes.LossScene
+                : "You lost! hahaha");
         }
     }
 
@@ -153,6 +201,24 @@ public class PlayerHealth : MonoBehaviour
         {
             healthBar.SetMaxHealth(health);
             healthBar.SetHealth(currentHealth);
+        }
+
+        UpdateLowHealthWarning(false);
+    }
+
+    private void UpdateLowHealthWarning(bool playSound)
+    {
+        float healthRatio = health > 0f ? currentHealth / health : 0f;
+        if (healthRatio <= LowHealthThreshold)
+        {
+            if (!lowHealthWarningActive && playSound)
+                BackgroundMusic.LowHealthWarning();
+
+            lowHealthWarningActive = true;
+        }
+        else if (healthRatio >= LowHealthResetThreshold)
+        {
+            lowHealthWarningActive = false;
         }
     }
 
@@ -202,6 +268,9 @@ public class RangeIndicatorScaler : MonoBehaviour
     [SerializeField] private Transform rangeIndicator;
 
     private Vector3 baseScale;
+    private float baseWorldRadius;
+    private float runtimeRangeMultiplier = 1f;
+    private SpriteRenderer rangeRenderer;
     private Transform[] rangeIndependentChildren = System.Array.Empty<Transform>();
     private Vector3[] baseChildLocalPositions = System.Array.Empty<Vector3>();
     private Vector3[] baseChildLocalScales = System.Array.Empty<Vector3>();
@@ -214,6 +283,8 @@ public class RangeIndicatorScaler : MonoBehaviour
         if (rangeIndicator != null)
         {
             baseScale = rangeIndicator.localScale;
+            rangeRenderer = rangeIndicator.GetComponent<SpriteRenderer>();
+            baseWorldRadius = CalculateCurrentWorldRadius();
             CacheRangeIndependentChildren();
         }
     }
@@ -244,10 +315,10 @@ public class RangeIndicatorScaler : MonoBehaviour
         if (rangeIndicator == null)
             return;
 
-        float multiplier = PlayerStats.instance != null
+        float permanentMultiplier = PlayerStats.instance != null
             ? 1f + PlayerStats.instance.GetPercentModifier(StatNames.Range) / 100f
             : 1f;
-        multiplier = Mathf.Max(0.01f, multiplier);
+        float multiplier = Mathf.Max(0.01f, permanentMultiplier) * Mathf.Max(0.01f, runtimeRangeMultiplier);
         rangeIndicator.localScale = baseScale * multiplier;
 
         // The current scene stores all weapon objects beneath RangeIndicator.
@@ -262,6 +333,82 @@ public class RangeIndicatorScaler : MonoBehaviour
             child.localPosition = baseChildLocalPositions[i] / multiplier;
             child.localScale = baseChildLocalScales[i] / multiplier;
         }
+    }
+
+    public float WorldRadius
+    {
+        get
+        {
+            if (rangeIndicator == null)
+                return 0f;
+
+            if (rangeRenderer != null && rangeRenderer.sprite != null)
+            {
+                Vector3 extents = rangeRenderer.bounds.extents;
+                return Mathf.Max(0f, Mathf.Min(extents.x, extents.y));
+            }
+
+            Vector3 scale = rangeIndicator.lossyScale;
+            return Mathf.Max(0f, Mathf.Min(Mathf.Abs(scale.x), Mathf.Abs(scale.y)) * 0.5f);
+        }
+    }
+
+    public float BaseWorldRadius => Mathf.Max(0f, baseWorldRadius);
+
+    public void SetRuntimeRangeMultiplier(float multiplier)
+    {
+        runtimeRangeMultiplier = Mathf.Max(0.01f, multiplier);
+        RefreshScale();
+    }
+
+    public Vector2 WorldCenter => rangeIndicator != null
+        ? (Vector2)rangeIndicator.position
+        : (Vector2)transform.position;
+
+    public float ClampDistanceToIndicator(Vector2 origin, Vector2 direction, float desiredDistance)
+    {
+        desiredDistance = Mathf.Max(0f, desiredDistance);
+        float radius = WorldRadius;
+        if (radius <= 0f || direction.sqrMagnitude <= 0.0001f)
+            return desiredDistance;
+
+        Vector2 normalizedDirection = direction.normalized;
+        Vector2 offset = origin - WorldCenter;
+        float projection = Vector2.Dot(offset, normalizedDirection);
+        float discriminant = projection * projection - (offset.sqrMagnitude - radius * radius);
+        if (discriminant <= 0f)
+            return 0f;
+
+        float distanceToEdge = -projection + Mathf.Sqrt(discriminant);
+        return Mathf.Min(desiredDistance, Mathf.Max(0f, distanceToEdge));
+    }
+
+    public Vector2 ClampPointToIndicator(Vector2 point)
+    {
+        float radius = WorldRadius;
+        if (rangeIndicator == null || radius <= 0f)
+            return point;
+
+        Vector2 center = WorldCenter;
+        Vector2 offset = point - center;
+        return offset.sqrMagnitude <= radius * radius
+            ? point
+            : center + offset.normalized * radius;
+    }
+
+    private float CalculateCurrentWorldRadius()
+    {
+        if (rangeIndicator == null)
+            return 0f;
+
+        if (rangeRenderer != null && rangeRenderer.sprite != null)
+        {
+            Vector3 extents = rangeRenderer.bounds.extents;
+            return Mathf.Max(0f, Mathf.Min(extents.x, extents.y));
+        }
+
+        Vector3 scale = rangeIndicator.lossyScale;
+        return Mathf.Max(0f, Mathf.Min(Mathf.Abs(scale.x), Mathf.Abs(scale.y)) * 0.5f);
     }
 
     private void CacheRangeIndependentChildren()

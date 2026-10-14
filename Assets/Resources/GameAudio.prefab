@@ -58,5 +58,16 @@ MonoBehaviour:
   overheatSound: {fileID: 8300000, guid: d9c8efabcf896034ea88471149cf83f9, type: 3}
   smokeStart: {fileID: 8300000, guid: af64986937df05243b591b354f99d1c9, type: 3}
   smokeLoop: {fileID: 8300000, guid: 20cba46bd34b3c0458c98710a2848b8a, type: 3}
+  molotovShatter: {fileID: 8300000, guid: d5b1bafa817a416bad102948c39861ce, type: 3}
   molotovLoop: {fileID: 8300000, guid: 78613df50b5de3743afd03e5e828655b, type: 3}
+  flashExplosion: {fileID: 8300000, guid: 50fcae41df0a47ffa68f1aa92d7a5f37, type: 3}
   flashRinging: {fileID: 8300000, guid: bcdde637e7c84d041b860452d6b31b28, type: 3}
+  dodge: {fileID: 8300000, guid: b8a3d7c59f3948e0aaf49589c3d3bee2, type: 3}
+  defenceHit: {fileID: 8300000, guid: 6956645e8d614ce99c635b2eb92913c3, type: 3}
+  grenadeThrow: {fileID: 8300000, guid: 921671cfce774b10adaa5c6d12a09dbd, type: 3}
+  pulsarActivate: {fileID: 8300000, guid: 9ff062643a6d4fe39a07c91345988d7a, type: 3}
+  pulsarPulse: {fileID: 8300000, guid: db7f04b5ee65412aa22c30f6363f12ef, type: 3}
+  nukeLaunch: {fileID: 8300000, guid: 99dd5d98451941fb8dbcaf062eb1fd19, type: 3}
+  waveComplete: {fileID: 8300000, guid: 85795c87e0084bf09549fb63c4555df6, type: 3}
+  defenceBreak: {fileID: 8300000, guid: 47df6b77a952465b975bfe1b87183324, type: 3}
+  lowHealthWarning: {fileID: 8300000, guid: e348b02aa5bb4600a7161779207f8478, type: 3}

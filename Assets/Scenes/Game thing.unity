@@ -4580,10 +4580,14 @@ MonoBehaviour:
   minSpawnTime: 1
   maxSpawnTime: 3
   normalEnemies:
-  - {fileID: 8463626256710258506, guid: e373bcdea1e85b94886fc580ba391d79, type: 3}
   - {fileID: 8463626256710258506, guid: 3914d96c339890646a795568cc03a26d, type: 3}
+  - {fileID: 8463626256710258506, guid: e373bcdea1e85b94886fc580ba391d79, type: 3}
   - {fileID: 8463626256710258506, guid: 9826db69588fc494abb1143e6346bdef, type: 3}
-  bossEnemy: {fileID: 8406745479353245597, guid: 4fb29249d062d25458ae1adacaa949d9, type: 3}
+  - {fileID: 8463626256710258506, guid: ccbd85b55c084151822e66db5c7737c5, type: 3}
+  - {fileID: 8463626256710258506, guid: 5cddd7dec7fa41d88a568216f83cfa7c, type: 3}
+  bossEnemy: {fileID: 8463626256710258506, guid: 8e58ace799c348879af111a82ce4e340, type: 3}
+  minWavesBetweenUnlocks: 3
+  maxWavesBetweenUnlocks: 5
   spawnPoints:
   - {fileID: 2072960944}
   - {fileID: 94612839}

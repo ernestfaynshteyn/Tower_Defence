@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -6530119443742562313}
   - component: {fileID: 3639659780231680501}
   - component: {fileID: 4379852410278357318}
+  - component: {fileID: 900000000000000101}
   m_Layer: 6
   m_Name: Green Slime
   m_TagString: Enemy
@@ -252,3 +253,17 @@ MonoBehaviour:
   damageAmount: 10
   damageRate: 1
   enemyID: 1
+--- !u!114 &900000000000000101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8463626256710258506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0c7cb9c11d47dca8a930cc96a1de5a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  effectColor: {r: 0.15, g: 1, b: 0.25, a: 1}
+  attackEffect: 0

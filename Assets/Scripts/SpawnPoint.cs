@@ -6,8 +6,13 @@ public class Spawner : MonoBehaviour
     public float maxSpawnTime = 3f;
 
     [Header("Prefabs")]
+    [Tooltip("Ordered unlock list. Element 0 is available from wave 1; later elements unlock every few waves.")]
     public GameObject[] normalEnemies;
     public GameObject bossEnemy;
+
+    [Header("Enemy Progression")]
+    [SerializeField, Min(1)] private int minWavesBetweenUnlocks = 3;
+    [SerializeField, Min(1)] private int maxWavesBetweenUnlocks = 5;
 
     [Header("Spawn Points")]
     public Transform[] spawnPoints;
@@ -15,9 +20,11 @@ public class Spawner : MonoBehaviour
     private float spawnTimer;
     private float currentSpawnTime;
     private bool warnedAboutInvalidBossPrefab;
+    private int[] enemyUnlockWaves = System.Array.Empty<int>();
 
     void Start()
     {
+        BuildEnemyUnlockSchedule();
         ApplyDifficulty();
         ResetSpawnTime();
     }
@@ -95,18 +102,58 @@ public class Spawner : MonoBehaviour
             Debug.LogWarning("Boss wave prefab has no EnemyHealth. Spawning a normal enemy instead so the wave can finish. Assign a real boss prefab when one is ready.", this);
         }
 
-        if (normalEnemies == null)
+        if (normalEnemies == null || normalEnemies.Length == 0)
             return null;
 
-        int startIndex = Random.Range(0, normalEnemies.Length);
-        for (int i = 0; i < normalEnemies.Length; i++)
+        int unlockedEnemyCount = GetUnlockedEnemyCount(WaveManager.Instance.currentWave);
+        if (unlockedEnemyCount <= 0)
+            return null;
+
+        int startIndex = Random.Range(0, unlockedEnemyCount);
+        for (int i = 0; i < unlockedEnemyCount; i++)
         {
-            GameObject candidate = normalEnemies[(startIndex + i) % normalEnemies.Length];
+            GameObject candidate = normalEnemies[(startIndex + i) % unlockedEnemyCount];
             if (HasEnemyHealth(candidate))
                 return candidate;
         }
 
         return null;
+    }
+
+    private void BuildEnemyUnlockSchedule()
+    {
+        int enemyCount = normalEnemies != null ? normalEnemies.Length : 0;
+        enemyUnlockWaves = new int[enemyCount];
+        if (enemyCount == 0)
+            return;
+
+        enemyUnlockWaves[0] = 1;
+        int minimumInterval = Mathf.Max(1, minWavesBetweenUnlocks);
+        int maximumInterval = Mathf.Max(minimumInterval, maxWavesBetweenUnlocks);
+        int nextUnlockWave = Random.Range(minimumInterval, maximumInterval + 1);
+
+        for (int i = 1; i < enemyCount; i++)
+        {
+            enemyUnlockWaves[i] = nextUnlockWave;
+            nextUnlockWave += Random.Range(minimumInterval, maximumInterval + 1);
+        }
+    }
+
+    private int GetUnlockedEnemyCount(int wave)
+    {
+        if (enemyUnlockWaves == null || enemyUnlockWaves.Length != (normalEnemies?.Length ?? 0))
+            BuildEnemyUnlockSchedule();
+
+        int unlockedCount = 0;
+        for (int i = 0; i < enemyUnlockWaves.Length; i++)
+        {
+            if (wave < enemyUnlockWaves[i])
+                break;
+
+            unlockedCount++;
+        }
+
+        return unlockedCount;
     }
 
     private bool HasEnemyHealth(GameObject prefab)

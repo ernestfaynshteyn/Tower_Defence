@@ -17,8 +17,10 @@ GameObject:
   - component: {fileID: -8157082140594441237}
   - component: {fileID: 6322769596096450460}
   - component: {fileID: 1544591151651258244}
+  - component: {fileID: 900000000000000001}
+  - component: {fileID: 900000000000000102}
   m_Layer: 6
-  m_Name: Blue Slime
+  m_Name: Blue Ice Slime
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +64,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 52b5518b813b4a6aae09974e55a93cc8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,7 +86,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -7078261816480267791, guid: bfeede70efd14484683f5956b4f1194b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.35, g: 0.85, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -217,11 +219,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53914c51dae6d14d95d482089f004a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 75
+  health: 100
   moveSpeed: 3
-  slowResistance: 0
-  stunResistance: 0
-  moneyReward: 10
+  slowResistance: 0.9
+  stunResistance: 0.2
+  burnResistance: 0
+  moneyReward: 15
+  isBoss: 0
+  logDamage: 0
   animator: {fileID: 0}
 --- !u!114 &6322769596096450460
 MonoBehaviour:
@@ -252,3 +257,30 @@ MonoBehaviour:
   damageAmount: 10
   damageRate: 1
   enemyID: 2
+--- !u!114 &900000000000000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8463626256710258506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6044694947924856b622de24f8e1e484, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  minimumSlowResistance: 0.9
+--- !u!114 &900000000000000102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8463626256710258506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0c7cb9c11d47dca8a930cc96a1de5a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  effectColor: {r: 0.35, g: 0.85, b: 1, a: 1}
+  attackEffect: 1

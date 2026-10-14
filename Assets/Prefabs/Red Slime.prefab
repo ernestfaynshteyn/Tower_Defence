@@ -17,8 +17,10 @@ GameObject:
   - component: {fileID: 2947253715798945505}
   - component: {fileID: -4256380432017749486}
   - component: {fileID: 2170254315521131573}
+  - component: {fileID: 900000000000000002}
+  - component: {fileID: 900000000000000103}
   m_Layer: 6
-  m_Name: Red Slime
+  m_Name: Red Acid Slime
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +64,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 52b5518b813b4a6aae09974e55a93cc8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,7 +86,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 4367289792872251007, guid: d4e8a5c5eececab46942986a743fd7d8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.18, b: 0.08, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -217,11 +219,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53914c51dae6d14d95d482089f004a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 125
-  moveSpeed: 1
+  health: 140
+  moveSpeed: 2.2
   slowResistance: 0
   stunResistance: 0
-  moneyReward: 10
+  burnResistance: 0
+  moneyReward: 20
+  isBoss: 0
+  logDamage: 0
   animator: {fileID: 0}
 --- !u!114 &-4256380432017749486
 MonoBehaviour:
@@ -236,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 3
+  speed: 2.2
 --- !u!114 &2170254315521131573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +254,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b7b120a8727355488d5ddaa199ca37e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 10
+  damageAmount: 9
   damageRate: 1
   enemyID: 3
+--- !u!114 &900000000000000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8463626256710258506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4dc4c3b2c34ac6bf7efe2cf401b03e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  defenceDamageMultiplier: 2
+--- !u!114 &900000000000000103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8463626256710258506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0c7cb9c11d47dca8a930cc96a1de5a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  effectColor: {r: 1, g: 0.18, b: 0.08, a: 1}
+  attackEffect: 2

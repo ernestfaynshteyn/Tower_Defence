@@ -141,10 +141,14 @@ public class PulsarRing : MonoBehaviour
         if (!isUnlocked)
             return;
 
+        bool wasActive = isActive;
         isActive = true;
         activeUntil = isPermanent ? float.PositiveInfinity : Time.time + GetDuration();
         nextPulseTime = Time.time;
         SetRingVisible(true);
+
+        if (!wasActive)
+            BackgroundMusic.PulsarActivated();
     }
 
     private void EndTemporaryRing()
@@ -186,6 +190,9 @@ public class PulsarRing : MonoBehaviour
 
             overlapResults[i] = null;
         }
+
+        if (enemiesHitThisPulse.Count > 0)
+            BackgroundMusic.PulsarPulsed();
     }
 
     private float GetDamage()

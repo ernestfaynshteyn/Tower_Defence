@@ -13,7 +13,10 @@ public enum Weapon
     flamethrower,
     gun1,
     gun2,
-    gun3
+    gun3,
+    lightningArc,
+    toxicSpitter,
+    piercingLaser
 }
 public class GlobalData : MonoBehaviour
 {

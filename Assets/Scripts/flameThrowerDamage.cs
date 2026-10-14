@@ -14,6 +14,7 @@ public class flameThrowerDamage : MonoBehaviour
     public UseGrenade grenade;
     private bool overheated = false;
     private AudioSource firingAudio;
+    private PlayerHealth playerHealth;
     private ParticleSystem[] flameParticles;
     private ParticleSystem.MinMaxCurve[] baseStartLifetimes;
     private PolygonCollider2D flameCollider;
@@ -21,6 +22,7 @@ public class flameThrowerDamage : MonoBehaviour
 
     private void Awake()
     {
+        playerHealth = GetComponentInParent<PlayerHealth>();
         flameParticles = particle != null
             ? particle.GetComponentsInChildren<ParticleSystem>(true)
             : System.Array.Empty<ParticleSystem>();
@@ -59,6 +61,7 @@ public class flameThrowerDamage : MonoBehaviour
     {
         HandleFlamethrower();
         bool sounding = Time.timeScale > 0f && Input.GetMouseButton(0) && !overheated &&
+            (playerHealth == null || !playerHealth.IsStunned) &&
             (grenade == null || !grenade.isEquipped);
         if (firingAudio != null)
         {
@@ -70,6 +73,7 @@ public class flameThrowerDamage : MonoBehaviour
     private void HandleFlamethrower()
     {
         bool firing = Input.GetMouseButton(0) &&
+            (playerHealth == null || !playerHealth.IsStunned) &&
             (grenade == null || !grenade.isEquipped);
         // FIRING
         if (firing && !overheated)
@@ -102,7 +106,7 @@ public class flameThrowerDamage : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!Input.GetMouseButton(0) || overheated)
+        if (!Input.GetMouseButton(0) || overheated || (playerHealth != null && playerHealth.IsStunned))
             return;
         EnemyHealth enemy = collision.GetComponentInParent<EnemyHealth>();
         if (enemy != null && (grenade == null || !grenade.isEquipped))

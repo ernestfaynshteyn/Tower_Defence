@@ -138,6 +138,9 @@ public class WaveManager : MonoBehaviour
         rewardGiven = true;
         if (CurrencyManager.Instance != null)
             CurrencyManager.Instance.AddMoney(GetWaveReward());
+
+        if (!IsBossWave)
+            BackgroundMusic.WaveCompleted();
     }
 
     private int GetNormalWaveEnemyCount()

@@ -53,11 +53,13 @@ public class UseGrenade : MonoBehaviour
     public bool isEquipped = false;
 
     private Camera mainCamera;
+    private PlayerHealth playerHealth;
     private bool isThrowing = false;
 
     void Start()
     {
         mainCamera = Camera.main;
+        playerHealth = GetComponentInParent<PlayerHealth>();
 
         if (trajectoryLine == null)
         {
@@ -87,7 +89,9 @@ public class UseGrenade : MonoBehaviour
 
         UpdateTrajectoryLine();
 
-        if (isEquipped && !isThrowing && Input.GetMouseButtonDown(0))
+        if (isEquipped && !isThrowing &&
+            (playerHealth == null || !playerHealth.IsStunned) &&
+            Input.GetMouseButtonDown(0))
         {
             StartCoroutine(ThrowGrenadeRoutine());
         }
@@ -169,6 +173,7 @@ public class UseGrenade : MonoBehaviour
             yield break;
 
         isThrowing = true;
+        BackgroundMusic.GrenadeThrown();
 
         yield return new WaitForSeconds(throwAnimationDelay);
 

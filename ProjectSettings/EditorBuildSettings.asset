@@ -17,6 +17,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game selecting things.unity
     guid: 3d50669d370aadf4990fc05ab1253e86
+  - enabled: 1
+    path: Assets/Scenes/Armory Prototype/Game selecting things - Armory Prototype.unity
+    guid: f691641c188a4561bd2bc6299328db7a
+  - enabled: 1
+    path: Assets/Scenes/Armory Prototype/Game thing - Armory Prototype.unity
+    guid: 6b17992e32914c708a2699595ab949bd
+  - enabled: 1
+    path: Assets/Scenes/Armory Prototype/Title card - Armory Prototype.unity
+    guid: e21aa27f1e574c70a16be33b3ea327d2
+  - enabled: 1
+    path: Assets/Scenes/Armory Prototype/You lost - Armory Prototype.unity
+    guid: b1cfd9075f8e4d79875492cb9e72bce9
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

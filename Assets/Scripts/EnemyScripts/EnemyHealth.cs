@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 public class EnemyHealth : MonoBehaviour
 {
     [Header("Stats")]
@@ -23,6 +24,8 @@ public class EnemyHealth : MonoBehaviour
     private float burnTickTimer;
     private const float burnTickInterval = 0.33f;
     public Animator animator;
+    public event Action<EnemyHealth, float> Damaged;
+    public event Action<EnemyHealth> Died;
     public float MaxHealth { get; private set; }
     public float CurrentMoveSpeed => isDead || isStunned ? 0f : baseSpeed * slowMultiplier;
 
@@ -41,7 +44,11 @@ public class EnemyHealth : MonoBehaviour
     {
         if (isDead) return;
         health -= damage;
-        if (damage > 0f && health > 0f) BackgroundMusic.EnemyHit(false);
+        if (damage > 0f)
+        {
+            Damaged?.Invoke(this, damage);
+            if (health > 0f) BackgroundMusic.EnemyHit(false);
+        }
         if (logDamage)
             Debug.Log(gameObject.name + " took " + damage + " damage. Health: " + health);
         CheckForHealth();
@@ -61,6 +68,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
+        Died?.Invoke(this);
         if (isBoss)
             BackgroundMusic.BossDefeated();
         else

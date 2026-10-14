@@ -17,6 +17,7 @@ public class Bullet : MonoBehaviour
 
     private Rigidbody2D rb;
     private PlayerHealth ownerHealth;
+    private Vector3 spawnPosition;
 
     public Vector3 direction;
     public Transform playerTransform;
@@ -32,6 +33,7 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        spawnPosition = transform.position;
 
         if (damage <= 0f)
         {
@@ -46,10 +48,10 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        if (playerTransform != null)
+        if (maxDistance > 0f)
         {
             float maxDistSqr = maxDistance * maxDistance;
-            if ((transform.position - playerTransform.position).sqrMagnitude > maxDistSqr)
+            if ((transform.position - spawnPosition).sqrMagnitude > maxDistSqr)
             {
                 Destroy(gameObject);
             }
@@ -111,6 +113,7 @@ public class Bullet : MonoBehaviour
         lifestealAmount = Mathf.Max(0f, newLifestealAmount);
         ownerHealth = newOwnerHealth;
         playerTransform = shooterTransform;
+        spawnPosition = transform.position;
 
         // Prime cached direction if direction already set by spawner before Setup is called
         if (direction != Vector3.zero)

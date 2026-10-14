@@ -16,6 +16,7 @@ public class NukeAbility : MonoBehaviour
     [SerializeField, Min(0.1f)] private float minimumCooldown = 6f;
 
     private Camera mainCamera;
+    private PlayerHealth playerHealth;
     private bool isUnlocked;
     private float nextReadyTime;
 
@@ -25,6 +26,7 @@ public class NukeAbility : MonoBehaviour
     private void Awake()
     {
         mainCamera = Camera.main;
+        playerHealth = GetComponentInParent<PlayerHealth>();
     }
 
     private void OnEnable()
@@ -44,7 +46,8 @@ public class NukeAbility : MonoBehaviour
 
     private void Update()
     {
-        if (!isUnlocked || Time.time < nextReadyTime || !Input.GetKeyDown(activationKey))
+        if (!isUnlocked || (playerHealth != null && playerHealth.IsStunned) ||
+            Time.time < nextReadyTime || !Input.GetKeyDown(activationKey))
             return;
 
         LaunchNuke();
@@ -84,6 +87,7 @@ public class NukeAbility : MonoBehaviour
             return;
         }
 
+        BackgroundMusic.NukeLaunched();
         nukeExplosion.Launch(targetPosition);
         nextReadyTime = Time.time + GetCooldown();
     }

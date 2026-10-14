@@ -10,7 +10,9 @@ public class BackgroundMusic : MonoBehaviour
     public AudioClip buttonClick, reload;
     public AudioClip gunOverheatStart, flameOverheatStart, overheatSound;
     public AudioClip frag, nuke, shotgun, ak, minigun, flame;
-    public AudioClip smokeStart, smokeLoop, molotovLoop, flashRinging;
+    public AudioClip smokeStart, smokeLoop, molotovShatter, molotovLoop, flashExplosion, flashRinging;
+    public AudioClip dodge, defenceHit, grenadeThrow, pulsarActivate, pulsarPulse;
+    public AudioClip nukeLaunch, waveComplete, defenceBreak, lowHealthWarning;
     private static BackgroundMusic instance;
     private AudioSource musicSource, effectsSource;
     private float nextHit, nextDeath, nextHover;
@@ -103,9 +105,9 @@ public class BackgroundMusic : MonoBehaviour
         Destroy(oneShotObject, clip.length / Mathf.Abs(pitch));
     }
 
-    public static void Purchase() { if (instance != null) instance.Play(instance.purchase); }
-    public static void PurchaseDenied() { if (instance != null) instance.Play(instance.purchaseDenied); }
-    public static void ButtonClick() { if (instance != null) instance.Play(instance.buttonClick); }
+    public static void Purchase() { if (instance != null) instance.Play(instance.purchase, 0.5f); }
+    public static void PurchaseDenied() { if (instance != null) instance.Play(instance.purchaseDenied, 0.5f); }
+    public static void ButtonClick() { if (instance != null) instance.Play(instance.buttonClick, 0.45f); }
     public static void Reload() { if (instance != null) instance.Play(instance.reload, 1f, 0.75f); }
     public static void Overheated(bool flamethrower)
     {
@@ -128,6 +130,15 @@ public class BackgroundMusic : MonoBehaviour
     public static void Shotgun() { if (instance != null) instance.Play(instance.shotgun); }
     public static void PlayerHurt() { if (instance != null) instance.Play(instance.playerHurt, 0.35f); }
     public static void PlayerDeath() { if (instance != null) instance.Play(instance.playerDeath); }
+    public static void PlayerDodged() { if (instance != null) instance.Play(instance.dodge, 0.55f); }
+    public static void DefenceHit() { if (instance != null) instance.Play(instance.defenceHit, 0.45f); }
+    public static void GrenadeThrown() { if (instance != null) instance.Play(instance.grenadeThrow, 0.6f); }
+    public static void PulsarActivated() { if (instance != null) instance.Play(instance.pulsarActivate, 0.65f); }
+    public static void PulsarPulsed() { if (instance != null) instance.Play(instance.pulsarPulse, 0.3f); }
+    public static void NukeLaunched() { if (instance != null) instance.Play(instance.nukeLaunch, 0.75f); }
+    public static void WaveCompleted() { if (instance != null) instance.Play(instance.waveComplete, 0.65f); }
+    public static void DefenceBroken() { if (instance != null) instance.Play(instance.defenceBreak, 0.65f); }
+    public static void LowHealthWarning() { if (instance != null) instance.Play(instance.lowHealthWarning, 0.5f); }
 
     public static void SmokeStarted(Vector2 position, float duration)
     {
@@ -138,12 +149,16 @@ public class BackgroundMusic : MonoBehaviour
 
     public static void MolotovStarted(Vector2 position, float duration)
     {
-        if (instance != null) instance.PlayLoop(instance.molotovLoop, position, duration, 0.4f);
+        if (instance == null) return;
+        instance.Play(instance.molotovShatter, 0.8f);
+        instance.PlayLoop(instance.molotovLoop, position, duration, 0.4f);
     }
 
     public static void FlashStarted(Vector2 position, float duration)
     {
-        if (instance != null) instance.PlayLoop(instance.flashRinging, position, duration, 0.3f, 1f);
+        if (instance == null) return;
+        instance.Play(instance.flashExplosion, 0.85f);
+        instance.PlayLoop(instance.flashRinging, position, duration, 0.6f, 1f);
     }
 
     private void PlayLoop(AudioClip clip, Vector2 position, float duration, float volume, float segmentLength = 0f)
@@ -185,13 +200,69 @@ public class BackgroundMusic : MonoBehaviour
     {
         if (instance == null || Time.unscaledTime < instance.nextHover) return;
         instance.nextHover = Time.unscaledTime + 0.08f;
-        instance.Play(instance.hover);
+        instance.Play(instance.hover, 0.3f);
     }
 
     public static AudioClip WeaponLoop(bool flamethrower, bool isMinigun)
     {
         if (instance == null) return null;
         return flamethrower ? instance.flame : isMinigun ? instance.minigun : instance.ak;
+    }
+
+    public static bool ConfigurePrototypeWeaponLoop(AudioSource source, PrototypePrimaryWeapon weapon)
+    {
+        if (instance == null || source == null)
+            return false;
+
+        AudioClip clip;
+        float volume;
+        float pitch;
+        switch (weapon)
+        {
+            case PrototypePrimaryWeapon.RapidBullets:
+                clip = instance.ak;
+                volume = 0.24f;
+                pitch = 1f;
+                break;
+            case PrototypePrimaryWeapon.PiercingLaser:
+                clip = instance.pulsarPulse;
+                volume = 0.25f;
+                pitch = 1.2f;
+                break;
+            case PrototypePrimaryWeapon.Flamethrower:
+                clip = instance.flame;
+                volume = 0.34f;
+                pitch = 1f;
+                break;
+            default:
+                return false;
+        }
+
+        source.Stop();
+        source.clip = clip;
+        source.volume = volume;
+        source.pitch = pitch;
+        source.loop = true;
+        return clip != null;
+    }
+
+    public static void PrototypeWeaponShot(PrototypePrimaryWeapon weapon)
+    {
+        if (instance == null)
+            return;
+
+        switch (weapon)
+        {
+            case PrototypePrimaryWeapon.ShotgunBurst:
+                instance.Play(instance.shotgun, 0.8f);
+                break;
+            case PrototypePrimaryWeapon.LightningArc:
+                instance.Play(instance.pulsarPulse, 0.55f);
+                break;
+            case PrototypePrimaryWeapon.ToxicSpitter:
+                instance.Play(instance.molotovShatter, 0.45f);
+                break;
+        }
     }
 }
 
@@ -232,20 +303,22 @@ public class AudioLoopLifetime : MonoBehaviour
 
 public class ButtonAudioHover : MonoBehaviour, IPointerEnterHandler, ISelectHandler, IPointerClickHandler, ISubmitHandler
 {
-    private UnityEngine.UI.Button button;
+    private UnityEngine.UI.Selectable selectable;
     private bool usesSpecificPurchaseSound;
 
-    private void Awake() { button = GetComponent<UnityEngine.UI.Button>(); }
+    private void Awake() { selectable = GetComponent<UnityEngine.UI.Selectable>(); }
     private void Start()
     {
         // Purchase buttons already play their own confirmation sound.
-        usesSpecificPurchaseSound = GetComponent<BuyGrenadeButton>() != null || GetComponent<skills>() != null;
+        usesSpecificPurchaseSound |= GetComponent<BuyGrenadeButton>() != null || GetComponent<skills>() != null;
     }
 
-    private void Play() { if (button != null && button.IsActive() && button.IsInteractable()) BackgroundMusic.Hover(); }
+    public void SuppressClickSound() { usesSpecificPurchaseSound = true; }
+
+    private void Play() { if (selectable != null && selectable.IsActive() && selectable.IsInteractable()) BackgroundMusic.Hover(); }
     private void PlayClick()
     {
-        if (button == null || !button.IsActive() || !button.IsInteractable() || usesSpecificPurchaseSound)
+        if (selectable == null || !selectable.IsActive() || !selectable.IsInteractable() || usesSpecificPurchaseSound)
             return;
         BackgroundMusic.ButtonClick();
     }
