@@ -186,7 +186,7 @@ public class PulsarRing : MonoBehaviour
 
             EnemyHealth enemy = hit.GetComponentInParent<EnemyHealth>();
             if (enemy != null && enemiesHitThisPulse.Add(enemy))
-                enemy.TakeDamage(damage);
+                enemy.TakeDamage(damage, DamageNumberType.Energy);
 
             overlapResults[i] = null;
         }

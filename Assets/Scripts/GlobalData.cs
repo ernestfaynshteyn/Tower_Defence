@@ -22,6 +22,10 @@ public class GlobalData : MonoBehaviour
 {
     public static GlobalData Instance;
 
+    // This defaults on for the current game. A future Settings menu can
+    // change this property without any weapon scripts needing to be rewritten.
+    public static bool AutomaticPrimaryAiming { get; set; } = true;
+
     private static bool warnedAboutMissingGlobalData;
 
      public string lastEnemyThatKilledPlayer;
@@ -53,6 +57,58 @@ public class GlobalData : MonoBehaviour
     public static Weapon ActiveWeapon => Instance != null
         ? Instance.selectedWeapon
         : Weapon.flamethrower;
+
+    public static int GetBossWaveInterval()
+    {
+        switch (ActiveDifficulty)
+        {
+            case Difficulty.Easy: return 15;
+            case Difficulty.Normal: return 12;
+            case Difficulty.Hard: return 8;
+            case Difficulty.Extreme: return 5;
+            default: return 12;
+        }
+    }
+
+    public static float GetMoneyRewardMultiplier()
+    {
+        switch (ActiveDifficulty)
+        {
+            case Difficulty.Easy: return 0.9f;
+            case Difficulty.Normal: return 1f;
+            case Difficulty.Hard: return 1.5f;
+            case Difficulty.Extreme: return 2f;
+            default: return 1f;
+        }
+    }
+
+    public static float GetUpgradePriceMultiplier()
+    {
+        switch (ActiveDifficulty)
+        {
+            case Difficulty.Easy: return 0.85f;
+            case Difficulty.Normal: return 1f;
+            case Difficulty.Hard: return 1.25f;
+            case Difficulty.Extreme: return 1.5f;
+            default: return 1f;
+        }
+    }
+
+    public static int ScaleMoneyReward(int baseAmount)
+    {
+        if (baseAmount <= 0)
+            return 0;
+
+        return Mathf.Max(1, Mathf.RoundToInt(baseAmount * GetMoneyRewardMultiplier()));
+    }
+
+    public static int ScaleUpgradePrice(int basePrice)
+    {
+        if (basePrice <= 0)
+            return 0;
+
+        return Mathf.Max(1, Mathf.RoundToInt(basePrice * GetUpgradePriceMultiplier()));
+    }
 
     void Awake()
     {

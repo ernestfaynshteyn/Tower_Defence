@@ -99,7 +99,7 @@ public class NukeExplosion : MonoBehaviour
         {
             if (enemy != null && enemy.gameObject.activeInHierarchy && enemy.health > 0f)
             {
-                enemy.TakeDamage(float.MaxValue);
+                enemy.TakeDamage(float.MaxValue, DamageNumberType.Explosive);
                 if (enemy.health <= 0f)
                     defeated++;
             }

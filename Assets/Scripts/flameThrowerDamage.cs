@@ -15,14 +15,31 @@ public class flameThrowerDamage : MonoBehaviour
     private bool overheated = false;
     private AudioSource firingAudio;
     private PlayerHealth playerHealth;
+    private SmoothMouseFollow autoAim;
     private ParticleSystem[] flameParticles;
     private ParticleSystem.MinMaxCurve[] baseStartLifetimes;
     private PolygonCollider2D flameCollider;
     private Vector2[][] baseColliderPaths;
+    private bool rangeDataCached;
+    private bool externalVisualPlaying;
+    private float appliedRangeMultiplier = -1f;
+
+    public ParticleSystem ParticleEffect => particle;
 
     private void Awake()
     {
         playerHealth = GetComponentInParent<PlayerHealth>();
+        autoAim = GetComponentInParent<SmoothMouseFollow>();
+        CacheRangeData();
+        StopParticleEffect(true);
+    }
+
+    private void CacheRangeData()
+    {
+        if (rangeDataCached)
+            return;
+
+        rangeDataCached = true;
         flameParticles = particle != null
             ? particle.GetComponentsInChildren<ParticleSystem>(true)
             : System.Array.Empty<ParticleSystem>();
@@ -42,12 +59,14 @@ public class flameThrowerDamage : MonoBehaviour
 
     private void OnEnable()
     {
+        StopParticleEffect(true);
         PlayerStats.OnStatChanged += HandleStatChanged;
     }
 
     private void OnDisable()
     {
         if (firingAudio != null) firingAudio.Stop();
+        StopParticleEffect(true);
         PlayerStats.OnStatChanged -= HandleStatChanged;
     }
 
@@ -60,7 +79,7 @@ public class flameThrowerDamage : MonoBehaviour
     void Update()
     {
         HandleFlamethrower();
-        bool sounding = Time.timeScale > 0f && Input.GetMouseButton(0) && !overheated &&
+        bool sounding = Time.timeScale > 0f && WantsToFire() && !overheated &&
             (playerHealth == null || !playerHealth.IsStunned) &&
             (grenade == null || !grenade.isEquipped);
         if (firingAudio != null)
@@ -72,7 +91,7 @@ public class flameThrowerDamage : MonoBehaviour
     }
     private void HandleFlamethrower()
     {
-        bool firing = Input.GetMouseButton(0) &&
+        bool firing = WantsToFire() &&
             (playerHealth == null || !playerHealth.IsStunned) &&
             (grenade == null || !grenade.isEquipped);
         // FIRING
@@ -106,14 +125,14 @@ public class flameThrowerDamage : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!Input.GetMouseButton(0) || overheated || (playerHealth != null && playerHealth.IsStunned))
+        if (!WantsToFire() || overheated || (playerHealth != null && playerHealth.IsStunned))
             return;
         EnemyHealth enemy = collision.GetComponentInParent<EnemyHealth>();
         if (enemy != null && (grenade == null || !grenade.isEquipped))
         {
             // Direct damage while inside the flame
             float directDamage = GetModifiedStat(StatNames.AttackDamage, flameDamage);
-            enemy.TakeDamage(directDamage * Time.deltaTime);
+            enemy.TakeDamage(directDamage * Time.deltaTime, DamageNumberType.Fire);
 
             // Apply/refresh burn DoT (only the flamethrower calls this)
             enemy.ApplyBurn(
@@ -140,7 +159,56 @@ public class flameThrowerDamage : MonoBehaviour
         float rangeMultiplier = PlayerStats.instance != null
             ? 1f + PlayerStats.instance.GetPercentModifier(StatNames.Range) / 100f
             : 1f;
+        ApplyRangeMultiplier(rangeMultiplier);
+    }
+
+    private bool WantsToFire()
+    {
+        return GlobalData.AutomaticPrimaryAiming
+            ? autoAim != null && autoAim.HasAutomaticTarget
+            : Input.GetMouseButton(0);
+    }
+
+    /// <summary>
+    /// Lets another weapon controller reuse this authored Particle System
+    /// without enabling this component's heat or damage logic.
+    /// </summary>
+    public void SetExternalVisual(bool shouldPlay, float rangeMultiplier)
+    {
+        CacheRangeData();
+        ApplyRangeMultiplier(rangeMultiplier);
+
+        if (shouldPlay == externalVisualPlaying || particle == null)
+            return;
+
+        externalVisualPlaying = shouldPlay;
+        if (shouldPlay)
+            particle.Play(true);
+        else
+            particle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+    }
+
+    public void StopParticleEffect(bool clearParticles)
+    {
+        externalVisualPlaying = false;
+        if (particle == null)
+            return;
+
+        particle.Stop(
+            true,
+            clearParticles
+                ? ParticleSystemStopBehavior.StopEmittingAndClear
+                : ParticleSystemStopBehavior.StopEmitting);
+    }
+
+    private void ApplyRangeMultiplier(float rangeMultiplier)
+    {
+        CacheRangeData();
         rangeMultiplier = Mathf.Max(0.01f, rangeMultiplier);
+        if (Mathf.Approximately(appliedRangeMultiplier, rangeMultiplier))
+            return;
+
+        appliedRangeMultiplier = rangeMultiplier;
 
         for (int i = 0; i < flameParticles.Length; i++)
         {

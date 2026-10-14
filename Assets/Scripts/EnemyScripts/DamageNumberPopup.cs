@@ -2,9 +2,22 @@ using System.Globalization;
 using TMPro;
 using UnityEngine;
 
+public enum DamageNumberType
+{
+    Normal,
+    Fire,
+    Burn,
+    Poison,
+    ElectricChain,
+    Energy,
+    Explosive,
+    Flash,
+    Reflected
+}
+
 /// <summary>
 /// Displays a short-lived, world-space damage number and merges rapid hits
-/// against the same enemy into one readable popup.
+/// of the same type against one enemy into a readable popup.
 /// </summary>
 public sealed class DamageNumberPopup : MonoBehaviour
 {
@@ -23,14 +36,14 @@ public sealed class DamageNumberPopup : MonoBehaviour
     private int displayedDamage;
     private Color baseColor;
 
-    public static DamageNumberPopup Create(Transform target, bool isBurnDamage)
+    public static DamageNumberPopup Create(Transform target, DamageNumberType damageType)
     {
         if (target == null)
             return null;
 
         var popupObject = new GameObject("Damage Number");
         var popup = popupObject.AddComponent<DamageNumberPopup>();
-        popup.Initialize(target, isBurnDamage);
+        popup.Initialize(target, damageType);
         return popup;
     }
 
@@ -54,12 +67,48 @@ public sealed class DamageNumberPopup : MonoBehaviour
         meshRenderer.sortingOrder = 100;
     }
 
-    private void Initialize(Transform target, bool isBurnDamage)
+    private void Initialize(Transform target, DamageNumberType damageType)
     {
         followTarget = target;
-        horizontalOffset = Random.Range(-0.1f, 0.1f) + (isBurnDamage ? TypeOffset : -TypeOffset);
-        baseColor = isBurnDamage ? new Color(1f, 0.18f, 0.18f, 1f) : Color.white;
+        horizontalOffset = Random.Range(-0.1f, 0.1f) + GetHorizontalOffset(damageType);
+        baseColor = GetColor(damageType);
         label.color = baseColor;
+    }
+
+    private static float GetHorizontalOffset(DamageNumberType damageType)
+    {
+        switch (damageType)
+        {
+            case DamageNumberType.Normal: return -TypeOffset;
+            case DamageNumberType.Fire:
+            case DamageNumberType.Explosive: return 0f;
+            default: return TypeOffset;
+        }
+    }
+
+    private static Color GetColor(DamageNumberType damageType)
+    {
+        switch (damageType)
+        {
+            case DamageNumberType.Fire:
+                return new Color(1f, 0.38f, 0.08f, 1f);
+            case DamageNumberType.Burn:
+                return new Color(1f, 0.12f, 0.08f, 1f);
+            case DamageNumberType.Poison:
+                return new Color(0.35f, 1f, 0.12f, 1f);
+            case DamageNumberType.ElectricChain:
+                return new Color(1f, 0.9f, 0.08f, 1f);
+            case DamageNumberType.Energy:
+                return new Color(0.2f, 0.95f, 1f, 1f);
+            case DamageNumberType.Explosive:
+                return new Color(1f, 0.62f, 0.08f, 1f);
+            case DamageNumberType.Flash:
+                return new Color(1f, 1f, 0.55f, 1f);
+            case DamageNumberType.Reflected:
+                return new Color(0.78f, 0.38f, 1f, 1f);
+            default:
+                return Color.white;
+        }
     }
 
     public void AddDamage(float amount)

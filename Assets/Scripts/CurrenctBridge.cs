@@ -21,6 +21,6 @@ public static class CurrencyBridge
     public static void Refund(int amount)
     {
         if (amount <= 0 || CurrencyManager.Instance == null) return;
-        CurrencyManager.Instance.AddMoney(amount);
+        CurrencyManager.Instance.AddMoney(amount, false);
     }
 }

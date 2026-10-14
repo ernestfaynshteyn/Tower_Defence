@@ -57,7 +57,7 @@ public class skills : MonoBehaviour
     [Min(0)] public int baseCost = 10;
     [Tooltip("Added to the cost for each level already owned. 10 + 5 => 10, 15, 20, ...")]
     public int costAddPerLevel = 0;
-    [Tooltip("Multiplied into the cost for each level already owned. 1.5 => 10, 15, 22, ...")]
+    [Tooltip("Compounds the full level cost. 1.12 adds 12% compounding; multi-level upgrades use at least a gentle 5% curve.")]
     public float costMultiplierPerLevel = 1f;
 
     [Header("Requirements")]
@@ -117,9 +117,13 @@ public class skills : MonoBehaviour
     public int GetCostForLevel(int targetLevel)
     {
         int owned = Mathf.Max(0, targetLevel - 1);
-        float mult = Mathf.Pow(Mathf.Max(0.01f, costMultiplierPerLevel), owned);
-        float cost = (baseCost + costAddPerLevel * owned) * mult;
-        return Mathf.Max(0, Mathf.RoundToInt(cost));
+        float linearCost = baseCost + costAddPerLevel * owned;
+        float configuredMultiplier = maxLevel > 1
+            ? Mathf.Max(1.05f, costMultiplierPerLevel)
+            : 1f;
+        float multiplier = Mathf.Pow(configuredMultiplier, owned);
+        float cost = linearCost * multiplier;
+        return GlobalData.ScaleUpgradePrice(Mathf.Max(0, Mathf.RoundToInt(cost)));
     }
 
     public int NextCost => IsMaxed ? 0 : GetCostForLevel(level + 1);

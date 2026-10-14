@@ -19,7 +19,7 @@ public class BuyGrenadeButton : MonoBehaviour
             return;
         }
 
-        if (!CurrencyManager.Instance.SpendMoney(Mathf.Max(0, cost)))
+        if (!CurrencyManager.Instance.SpendMoney(GlobalData.ScaleUpgradePrice(Mathf.Max(0, cost))))
         {
             BackgroundMusic.PurchaseDenied();
             return;

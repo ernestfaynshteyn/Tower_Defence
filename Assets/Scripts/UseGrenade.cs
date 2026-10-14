@@ -387,10 +387,12 @@ public class UseGrenade : MonoBehaviour
             switch (grenadeType)
             {
                 case GrenadeType.Frag:
-                    enemyHealth.TakeDamage(damage);
+                    enemyHealth.TakeDamage(damage, DamageNumberType.Explosive);
                     break;
                 case GrenadeType.Flash:
-                    enemyHealth.TakeDamage(GetModifiedStat(StatNames.FlashDamage, flashDamage));
+                    enemyHealth.TakeDamage(
+                        GetModifiedStat(StatNames.FlashDamage, flashDamage),
+                        DamageNumberType.Flash);
                     enemyHealth.Stun(GetModifiedStat(StatNames.FlashDuration, stunDuration));
                     break;
                 case GrenadeType.Molotov:

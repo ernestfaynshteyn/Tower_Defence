@@ -12,8 +12,12 @@ public class CurrencyManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI moneyText;
 
+    private int startingMoney;
+
     void Awake()
     {
+        startingMoney = Mathf.Max(0, money);
+
         if (Instance == null)
         {
             Instance = this;
@@ -71,10 +75,18 @@ public class CurrencyManager : MonoBehaviour
 
     public void AddMoney(int amount)
     {
+        AddMoney(amount, true);
+    }
+
+    public void AddMoney(int amount, bool applyDifficultyMultiplier)
+    {
         if (amount <= 0)
             return;
 
-        money += amount;
+        int creditedAmount = applyDifficultyMultiplier
+            ? GlobalData.ScaleMoneyReward(amount)
+            : amount;
+        money += creditedAmount;
         PersistMoney();
         UpdateUI();
     }
@@ -96,6 +108,19 @@ public class CurrencyManager : MonoBehaviour
     public int GetMoney()
     {
         return money;
+    }
+
+    public void ResetToStartingMoney()
+    {
+        money = startingMoney;
+
+        if (!string.IsNullOrWhiteSpace(persistenceKey))
+        {
+            PlayerPrefs.SetInt(persistenceKey, money);
+            PlayerPrefs.Save();
+        }
+
+        UpdateUI();
     }
 
     void UpdateUI()

@@ -39,6 +39,7 @@ public class Shottingscript : MonoBehaviour
     private AudioSource firingAudio;
     private PlayerHealth playerHealth;
     private RangeIndicatorScaler rangeIndicator;
+    private SmoothMouseFollow autoAim;
     private bool shotgunSound;
     private float lastAudibleShot = float.NegativeInfinity;
 
@@ -47,6 +48,7 @@ public class Shottingscript : MonoBehaviour
         currentMag = maxMagSize;
         playerHealth = GetComponentInParent<PlayerHealth>();
         rangeIndicator = playerHealth != null ? playerHealth.GetComponent<RangeIndicatorScaler>() : null;
+        autoAim = GetComponentInParent<SmoothMouseFollow>();
 
         firingAudio = BackgroundMusic.CreateSource(gameObject, true, 0.5f);
         shotgunSound = name.ToLowerInvariant().Contains("shotgun");
@@ -67,8 +69,9 @@ public class Shottingscript : MonoBehaviour
     private void Update()
     {
         bool towerStunned = playerHealth != null && playerHealth.IsStunned;
-        HandlingShooting(towerStunned);
-        bool sounding = Time.timeScale > 0f && Input.GetMouseButton(0) && !overheated && !reloading &&
+        bool wantsToFire = WantsToFire();
+        HandlingShooting(towerStunned, wantsToFire);
+        bool sounding = Time.timeScale > 0f && wantsToFire && !overheated && !reloading &&
             !towerStunned &&
             (usingGrenades == null || !usingGrenades.isEquipped) &&
             Time.time - lastAudibleShot <= Mathf.Max(0.1f, GetFiringDelay() * 1.5f);
@@ -119,11 +122,18 @@ public class Shottingscript : MonoBehaviour
         return reloadTime / Mathf.Max(0.01f, 1f + reloadBonus / 100f);
     }
 
-    private void HandlingShooting(bool towerStunned)
+    private bool WantsToFire()
+    {
+        return GlobalData.AutomaticPrimaryAiming
+            ? autoAim != null && autoAim.HasAutomaticTarget
+            : Input.GetMouseButton(0);
+    }
+
+    private void HandlingShooting(bool towerStunned, bool wantsToFire)
     {
         bool grenadeEquipped = usingGrenades != null && usingGrenades.isEquipped;
 
-        if (!towerStunned && !grenadeEquipped && Input.GetMouseButton(0) && canShoot && !overheated && !reloading)
+        if (!towerStunned && !grenadeEquipped && wantsToFire && canShoot && !overheated && !reloading)
         {
             canShoot = false;
             float multishotChance = Mathf.Clamp01(GetChanceModifier(StatNames.MultishotChance) / 100f);
@@ -172,7 +182,7 @@ public class Shottingscript : MonoBehaviour
         // Cooling must continue while reloading, overheated, or using a grenade;
         // otherwise holding the mouse button can leave the weapon hot forever.
         if (currentHeat > 0f &&
-            (!Input.GetMouseButton(0) || towerStunned || grenadeEquipped || overheated || reloading))
+            (!wantsToFire || towerStunned || grenadeEquipped || overheated || reloading))
         {
             currentHeat -= coolingRate * Time.deltaTime;
             currentHeat = Mathf.Clamp(currentHeat, 0, MaxHeat);

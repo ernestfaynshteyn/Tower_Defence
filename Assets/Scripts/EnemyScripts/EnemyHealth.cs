@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 public class EnemyHealth : MonoBehaviour
 {
@@ -19,8 +20,13 @@ public class EnemyHealth : MonoBehaviour
     private float slowMultiplier = 1f;
     private bool isStunned;
     private bool isDead;
-    private DamageNumberPopup damageNumberPopup;
-    private DamageNumberPopup burnDamageNumberPopup;
+    private bool recordedBurn;
+    private bool recordedPoison;
+    private bool recordedSlow;
+    private bool recordedStun;
+    private bool recordedShock;
+    private readonly Dictionary<DamageNumberType, DamageNumberPopup> damageNumberPopups =
+        new Dictionary<DamageNumberType, DamageNumberPopup>();
     public float burnDuration;
     public float burnDamage = 5f;
     private float burnTickTimer;
@@ -29,11 +35,13 @@ public class EnemyHealth : MonoBehaviour
     public event Action<EnemyHealth, float> Damaged;
     public event Action<EnemyHealth> Died;
     public float MaxHealth { get; private set; }
+    public float CurrentHealth => Mathf.Max(0f, health);
     public float CurrentMoveSpeed => isDead || isStunned ? 0f : baseSpeed * slowMultiplier;
 
     private void Start()
     {
         ApplyDifficulty();
+        ApplyWaveScaling();
         MaxHealth = health;
         baseSpeed = moveSpeed;
         RefreshMoveSpeed();
@@ -41,46 +49,50 @@ public class EnemyHealth : MonoBehaviour
         {
             animator = GetComponent<Animator>();
         }
+
+        if (isBoss)
+            WaveManager.Instance?.RegisterBoss(this);
     }
     public void TakeDamage(float damage)
     {
-        ApplyDamage(damage, false);
+        TakeDamage(damage, DamageNumberType.Normal);
+    }
+
+    public void TakeDamage(float damage, DamageNumberType damageType)
+    {
+        ApplyDamage(damage, damageType);
     }
 
     public void TakeBurnDamage(float damage)
     {
-        ApplyDamage(damage, true);
+        ApplyDamage(damage, DamageNumberType.Burn);
     }
 
-    private void ApplyDamage(float damage, bool isBurnDamage)
+    private void ApplyDamage(float damage, DamageNumberType damageType)
     {
         if (isDead) return;
         float appliedDamage = Mathf.Min(damage, Mathf.Max(health, 0f));
         health -= damage;
-<<<<<<< HEAD
-        if (damage > 0f)
-        {
-            Damaged?.Invoke(this, damage);
-            if (health > 0f) BackgroundMusic.EnemyHit(false);
-        }
-=======
         if (appliedDamage > 0f)
         {
-            DamageNumberPopup popup = isBurnDamage ? burnDamageNumberPopup : damageNumberPopup;
-            if (popup == null)
+            GameRecords.RecordDamage(appliedDamage);
+            if (damageType == DamageNumberType.Poison)
+                RecordStatusOnce(StatusEffectRecord.Poisoned);
+            else if (damageType == DamageNumberType.ElectricChain)
+                RecordStatusOnce(StatusEffectRecord.Shocked);
+
+            Damaged?.Invoke(this, appliedDamage);
+
+            if (!damageNumberPopups.TryGetValue(damageType, out DamageNumberPopup popup) || popup == null)
             {
-                popup = DamageNumberPopup.Create(transform, isBurnDamage);
-                if (isBurnDamage)
-                    burnDamageNumberPopup = popup;
-                else
-                    damageNumberPopup = popup;
+                popup = DamageNumberPopup.Create(transform, damageType);
+                damageNumberPopups[damageType] = popup;
             }
             if (popup != null)
                 popup.AddDamage(appliedDamage);
         }
 
         if (damage > 0f && health > 0f) BackgroundMusic.EnemyHit(false);
->>>>>>> 89948c5db45a3f98ca3be1e59dc1d8470ffb28e1
         if (logDamage)
             Debug.Log(gameObject.name + " took " + damage + " damage. Health: " + health);
         CheckForHealth();
@@ -171,6 +183,8 @@ public class EnemyHealth : MonoBehaviour
         if (finalDuration <= 0f || finalDamage <= 0f)
             return; // fully resistant to burn
 
+        RecordStatusOnce(StatusEffectRecord.Burned);
+
         bool isFreshBurn = burnDuration <= 0f;
 
         // Refresh duration (whoever applies burn last keeps it going)
@@ -192,6 +206,8 @@ public class EnemyHealth : MonoBehaviour
     {
         if (isDead) return;
         float resisted = Mathf.Lerp(1f, Mathf.Clamp01(multiplier), 1f - slowResistance);
+        if (resisted < 0.999f)
+            RecordStatusOnce(StatusEffectRecord.Slowed);
         slowMultiplier = resisted;
         RefreshMoveSpeed();
     }
@@ -207,7 +223,14 @@ public class EnemyHealth : MonoBehaviour
         if (isStunned) return;
         float resistedDuration = duration * (1f - stunResistance);
         if (resistedDuration <= 0f) return;
+        RecordStatusOnce(StatusEffectRecord.Stunned);
         StartCoroutine(StunRoutine(resistedDuration));
+    }
+
+    public void RecordStatusEffect(StatusEffectRecord effect)
+    {
+        if (!isDead)
+            RecordStatusOnce(effect);
     }
     private IEnumerator StunRoutine(float duration)
     {
@@ -224,6 +247,35 @@ public class EnemyHealth : MonoBehaviour
     private void RefreshMoveSpeed()
     {
         moveSpeed = CurrentMoveSpeed;
+    }
+
+    private void RecordStatusOnce(StatusEffectRecord effect)
+    {
+        switch (effect)
+        {
+            case StatusEffectRecord.Burned:
+                if (recordedBurn) return;
+                recordedBurn = true;
+                break;
+            case StatusEffectRecord.Poisoned:
+                if (recordedPoison) return;
+                recordedPoison = true;
+                break;
+            case StatusEffectRecord.Slowed:
+                if (recordedSlow) return;
+                recordedSlow = true;
+                break;
+            case StatusEffectRecord.Stunned:
+                if (recordedStun) return;
+                recordedStun = true;
+                break;
+            case StatusEffectRecord.Shocked:
+                if (recordedShock) return;
+                recordedShock = true;
+                break;
+        }
+
+        GameRecords.RecordStatusEffect(effect);
     }
     private void ApplyDifficulty()
     {
@@ -252,5 +304,18 @@ public class EnemyHealth : MonoBehaviour
         // bosses keep their intended differences on every difficulty.
         health = Mathf.Max(1f, health * healthMultiplier);
         moveSpeed = Mathf.Max(0f, moveSpeed * speedMultiplier);
+    }
+
+    private void ApplyWaveScaling()
+    {
+        WaveManager waves = WaveManager.Instance;
+        if (waves == null)
+            return;
+
+        health = Mathf.Max(1f, health * waves.GetEnemyHealthMultiplierForCurrentWave());
+        moveSpeed = Mathf.Max(0f, moveSpeed * waves.GetEnemySpeedMultiplierForCurrentWave());
+        slowResistance = waves.GetEnemyResistanceForCurrentWave(slowResistance);
+        stunResistance = waves.GetEnemyResistanceForCurrentWave(stunResistance);
+        burnResistance = waves.GetEnemyResistanceForCurrentWave(burnResistance);
     }
 }

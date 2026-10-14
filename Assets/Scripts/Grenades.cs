@@ -92,7 +92,7 @@ public class Grenades : MonoBehaviour
 
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(damage);
+                    enemy.TakeDamage(damage, DamageNumberType.Explosive);
                 }
             }
         }

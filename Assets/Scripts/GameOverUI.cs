@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameOverUI : MonoBehaviour
 {
@@ -8,11 +9,14 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] private Sprite blueSlimePortrait;
     [SerializeField] private Sprite redSlimePortrait;
     [SerializeField] private Material slimeRecolorMaterial;
+    [SerializeField] private TextMeshProUGUI recordsText;
 
     private void Start()
     {
         if (killerImage == null)
             return;
+
+        GameRecords.Save();
 
         Sprite killerPortrait = null;
         Color killerColor = Color.white;
@@ -52,6 +56,32 @@ public class GameOverUI : MonoBehaviour
         if (slimeRecolorMaterial != null)
             killerImage.material = slimeRecolorMaterial;
         killerImage.gameObject.SetActive(killerPortrait != null);
+        ShowRecords();
+    }
+
+    private void ShowRecords()
+    {
+        if (recordsText == null && killerImage != null && killerImage.canvas != null)
+        {
+            GameObject labelObject = new GameObject("Run Records", typeof(RectTransform));
+            labelObject.transform.SetParent(killerImage.canvas.transform, false);
+            recordsText = labelObject.AddComponent<TextMeshProUGUI>();
+
+            RectTransform rect = recordsText.rectTransform;
+            rect.anchorMin = new Vector2(0.58f, 0.08f);
+            rect.anchorMax = new Vector2(0.96f, 0.46f);
+            rect.offsetMin = Vector2.zero;
+            rect.offsetMax = Vector2.zero;
+            recordsText.fontSize = 28f;
+            recordsText.fontStyle = FontStyles.Bold;
+            recordsText.alignment = TextAlignmentOptions.TopLeft;
+            recordsText.color = Color.white;
+            recordsText.textWrappingMode = TextWrappingModes.Normal;
+            recordsText.raycastTarget = false;
+        }
+
+        if (recordsText != null)
+            recordsText.text = GameRecords.GetSummaryText();
     }
 
     public void RestartGame()

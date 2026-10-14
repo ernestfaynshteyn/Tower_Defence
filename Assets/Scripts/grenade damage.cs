@@ -42,7 +42,12 @@ public class GrenadeDamage : MonoBehaviour
 
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(damage);
+                DamageNumberType damageType = grenadeType == GrenadeType.Flash
+                    ? DamageNumberType.Flash
+                    : grenadeType == GrenadeType.Molotov
+                        ? DamageNumberType.Fire
+                        : DamageNumberType.Explosive;
+                enemyHealth.TakeDamage(damage, damageType);
             }
         }
 
