@@ -19,6 +19,8 @@ public class EnemyHealth : MonoBehaviour
     private float slowMultiplier = 1f;
     private bool isStunned;
     private bool isDead;
+    private DamageNumberPopup damageNumberPopup;
+    private DamageNumberPopup burnDamageNumberPopup;
     public float burnDuration;
     public float burnDamage = 5f;
     private float burnTickTimer;
@@ -42,13 +44,43 @@ public class EnemyHealth : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
+        ApplyDamage(damage, false);
+    }
+
+    public void TakeBurnDamage(float damage)
+    {
+        ApplyDamage(damage, true);
+    }
+
+    private void ApplyDamage(float damage, bool isBurnDamage)
+    {
         if (isDead) return;
+        float appliedDamage = Mathf.Min(damage, Mathf.Max(health, 0f));
         health -= damage;
+<<<<<<< HEAD
         if (damage > 0f)
         {
             Damaged?.Invoke(this, damage);
             if (health > 0f) BackgroundMusic.EnemyHit(false);
         }
+=======
+        if (appliedDamage > 0f)
+        {
+            DamageNumberPopup popup = isBurnDamage ? burnDamageNumberPopup : damageNumberPopup;
+            if (popup == null)
+            {
+                popup = DamageNumberPopup.Create(transform, isBurnDamage);
+                if (isBurnDamage)
+                    burnDamageNumberPopup = popup;
+                else
+                    damageNumberPopup = popup;
+            }
+            if (popup != null)
+                popup.AddDamage(appliedDamage);
+        }
+
+        if (damage > 0f && health > 0f) BackgroundMusic.EnemyHit(false);
+>>>>>>> 89948c5db45a3f98ca3be1e59dc1d8470ffb28e1
         if (logDamage)
             Debug.Log(gameObject.name + " took " + damage + " damage. Health: " + health);
         CheckForHealth();
@@ -112,7 +144,7 @@ public class EnemyHealth : MonoBehaviour
             burnTickTimer -= Time.deltaTime;
             if (burnTickTimer <= 0f)
             {
-                TakeDamage(burnDamage);
+                TakeBurnDamage(burnDamage);
                 burnTickTimer = burnTickInterval;
             }
         }
