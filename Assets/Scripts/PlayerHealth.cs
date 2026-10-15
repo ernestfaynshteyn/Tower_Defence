@@ -25,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
     private bool defenceUnlocked;
     private bool lowHealthWarningActive;
     private float stunRemaining;
+    private float currentDefenceRegenPerSecond;
 
     public bool IsStunned => stunRemaining > 0f;
 
@@ -53,6 +54,7 @@ public class PlayerHealth : MonoBehaviour
     {
         ApplyMaximumHealth(false);
         ApplyMaximumDefence(false);
+        ApplyDefenceRegenRate();
     }
 
     private void Update()
@@ -63,7 +65,9 @@ public class PlayerHealth : MonoBehaviour
         if (isDefeated || !defenceUnlocked || currentDefence >= maxDefence)
             return;
 
-        currentDefence = Mathf.Min(maxDefence, currentDefence + defenceRegenPerSecond * Time.deltaTime);
+        currentDefence = Mathf.Min(
+            maxDefence,
+            currentDefence + currentDefenceRegenPerSecond * Time.deltaTime);
         if (defenceBar != null)
             defenceBar.SetHealth(currentDefence);
     }
@@ -182,6 +186,18 @@ public class PlayerHealth : MonoBehaviour
 
         if (statName == StatNames.Defence || statName == StatNames.DefenceUnlocked)
             ApplyMaximumDefence(true);
+
+        if (statName == StatNames.DefenceRegenRate)
+            ApplyDefenceRegenRate();
+    }
+
+    private void ApplyDefenceRegenRate()
+    {
+        float authoredRate = Mathf.Max(0f, defenceRegenPerSecond);
+        currentDefenceRegenPerSecond = PlayerStats.instance != null
+            ? PlayerStats.instance.GetModifiedValue(StatNames.DefenceRegenRate, authoredRate)
+            : authoredRate;
+        currentDefenceRegenPerSecond = Mathf.Max(0f, currentDefenceRegenPerSecond);
     }
 
     private void ApplyMaximumHealth(bool preserveHealthPercentage)

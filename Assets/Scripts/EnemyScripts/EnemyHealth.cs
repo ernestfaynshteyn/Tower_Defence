@@ -19,6 +19,8 @@ public class EnemyHealth : MonoBehaviour
     private float baseSpeed;
     private float slowMultiplier = 1f;
     private bool isStunned;
+    private float stunnedUntil;
+    private Coroutine stunCoroutine;
     private bool isDead;
     private bool recordedBurn;
     private bool recordedPoison;
@@ -217,14 +219,32 @@ public class EnemyHealth : MonoBehaviour
         slowMultiplier = 1f;
         RefreshMoveSpeed();
     }
+
+    /// <summary>Moves this enemy away from an origin. Reusable by pulse-style abilities.</summary>
+    public void PushAway(Vector2 origin, float distance)
+    {
+        if (isDead || distance <= 0f)
+            return;
+
+        Vector2 direction = (Vector2)transform.position - origin;
+        if (direction.sqrMagnitude < 0.0001f)
+            direction = UnityEngine.Random.insideUnitCircle.normalized;
+        else
+            direction.Normalize();
+
+        transform.position += (Vector3)(direction * distance);
+    }
+
     public void Stun(float duration)
     {
         if (isDead) return;
-        if (isStunned) return;
         float resistedDuration = duration * (1f - stunResistance);
         if (resistedDuration <= 0f) return;
         RecordStatusOnce(StatusEffectRecord.Stunned);
-        StartCoroutine(StunRoutine(resistedDuration));
+
+        stunnedUntil = Mathf.Max(stunnedUntil, Time.time + resistedDuration);
+        if (stunCoroutine == null)
+            stunCoroutine = StartCoroutine(StunRoutine());
     }
 
     public void RecordStatusEffect(StatusEffectRecord effect)
@@ -232,12 +252,16 @@ public class EnemyHealth : MonoBehaviour
         if (!isDead)
             RecordStatusOnce(effect);
     }
-    private IEnumerator StunRoutine(float duration)
+    private IEnumerator StunRoutine()
     {
         isStunned = true;
         RefreshMoveSpeed();
-        yield return new WaitForSeconds(duration);
+
+        while (Time.time < stunnedUntil && !isDead)
+            yield return null;
+
         isStunned = false;
+        stunCoroutine = null;
         if (!isDead)
         {
             RefreshMoveSpeed();

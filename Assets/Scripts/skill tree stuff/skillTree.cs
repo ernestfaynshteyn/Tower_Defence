@@ -227,6 +227,14 @@ public class SkillTreeScript : MonoBehaviour
     {
         foreach (skills n in nodes)
             if (n != null && n.skillId == id) return n;
+
+        string resolvedId = SkillSeedData.ResolveSkillId(id);
+        if (resolvedId != id)
+        {
+            foreach (skills n in nodes)
+                if (n != null && n.skillId == resolvedId) return n;
+        }
+
         return null;
     }
 }

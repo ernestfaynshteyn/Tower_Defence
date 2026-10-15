@@ -27,10 +27,27 @@ public static class StatNames
     public const string ThrowableReloadSpeed = "ThrowableReloadSpeed";
     public const string NukeUnlocked = "NukeUnlocked"; // treat as a 0/1 flag stat
 
+    // ---- Active abilities ----
+    public const string SewerPulseUnlocked = "SewerPulseUnlocked";
+    public const string SewerPulseDamage = "SewerPulseDamage";
+    public const string SewerPulseRadius = "SewerPulseRadius";
+    public const string SewerPulseForce = "SewerPulseForce";
+    public const string SewerPulseCooldownReduction = "SewerPulseCooldownReduction";
+
+    public const string EmpShockwaveUnlocked = "EmpShockwaveUnlocked";
+    public const string EmpShockwaveDuration = "EmpShockwaveDuration";
+    public const string EmpShockwaveCooldownReduction = "EmpShockwaveCooldownReduction";
+
+    public const string ToxicFloodUnlocked = "ToxicFloodUnlocked";
+    public const string ToxicFloodDamage = "ToxicFloodDamage";
+    public const string ToxicFloodDuration = "ToxicFloodDuration";
+    public const string ToxicFloodCooldownReduction = "ToxicFloodCooldownReduction";
+
     // ---- Defense tree ----   
     public const string Health = "Health";
     public const string Defence = "Defence";
     public const string DefenceUnlocked = "DefenceUnlocked"; // 0/1 flag
+    public const string DefenceRegenRate = "DefenceRegenRate";
     public const string DodgeChance = "DodgeChance";
     public const string PizzaUnlocked = "PizzaUnlocked";     // 0/1 flag
     public const string PizzaDamage = "PizzaDamage";

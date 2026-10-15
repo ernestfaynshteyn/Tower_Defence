@@ -40,6 +40,16 @@ public class WaveManager : MonoBehaviour
     public int bossWaveInterval = 5; // every X waves
     public bool IsBossWave => currentWave % Mathf.Max(1, bossWaveInterval) == 0;
 
+    [Header("Random Wave Events")]
+    [Tooltip("Chance that a normal Hard wave becomes a huge wave.")]
+    [Range(0f, 1f)] public float hardHugeWaveChance = 0.12f;
+    [Tooltip("Chance that a normal Extreme wave becomes a huge wave. Kept at least as high as the Hard chance.")]
+    [Range(0f, 1f)] public float extremeHugeWaveChance = 0.28f;
+    [Tooltip("Multiplier applied to the normal enemy count when the warning appears.")]
+    [Min(1f)] public float hugeWaveEnemyMultiplier = 1.75f;
+    [Tooltip("How long the warning remains on screen before the wave starts.")]
+    [Min(0f)] public float hugeWaveWarningDuration = 2f;
+
     [Header("UI")]
     public GameObject waveTitle;
     private TextMeshProUGUI waveTitleTMP;
@@ -49,6 +59,8 @@ public class WaveManager : MonoBehaviour
     private bool rewardGiven;
     private int baseEnemyNeeded;
     private BossHealthBarUI bossHealthBarUI;
+    private WaveEventWarningUI waveEventWarningUI;
+    private bool hugeWaveActive;
 
     void Awake()
     {
@@ -63,6 +75,7 @@ public class WaveManager : MonoBehaviour
             Instance = this;
 
         bossHealthBarUI = new BossHealthBarUI(transform);
+        waveEventWarningUI = new WaveEventWarningUI(transform);
 
         // Keep the milestone feature usable in both the original and Armory
         // gameplay scenes without requiring duplicate scene wiring.
@@ -74,6 +87,7 @@ public class WaveManager : MonoBehaviour
     {
         GameRecords.Save();
         bossHealthBarUI?.Dispose();
+        waveEventWarningUI?.Hide();
 
         if (Instance == this)
             Instance = null;
@@ -144,7 +158,15 @@ public class WaveManager : MonoBehaviour
         // immediately before its enemies and label are prepared.
         currentWave++;
 
+        hugeWaveActive = RollHugeWaveEvent();
         PrepareCurrentWaveEnemyCount();
+
+        if (hugeWaveActive)
+        {
+            waveEventWarningUI?.Show("HUGE WAVE COMING!");
+            yield return new WaitForSeconds(Mathf.Max(0f, hugeWaveWarningDuration));
+            waveEventWarningUI?.Hide();
+        }
 
         rewardGiven = false;
         waitingForNextWave = false;
@@ -203,11 +225,52 @@ public class WaveManager : MonoBehaviour
 
     private void PrepareCurrentWaveEnemyCount()
     {
-        enemyNeeded = IsBossWave
-            ? BossEnemiesPerWave
-            : GetNormalWaveEnemyCount();
+        if (IsBossWave)
+        {
+            enemyNeeded = BossEnemiesPerWave;
+        }
+        else
+        {
+            int normalEnemyCount = GetNormalWaveEnemyCount();
+            enemyNeeded = hugeWaveActive
+                ? Mathf.Clamp(
+                    Mathf.CeilToInt(normalEnemyCount * Mathf.Max(1f, hugeWaveEnemyMultiplier)),
+                    1,
+                    Mathf.Max(1, maxEnemiesPerWave))
+                : normalEnemyCount;
+        }
+
         enemySpawned = 0;
         enemyleft = enemyNeeded;
+    }
+
+    private bool RollHugeWaveEvent()
+    {
+        if (IsBossWave)
+            return false;
+
+        float chance;
+        switch (GlobalData.ActiveDifficulty)
+        {
+            case Difficulty.Hard:
+                chance = hardHugeWaveChance;
+                break;
+            case Difficulty.Extreme:
+                chance = Mathf.Max(hardHugeWaveChance, extremeHugeWaveChance);
+                break;
+            default:
+                return false;
+        }
+
+        return UnityEngine.Random.value < Mathf.Clamp01(chance);
+    }
+
+    private void OnValidate()
+    {
+        hardHugeWaveChance = Mathf.Clamp01(hardHugeWaveChance);
+        extremeHugeWaveChance = Mathf.Clamp(extremeHugeWaveChance, hardHugeWaveChance, 1f);
+        hugeWaveEnemyMultiplier = Mathf.Max(1f, hugeWaveEnemyMultiplier);
+        hugeWaveWarningDuration = Mathf.Max(0f, hugeWaveWarningDuration);
     }
 
     public void RegisterBoss(EnemyHealth boss)
@@ -464,5 +527,84 @@ internal sealed class BossHealthBarUI
     private static string GetDisplayName(string objectName)
     {
         return objectName.Replace("(Clone)", string.Empty).Trim().ToUpperInvariant();
+    }
+}
+
+internal sealed class WaveEventWarningUI
+{
+    private readonly Transform owner;
+    private GameObject canvasObject;
+    private TextMeshProUGUI warningLabel;
+
+    public WaveEventWarningUI(Transform owner)
+    {
+        this.owner = owner;
+    }
+
+    public void Show(string message)
+    {
+        EnsureUI();
+        warningLabel.text = message;
+        canvasObject.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        if (canvasObject != null)
+            canvasObject.SetActive(false);
+    }
+
+    private void EnsureUI()
+    {
+        if (canvasObject != null)
+            return;
+
+        canvasObject = new GameObject(
+            "Wave Warning Canvas",
+            typeof(RectTransform),
+            typeof(Canvas),
+            typeof(UnityEngine.UI.CanvasScaler),
+            typeof(UnityEngine.UI.GraphicRaycaster));
+        canvasObject.transform.SetParent(owner, false);
+
+        Canvas canvas = canvasObject.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 650;
+
+        UnityEngine.UI.CanvasScaler scaler = canvasObject.GetComponent<UnityEngine.UI.CanvasScaler>();
+        scaler.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1920f, 1080f);
+        scaler.matchWidthOrHeight = 0.5f;
+
+        GameObject panelObject = new GameObject("Warning Panel", typeof(RectTransform));
+        panelObject.transform.SetParent(canvasObject.transform, false);
+        RectTransform panelRect = panelObject.GetComponent<RectTransform>();
+        panelRect.anchorMin = new Vector2(0.5f, 0.5f);
+        panelRect.anchorMax = new Vector2(0.5f, 0.5f);
+        panelRect.pivot = new Vector2(0.5f, 0.5f);
+        panelRect.anchoredPosition = new Vector2(0f, 150f);
+        panelRect.sizeDelta = new Vector2(900f, 150f);
+
+        UnityEngine.UI.Image panel = panelObject.AddComponent<UnityEngine.UI.Image>();
+        panel.color = new Color(0.08f, 0.01f, 0.01f, 0.92f);
+        panel.raycastTarget = false;
+
+        GameObject labelObject = new GameObject("Warning Text", typeof(RectTransform));
+        labelObject.transform.SetParent(panelObject.transform, false);
+        warningLabel = labelObject.AddComponent<TextMeshProUGUI>();
+        RectTransform labelRect = warningLabel.rectTransform;
+        labelRect.anchorMin = Vector2.zero;
+        labelRect.anchorMax = Vector2.one;
+        labelRect.offsetMin = new Vector2(24f, 12f);
+        labelRect.offsetMax = new Vector2(-24f, -12f);
+        warningLabel.alignment = TextAlignmentOptions.Center;
+        warningLabel.color = new Color(1f, 0.24f, 0.12f, 1f);
+        warningLabel.fontSize = 58f;
+        warningLabel.fontStyle = FontStyles.Bold;
+        warningLabel.textWrappingMode = TextWrappingModes.NoWrap;
+        warningLabel.overflowMode = TextOverflowModes.Overflow;
+        warningLabel.raycastTarget = false;
+
+        canvasObject.SetActive(false);
     }
 }

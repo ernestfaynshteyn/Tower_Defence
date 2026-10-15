@@ -1,47 +1,49 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// An automatic area-damage ability unlocked by the Pulsar Ring skill.
-/// While active it follows the player, pulses nearby enemies, and shows a
-/// lightweight ring. The final skill keeps the ring active permanently.
+/// The original Pulsar Ring component is retained so existing scene references
+/// stay valid, but it now implements the player-triggered Sewer Pulse ability.
 /// </summary>
 [DisallowMultipleComponent]
 public class PulsarRing : MonoBehaviour
 {
-    [Header("Base Stats")]
-    [SerializeField] private float baseDamage = 30f;
-    [SerializeField] private float baseDuration = 10f;
-    [SerializeField] private float radius = 3f;
-    [SerializeField] private float pulseInterval = 1f;
-    [SerializeField] private float cooldown = 4f;
+    [Header("Sewer Pulse")]
+    [SerializeField] private KeyCode activationKey = KeyCode.Z;
+    [SerializeField, Min(0f)] private float baseDamage = 30f;
+    [SerializeField, Min(0.1f)] private float radius = 3f;
+    [SerializeField, Min(0f)] private float baseKnockbackDistance = 2.5f;
+    [SerializeField, Min(0.1f)] private float baseCooldown = 8f;
 
-    [Header("Ring Look")]
-    [SerializeField] private Color ringColor = new Color(0.2f, 0.85f, 1f, 0.9f);
-    [SerializeField, Range(12, 1000)] private int ringSegments = 48;
-    [SerializeField] private float ringWidth = 0.08f;
+    [Header("Pulse Look")]
+    [SerializeField] private Color pulseColor = new Color(0.2f, 0.85f, 1f, 0.9f);
+    [SerializeField, Range(12, 96)] private int ringSegments = 48;
+    [SerializeField, Min(0.01f)] private float ringWidth = 0.08f;
     [SerializeField] private int ringSortingOrder = 10;
+    [SerializeField, Min(0.05f)] private float visualDuration = 0.35f;
 
-    private const int MaxEnemiesPerPulse = 64;
+    private const int MaxEnemiesPerPulse = 128;
 
     private readonly Collider2D[] overlapResults = new Collider2D[MaxEnemiesPerPulse];
-    private readonly HashSet<EnemyHealth> enemiesHitThisPulse = new HashSet<EnemyHealth>();
+    private readonly HashSet<EnemyHealth> enemiesHit = new HashSet<EnemyHealth>();
 
-    private LineRenderer ringRenderer;
-    private Transform ringVisualTransform;
-    private Material ringMaterial;
-
+    private PlayerHealth playerHealth;
     private bool isUnlocked;
-    private bool isPermanent;
-    private bool isActive;
-    private float activeUntil;
-    private float nextActivationTime;
-    private float nextPulseTime;
+    private float nextReadyTime;
+
+    public bool IsUnlocked => isUnlocked;
+    public float CooldownRemaining => Mathf.Max(0f, nextReadyTime - Time.time);
 
     private void Awake()
     {
-        CreateRingVisual();
-        SetRingVisible(false);
+        playerHealth = GetComponentInParent<PlayerHealth>();
+
+        // EMP and Toxic Flood share this player object and are kept in a
+        // separate reusable controller. This also repairs older scenes that do
+        // not have the component serialized yet.
+        if (GetComponent<TowerAbilityController>() == null)
+            gameObject.AddComponent<TowerAbilityController>();
     }
 
     private void OnEnable()
@@ -52,250 +54,169 @@ public class PulsarRing : MonoBehaviour
     private void OnDisable()
     {
         PlayerStats.OnStatChanged -= HandleStatChanged;
-        StopRing();
     }
 
     private void Start()
     {
-        RefreshStats(true);
+        RefreshUnlock();
     }
 
     private void Update()
     {
-        if (!isUnlocked)
-            return;
+        if (Input.GetKeyDown(activationKey))
+            TryActivate();
+    }
 
-        if (isPermanent)
+    public bool TryActivate()
+    {
+        if (!isUnlocked || Time.timeScale <= 0f || Time.time < nextReadyTime ||
+            (playerHealth != null && playerHealth.IsStunned))
         {
-            if (!isActive)
-                BeginRing();
-        }
-        else if (isActive && Time.time >= activeUntil)
-        {
-            EndTemporaryRing();
-        }
-        else if (!isActive && Time.time >= nextActivationTime)
-        {
-            BeginRing();
+            return false;
         }
 
-        if (!isActive)
-            return;
-
-        if (Time.time >= nextPulseTime)
-        {
-            PulseEnemies();
-            nextPulseTime = Time.time + Mathf.Max(0.05f, pulseInterval);
-        }
-
-        UpdateRingVisual();
+        PulseEnemies();
+        StartCoroutine(PlayPulseVisual(GetRadius()));
+        BackgroundMusic.PulsarActivated();
+        BackgroundMusic.PulsarPulsed();
+        nextReadyTime = Time.time + GetCooldown();
+        return true;
     }
 
     private void HandleStatChanged(string statName, float oldValue, float newValue)
     {
-        if (statName == StatNames.PizzaUnlocked ||
-            statName == StatNames.PizzaDamage ||
-            statName == StatNames.PizzaDuration ||
-            statName == StatNames.PizzaPermanent)
-        {
-            RefreshStats(false);
-        }
+        if (statName == StatNames.SewerPulseUnlocked || statName == StatNames.PizzaUnlocked)
+            RefreshUnlock();
     }
 
-    private void RefreshStats(bool startImmediately)
+    private void RefreshUnlock()
     {
         if (PlayerStats.instance == null)
-            return;
-
-        bool wasUnlocked = isUnlocked;
-        bool wasPermanent = isPermanent;
-
-        isUnlocked = PlayerStats.instance.GetModifiedValue(StatNames.PizzaUnlocked, 0f) > 0.5f;
-        isPermanent = PlayerStats.instance.GetModifiedValue(StatNames.PizzaPermanent, 0f) > 0.5f;
-
-        if (!isUnlocked)
         {
-            StopRing();
+            isUnlocked = false;
             return;
         }
 
-        if (isPermanent)
-        {
-            BeginRing();
-            return;
-        }
-
-        if (startImmediately || !wasUnlocked || wasPermanent)
-        {
-            BeginRing();
-        }
-        else if (isActive)
-        {
-            // Buying duration while the ring is active should never shorten it.
-            activeUntil = Mathf.Max(activeUntil, Time.time + GetDuration());
-        }
-    }
-
-    private void BeginRing()
-    {
-        if (!isUnlocked)
-            return;
-
-        bool wasActive = isActive;
-        isActive = true;
-        activeUntil = isPermanent ? float.PositiveInfinity : Time.time + GetDuration();
-        nextPulseTime = Time.time;
-        SetRingVisible(true);
-
-        if (!wasActive)
-            BackgroundMusic.PulsarActivated();
-    }
-
-    private void EndTemporaryRing()
-    {
-        isActive = false;
-        nextActivationTime = Time.time + Mathf.Max(0f, cooldown);
-        SetRingVisible(false);
-    }
-
-    private void StopRing()
-    {
-        isActive = false;
-        nextActivationTime = float.PositiveInfinity;
-        SetRingVisible(false);
+        // PizzaUnlocked is read only as a compatibility fallback for a scene
+        // that has not yet been resaved by the skill-tree installer.
+        isUnlocked = PlayerStats.instance.GetModifiedValue(StatNames.SewerPulseUnlocked, 0f) > 0.5f ||
+                     PlayerStats.instance.GetModifiedValue(StatNames.PizzaUnlocked, 0f) > 0.5f;
     }
 
     private void PulseEnemies()
     {
+        float pulseRadius = GetRadius();
         int hitCount = Physics2D.OverlapCircle(
             transform.position,
-            radius,
+            pulseRadius,
             ContactFilter2D.noFilter,
             overlapResults);
-        if (hitCount <= 0)
-            return;
 
-        enemiesHitThisPulse.Clear();
+        enemiesHit.Clear();
         float damage = GetDamage();
+        float knockbackDistance = GetKnockbackDistance();
 
         for (int i = 0; i < hitCount; i++)
         {
             Collider2D hit = overlapResults[i];
+            overlapResults[i] = null;
             if (hit == null)
                 continue;
 
             EnemyHealth enemy = hit.GetComponentInParent<EnemyHealth>();
-            if (enemy != null && enemiesHitThisPulse.Add(enemy))
-                enemy.TakeDamage(damage, DamageNumberType.Energy);
+            if (enemy == null || !enemiesHit.Add(enemy))
+                continue;
 
-            overlapResults[i] = null;
+            enemy.TakeDamage(damage, DamageNumberType.Energy);
+            enemy.PushAway(transform.position, knockbackDistance);
         }
-
-        if (enemiesHitThisPulse.Count > 0)
-            BackgroundMusic.PulsarPulsed();
     }
 
     private float GetDamage()
     {
-        float damage = PlayerStats.instance != null
-            ? PlayerStats.instance.GetModifiedValue(StatNames.PizzaDamage, baseDamage)
+        return PlayerStats.instance != null
+            ? Mathf.Max(0f, PlayerStats.instance.GetModifiedValue(StatNames.SewerPulseDamage, baseDamage))
             : baseDamage;
-        return Mathf.Max(0f, damage);
     }
 
-    private float GetDuration()
+    private float GetRadius()
     {
-        float duration = PlayerStats.instance != null
-            ? PlayerStats.instance.GetModifiedValue(StatNames.PizzaDuration, baseDuration)
-            : baseDuration;
-        return Mathf.Max(0.05f, duration);
+        return PlayerStats.instance != null
+            ? Mathf.Max(0.1f, PlayerStats.instance.GetModifiedValue(StatNames.SewerPulseRadius, radius))
+            : radius;
     }
 
-    private void CreateRingVisual()
+    private float GetKnockbackDistance()
     {
-        GameObject visual = new GameObject("Pulsar Ring Visual");
-        ringVisualTransform = visual.transform;
-        ringVisualTransform.SetParent(transform, false);
+        return PlayerStats.instance != null
+            ? Mathf.Max(0f, PlayerStats.instance.GetModifiedValue(StatNames.SewerPulseForce, baseKnockbackDistance))
+            : baseKnockbackDistance;
+    }
 
-        ringRenderer = visual.AddComponent<LineRenderer>();
-        ringRenderer.useWorldSpace = false;
-        ringRenderer.loop = false;
-        ringRenderer.alignment = LineAlignment.View;
-        ringRenderer.textureMode = LineTextureMode.Stretch;
-        ringRenderer.numCapVertices = 2;
-        ringRenderer.sortingOrder = ringSortingOrder;
+    private float GetCooldown()
+    {
+        float reduction = PlayerStats.instance != null
+            ? PlayerStats.instance.GetPercentModifier(StatNames.SewerPulseCooldownReduction)
+            : 0f;
+        return Mathf.Max(1f, baseCooldown * (1f - Mathf.Clamp(reduction, 0f, 80f) / 100f));
+    }
 
+    private IEnumerator PlayPulseVisual(float targetRadius)
+    {
+        GameObject visual = new GameObject("Sewer Pulse Visual");
+        visual.transform.SetParent(transform, false);
+
+        LineRenderer line = visual.AddComponent<LineRenderer>();
+        line.useWorldSpace = false;
+        line.loop = true;
+        line.alignment = LineAlignment.View;
+        line.positionCount = Mathf.Clamp(ringSegments, 12, 96);
+        line.startWidth = ringWidth;
+        line.endWidth = ringWidth;
+        line.sortingOrder = ringSortingOrder;
+        line.material = CreateSpriteMaterial();
+
+        float elapsed = 0f;
+        while (elapsed < visualDuration)
+        {
+            elapsed += Time.deltaTime;
+            float progress = Mathf.Clamp01(elapsed / visualDuration);
+            float currentRadius = Mathf.Lerp(0.15f, targetRadius, progress);
+            SetCircle(line, currentRadius);
+
+            Color color = pulseColor;
+            color.a *= 1f - progress;
+            line.startColor = color;
+            line.endColor = color;
+            yield return null;
+        }
+
+        if (line.material != null)
+            Destroy(line.material);
+        Destroy(visual);
+    }
+
+    private static Material CreateSpriteMaterial()
+    {
         Shader shader = Shader.Find("Sprites/Default");
         if (shader == null)
             shader = Shader.Find("Universal Render Pipeline/2D/Sprite-Unlit-Default");
+        return shader != null ? new Material(shader) : null;
+    }
 
-        if (shader != null)
+    private static void SetCircle(LineRenderer line, float circleRadius)
+    {
+        int count = line.positionCount;
+        for (int i = 0; i < count; i++)
         {
-            ringMaterial = new Material(shader);
-            ringRenderer.material = ringMaterial;
+            float angle = i * Mathf.PI * 2f / count;
+            line.SetPosition(i, new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * circleRadius);
         }
-        else
-        {
-            Debug.LogWarning("[PulsarRing] Could not find a sprite shader for the ring visual.", this);
-        }
-
-        RebuildRingGeometry();
-    }
-
-    private void RebuildRingGeometry()
-    {
-        if (ringRenderer == null)
-            return;
-
-        int segments = Mathf.Clamp(ringSegments, 12, 96);
-        float localRadius = radius;
-
-        ringRenderer.positionCount = segments + 1;
-        for (int i = 0; i <= segments; i++)
-        {
-            float angle = i * Mathf.PI * 2f / segments;
-            ringRenderer.SetPosition(i, new Vector3(Mathf.Cos(angle) * localRadius, Mathf.Sin(angle) * localRadius, 0f));
-        }
-    }
-
-    private void UpdateRingVisual()
-    {
-        if (ringRenderer == null || ringVisualTransform == null)
-            return;
-
-        float visualScale = GetVisualScale();
-        ringVisualTransform.localScale = new Vector3(1f / visualScale, 1f / visualScale, 1f);
-
-        float glow = 0.7f + 0.3f * Mathf.Sin(Time.time * 6f);
-        Color currentColor = ringColor;
-        currentColor.a *= Mathf.Clamp01(glow);
-        ringRenderer.startColor = currentColor;
-        ringRenderer.endColor = currentColor;
-        ringRenderer.startWidth = ringWidth;
-        ringRenderer.endWidth = ringWidth;
-    }
-
-    private float GetVisualScale()
-    {
-        Vector3 scale = transform.lossyScale;
-        return Mathf.Max(0.01f, (Mathf.Abs(scale.x) + Mathf.Abs(scale.y)) * 0.5f);
-    }
-
-    private void SetRingVisible(bool visible)
-    {
-        if (ringRenderer != null)
-            ringRenderer.enabled = visible;
-    }
-
-    private void OnDestroy()
-    {
-        if (ringMaterial != null)
-            Destroy(ringMaterial);
     }
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = ringColor;
+        Gizmos.color = pulseColor;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

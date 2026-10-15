@@ -37,6 +37,62 @@ public static class SkillSeedData
 
     private static string[] R(params string[] ids) => ids;
 
+    // The original scenes used numeric save ids. Keep these aliases so an
+    // existing run still loads after the ability nodes receive readable ids.
+    private static readonly Dictionary<string, string> LegacyIdAliases =
+        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "26", "defense" },
+            { "27", "health" },
+            { "28", "more_health" },
+            { "29", "add_defence" },
+            { "30", "more_health_q" },
+            { "33", "defence" },
+            { "34", "health_defence" },
+            { "35", "more_defence" },
+            { "36", "dodge" },
+            { "37", "more_dodge" },
+            { "38", "even_more_dodge" },
+            { "39", "sewer_pulse" },
+            { "40", "sewer_pulse_damage" },
+            { "41", "sewer_pulse_radius" },
+            { "42", "sewer_pulse_recharge" },
+            { "43", "sewer_pulse_force" },
+
+            { "44", "support" },
+            { "45", "increas_radius" },
+            { "46", "incremental_increase" },
+            { "47", "more_damage_10" },
+            { "48", "even_more" },
+            { "49", "more_damage_15" },
+            { "50", "flash_length" },
+            { "51", "brun_upgrades" },
+            { "52", "flash_damage" },
+            { "53", "longer_burn" },
+            { "54", "incremental_burn" },
+            { "55", "fire_damage" },
+            { "56", "burn_rate" },
+            { "57", "nuke" },
+            { "58", "shorter_reload_35" },
+            { "59", "shorter_reload_40" },
+
+            { "pizza_circle", "sewer_pulse" },
+            { "pizza_more_damage", "sewer_pulse_damage" },
+            { "pizza_last_longer", "sewer_pulse_radius" },
+            { "pizza_permanent", "sewer_pulse_recharge" },
+            { "pizza_more_damage2", "sewer_pulse_force" },
+        };
+
+    public static string ResolveSkillId(string id)
+    {
+        if (string.IsNullOrEmpty(id))
+            return id;
+
+        return LegacyIdAliases.TryGetValue(id, out string currentId)
+            ? currentId
+            : id;
+    }
+
     public static List<SkillSeed> AttacksTree()
     {
         return new List<SkillSeed>
@@ -152,6 +208,25 @@ public static class SkillSeedData
                 R("nuke"), E(StatNames.ThrowableReloadSpeed, ModifierType.Percent, 35, false)),
             new SkillSeed("shorter_reload_40", "Nuke Cooldown II", "40% shorter Nuke cooldown.", 80, 1,
                 R("shorter_reload_35"), E(StatNames.ThrowableReloadSpeed, ModifierType.Percent, 40, false)),
+
+            // Active ability branches. EMP belongs with flash/stun upgrades;
+            // Toxic Flood belongs with the burn and persistent-area upgrades.
+            new SkillSeed("emp_shockwave", "EMP Shockwave (X)", "Press X to stun every slime for 1 second.", 180, 1,
+                R("flash_damage"), E(StatNames.EmpShockwaveUnlocked, ModifierType.Flat, 1, false)),
+            new SkillSeed("emp_duration", "EMP Duration", "20% longer EMP stun per level.", 75, 5,
+                R("emp_shockwave"), E(StatNames.EmpShockwaveDuration, ModifierType.Percent, 20)),
+            new SkillSeed("emp_recharge", "EMP Recharge", "8% shorter EMP cooldown per level.", 90, 5,
+                R("emp_shockwave"), E(StatNames.EmpShockwaveCooldownReduction, ModifierType.Percent, 8)),
+
+            new SkillSeed("toxic_flood", "Toxic Flood (C)", "Press C to create three poison zones for 5 seconds.", 160, 1,
+                R("burn_rate"), E(StatNames.ToxicFloodUnlocked, ModifierType.Flat, 1, false)),
+            new SkillSeed("toxic_flood_damage", "Toxic Flood Damage", "10% more poison damage per level.", 60, 10,
+                R("toxic_flood"), E(StatNames.ToxicFloodDamage, ModifierType.Percent, 10)),
+            new SkillSeed("toxic_flood_duration", "Toxic Flood Duration", "10% longer poison zones per level.", 70, 5,
+                R("toxic_flood"), E(StatNames.ToxicFloodDuration, ModifierType.Percent, 10)),
+            new SkillSeed("toxic_flood_recharge", "Toxic Flood Recharge", "8% shorter Toxic Flood cooldown per level.", 90, 5,
+                R("toxic_flood_damage", "toxic_flood_duration"),
+                E(StatNames.ToxicFloodCooldownReduction, ModifierType.Percent, 8)),
         };
     }
     public static List<SkillSeed> DefenseTree()
@@ -173,6 +248,10 @@ public static class SkillSeedData
                 R("add_defence"), E(StatNames.Defence, ModifierType.Flat, 20, false)),
             new SkillSeed("more_defence", "Greater Defense", "2% more defense per level.", 25, 20,
                 R("defence"), E(StatNames.Defence, ModifierType.Percent, 2)),
+            new SkillSeed("defence_regeneration", "Defense Regen", "6% faster defense regeneration per level.", 35, 10,
+                R("more_defence"), E(StatNames.DefenceRegenRate, ModifierType.Percent, 6)),
+            new SkillSeed("rapid_defence_regeneration", "Rapid Recovery", "15% faster defense regeneration per level.", 85, 3,
+                R("defence_regeneration"), E(StatNames.DefenceRegenRate, ModifierType.Percent, 15)),
             new SkillSeed("health_defence", "Health and Defense", "20% more health and defense.", 100, 1,
                 R("add_defence", "defence"),
                 E(StatNames.Health, ModifierType.Percent, 20, false),
@@ -185,16 +264,16 @@ public static class SkillSeedData
             new SkillSeed("even_more_dodge", "Dodge Mastery", "20% more dodge chance.", 90, 1,
                 R("more_dodge"), E(StatNames.DodgeChance, ModifierType.Flat, 20, false)),
 
-            new SkillSeed("pizza_circle", "Pulsar Ring", "Unlocks Pulsar Ring.", 60, 1,
-                R("more_health_q"), E(StatNames.PizzaUnlocked, ModifierType.Flat, 1, false)),
-            new SkillSeed("pizza_more_damage", "Pulsar Ring Damage", "10% more Pulsar damage per level.", 30, 5,
-                R("pizza_circle"), E(StatNames.PizzaDamage, ModifierType.Percent, 10)),
-            new SkillSeed("pizza_last_longer", "Pulsar Ring Duration", "10% longer Pulsar per level.", 30, 5,
-                R("pizza_circle"), E(StatNames.PizzaDuration, ModifierType.Percent, 10)),
-            new SkillSeed("pizza_more_damage2", "Greater Pulsar Damage", "2% more Pulsar damage per level.", 25, 20,
-                R("pizza_more_damage"), E(StatNames.PizzaDamage, ModifierType.Percent, 2)),
-            new SkillSeed("pizza_permanent", "Permanent Pulsar Ring", "Pulsar Ring stays active.", 80, 1,
-                R("pizza_last_longer"), E(StatNames.PizzaPermanent, ModifierType.Flat, 1, false)),
+            new SkillSeed("sewer_pulse", "Sewer Pulse (Z)", "Press Z to damage and push nearby slimes away.", 90, 1,
+                R("more_health_q"), E(StatNames.SewerPulseUnlocked, ModifierType.Flat, 1, false)),
+            new SkillSeed("sewer_pulse_damage", "Sewer Pulse Damage", "10% more Sewer Pulse damage per level.", 45, 5,
+                R("sewer_pulse"), E(StatNames.SewerPulseDamage, ModifierType.Percent, 10)),
+            new SkillSeed("sewer_pulse_radius", "Sewer Pulse Radius", "10% larger Sewer Pulse radius per level.", 50, 5,
+                R("sewer_pulse_damage"), E(StatNames.SewerPulseRadius, ModifierType.Percent, 10)),
+            new SkillSeed("sewer_pulse_force", "Sewer Pulse Force", "10% farther knockback per level.", 40, 10,
+                R("sewer_pulse_damage"), E(StatNames.SewerPulseForce, ModifierType.Percent, 10)),
+            new SkillSeed("sewer_pulse_recharge", "Sewer Pulse Recharge", "8% shorter Sewer Pulse cooldown per level.", 80, 5,
+                R("sewer_pulse_radius"), E(StatNames.SewerPulseCooldownReduction, ModifierType.Percent, 8)),
         };
     }
 
