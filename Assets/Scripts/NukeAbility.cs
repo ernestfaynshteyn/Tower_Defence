@@ -22,6 +22,7 @@ public class NukeAbility : MonoBehaviour
 
     public bool IsUnlocked => isUnlocked;
     public float CooldownRemaining => Mathf.Max(0f, nextReadyTime - Time.time);
+    public float CooldownDuration => GetCooldown();
 
     private void Awake()
     {

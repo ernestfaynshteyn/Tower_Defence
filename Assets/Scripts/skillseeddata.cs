@@ -42,6 +42,32 @@ public static class SkillSeedData
     private static readonly Dictionary<string, string> LegacyIdAliases =
         new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
+            { "1", "attacks" },
+            { "2", "attack_speed" },
+            { "3", "progression_upgrade" },
+            { "4", "attack_damage" },
+            { "5", "range10" },
+            { "6", "more_damage" },
+            { "7", "reload_cooldown" },
+            { "8", "faster_attack" },
+            { "9", "faster_cooldown" },
+            { "10", "more_range" },
+            { "11", "more_speeeed" },
+            { "12", "multishot" },
+            { "13", "better_chances" },
+            { "14", "what_is_this" },
+            { "15", "crit_chance" },
+            { "16", "crit_damage" },
+            { "17", "more_crit_percent" },
+            { "18", "more_crit_damage" },
+            { "19", "max_crit" },
+            { "20", "lifesteal_q" },
+            { "21", "lifesteal_gain" },
+            { "22", "useless_upgrade" },
+            { "23", "more_lifesteal" },
+            { "24", "more_lifesteal_again" },
+            { "25", "vampire" },
+
             { "26", "defense" },
             { "27", "health" },
             { "28", "more_health" },
@@ -53,11 +79,11 @@ public static class SkillSeedData
             { "36", "dodge" },
             { "37", "more_dodge" },
             { "38", "even_more_dodge" },
-            { "39", "sewer_pulse" },
-            { "40", "sewer_pulse_damage" },
-            { "41", "sewer_pulse_radius" },
-            { "42", "sewer_pulse_recharge" },
-            { "43", "sewer_pulse_force" },
+            { "39", "pizza_circle" },
+            { "40", "pizza_more_damage" },
+            { "41", "pizza_last_longer" },
+            { "42", "pizza_permanent" },
+            { "43", "pizza_more_damage2" },
 
             { "44", "support" },
             { "45", "increas_radius" },
@@ -76,11 +102,6 @@ public static class SkillSeedData
             { "58", "shorter_reload_35" },
             { "59", "shorter_reload_40" },
 
-            { "pizza_circle", "sewer_pulse" },
-            { "pizza_more_damage", "sewer_pulse_damage" },
-            { "pizza_last_longer", "sewer_pulse_radius" },
-            { "pizza_permanent", "sewer_pulse_recharge" },
-            { "pizza_more_damage2", "sewer_pulse_force" },
         };
 
     public static string ResolveSkillId(string id)
@@ -167,6 +188,18 @@ public static class SkillSeedData
                 R("more_lifesteal_again"),
                 E(StatNames.LifestealAmount, ModifierType.Percent, 15, false),
                 E(StatNames.LifestealChance, ModifierType.Percent, 15, false)),
+
+            // active area attack branch
+            new SkillSeed("sewer_pulse", "Sewer Pulse (Z)", "Press Z to damage and push nearby slimes away.", 90, 1,
+                R("more_range"), E(StatNames.SewerPulseUnlocked, ModifierType.Flat, 1, false)),
+            new SkillSeed("sewer_pulse_damage", "Pulse Damage", "10% more Sewer Pulse damage per level.", 45, 5,
+                R("sewer_pulse"), E(StatNames.SewerPulseDamage, ModifierType.Percent, 10)),
+            new SkillSeed("sewer_pulse_force", "Push Force", "10% farther Sewer Pulse knockback per level.", 40, 10,
+                R("sewer_pulse_damage"), E(StatNames.SewerPulseForce, ModifierType.Percent, 10)),
+            new SkillSeed("sewer_pulse_radius", "Pulse Radius", "10% larger Sewer Pulse radius per level.", 50, 5,
+                R("sewer_pulse"), E(StatNames.SewerPulseRadius, ModifierType.Percent, 10)),
+            new SkillSeed("sewer_pulse_recharge", "Pulse Recharge", "8% shorter Sewer Pulse cooldown per level.", 80, 5,
+                R("sewer_pulse_radius"), E(StatNames.SewerPulseCooldownReduction, ModifierType.Percent, 8)),
         };
     }
 
@@ -264,16 +297,16 @@ public static class SkillSeedData
             new SkillSeed("even_more_dodge", "Dodge Mastery", "20% more dodge chance.", 90, 1,
                 R("more_dodge"), E(StatNames.DodgeChance, ModifierType.Flat, 20, false)),
 
-            new SkillSeed("sewer_pulse", "Sewer Pulse (Z)", "Press Z to damage and push nearby slimes away.", 90, 1,
-                R("more_health_q"), E(StatNames.SewerPulseUnlocked, ModifierType.Flat, 1, false)),
-            new SkillSeed("sewer_pulse_damage", "Sewer Pulse Damage", "10% more Sewer Pulse damage per level.", 45, 5,
-                R("sewer_pulse"), E(StatNames.SewerPulseDamage, ModifierType.Percent, 10)),
-            new SkillSeed("sewer_pulse_radius", "Sewer Pulse Radius", "10% larger Sewer Pulse radius per level.", 50, 5,
-                R("sewer_pulse_damage"), E(StatNames.SewerPulseRadius, ModifierType.Percent, 10)),
-            new SkillSeed("sewer_pulse_force", "Sewer Pulse Force", "10% farther knockback per level.", 40, 10,
-                R("sewer_pulse_damage"), E(StatNames.SewerPulseForce, ModifierType.Percent, 10)),
-            new SkillSeed("sewer_pulse_recharge", "Sewer Pulse Recharge", "8% shorter Sewer Pulse cooldown per level.", 80, 5,
-                R("sewer_pulse_radius"), E(StatNames.SewerPulseCooldownReduction, ModifierType.Percent, 8)),
+            new SkillSeed("pizza_circle", "Pulsar Ring", "Unlocks Pulsar Ring.", 60, 1,
+                R("more_health_q"), E(StatNames.PizzaUnlocked, ModifierType.Flat, 1, false)),
+            new SkillSeed("pizza_more_damage", "Pulsar Ring Damage", "10% more Pulsar damage per level.", 30, 5,
+                R("pizza_circle"), E(StatNames.PizzaDamage, ModifierType.Percent, 10)),
+            new SkillSeed("pizza_last_longer", "Pulsar Ring Duration", "10% longer Pulsar per level.", 30, 5,
+                R("pizza_circle"), E(StatNames.PizzaDuration, ModifierType.Percent, 10)),
+            new SkillSeed("pizza_more_damage2", "Greater Pulsar Damage", "2% more Pulsar damage per level.", 25, 20,
+                R("pizza_more_damage"), E(StatNames.PizzaDamage, ModifierType.Percent, 2)),
+            new SkillSeed("pizza_permanent", "Permanent Pulsar Ring", "Pulsar Ring stays active.", 80, 1,
+                R("pizza_last_longer"), E(StatNames.PizzaPermanent, ModifierType.Flat, 1, false)),
         };
     }
 
