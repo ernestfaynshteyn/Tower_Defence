@@ -1013,6 +1013,7 @@ MonoBehaviour:
   blueSlimePortrait: {fileID: -7078261816480267791, guid: bfeede70efd14484683f5956b4f1194b, type: 3}
   redSlimePortrait: {fileID: 4367289792872251007, guid: d4e8a5c5eececab46942986a743fd7d8, type: 3}
   slimeRecolorMaterial: {fileID: 2100000, guid: 52b5518b813b4a6aae09974e55a93cc8, type: 2}
+  retryButton: {fileID: 1597578284}
 --- !u!1 &3000000001
 GameObject:
   m_ObjectHideFlags: 0

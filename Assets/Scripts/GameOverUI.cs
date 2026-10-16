@@ -10,6 +10,7 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] private Sprite redSlimePortrait;
     [SerializeField] private Material slimeRecolorMaterial;
     [SerializeField] private TextMeshProUGUI recordsText;
+    [SerializeField] private RectTransform retryButton;
 
     private void Start()
     {
@@ -68,14 +69,29 @@ public class GameOverUI : MonoBehaviour
             recordsText = labelObject.AddComponent<TextMeshProUGUI>();
 
             RectTransform rect = recordsText.rectTransform;
-            rect.anchorMin = new Vector2(0.58f, 0.08f);
-            rect.anchorMax = new Vector2(0.96f, 0.46f);
+            rect.anchorMin = retryButton != null ? retryButton.anchorMin : new Vector2(0.5f, 0.5f);
+            rect.anchorMax = retryButton != null ? retryButton.anchorMax : new Vector2(0.5f, 0.5f);
+            rect.pivot = new Vector2(0.5f, 1f);
             rect.offsetMin = Vector2.zero;
             rect.offsetMax = Vector2.zero;
-            recordsText.fontSize = 28f;
+            if (retryButton != null)
+            {
+                rect.anchoredPosition = retryButton.anchoredPosition + Vector2.down *
+                    (retryButton.rect.height * Mathf.Abs(retryButton.localScale.y) * 0.5f + 12f);
+                rect.sizeDelta = new Vector2(
+                    Mathf.Max(360f, retryButton.rect.width * Mathf.Abs(retryButton.localScale.x)),
+                    280f);
+            }
+            else
+            {
+                rect.anchoredPosition = new Vector2(0f, -120f);
+                rect.sizeDelta = new Vector2(600f, 280f);
+            }
+
+            recordsText.fontSize = 48f;
             recordsText.fontStyle = FontStyles.Bold;
-            recordsText.alignment = TextAlignmentOptions.TopLeft;
-            recordsText.color = Color.white;
+            recordsText.alignment = TextAlignmentOptions.Top;
+            recordsText.color = Color.black;
             recordsText.textWrappingMode = TextWrappingModes.Normal;
             recordsText.raycastTarget = false;
         }

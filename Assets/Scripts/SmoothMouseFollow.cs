@@ -22,6 +22,12 @@ public class SmoothMouseFollow : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            GlobalData.AutomaticPrimaryAiming = !GlobalData.AutomaticPrimaryAiming;
+            Debug.Log("Auto shoot " + (GlobalData.AutomaticPrimaryAiming ? "ON" : "OFF") + ".");
+        }
+
         HandlingAiming();
     }
 

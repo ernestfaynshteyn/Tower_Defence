@@ -6693,6 +6693,7 @@ GameObject:
   - component: {fileID: 286353387}
   - component: {fileID: 286353386}
   - component: {fileID: 286353385}
+  - component: {fileID: 286353389}
   m_Layer: 5
   m_Name: Pulsar Ring Cooldown
   m_TagString: Untagged
@@ -6735,14 +6736,6 @@ MonoBehaviour:
   m_Script: {fileID: 306639945}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityCooldownIcon
-  iconImage: {fileID: 286353387}
-  cooldownOverlay: {fileID: 1353261242}
-  cooldownText: {fileID: 496914994}
-  animatedTransform: {fileID: 286353384}
-  readyColor: {r: 0.72, g: 0.3, b: 0.95, a: 1}
-  lockedColor: {r: 0.42, g: 0.42, b: 0.42, a: 1}
-  readyPopScale: 1.2
-  readyPopDuration: 0.28
 --- !u!114 &286353386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6796,6 +6789,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 286353383}
   m_CullTransparentMesh: 1
+--- !u!114 &286353389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286353383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 616616598}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AbilityCooldownIcon
 --- !u!1 &295837423
 GameObject:
   m_ObjectHideFlags: 0
@@ -6880,8 +6885,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 11
+  m_fontSizeBase: 11
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13711,6 +13716,21 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 107088329}
   m_SourcePrefab: {fileID: 100100000, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
+--- !u!115 &616616598
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 7
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_Type: 0
+  m_ExecutionOrder: 0
+  m_ClassName: AbilityCooldownIcon
+  m_Namespace: 
+  m_AssemblyName: Assembly-CSharp
 --- !u!1 &617335158
 GameObject:
   m_ObjectHideFlags: 0
@@ -18536,14 +18556,6 @@ MonoBehaviour:
   m_Script: {fileID: 1586623002}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityCooldownIcon
-  iconImage: {fileID: 844924583}
-  cooldownOverlay: {fileID: 252448466}
-  cooldownText: {fileID: 1432355054}
-  animatedTransform: {fileID: 844924580}
-  readyColor: {r: 0.12, g: 0.72, b: 0.9, a: 1}
-  lockedColor: {r: 0.42, g: 0.42, b: 0.42, a: 1}
-  readyPopScale: 1.2
-  readyPopDuration: 0.28
 --- !u!114 &844924582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19608,14 +19620,6 @@ MonoBehaviour:
   m_Script: {fileID: 1586623002}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityCooldownIcon
-  iconImage: {fileID: 908252723}
-  cooldownOverlay: {fileID: 786252115}
-  cooldownText: {fileID: 1996874992}
-  animatedTransform: {fileID: 908252720}
-  readyColor: {r: 0.28, g: 0.78, b: 0.25, a: 1}
-  lockedColor: {r: 0.42, g: 0.42, b: 0.42, a: 1}
-  readyPopScale: 1.2
-  readyPopDuration: 0.28
 --- !u!114 &908252722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26295,7 +26299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6684c249d2c47c44b91c631a6da1afd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWave: 10
+  currentWave: 1
   enemyNeeded: 10
   enemySpawned: 0
   enemyleft: 10
@@ -30038,7 +30042,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Size: {x: 2, y: 2}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 0.13
 --- !u!114 &1393480306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37691,13 +37695,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityCooldownHud
   abilityController: {fileID: 2100000011}
-  sewerPulseIcon: {fileID: 844924581}
+  sewerPulseIcon: {fileID: 844924585}
   empIcon: {fileID: 1739039268}
-  toxicFloodIcon: {fileID: 908252721}
+  toxicFloodIcon: {fileID: 908252725}
   nukeAbility: {fileID: 2100000010}
   nukeIcon: {fileID: 2011649082}
   pulsarRing: {fileID: 1393480311}
-  pulsarRingIcon: {fileID: 286353385}
+  pulsarRingIcon: {fileID: 286353389}
 --- !u!1 &1735554018
 GameObject:
   m_ObjectHideFlags: 0

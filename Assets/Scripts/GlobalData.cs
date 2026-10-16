@@ -63,10 +63,10 @@ public class GlobalData : MonoBehaviour
         switch (ActiveDifficulty)
         {
             case Difficulty.Easy: return 15;
-            case Difficulty.Normal: return 12;
-            case Difficulty.Hard: return 8;
-            case Difficulty.Extreme: return 5;
-            default: return 12;
+            case Difficulty.Normal: return 13;
+            case Difficulty.Hard: return 10;
+            case Difficulty.Extreme: return 7;
+            default: return 13;
         }
     }
 
