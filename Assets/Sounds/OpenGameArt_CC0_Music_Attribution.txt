@@ -1,0 +1,12 @@
+Gameplay music added in October 2026 uses tracks from the Dark Sci-Fi Audio Pack:
+
+- Pulse.mp3 - normal gameplay
+- Urgent.mp3 - boss waves
+
+Created by SRG774 and distributed through OpenGameArt.org:
+https://opengameart.org/content/dark-sci-fi-audio-pack
+
+License: Creative Commons Zero (CC0 1.0)
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Attribution is not required, but this file keeps the project's asset origins clear.

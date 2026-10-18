@@ -29,7 +29,9 @@ public enum PrototypeWeaponUpgrade
     Range,
     FireRate,
     Cooling,
-    Special
+    SpecialOne,
+    SpecialTwo,
+    SpecialThree
 }
 
 [DisallowMultipleComponent]
@@ -100,6 +102,8 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
     private const float ShotgunMultishotSpread = 8f;
     private const float FlamethrowerMultishotSpread = 28f;
     private const float LightningMultishotSpread = 20f;
+    private const float OverchargeCooldown = 15f;
+    private const float FreezeBurstCooldown = 10f;
 
     private readonly HashSet<PrototypePrimaryWeapon> ownedPrimaries = new HashSet<PrototypePrimaryWeapon>();
     private readonly HashSet<PrototypePrimaryWeapon> purchasedPrimaries = new HashSet<PrototypePrimaryWeapon>();
@@ -115,6 +119,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
     private readonly HashSet<EnemyHealth> uniqueEnemySearchResults = new HashSet<EnemyHealth>();
     private readonly List<EnemyHealth> enemySearchResults = new List<EnemyHealth>(64);
     private readonly Dictionary<Color32, Gradient> particleGradients = new Dictionary<Color32, Gradient>();
+    private readonly HashSet<EnemyHealth> combustionTrackedEnemies = new HashSet<EnemyHealth>();
 
     private PlayerHealth playerHealth;
     private UseGrenade grenadeController;
@@ -134,12 +139,28 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
     private float overchargeEndsAt;
     private float overchargeReadyAt;
     private EnemyHealth automaticPrimaryTarget;
+    private float lastLaserPulseTime = float.NegativeInfinity;
+    private float laserFocusBonus;
+    private int rapidBulletCounter;
     private bool initialized;
     private PrototypePrimaryWeapon startingPrimary;
     private ContactFilter2D physicsContactFilter;
 
     private static Material sharedLineMaterial;
     private static Sprite sharedCircleSprite;
+
+    public bool IsOverchargeUnlocked =>
+        GetAttachmentLevel(PrototypeAttachment.OverchargeModule) > 0;
+    public float OverchargeCooldownRemaining => IsOverchargeUnlocked
+        ? Mathf.Max(0f, overchargeReadyAt - Time.time)
+        : 0f;
+    public float OverchargeCooldownDuration => OverchargeCooldown;
+    public bool IsFreezeBurstUnlocked =>
+        GetAttachmentLevel(PrototypeAttachment.FreezeBurst) > 0;
+    public float FreezeBurstCooldownRemaining => IsFreezeBurstUnlocked
+        ? Mathf.Max(0f, nextFreezeBurstTime - Time.time)
+        : 0f;
+    public float FreezeBurstCooldownDuration => FreezeBurstCooldown;
 
     public void Initialize(PlayerHealth targetPlayer)
     {
@@ -198,7 +219,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         for (int i = 0; i < satelliteCount; i++)
             CreateSatellite();
         if (GetAttachmentLevel(PrototypeAttachment.FreezeBurst) > 0)
-            nextFreezeBurstTime = Time.time + 10f;
+            nextFreezeBurstTime = Time.time + FreezeBurstCooldown;
         UpdatePersistentVisuals();
     }
 
@@ -343,13 +364,25 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         AddHeat(profile.HeatPerShot);
     }
 
-    private void FireRapidBullet(Vector2 origin, Vector2 direction, WeaponProfile profile)
+    private void FireRapidBullet(Vector2 origin, Vector2 direction, WeaponProfile profile,
+        bool allowSpecialCycle = true)
     {
+        bool tracerRound = false;
+        bool bulletStorm = false;
+        if (allowSpecialCycle)
+        {
+            rapidBulletCounter++;
+            tracerRound = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialTwo) && rapidBulletCounter % 6 == 0;
+            bulletStorm = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialThree) && rapidBulletCounter % 20 == 0;
+        }
+
         float range = GetWeaponDistance(profile.Range, origin, direction);
         Vector2 end = origin + direction * range;
-        CreateTimedLine("Rapid Bullet", origin, end, new Color(1f, 0.9f, 0.25f), 0.035f, 0.055f);
+        Color bulletColor = tracerRound ? new Color(1f, 0.25f, 0.08f) : new Color(1f, 0.9f, 0.25f);
+        CreateTimedLine(tracerRound ? "Tracer Round" : "Rapid Bullet", origin, end,
+            bulletColor, tracerRound ? 0.065f : 0.035f, 0.055f);
         CreateDirectionalParticles("Rapid Bullet Sparks", origin, direction,
-            new Color(1f, 0.9f, 0.25f), 5, 2.8f, 0.1f, 0.18f, 10f);
+            bulletColor, tracerRound ? 9 : 5, 2.8f, 0.1f, 0.18f, 10f);
 
         int targetsRemaining = 1 + GetPierceCount(profile);
         HashSet<EnemyHealth> hitEnemies = new HashSet<EnemyHealth>();
@@ -359,10 +392,21 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
             if (enemy == null || !hitEnemies.Add(enemy))
                 continue;
 
-            float dealt = DealWeaponDamage(enemy, profile.Damage);
+            float dealt = DealWeaponDamage(enemy, profile.Damage * (tracerRound ? 3f : 1f));
             TryReflect(enemy, dealt);
             if (--targetsRemaining <= 0)
                 break;
+        }
+
+        if (bulletStorm)
+        {
+            CreateRingEffect(origin, 0.75f, new Color(1f, 0.9f, 0.25f), 0.18f);
+            for (int i = 0; i < 8; i++)
+            {
+                float angle = i * 45f;
+                Vector2 stormDirection = Quaternion.Euler(0f, 0f, angle) * Vector2.right;
+                FireRapidBullet(origin, stormDirection, profile, false);
+            }
         }
     }
 
@@ -371,19 +415,42 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         float range = GetWeaponDistance(profile.Range, origin, direction);
         Vector2 end = origin + direction * range;
         Color laserColor = new Color(0.2f, 0.95f, 1f);
-        CreateTimedLine("Piercing Laser", origin, end, laserColor, 0.1f, profile.FireDelay * 1.35f);
+        bool wideBeam = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialTwo);
+        CreateTimedLine("Piercing Laser", origin, end, laserColor,
+            wideBeam ? 0.32f : 0.1f, profile.FireDelay * 1.35f);
         CreateLineParticles("Piercing Laser Particles", origin, end, laserColor, 22, 0.09f, 0.14f);
+
+        float pulseDamage = profile.Damage;
+        if (HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialOne))
+        {
+            float timeSinceLastPulse = Time.time - lastLaserPulseTime;
+            if (timeSinceLastPulse > 0.22f)
+                laserFocusBonus = 0f;
+            else if (timeSinceLastPulse > 0.001f)
+                laserFocusBonus = Mathf.Min(0.5f, laserFocusBonus + 0.04f);
+            pulseDamage *= 1f + laserFocusBonus;
+            lastLaserPulseTime = Time.time;
+        }
 
         HashSet<EnemyHealth> hitEnemies = new HashSet<EnemyHealth>();
         EnemyHealth last = null;
         float lastDamage = 0f;
         int targetsRemaining = Mathf.Max(1, GetPierceCount(profile));
-        foreach (RaycastHit2D hit in GetRaycastHits(origin, direction, range))
+        List<RaycastHit2D> laserHits = wideBeam
+            ? GetCircleCastHits(origin, direction, range, 0.22f)
+            : GetRaycastHits(origin, direction, range);
+        foreach (RaycastHit2D hit in laserHits)
         {
             EnemyHealth enemy = hit.collider != null ? hit.collider.GetComponentInParent<EnemyHealth>() : null;
             if (enemy == null || !hitEnemies.Add(enemy))
                 continue;
-            lastDamage = DealWeaponDamage(enemy, profile.Damage, DamageNumberType.Energy);
+            float hitDamage = pulseDamage;
+            if (HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialThree) &&
+                !enemy.isBoss && enemy.MaxHealth > 0f && enemy.CurrentHealth <= enemy.MaxHealth * 0.15f)
+            {
+                hitDamage = Mathf.Max(hitDamage, enemy.CurrentHealth);
+            }
+            lastDamage = DealWeaponDamage(enemy, hitDamage, DamageNumberType.Energy);
             last = enemy;
             if (--targetsRemaining <= 0)
                 break;
@@ -394,11 +461,12 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
     private void FireShotgun(Vector2 origin, Vector2 direction, WeaponProfile profile, float multishotChance)
     {
         const int pelletCount = 7;
+        float halfSpread = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialOne) ? 11.5f : 19f;
         CreateDirectionalParticles("Shotgun Muzzle Particles", origin, direction,
             new Color(1f, 0.65f, 0.2f), 14, 3.2f, 0.12f, 0.2f, 22f);
         for (int i = 0; i < pelletCount; i++)
         {
-            float angle = Mathf.Lerp(-19f, 19f, i / (pelletCount - 1f));
+            float angle = Mathf.Lerp(-halfSpread, halfSpread, i / (pelletCount - 1f));
             Vector2 pelletDirection = Quaternion.Euler(0f, 0f, angle) * direction;
             FireShotgunPellet(origin, pelletDirection, profile);
 
@@ -414,6 +482,9 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
                 FireShotgunPellet(origin, bonusDirection, profile);
             }
         }
+
+        if (HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialThree))
+            FireShotgunSlug(origin, direction, profile);
     }
 
     private void FireShotgunPellet(Vector2 origin, Vector2 direction, WeaponProfile profile)
@@ -433,33 +504,113 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
             float falloff = Mathf.Lerp(1f, 0.45f, Mathf.Clamp01(distance / Mathf.Max(0.01f, range)));
             float dealt = DealWeaponDamage(enemy, profile.Damage * falloff);
             TryReflect(enemy, dealt);
+            if (HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialTwo))
+                enemy.PushAway(origin, 0.55f);
             if (--targetsRemaining <= 0)
                 break;
+        }
+
+    }
+
+    private void FireShotgunSlug(Vector2 origin, Vector2 direction, WeaponProfile profile)
+    {
+        float range = GetWeaponDistance(profile.Range, origin, direction);
+        Vector2 end = origin + direction * range;
+        CreateTimedLine("Shotgun Center Slug", origin, end,
+            new Color(1f, 0.82f, 0.32f), 0.075f, 0.08f);
+
+        foreach (RaycastHit2D hit in GetRaycastHits(origin, direction, range))
+        {
+            EnemyHealth enemy = hit.collider != null ? hit.collider.GetComponentInParent<EnemyHealth>() : null;
+            if (enemy == null)
+                continue;
+
+            float distance = Vector2.Distance(origin, enemy.transform.position);
+            float falloff = Mathf.Lerp(1f, 0.65f, Mathf.Clamp01(distance / Mathf.Max(0.01f, range)));
+            float dealt = DealWeaponDamage(enemy, profile.Damage * 2.2f * falloff);
+            TryReflect(enemy, dealt);
+            break;
         }
     }
 
     private void FireFlamethrower(Vector2 origin, Vector2 direction, WeaponProfile profile)
     {
         float range = GetWeaponDistance(profile.Range, origin, direction);
+        bool longBurn = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialOne);
+        bool wideSpread = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialTwo);
+        bool combustion = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialThree);
+        float halfAngle = wideSpread ? 36f : 24f;
         if (originalFlamethrower == null)
         {
             Color fallbackColor = new Color(1f, 0.25f, 0.04f, 0.8f);
             CreateDirectionalParticles("Flamethrower Fallback", origin, direction, fallbackColor,
-                12, range / 0.32f, 0.32f, 0.2f, 24f);
+                12, range / 0.32f, 0.32f, 0.2f, halfAngle);
         }
 
-        int specialLevel = GetWeaponUpgradeLevel(ActivePrimary, PrototypeWeaponUpgrade.Special);
         foreach (EnemyHealth enemy in FindEnemies(origin, range))
         {
             Vector2 toEnemy = (Vector2)enemy.transform.position - origin;
-            if (Vector2.Angle(direction, toEnemy) > 24f)
+            if (Vector2.Angle(direction, toEnemy) > halfAngle)
                 continue;
+
+            if (combustion)
+                TrackCombustion(enemy);
             DealWeaponDamage(enemy, profile.Damage, DamageNumberType.Fire);
-            float burnDuration = GetModifiedStat(StatNames.BurnDuration, 1f + specialLevel * 0.35f);
+            float burnDuration = GetModifiedStat(StatNames.BurnDuration, longBurn ? 3f : 1f);
             float burnDamage = GetModifiedStat(StatNames.BurnRate,
-                GetWeaponDamage(3f + specialLevel * 0.75f));
+                GetWeaponDamage(3f));
             enemy.ApplyBurn(burnDuration, burnDamage);
         }
+    }
+
+    private void TrackCombustion(EnemyHealth enemy)
+    {
+        if (enemy == null || !combustionTrackedEnemies.Add(enemy))
+            return;
+
+        enemy.Died += HandleCombustionDeath;
+    }
+
+    private void HandleCombustionDeath(EnemyHealth enemy)
+    {
+        if (enemy == null)
+            return;
+
+        enemy.Died -= HandleCombustionDeath;
+        combustionTrackedEnemies.Remove(enemy);
+        StartCoroutine(CombustionRoutine(enemy.transform.position));
+    }
+
+    private IEnumerator CombustionRoutine(Vector2 position)
+    {
+        // The death event can occur while the flamethrower is iterating the
+        // shared overlap results, so defer the new overlap query by one frame.
+        yield return null;
+
+        const float radius = 1.65f;
+        CreateRingEffect(position, radius, new Color(1f, 0.2f, 0.03f), 0.2f);
+        CreateRadialParticles("Flame Combustion", position,
+            new Color(1f, 0.25f, 0.04f), 28, 2.8f, 0.16f, 0.4f);
+
+        int damageLevel = GetWeaponUpgradeLevel(
+            PrototypePrimaryWeapon.Flamethrower, PrototypeWeaponUpgrade.Damage);
+        float damage = GetWeaponDamageAtLevel(18f, PrototypePrimaryWeapon.Flamethrower, damageLevel);
+        foreach (EnemyHealth nearby in FindEnemies(position, radius))
+        {
+            nearby.TakeDamage(damage, DamageNumberType.Fire);
+            nearby.ApplyBurn(1.25f, GetWeaponDamageAtLevel(
+                2.5f, PrototypePrimaryWeapon.Flamethrower, damageLevel));
+        }
+    }
+
+    private void ClearCombustionTracking()
+    {
+        foreach (EnemyHealth enemy in combustionTrackedEnemies)
+        {
+            if (enemy != null)
+                enemy.Died -= HandleCombustionDeath;
+        }
+        combustionTrackedEnemies.Clear();
     }
 
     private void FireLightning(Vector2 origin, Vector2 direction, WeaponProfile profile,
@@ -480,9 +631,18 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         Vector2 start = origin;
         float damage = profile.Damage;
         int chainCount = Mathf.Max(1, GetPierceCount(profile));
+        EnemyHealth firstHit = null;
+        EnemyHealth lastHit = null;
+        float lastChainDamage = 0f;
         for (int chain = 0; chain < chainCount && current != null; chain++)
         {
+            if (chain > 0)
+                BackgroundMusic.LightningChained();
+
             hit.Add(current);
+            if (firstHit == null)
+                firstHit = current;
+            lastHit = current;
             if (volleyHits != null)
                 volleyHits.Add(current);
             Color lightningColor = new Color(0.95f, 0.85f, 0.12f);
@@ -494,18 +654,31 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
                 ? DamageNumberType.Normal
                 : DamageNumberType.ElectricChain;
             float dealt = DealWeaponDamage(current, damage, damageType);
+            lastChainDamage = damage;
             current.RecordStatusEffect(StatusEffectRecord.Shocked);
+            if (HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialTwo))
+                current.Stun(0.3f);
             if (chain == 0) TryReflect(current, dealt);
             start = current.transform.position;
-            current = FindNearestEnemyWithinIndicator(start, ApplyWeaponRange(3.4f), hit, volleyHits);
+            float jumpRange = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialOne) ? 4.6f : 3.4f;
+            current = FindNearestEnemyWithinIndicator(start, ApplyWeaponRange(jumpRange), hit, volleyHits);
             damage *= 0.82f;
+        }
+
+        if (firstHit != null && lastHit != null && firstHit != lastHit &&
+            HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialThree))
+        {
+            DealWeaponDamage(firstHit, lastChainDamage * 0.75f, DamageNumberType.ElectricChain);
+            CreateTimedLine("Lightning Feedback Loop", lastHit.transform.position, firstHit.transform.position,
+                new Color(1f, 0.95f, 0.35f), 0.085f, 0.18f);
+            CreateLineParticles("Lightning Feedback Particles", lastHit.transform.position,
+                firstHit.transform.position, new Color(1f, 0.95f, 0.35f), 12, 0.12f, 0.18f);
         }
     }
 
     private void FireToxicBomb(Vector2 origin, Vector2 requestedTarget, WeaponProfile profile)
     {
         Vector2 target = requestedTarget;
-        int specialLevel = GetWeaponUpgradeLevel(ActivePrimary, PrototypeWeaponUpgrade.Special);
         float splashRadius = GetToxicSplashRadius();
         float range = GetWeaponRadius(profile.Range);
         if (rangeIndicator != null && rangeIndicator.WorldRadius > 0f)
@@ -513,18 +686,18 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         Vector2 delta = target - origin;
         if (delta.magnitude > range)
             target = origin + delta.normalized * range;
-        StartCoroutine(ToxicBombRoutine(origin, target, splashRadius, profile.Damage, specialLevel));
+        StartCoroutine(ToxicBombRoutine(origin, target, splashRadius, profile.Damage));
     }
 
     private float GetToxicSplashRadius()
     {
-        int specialLevel = GetWeaponUpgradeLevel(PrototypePrimaryWeapon.ToxicSpitter,
-            PrototypeWeaponUpgrade.Special);
-        return 2f + specialLevel * 0.18f;
+        return HasWeaponUpgrade(PrototypePrimaryWeapon.ToxicSpitter, PrototypeWeaponUpgrade.SpecialTwo)
+            ? 2.9f
+            : 2f;
     }
 
     private IEnumerator ToxicBombRoutine(Vector2 start, Vector2 target, float splashRadius,
-        float baseDamage, int specialLevel)
+        float baseDamage)
     {
         GameObject bomb = CreateCircleObject("Toxic Bomb", new Color(0.55f, 1f, 0.12f), 0.24f, 16);
         bomb.transform.position = start;
@@ -561,20 +734,60 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
             Destroy(bomb);
         }
 
+        BackgroundMusic.ToxicSpitterImpacted();
         CreateRingEffect(target, splashRadius, new Color(0.45f, 1f, 0.08f), 0.22f);
         CreateRadialParticles("Toxic Spitter Splash", target, new Color(0.45f, 1f, 0.08f),
             28, 2.6f, 0.2f, 0.5f);
         EnemyHealth reflectionSource = null;
         float reflectedDamage = 0f;
+        float poisonDamage = GetWeaponDamage(4f) *
+                             (HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialOne) ? 1.65f : 1f);
         foreach (EnemyHealth enemy in FindEnemies(target, splashRadius))
         {
             reflectedDamage = DealWeaponDamage(enemy, baseDamage, DamageNumberType.Poison);
             PrototypePoisonStatus poison = enemy.GetComponent<PrototypePoisonStatus>();
             if (poison == null) poison = enemy.gameObject.AddComponent<PrototypePoisonStatus>();
-            poison.Apply(4f + specialLevel * 0.5f, GetWeaponDamage(4f + specialLevel * 0.6f));
+            poison.Apply(4f, poisonDamage);
             reflectionSource = enemy;
         }
         if (reflectionSource != null) TryReflect(reflectionSource, reflectedDamage);
+
+        if (HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialThree))
+            StartCoroutine(ToxicPoolRoutine(target, splashRadius, baseDamage, poisonDamage));
+    }
+
+    private IEnumerator ToxicPoolRoutine(Vector2 position, float radius, float baseDamage, float poisonDamage)
+    {
+        GameObject pool = CreateCircleObject("Lingering Toxic Pool",
+            new Color(0.28f, 0.8f, 0.05f, 0.34f), radius * 2f, 5);
+        pool.transform.position = position;
+        runtimeObjects.Add(pool);
+
+        const float duration = 3.5f;
+        const float tickInterval = 0.5f;
+        BackgroundMusic.ToxicPoolStarted(position, duration);
+        float remaining = duration;
+        while (remaining > 0f && pool != null)
+        {
+            foreach (EnemyHealth enemy in FindEnemies(position, radius))
+            {
+                DealWeaponDamage(enemy, baseDamage * 0.14f, DamageNumberType.Poison);
+                PrototypePoisonStatus poison = enemy.GetComponent<PrototypePoisonStatus>();
+                if (poison == null) poison = enemy.gameObject.AddComponent<PrototypePoisonStatus>();
+                poison.Apply(1.1f, poisonDamage * 0.45f);
+            }
+
+            CreateRadialParticles("Toxic Pool Bubbles", position, new Color(0.45f, 1f, 0.08f),
+                7, 0.65f, 0.11f, 0.35f);
+            yield return new WaitForSeconds(tickInterval);
+            remaining -= tickInterval;
+        }
+
+        if (pool != null)
+        {
+            runtimeObjects.Remove(pool);
+            Destroy(pool);
+        }
     }
 
     private void UpdateAttachments()
@@ -590,17 +803,21 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
                 hitEnemy = true;
             }
             if (hitEnemy)
+            {
+                BackgroundMusic.SpikeBarrierStruck();
                 CreateRadialParticles("Spike Barrier Impact", playerHealth.transform.position,
                     new Color(1f, 0.2f, 0.14f), 10, 1.8f, 0.1f, 0.22f);
+            }
         }
 
         int freezeLevel = GetAttachmentLevel(PrototypeAttachment.FreezeBurst);
         if (freezeLevel > 0 && Time.time >= nextFreezeBurstTime)
         {
-            nextFreezeBurstTime = Time.time + 10f;
+            nextFreezeBurstTime = Time.time + FreezeBurstCooldown;
             float radius = ClampRadiusToIndicator(4f + 0.45f * freezeLevel);
             foreach (EnemyHealth enemy in FindEnemies(playerHealth.transform.position, radius))
                 enemy.Stun(0.65f + 0.25f * freezeLevel);
+            BackgroundMusic.FreezeBurstActivated();
             CreateRingEffect(playerHealth.transform.position, radius, new Color(0.25f, 0.85f, 1f), 0.3f);
             CreateRadialParticles("Freeze Burst Particles", playerHealth.transform.position,
                 new Color(0.25f, 0.85f, 1f), 34, radius * 1.8f, 0.12f, 0.4f);
@@ -631,6 +848,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
             if (satellite == null) continue;
             EnemyHealth target = FindNearestEnemyWithinIndicator(satellite.transform.position, ApplyGlobalRange(6f), null);
             if (target == null) continue;
+            BackgroundMusic.MiniTurretFired();
             float dealt = DealDamage(target, 7f + level * 1.5f, DamageNumberType.Energy);
             CreateTimedLine("Satellite Shot", satellite.transform.position, target.transform.position,
                 new Color(0.4f, 1f, 0.85f), 0.035f, 0.08f);
@@ -644,7 +862,8 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
     {
         int level = GetAttachmentLevel(PrototypeAttachment.OverchargeModule);
         overchargeEndsAt = Time.time + 3.5f + level * 0.5f;
-        overchargeReadyAt = Time.time + 15f;
+        overchargeReadyAt = Time.time + OverchargeCooldown;
+        BackgroundMusic.OverchargeActivated();
         CreateRingEffect(playerHealth.transform.position, 1.7f, new Color(1f, 0.45f, 0.08f), 0.28f);
         CreateRadialParticles("Overcharge Particles", playerHealth.transform.position,
             new Color(1f, 0.45f, 0.08f), 30, 2.5f, 0.12f, 0.38f);
@@ -671,6 +890,8 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         }
 
         ActivePrimary = weapon;
+        laserFocusBonus = 0f;
+        lastLaserPulseTime = float.NegativeInfinity;
         nextPrimaryFireTime = 0f;
         StopWeaponAudio();
         UpdateRangeIndicatorForActiveWeapon();
@@ -698,9 +919,9 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         if (attachment == PrototypeAttachment.MiniTurretSatellites)
             CreateSatellite();
         if (attachment == PrototypeAttachment.FreezeBurst && level == 0)
-            nextFreezeBurstTime = Time.time + 10f;
+            nextFreezeBurstTime = Time.time + FreezeBurstCooldown;
         UpdatePersistentVisuals();
-        BackgroundMusic.Purchase();
+        BackgroundMusic.UpgradeUnlocked();
         StateChanged?.Invoke();
         return true;
     }
@@ -724,7 +945,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         WeaponProfile profile = GetProfile(ActivePrimary);
         state.Heat = Mathf.Min(state.Heat, GetMaxHeat(profile));
         UpdateRangeIndicatorForActiveWeapon();
-        BackgroundMusic.Purchase();
+        BackgroundMusic.UpgradeUnlocked();
         StateChanged?.Invoke();
         return true;
     }
@@ -733,6 +954,16 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
     {
         WeaponState state = GetWeaponState(weapon);
         return state.UpgradeLevels.TryGetValue(upgrade, out int level) ? level : 0;
+    }
+
+    private bool HasWeaponUpgrade(PrototypeWeaponUpgrade upgrade)
+    {
+        return HasWeaponUpgrade(ActivePrimary, upgrade);
+    }
+
+    private bool HasWeaponUpgrade(PrototypePrimaryWeapon weapon, PrototypeWeaponUpgrade upgrade)
+    {
+        return GetWeaponUpgradeLevel(weapon, upgrade) > 0;
     }
 
     public int ResetProgressAndRefund()
@@ -766,6 +997,10 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         overchargeEndsAt = 0f;
         overchargeReadyAt = 0f;
         nextFreezeBurstTime = 0f;
+        laserFocusBonus = 0f;
+        lastLaserPulseTime = float.NegativeInfinity;
+        rapidBulletCounter = 0;
+        ClearCombustionTracking();
         UpdateRangeIndicatorForActiveWeapon();
 
         if (CurrencyManager.Instance != null && refund > 0)
@@ -781,7 +1016,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
 
     public static int GetWeaponUpgradeMaxLevel(PrototypeWeaponUpgrade upgrade)
     {
-        return upgrade == PrototypeWeaponUpgrade.Special ? 4 : 5;
+        return IsSpecialUpgrade(upgrade) ? 1 : 5;
     }
 
     public static int GetWeaponUpgradeCost(PrototypePrimaryWeapon weapon, PrototypeWeaponUpgrade upgrade, int currentLevel)
@@ -807,16 +1042,13 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
                 costAddedPerLevel = 40;
                 costMultiplierPerLevel = 1.30f;
                 break;
-            case PrototypeWeaponUpgrade.Special:
-                baseCost = 350;
-                costAddedPerLevel = 25;
-                costMultiplierPerLevel = GetSpecialUpgradeCostMultiplier(weapon);
-                break;
-            default:
+            case PrototypeWeaponUpgrade.Cooling:
                 baseCost = 95;
                 costAddedPerLevel = 32;
                 costMultiplierPerLevel = 1.24f;
                 break;
+            default:
+                return GlobalData.ScaleUpgradePrice(GetSpecialUpgradeCost(weapon, upgrade));
         }
 
         float linearCost = baseCost + costAddedPerLevel * level;
@@ -825,22 +1057,29 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         return GlobalData.ScaleUpgradePrice(basePrice);
     }
 
-    private static float GetSpecialUpgradeCostMultiplier(PrototypePrimaryWeapon weapon)
+    private static int GetSpecialUpgradeCost(PrototypePrimaryWeapon weapon, PrototypeWeaponUpgrade upgrade)
     {
-        // Specials all begin expensive. Stronger target-multiplying specials
-        // compound faster than gradual damage-over-time improvements.
+        int slotCost = upgrade == PrototypeWeaponUpgrade.SpecialOne ? 0 :
+            upgrade == PrototypeWeaponUpgrade.SpecialTwo ? 85 : 180;
+        int weaponCost;
         switch (weapon)
         {
-            case PrototypePrimaryWeapon.PiercingLaser:
-                return 1.38f;
-            case PrototypePrimaryWeapon.ShotgunBurst:
-            case PrototypePrimaryWeapon.LightningArc:
-                return 1.34f;
-            case PrototypePrimaryWeapon.RapidBullets:
-                return 1.30f;
-            default:
-                return 1.22f;
+            case PrototypePrimaryWeapon.PiercingLaser: weaponCost = 475; break;
+            case PrototypePrimaryWeapon.LightningArc: weaponCost = 500; break;
+            case PrototypePrimaryWeapon.ToxicSpitter: weaponCost = 450; break;
+            case PrototypePrimaryWeapon.Flamethrower: weaponCost = 425; break;
+            case PrototypePrimaryWeapon.ShotgunBurst: weaponCost = 400; break;
+            default: weaponCost = 420; break;
         }
+
+        return weaponCost + slotCost;
+    }
+
+    private static bool IsSpecialUpgrade(PrototypeWeaponUpgrade upgrade)
+    {
+        return upgrade == PrototypeWeaponUpgrade.SpecialOne ||
+               upgrade == PrototypeWeaponUpgrade.SpecialTwo ||
+               upgrade == PrototypeWeaponUpgrade.SpecialThree;
     }
 
     public static string GetWeaponDisplayName(PrototypePrimaryWeapon weapon)
@@ -855,7 +1094,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
             case PrototypeWeaponUpgrade.Damage:
                 return weapon == PrototypePrimaryWeapon.Flamethrower ? "Fuel Pressure" :
                     weapon == PrototypePrimaryWeapon.LightningArc ? "Voltage Amplifier" :
-                    weapon == PrototypePrimaryWeapon.ToxicSpitter ? "Concentrated Toxin" : "Damage Tuning";
+                    weapon == PrototypePrimaryWeapon.ToxicSpitter ? "Payload Strength" : "Damage Tuning";
             case PrototypeWeaponUpgrade.Range:
                 return weapon == PrototypePrimaryWeapon.ShotgunBurst ? "Longer Barrel" :
                     weapon == PrototypePrimaryWeapon.Flamethrower ? "Extended Nozzle" :
@@ -870,15 +1109,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
                 return weapon == PrototypePrimaryWeapon.Flamethrower ? "Insulated Fuel Lines" :
                     weapon == PrototypePrimaryWeapon.PiercingLaser ? "Lens Coolant" : "Cooling System";
             default:
-                switch (weapon)
-                {
-                    case PrototypePrimaryWeapon.RapidBullets: return "Armor-Piercing Rounds";
-                    case PrototypePrimaryWeapon.PiercingLaser: return "Focusing Prism";
-                    case PrototypePrimaryWeapon.ShotgunBurst: return "Hardened Pellets";
-                    case PrototypePrimaryWeapon.Flamethrower: return "Napalm Blend";
-                    case PrototypePrimaryWeapon.LightningArc: return "Arc Capacitor";
-                    default: return "Corrosive Payload";
-                }
+                return GetSpecialUpgradeName(weapon, upgrade);
         }
     }
 
@@ -891,15 +1122,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
             case PrototypeWeaponUpgrade.FireRate: return "+10% firing speed per level for this weapon only.";
             case PrototypeWeaponUpgrade.Cooling: return "+12% heat capacity and +15% cooling per level.";
             default:
-                switch (weapon)
-                {
-                    case PrototypePrimaryWeapon.RapidBullets: return "Each level lets every bullet pass through one more slime.";
-                    case PrototypePrimaryWeapon.PiercingLaser: return "Each level lets the beam damage two more slimes per pulse.";
-                    case PrototypePrimaryWeapon.ShotgunBurst: return "Each level lets every pellet pass through one more slime.";
-                    case PrototypePrimaryWeapon.Flamethrower: return "Increases burn duration and burn damage.";
-                    case PrototypePrimaryWeapon.LightningArc: return "Adds one extra slime to every lightning chain.";
-                    default: return "Increases poison duration, poison damage, and splash radius.";
-                }
+                return GetSpecialUpgradeDescription(weapon, upgrade);
         }
     }
 
@@ -930,7 +1153,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
                     GetMaxHeatAtLevel(profile, level), GetMaxHeatAtLevel(profile, nextLevel),
                     GetCoolingAtLevel(profile, level), GetCoolingAtLevel(profile, nextLevel));
             default:
-                return GetSpecialUpgradePreview(weapon, profile, level, nextLevel);
+                return GetSpecialUpgradePreview(weapon, upgrade);
         }
     }
 
@@ -961,35 +1184,110 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         }
     }
 
-    private string GetSpecialUpgradePreview(PrototypePrimaryWeapon weapon, WeaponProfile profile,
-        int level, int nextLevel)
+    private static string GetSpecialUpgradeName(PrototypePrimaryWeapon weapon, PrototypeWeaponUpgrade upgrade)
     {
         switch (weapon)
         {
             case PrototypePrimaryWeapon.RapidBullets:
-            case PrototypePrimaryWeapon.ShotgunBurst:
-                return string.Format("Targets hit per projectile {0} -> {1}",
-                    1 + GetSpecialTargetCount(profile, weapon, level),
-                    1 + GetSpecialTargetCount(profile, weapon, nextLevel));
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne) return "Armor Drill";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo) return "Tracer Cycle";
+                return "Bullet Storm";
             case PrototypePrimaryWeapon.PiercingLaser:
-                return string.Format("Targets hit per pulse {0} -> {1}",
-                    GetSpecialTargetCount(profile, weapon, level),
-                    GetSpecialTargetCount(profile, weapon, nextLevel));
-            case PrototypePrimaryWeapon.LightningArc:
-                return string.Format("Chained targets {0} -> {1}",
-                    GetSpecialTargetCount(profile, weapon, level),
-                    GetSpecialTargetCount(profile, weapon, nextLevel));
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne) return "Thermal Focus";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo) return "Wide Aperture";
+                return "Disintegrator Lens";
+            case PrototypePrimaryWeapon.ShotgunBurst:
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne) return "Tight Choke";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo) return "Concussive Shells";
+                return "Slug Chamber";
             case PrototypePrimaryWeapon.Flamethrower:
-                int damageLevel = GetWeaponUpgradeLevel(weapon, PrototypeWeaponUpgrade.Damage);
-                return string.Format("Burn {0:0.##}s/{1:0.##} dmg -> {2:0.##}s/{3:0.##} dmg",
-                    1f + level * 0.35f, GetWeaponDamageAtLevel(3f + level * 0.75f, weapon, damageLevel),
-                    1f + nextLevel * 0.35f, GetWeaponDamageAtLevel(3f + nextLevel * 0.75f, weapon, damageLevel));
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne) return "Long-Burn Fuel";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo) return "Wide Nozzle";
+                return "Combustion";
+            case PrototypePrimaryWeapon.LightningArc:
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne) return "Extended Arc";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo) return "Static Lock";
+                return "Feedback Loop";
             default:
-                int toxinDamageLevel = GetWeaponUpgradeLevel(weapon, PrototypeWeaponUpgrade.Damage);
-                return string.Format("Splash {0:0.##} -> {1:0.##} | Poison {2:0.##}s/{3:0.##} -> {4:0.##}s/{5:0.##}",
-                    2f + level * 0.18f, 2f + nextLevel * 0.18f,
-                    4f + level * 0.5f, GetWeaponDamageAtLevel(4f + level * 0.6f, weapon, toxinDamageLevel),
-                    4f + nextLevel * 0.5f, GetWeaponDamageAtLevel(4f + nextLevel * 0.6f, weapon, toxinDamageLevel));
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne) return "Concentrated Venom";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo) return "Expanding Splat";
+                return "Lingering Pool";
+        }
+    }
+
+    private static string GetSpecialUpgradeDescription(PrototypePrimaryWeapon weapon,
+        PrototypeWeaponUpgrade upgrade)
+    {
+        switch (weapon)
+        {
+            case PrototypePrimaryWeapon.RapidBullets:
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne)
+                    return "Every bullet drills through two additional slimes.";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo)
+                    return "Every sixth bullet becomes a bright tracer that deals triple damage.";
+                return "Every twentieth bullet fires an eight-direction bullet storm.";
+            case PrototypePrimaryWeapon.PiercingLaser:
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne)
+                    return "Holding the beam on continuously ramps its damage up to +50%.";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo)
+                    return "Widens both the damaging beam and its visible laser line.";
+                return "The beam instantly disintegrates non-boss slimes below 15% health.";
+            case PrototypePrimaryWeapon.ShotgunBurst:
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne)
+                    return "Tightens the pellet spread for much stronger mid-range hits.";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo)
+                    return "Pellet impacts knock slimes away from the tower.";
+                return "Adds one heavy center slug to every shotgun blast.";
+            case PrototypePrimaryWeapon.Flamethrower:
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne)
+                    return "Burning lasts three times longer after a slime leaves the flames.";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo)
+                    return "Widens the damaging flame cone and the authored particle effect.";
+                return "Burning slimes combust on death and ignite nearby slimes.";
+            case PrototypePrimaryWeapon.LightningArc:
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne)
+                    return "Adds three chain targets and increases the distance between jumps.";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo)
+                    return "Every lightning hit briefly stuns its target.";
+                return "The final arc loops back and shocks the first target again.";
+            default:
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne)
+                    return "Poison damage over time is increased by 65%.";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo)
+                    return "Poison splats and their visible splash grow 45% larger.";
+                return "Every bomb leaves a damaging poison pool for 3.5 seconds.";
+        }
+    }
+
+    private static string GetSpecialUpgradePreview(PrototypePrimaryWeapon weapon,
+        PrototypeWeaponUpgrade upgrade)
+    {
+        switch (weapon)
+        {
+            case PrototypePrimaryWeapon.RapidBullets:
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne) return "Targets per bullet 1 -> 3";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo) return "Every 6th bullet deals 300% damage";
+                return "Every 20th bullet fires in 8 directions";
+            case PrototypePrimaryWeapon.PiercingLaser:
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne) return "Unlock sustained damage ramp up to +50%";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo) return "Beam width 0.1 -> 0.32";
+                return "Instantly finish non-boss slimes below 15% health";
+            case PrototypePrimaryWeapon.ShotgunBurst:
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne) return "Pellet spread 38 degrees -> 23 degrees";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo) return "Unlock 0.55-unit knockback per pellet";
+                return "Add one center slug at 220% pellet damage";
+            case PrototypePrimaryWeapon.Flamethrower:
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne) return "Burn duration 1s -> 3s";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo) return "Flame cone 48 degrees -> 72 degrees";
+                return "Unlock 1.65-radius death combustion";
+            case PrototypePrimaryWeapon.LightningArc:
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne) return "Chain targets +3 | Jump range 3.4 -> 4.6";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo) return "Unlock a 0.3-second stun per hit";
+                return "Final arc returns at 75% of its remaining damage";
+            default:
+                if (upgrade == PrototypeWeaponUpgrade.SpecialOne) return "Poison damage 100% -> 165%";
+                if (upgrade == PrototypeWeaponUpgrade.SpecialTwo) return "Splash radius 2 -> 2.9";
+                return "Unlock a 3.5-second damaging poison pool";
         }
     }
 
@@ -1041,21 +1339,6 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         float reloadRecovery = 1f + GetPercent(StatNames.ReloadSpeed) / 100f;
         return profile.CoolingPerSecond * (1f + Mathf.Max(0, coolingLevel) * 0.15f) *
                Mathf.Max(0.1f, reloadRecovery);
-    }
-
-    private static int GetSpecialTargetCount(WeaponProfile profile, PrototypePrimaryWeapon weapon, int specialLevel)
-    {
-        switch (weapon)
-        {
-            case PrototypePrimaryWeapon.PiercingLaser:
-                return profile.Pierce + specialLevel * 2;
-            case PrototypePrimaryWeapon.RapidBullets:
-            case PrototypePrimaryWeapon.ShotgunBurst:
-            case PrototypePrimaryWeapon.LightningArc:
-                return profile.Pierce + specialLevel;
-            default:
-                return profile.Pierce;
-        }
     }
 
     public int GetAttachmentLevel(PrototypeAttachment attachment)
@@ -1239,7 +1522,10 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
                 state.Heat = 0f;
                 state.Overheated = false;
                 if (weapon == ActivePrimary)
+                {
+                    BackgroundMusic.OverheatCooled();
                     UpdatePersistentVisuals();
+                }
             }
         }
     }
@@ -1266,13 +1552,19 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         }
 
         if (!weaponLoopSource.isPlaying)
+        {
+            BackgroundMusic.PrototypeWeaponLoopStarted(ActivePrimary);
             weaponLoopSource.Play();
+        }
     }
 
     private void StopWeaponAudio()
     {
         if (weaponLoopSource != null && weaponLoopSource.isPlaying)
+        {
             weaponLoopSource.Stop();
+            BackgroundMusic.PrototypeWeaponLoopStopped(loopWeapon);
+        }
     }
 
     private void AddHeat(float amount)
@@ -1311,19 +1603,19 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
 
     private int GetPierceCount(WeaponProfile profile)
     {
-        int level = GetWeaponUpgradeLevel(ActivePrimary, PrototypeWeaponUpgrade.Special);
-        switch (ActivePrimary)
+        if (ActivePrimary == PrototypePrimaryWeapon.RapidBullets &&
+            HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialOne))
         {
-            case PrototypePrimaryWeapon.RapidBullets:
-            case PrototypePrimaryWeapon.ShotgunBurst:
-                return profile.Pierce + level;
-            case PrototypePrimaryWeapon.PiercingLaser:
-                return profile.Pierce + level * 2;
-            case PrototypePrimaryWeapon.LightningArc:
-                return profile.Pierce + level;
-            default:
-                return profile.Pierce;
+            return profile.Pierce + 2;
         }
+
+        if (ActivePrimary == PrototypePrimaryWeapon.LightningArc &&
+            HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialOne))
+        {
+            return profile.Pierce + 3;
+        }
+
+        return profile.Pierce;
     }
 
     private float DealWeaponDamage(
@@ -1377,6 +1669,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         EnemyHealth target = FindNearestEnemyWithinIndicator(source.transform.position, ApplyGlobalRange(4f), excluded);
         if (target == null) return;
         target.TakeDamage(damage * 0.6f, DamageNumberType.Reflected);
+        BackgroundMusic.ReflectorRicocheted();
         CreateTimedLine("Reflected Shot", source.transform.position, target.transform.position,
             new Color(0.75f, 0.35f, 1f), 0.045f, 0.12f);
         CreateLineParticles("Reflected Shot Particles", source.transform.position, target.transform.position,
@@ -1575,6 +1868,14 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         return raycastHits;
     }
 
+    private List<RaycastHit2D> GetCircleCastHits(Vector2 origin, Vector2 direction,
+        float distance, float radius)
+    {
+        raycastHits.Clear();
+        Physics2D.CircleCast(origin, radius, direction, physicsContactFilter, raycastHits, distance);
+        return raycastHits;
+    }
+
     private List<EnemyHealth> FindEnemies(Vector2 origin, float radius)
     {
         overlapColliders.Clear();
@@ -1665,7 +1966,8 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         WeaponProfile profile = GetProfile(PrototypePrimaryWeapon.Flamethrower);
         float visibleDistance = GetWeaponDistance(profile.Range, origin, direction);
         float rangeMultiplier = visibleDistance / Mathf.Max(0.01f, profile.Range);
-        originalFlamethrower.SetExternalVisual(shouldPlay, rangeMultiplier);
+        float spreadMultiplier = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialTwo) ? 1.5f : 1f;
+        originalFlamethrower.SetExternalVisual(shouldPlay, rangeMultiplier, spreadMultiplier);
     }
 
     private LineRenderer CreatePersistentLine(string objectName, float startWidth, float endWidth, int sortingOrder)
@@ -2006,6 +2308,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
     private void OnDestroy()
     {
         StopWeaponAudio();
+        ClearCombustionTracking();
         if (originalFlamethrower != null)
             originalFlamethrower.StopParticleEffect(true);
         PlayerStats.OnStatChanged -= HandlePlayerStatChanged;

@@ -34,7 +34,12 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier:
   music: {fileID: 8300000, guid: d18ff662fecffa14298a17f9dc77da0e, type: 3}
-  bossMusic: {fileID: 8300000, guid: fd05bffcfeb0c244187945328df2d58a, type: 3}
+  gameplayMusic: {fileID: 8300000, guid: 89cb0e3ddd2349f8a719034e77e642e2, type: 3}
+  bossMusic: {fileID: 8300000, guid: e39b4aebbd4e43daad7f153b1bf94215, type: 3}
+  menuMusicVolume: 0.26
+  gameplayMusicVolume: 1
+  bossMusicVolume: 1
+  musicFadeDuration: 0.35
   bossEncounter: {fileID: 8300000, guid: ad12f336ab0e6ed48a7aa51c5f2a1821, type: 3}
   bossDefeat: {fileID: 8300000, guid: a6d6a2bd04579bb47808471ef5bcafd4, type: 3}
   wave: {fileID: 8300000, guid: f143c8b5d8136e2479e08d8b66b8d3c1, type: 3}
@@ -71,3 +76,38 @@ MonoBehaviour:
   waveComplete: {fileID: 8300000, guid: 85795c87e0084bf09549fb63c4555df6, type: 3}
   defenceBreak: {fileID: 8300000, guid: 47df6b77a952465b975bfe1b87183324, type: 3}
   lowHealthWarning: {fileID: 8300000, guid: e348b02aa5bb4600a7161779207f8478, type: 3}
+  laserLoop: {fileID: 8300000, guid: e8e5a9d394be551a5c60cba3d3b0984d, type: 3}
+  laserStart: {fileID: 8300000, guid: d17e51dacdb1861a75716f24b7e0e852, type: 3}
+  laserStop: {fileID: 8300000, guid: 2210c0af5055be6c373115762e9e744d, type: 3}
+  lightningArc: {fileID: 8300000, guid: 8ad5e29fc7ccc97b81c2784d4a40c6d2, type: 3}
+  lightningChain: {fileID: 8300000, guid: 7f897d5402ad05dd6e1992b8380c83fa, type: 3}
+  toxicSpitterFire: {fileID: 8300000, guid: a5d1c2c0f93ba8669903f4f7ec90cbbf, type: 3}
+  toxicSpitterImpact: {fileID: 8300000, guid: beb0d7867697048331dd515b503b18e3, type: 3}
+  toxicPoolLoop: {fileID: 8300000, guid: 0c6a772935f66075777d20e301919e15, type: 3}
+  flamethrowerIgnite: {fileID: 8300000, guid: fbf88afeb0e72de434215070e5da858e, type: 3}
+  flamethrowerStop: {fileID: 8300000, guid: 8748da30650b4752db2c81a6de585664, type: 3}
+  overheatVent: {fileID: 8300000, guid: c6c8a2ccbf8f9770de98ae8e9647e328, type: 3}
+  overheatReady: {fileID: 8300000, guid: 1c76a35f24afc6e06d8c9de99105a20b, type: 3}
+  iceSlimeShatter: {fileID: 8300000, guid: 95e57e97716a94d6dbbd37a3dc676d5a, type: 3}
+  acidSlimeSizzle: {fileID: 8300000, guid: 6a3df246cbef771140b9e9d886d29e93, type: 3}
+  electricSlimeCharge: {fileID: 8300000, guid: f6d929ecb4518e84d012084a6c7459c6, type: 3}
+  toxicSlimeTrail: {fileID: 8300000, guid: e5a4c1e85dc94c382d8c191090f0553b, type: 3}
+  megaSlimeSpawn: {fileID: 8300000, guid: 639072cfed1455ec53d336f220d5523e, type: 3}
+  megaSlimeSplit: {fileID: 8300000, guid: f2637a9b63800b3ae6979ba9a03ecf54, type: 3}
+  miniSlimeSpawn: {fileID: 8300000, guid: 60a637647437e190683a27d525ddbab5, type: 3}
+  miniTurretFire: {fileID: 8300000, guid: b5e27491d746eb2528d5904505299b81, type: 3}
+  spikeBarrierHit: {fileID: 8300000, guid: a0864582e9cb35700b0581fb15510ffa, type: 3}
+  overchargeActivate: {fileID: 8300000, guid: 0762afb2c6e72c7cac3f4e12aca2aa2a, type: 3}
+  freezeBurstActivate: {fileID: 8300000, guid: 7c3f717f844511ffbe15f92fcfa4bd14, type: 3}
+  reflectorRicochet: {fileID: 8300000, guid: 802777b356a42c5cb99bde34776e422a, type: 3}
+  empCharge: {fileID: 8300000, guid: daa94aa73b981e21741863465f303212, type: 3}
+  empBlast: {fileID: 8300000, guid: a969999692eeba0a2bb0207a7731a068, type: 3}
+  toxicFloodActivate: {fileID: 8300000, guid: 2679e11b090aa99df4e20720d9a54c55, type: 3}
+  abilityReady: {fileID: 8300000, guid: 1db00e7c475f00ca15e764607dd4a0e4, type: 3}
+  hugeWaveWarning: {fileID: 8300000, guid: 9ea7388e5e20e5d2b4be45f6e6789e09, type: 3}
+  bossIncomingAlarm: {fileID: 8300000, guid: e32da353115ebd05bd0138140e5ef2a2, type: 3}
+  defenceRecharging: {fileID: 8300000, guid: a3a009ac3d09a31659ffe3d8748f428e, type: 3}
+  defenceFull: {fileID: 8300000, guid: 7a2b8b7a4da039bbcce10fe1eb7cbcdd, type: 3}
+  upgradeUnlocked: {fileID: 8300000, guid: eb53c477d64b7314a276c7e6638ae64c, type: 3}
+  tabOpen: {fileID: 8300000, guid: 7e3351bbd751de03145f5798ac5a4e98, type: 3}
+  toggleSelect: {fileID: 8300000, guid: 7b6044b9b93b086ae7fb84eab22faae4, type: 3}

@@ -15,6 +15,15 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
     [SerializeField] private RectTransform tabParent;
     [SerializeField] private GameObject upgradesPanel;
     [SerializeField] private GameObject grenadesPanel;
+    [Tooltip("Scene-authored Armory window. Use Tools/Tower Defence/Create Missing Armory Panel if this is missing.")]
+    [SerializeField] private GameObject armoryPanel;
+
+    [Header("Armory Readability")]
+    [SerializeField, Min(160f)] private float cardHeight = 220f;
+    [SerializeField, Range(20f, 48f)] private float cardTitleFontSize = 32f;
+    [SerializeField, Range(16f, 40f)] private float cardDescriptionFontSize = 24f;
+    [SerializeField, Min(180f)] private float purchaseButtonWidth = 240f;
+    [SerializeField, Range(18f, 40f)] private float purchaseButtonFontSize = 27f;
 
     private readonly Dictionary<PrototypePrimaryWeapon, UnityEngine.UI.Button> primaryButtons =
         new Dictionary<PrototypePrimaryWeapon, UnityEngine.UI.Button>();
@@ -39,8 +48,15 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
     private readonly Dictionary<PrototypeWeaponUpgrade, TextMeshProUGUI> weaponUpgradeDescriptions =
         new Dictionary<PrototypeWeaponUpgrade, TextMeshProUGUI>();
 
+    private const string ArmoryPanelName = "Armory Panel";
+    private static readonly PrototypeWeaponUpgrade[] SignatureUpgrades =
+    {
+        PrototypeWeaponUpgrade.SpecialOne,
+        PrototypeWeaponUpgrade.SpecialTwo,
+        PrototypeWeaponUpgrade.SpecialThree
+    };
+
     private PrototypeArmoryCombat combat;
-    private GameObject armoryPanel;
     private TextMeshProUGUI weaponUpgradeHeading;
     private TextMeshProUGUI weaponStatsLabel;
     private TextMeshProUGUI armoryFeedbackLabel;
@@ -82,7 +98,11 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         if (!ValidateUiReferences())
             yield break;
 
-        BuildArmoryPanel();
+        if (armoryPanel == null)
+            BuildArmoryPanel();
+        else if (!BindArmoryPanel())
+            yield break;
+
         BuildThirdTab();
         RefreshButtons();
         uiReady = true;
@@ -250,10 +270,138 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Used by the Editor installer to turn the formerly runtime-only Armory
+    /// into ordinary scene-authored uGUI that can be edited in the Inspector.
+    /// </summary>
+    public bool EnsureSceneAuthoredArmoryPanel()
+    {
+        if (armoryPanel != null)
+        {
+            bool changed = MatchArmoryPanelLayer();
+            changed |= EnsureSignatureUpgradeCards();
+            return changed;
+        }
+
+        if (upgradesPanel == null || upgradesPanel.transform.parent == null)
+        {
+            Debug.LogError("The Armory panel needs the existing SkillTree panel and its window parent.", this);
+            return false;
+        }
+
+        Transform existing = upgradesPanel.transform.parent.Find(ArmoryPanelName);
+        if (existing == null)
+            existing = upgradesPanel.transform.parent.Find("Armory Prototype Panel");
+
+        if (existing != null)
+        {
+            existing.name = ArmoryPanelName;
+            armoryPanel = existing.gameObject;
+            MatchArmoryPanelLayer();
+            EnsureSignatureUpgradeCards();
+            return true;
+        }
+
+        BuildArmoryPanel();
+        return armoryPanel != null;
+    }
+
+    private bool EnsureSignatureUpgradeCards()
+    {
+        if (armoryPanel == null)
+            return false;
+
+        Transform content = armoryPanel.transform.Find("Scroll View/Viewport/Content");
+        if (content == null)
+            return false;
+
+        bool changed = false;
+        Transform legacySpecial = content.Find("Special");
+        Transform firstSpecial = content.Find(PrototypeWeaponUpgrade.SpecialOne.ToString());
+        if (firstSpecial == null && legacySpecial != null)
+        {
+            legacySpecial.name = PrototypeWeaponUpgrade.SpecialOne.ToString();
+            firstSpecial = legacySpecial;
+            changed = true;
+        }
+
+        Transform template = firstSpecial != null ? firstSpecial : content.Find(PrototypeWeaponUpgrade.Cooling.ToString());
+        if (template == null)
+            return changed;
+
+        Transform cooling = content.Find(PrototypeWeaponUpgrade.Cooling.ToString());
+        int firstSibling = cooling != null ? cooling.GetSiblingIndex() + 1 : template.GetSiblingIndex();
+        for (int i = 0; i < SignatureUpgrades.Length; i++)
+        {
+            PrototypeWeaponUpgrade upgrade = SignatureUpgrades[i];
+            Transform card = content.Find(upgrade.ToString());
+            if (card == null)
+            {
+                GameObject clone = Instantiate(template.gameObject, content, false);
+                clone.name = upgrade.ToString();
+                card = clone.transform;
+                changed = true;
+            }
+
+            int desiredSibling = firstSibling + i;
+            if (card.GetSiblingIndex() != desiredSibling)
+            {
+                card.SetSiblingIndex(desiredSibling);
+                changed = true;
+            }
+
+            TextMeshProUGUI title = FindText(card.Find("Description"), "Title");
+            TextMeshProUGUI details = FindText(card.Find("Description"), "Details");
+            UnityEngine.UI.Button button = card.GetComponentInChildren<UnityEngine.UI.Button>(true);
+            TextMeshProUGUI label = button != null ? button.GetComponentInChildren<TextMeshProUGUI>(true) : null;
+            string defaultTitle = PrototypeArmoryCombat.GetWeaponUpgradeName(
+                PrototypePrimaryWeapon.RapidBullets, upgrade);
+            string defaultDetails = PrototypeArmoryCombat.GetWeaponUpgradeDescription(
+                PrototypePrimaryWeapon.RapidBullets, upgrade);
+            if (title != null && title.text != defaultTitle)
+            {
+                title.text = defaultTitle;
+                changed = true;
+            }
+            if (details != null && details.text != defaultDetails)
+            {
+                details.text = defaultDetails;
+                changed = true;
+            }
+            if (label != null && label.text != "BUY ONCE")
+            {
+                label.text = "BUY ONCE";
+                changed = true;
+            }
+        }
+
+        PrototypeWeaponUpgrade[] basicWeaponUpgrades =
+        {
+            PrototypeWeaponUpgrade.Damage,
+            PrototypeWeaponUpgrade.Range,
+            PrototypeWeaponUpgrade.FireRate,
+            PrototypeWeaponUpgrade.Cooling
+        };
+        foreach (PrototypeWeaponUpgrade basicUpgrade in basicWeaponUpgrades)
+        {
+            Transform basicCard = content.Find(basicUpgrade.ToString());
+            if (basicCard == null)
+                continue;
+
+            DestroyImmediate(basicCard.gameObject);
+            changed = true;
+        }
+
+        return changed;
+    }
+
     private void BuildArmoryPanel()
     {
+        if (armoryPanel != null)
+            return;
+
         RectTransform referenceRect = upgradesPanel.transform as RectTransform;
-        armoryPanel = new GameObject("Armory Prototype Panel", typeof(RectTransform), typeof(CanvasRenderer), typeof(UnityEngine.UI.Image));
+        armoryPanel = new GameObject(ArmoryPanelName, typeof(RectTransform), typeof(CanvasRenderer), typeof(UnityEngine.UI.Image));
         RectTransform panelRect = armoryPanel.GetComponent<RectTransform>();
         panelRect.SetParent(upgradesPanel.transform.parent, false);
         CopyRect(referenceRect, panelRect);
@@ -267,7 +415,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
 
         weaponUpgradeHeading = CreateSectionHeading(content, "ACTIVE WEAPON UPGRADES");
         weaponStatsLabel = CreateStatsCard(content);
-        foreach (PrototypeWeaponUpgrade upgrade in Enum.GetValues(typeof(PrototypeWeaponUpgrade)))
+        foreach (PrototypeWeaponUpgrade upgrade in SignatureUpgrades)
             CreateWeaponUpgradeCard(content, upgrade);
 
         CreateSectionHeading(content, "PRIMARY WEAPONS — FIVE ALTERNATIVES");
@@ -296,7 +444,151 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         CreateAttachmentCard(content, PrototypeAttachment.ReflectorDome,
             "Reflector Dome", "Adds a stacking chance for attacks to bounce to another slime.");
 
+        MatchArmoryPanelLayer();
         armoryPanel.SetActive(false);
+    }
+
+    private bool MatchArmoryPanelLayer()
+    {
+        if (armoryPanel == null || upgradesPanel == null)
+            return false;
+
+        bool changed = false;
+        int uiLayer = upgradesPanel.layer;
+        Transform[] hierarchy = armoryPanel.GetComponentsInChildren<Transform>(true);
+        foreach (Transform item in hierarchy)
+        {
+            if (item.gameObject.layer == uiLayer)
+                continue;
+
+            item.gameObject.layer = uiLayer;
+            changed = true;
+        }
+
+        return changed;
+    }
+
+    private bool BindArmoryPanel()
+    {
+        primaryButtons.Clear();
+        primaryButtonLabels.Clear();
+        primaryCards.Clear();
+        attachmentButtons.Clear();
+        attachmentButtonLabels.Clear();
+        attachmentDescriptions.Clear();
+        attachmentBaseDescriptions.Clear();
+        weaponUpgradeButtons.Clear();
+        weaponUpgradeButtonLabels.Clear();
+        weaponUpgradeTitles.Clear();
+        weaponUpgradeDescriptions.Clear();
+
+        Transform header = armoryPanel.transform.Find("Header");
+        Transform scrollView = armoryPanel.transform.Find("Scroll View");
+        Transform content = armoryPanel.transform.Find("Scroll View/Viewport/Content");
+        if (header == null || scrollView == null || content == null)
+        {
+            Debug.LogError("The scene-authored Armory panel is missing Header or Scroll View content.", armoryPanel);
+            return false;
+        }
+
+        resetButton = FindButton(header, "RESET + REFUND Button");
+        UnityEngine.UI.Button closeButton = FindButton(header, "CLOSE Button");
+        armoryFeedbackLabel = FindText(header, "Feedback");
+        resetButtonLabel = resetButton != null ? resetButton.GetComponentInChildren<TextMeshProUGUI>(true) : null;
+        armoryScrollRect = scrollView.GetComponent<UnityEngine.UI.ScrollRect>();
+        weaponUpgradeHeading = FindText(content.Find("ACTIVE WEAPON UPGRADES"), "Heading Label");
+        weaponStatsLabel = FindText(content.Find("Active Weapon Stats"), "Stats Text");
+
+        if (resetButton == null || closeButton == null || armoryFeedbackLabel == null ||
+            armoryScrollRect == null || weaponUpgradeHeading == null || weaponStatsLabel == null)
+        {
+            Debug.LogError("The scene-authored Armory panel has missing header or summary references.", armoryPanel);
+            return false;
+        }
+
+        resetButton.onClick.AddListener(HandleResetClicked);
+        closeButton.onClick.AddListener(HandleCloseClicked);
+
+        foreach (PrototypeWeaponUpgrade upgrade in SignatureUpgrades)
+        {
+            if (!TryBindCard(content, upgrade.ToString(), out GameObject card, out UnityEngine.UI.Button button,
+                    out TextMeshProUGUI buttonLabel, out TextMeshProUGUI title, out TextMeshProUGUI description))
+                return false;
+
+            PrototypeWeaponUpgrade captured = upgrade;
+            button.onClick.AddListener(() => HandleWeaponUpgradeClicked(captured));
+            weaponUpgradeButtons[upgrade] = button;
+            weaponUpgradeButtonLabels[upgrade] = buttonLabel;
+            weaponUpgradeTitles[upgrade] = title;
+            weaponUpgradeDescriptions[upgrade] = description;
+        }
+
+        foreach (PrototypePrimaryWeapon weapon in Enum.GetValues(typeof(PrototypePrimaryWeapon)))
+        {
+            string cardName = PrototypeArmoryCombat.GetWeaponDisplayName(weapon);
+            if (!TryBindCard(content, cardName, out GameObject card, out UnityEngine.UI.Button button,
+                    out TextMeshProUGUI buttonLabel, out _, out _))
+                return false;
+
+            PrototypePrimaryWeapon captured = weapon;
+            button.onClick.AddListener(() => HandlePrimaryClicked(captured));
+            primaryCards[weapon] = card;
+            primaryButtons[weapon] = button;
+            primaryButtonLabels[weapon] = buttonLabel;
+        }
+
+        foreach (PrototypeAttachment attachment in Enum.GetValues(typeof(PrototypeAttachment)))
+        {
+            string cardName = FormatEnumName(attachment);
+            if (!TryBindCard(content, cardName, out _, out UnityEngine.UI.Button button,
+                    out TextMeshProUGUI buttonLabel, out _, out TextMeshProUGUI description))
+                return false;
+
+            PrototypeAttachment captured = attachment;
+            button.onClick.AddListener(() => HandleAttachmentClicked(captured));
+            attachmentButtons[attachment] = button;
+            attachmentButtonLabels[attachment] = buttonLabel;
+            attachmentDescriptions[attachment] = description;
+            attachmentBaseDescriptions[attachment] = GetAttachmentBaseDescription(attachment);
+        }
+
+        return true;
+    }
+
+    private static bool TryBindCard(
+        Transform content,
+        string cardName,
+        out GameObject card,
+        out UnityEngine.UI.Button button,
+        out TextMeshProUGUI buttonLabel,
+        out TextMeshProUGUI title,
+        out TextMeshProUGUI description)
+    {
+        Transform cardTransform = content != null ? content.Find(cardName) : null;
+        Transform copy = cardTransform != null ? cardTransform.Find("Description") : null;
+        card = cardTransform != null ? cardTransform.gameObject : null;
+        button = cardTransform != null ? cardTransform.GetComponentInChildren<UnityEngine.UI.Button>(true) : null;
+        buttonLabel = button != null ? button.GetComponentInChildren<TextMeshProUGUI>(true) : null;
+        title = FindText(copy, "Title");
+        description = FindText(copy, "Details");
+
+        if (card != null && button != null && buttonLabel != null && title != null && description != null)
+            return true;
+
+        Debug.LogError("Armory card '" + cardName + "' is missing one or more editable UI children.", card);
+        return false;
+    }
+
+    private static UnityEngine.UI.Button FindButton(Transform parent, string childName)
+    {
+        Transform child = parent != null ? parent.Find(childName) : null;
+        return child != null ? child.GetComponent<UnityEngine.UI.Button>() : null;
+    }
+
+    private static TextMeshProUGUI FindText(Transform parent, string childName)
+    {
+        Transform child = parent != null ? parent.Find(childName) : null;
+        return child != null ? child.GetComponent<TextMeshProUGUI>() : null;
     }
 
     private void CreateHeader(RectTransform panel)
@@ -312,6 +604,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         header.GetComponent<UnityEngine.UI.Image>().color = new Color(0.1f, 0.13f, 0.19f, 1f);
 
         TextMeshProUGUI title = CreateText(header.transform, "ARMORY", 28f, TextAlignmentOptions.Center, Color.white);
+        title.gameObject.name = "Title";
         title.fontStyle = FontStyles.Bold;
         Stretch(title.rectTransform, 220f, 150f, 28f, 5f);
 
@@ -336,6 +629,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
 
         armoryFeedbackLabel = CreateText(header.transform, "Progress auto-saves", 15f,
             TextAlignmentOptions.Center, new Color(0.64f, 0.78f, 0.92f));
+        armoryFeedbackLabel.gameObject.name = "Feedback";
         armoryFeedbackLabel.enableAutoSizing = true;
         armoryFeedbackLabel.fontSizeMin = 11f;
         armoryFeedbackLabel.fontSizeMax = 15f;
@@ -402,6 +696,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         section.GetComponent<UnityEngine.UI.Image>().color = new Color(0.13f, 0.2f, 0.3f, 1f);
         section.GetComponent<UnityEngine.UI.LayoutElement>().preferredHeight = 52f;
         TextMeshProUGUI label = CreateText(section.transform, heading, 22f, TextAlignmentOptions.Center, new Color(0.75f, 0.9f, 1f));
+        label.gameObject.name = "Heading Label";
         Stretch(label.rectTransform, 8f, 8f, 6f, 6f);
         return label;
     }
@@ -415,6 +710,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         card.GetComponent<UnityEngine.UI.LayoutElement>().preferredHeight = 112f;
         TextMeshProUGUI label = CreateText(card.transform, string.Empty, 18f, TextAlignmentOptions.Center,
             new Color(0.82f, 0.94f, 1f));
+        label.gameObject.name = "Stats Text";
         label.textWrappingMode = TextWrappingModes.Normal;
         Stretch(label.rectTransform, 16f, 16f, 8f, 8f);
         return label;
@@ -467,7 +763,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         attachmentBaseDescriptions[attachment] = description;
     }
 
-    private static GameObject CreateCard(Transform parent, string title, string description,
+    private GameObject CreateCard(Transform parent, string title, string description,
         out UnityEngine.UI.Button button, out TextMeshProUGUI buttonLabel,
         out TextMeshProUGUI titleText, out TextMeshProUGUI descriptionText)
     {
@@ -475,11 +771,11 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
             typeof(UnityEngine.UI.Image), typeof(UnityEngine.UI.LayoutElement), typeof(UnityEngine.UI.HorizontalLayoutGroup));
         card.transform.SetParent(parent, false);
         card.GetComponent<UnityEngine.UI.Image>().color = new Color(0.095f, 0.11f, 0.15f, 1f);
-        card.GetComponent<UnityEngine.UI.LayoutElement>().preferredHeight = 148f;
+        card.GetComponent<UnityEngine.UI.LayoutElement>().preferredHeight = cardHeight;
 
         UnityEngine.UI.HorizontalLayoutGroup horizontal = card.GetComponent<UnityEngine.UI.HorizontalLayoutGroup>();
-        horizontal.padding = new RectOffset(18, 14, 12, 12);
-        horizontal.spacing = 16f;
+        horizontal.padding = new RectOffset(24, 20, 16, 16);
+        horizontal.spacing = 22f;
         horizontal.childAlignment = TextAnchor.MiddleLeft;
         horizontal.childControlWidth = true;
         horizontal.childControlHeight = true;
@@ -492,29 +788,31 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         UnityEngine.UI.LayoutElement copyLayout = copy.GetComponent<UnityEngine.UI.LayoutElement>();
         copyLayout.flexibleWidth = 1f;
         UnityEngine.UI.VerticalLayoutGroup vertical = copy.GetComponent<UnityEngine.UI.VerticalLayoutGroup>();
-        vertical.spacing = 4f;
+        vertical.spacing = 8f;
         vertical.childControlHeight = true;
         vertical.childControlWidth = true;
         vertical.childForceExpandHeight = false;
         vertical.childForceExpandWidth = true;
 
-        titleText = CreateText(copy.transform, title, 23f, TextAlignmentOptions.Left, Color.white);
+        titleText = CreateText(copy.transform, title, cardTitleFontSize, TextAlignmentOptions.Left, Color.white);
+        titleText.gameObject.name = "Title";
         titleText.fontStyle = FontStyles.Bold;
-        titleText.gameObject.AddComponent<UnityEngine.UI.LayoutElement>().preferredHeight = 38f;
-        descriptionText = CreateText(copy.transform, description, 17f, TextAlignmentOptions.TopLeft,
+        titleText.gameObject.AddComponent<UnityEngine.UI.LayoutElement>().preferredHeight = 52f;
+        descriptionText = CreateText(copy.transform, description, cardDescriptionFontSize, TextAlignmentOptions.TopLeft,
             new Color(0.78f, 0.82f, 0.9f));
+        descriptionText.gameObject.name = "Details";
         descriptionText.textWrappingMode = TextWrappingModes.Normal;
-        descriptionText.gameObject.AddComponent<UnityEngine.UI.LayoutElement>().preferredHeight = 78f;
+        descriptionText.gameObject.AddComponent<UnityEngine.UI.LayoutElement>().preferredHeight = 128f;
 
-        button = CreateButton(card.transform, "BUY", new Color(0.12f, 0.48f, 0.38f, 1f));
+        button = CreateButton(card.transform, "BUY", new Color(0.12f, 0.48f, 0.38f, 1f), purchaseButtonFontSize);
         UnityEngine.UI.LayoutElement buttonLayout = button.gameObject.AddComponent<UnityEngine.UI.LayoutElement>();
-        buttonLayout.preferredWidth = 190f;
-        buttonLayout.minWidth = 190f;
+        buttonLayout.preferredWidth = purchaseButtonWidth;
+        buttonLayout.minWidth = purchaseButtonWidth;
         buttonLabel = button.GetComponentInChildren<TextMeshProUGUI>();
         return card;
     }
 
-    private static UnityEngine.UI.Button CreateButton(Transform parent, string label, Color color)
+    private static UnityEngine.UI.Button CreateButton(Transform parent, string label, Color color, float fontSize = 20f)
     {
         GameObject buttonObject = new GameObject(label + " Button", typeof(RectTransform), typeof(CanvasRenderer),
             typeof(UnityEngine.UI.Image), typeof(UnityEngine.UI.Button));
@@ -525,7 +823,8 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         button.targetGraphic = image;
         buttonObject.AddComponent<ButtonAudioHover>().SuppressClickSound();
 
-        TextMeshProUGUI text = CreateText(buttonObject.transform, label, 20f, TextAlignmentOptions.Center, Color.white);
+        TextMeshProUGUI text = CreateText(buttonObject.transform, label, fontSize, TextAlignmentOptions.Center, Color.white);
+        text.gameObject.name = "Label";
         text.fontStyle = FontStyles.Bold;
         Stretch(text.rectTransform, 6f, 6f, 4f, 4f);
         return button;
@@ -563,7 +862,12 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
     {
         string upgradeName = PrototypeArmoryCombat.GetWeaponUpgradeName(combat.ActivePrimary, upgrade);
         if (combat.BuyWeaponUpgrade(upgrade))
-            ShowFeedback(upgradeName + " upgraded.", true);
+        {
+            string action = PrototypeArmoryCombat.GetWeaponUpgradeMaxLevel(upgrade) == 1
+                ? " unlocked."
+                : " upgraded.";
+            ShowFeedback(upgradeName + action, true);
+        }
         else
             ShowFeedback("Not enough money for " + upgradeName + ".", false);
     }
@@ -646,6 +950,23 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         }
     }
 
+    private static string GetAttachmentBaseDescription(PrototypeAttachment attachment)
+    {
+        switch (attachment)
+        {
+            case PrototypeAttachment.MiniTurretSatellites:
+                return "Adds an orbiting automatic shooter per level.";
+            case PrototypeAttachment.SpikeBarrier:
+                return "Damages slimes touching the tower every half second.";
+            case PrototypeAttachment.OverchargeModule:
+                return "Press R for a temporary fire-rate boost. Levels increase its strength and duration.";
+            case PrototypeAttachment.FreezeBurst:
+                return "Automatically freezes nearby slimes every 10 seconds.";
+            default:
+                return "Adds a stacking chance for attacks to bounce to another slime.";
+        }
+    }
+
     private void RefreshButtons()
     {
         if (combat == null) return;
@@ -674,11 +995,11 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         PrototypePrimaryWeapon activeWeapon = combat.ActivePrimary;
         string activeName = PrototypeArmoryCombat.GetWeaponDisplayName(activeWeapon);
         if (weaponUpgradeHeading != null)
-            weaponUpgradeHeading.text = activeName.ToUpperInvariant() + " — WEAPON UPGRADES";
+            weaponUpgradeHeading.text = activeName.ToUpperInvariant() + " — 3 SIGNATURE UPGRADES";
         if (weaponStatsLabel != null)
             weaponStatsLabel.text = combat.GetActiveWeaponStatsText();
 
-        foreach (PrototypeWeaponUpgrade upgrade in Enum.GetValues(typeof(PrototypeWeaponUpgrade)))
+        foreach (PrototypeWeaponUpgrade upgrade in SignatureUpgrades)
         {
             if (!weaponUpgradeButtonLabels.TryGetValue(upgrade, out TextMeshProUGUI buttonLabel))
                 continue;
@@ -692,14 +1013,16 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
 
             if (level >= max)
             {
-                buttonLabel.text = "MAX\nLVL " + level;
+                buttonLabel.text = max == 1 ? "OWNED" : "MAX\nLVL " + level;
                 weaponUpgradeButtons[upgrade].interactable = false;
                 SetButtonColor(weaponUpgradeButtons[upgrade], new Color(0.28f, 0.31f, 0.36f, 1f));
             }
             else
             {
                 int cost = PrototypeArmoryCombat.GetWeaponUpgradeCost(activeWeapon, upgrade, level);
-                buttonLabel.text = "LVL " + level + "/" + max + "\n$" + cost;
+                buttonLabel.text = max == 1
+                    ? "BUY ONCE\n$" + cost
+                    : "LVL " + level + "/" + max + "\n$" + cost;
                 weaponUpgradeButtons[upgrade].interactable = true;
                 SetButtonColor(weaponUpgradeButtons[upgrade], new Color(0.12f, 0.48f, 0.38f, 1f));
             }

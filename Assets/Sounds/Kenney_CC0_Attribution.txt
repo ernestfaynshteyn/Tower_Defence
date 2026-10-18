@@ -1,0 +1,14 @@
+Supporting sound effects added in October 2026 use audio from these Kenney packs:
+
+- Sci-Fi Sounds 1.0
+- Digital Audio 1.0
+- Impact Sounds 1.0
+- UI Audio 1.0
+
+Created and distributed by Kenney (https://kenney.nl/).
+
+License: Creative Commons Zero (CC0 1.0)
+https://creativecommons.org/publicdomain/zero/1.0/
+
+The source packs permit personal, educational, and commercial use. Credit is
+not required, but is included here to keep the project's asset origins clear.
