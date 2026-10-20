@@ -26,7 +26,7 @@ public class WeaponSelect : MonoBehaviour
             LevelManager.Instance.selectedWeapon = weaponName;
         }
 
-        SceneManager.LoadScene("Game thing");
+        SceneManager.LoadScene(PrototypeSceneRoutes.GameplayScene);
     }
 
     private bool TryGetWeapon(string weaponName, out Weapon weapon)

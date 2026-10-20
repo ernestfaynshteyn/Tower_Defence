@@ -181,9 +181,7 @@ public class PlayerHealth : MonoBehaviour
 
             currentHealth = 0f;
             string activeScene = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(PrototypeSceneRoutes.IsPrototypeGameplay(activeScene)
-                ? PrototypeSceneRoutes.LossScene
-                : "You lost! hahaha");
+            SceneManager.LoadScene(PrototypeSceneRoutes.LossScene);
         }
     }
 

@@ -26,6 +26,8 @@ namespace CodeMonkey.Utils {
         private static readonly Vector3 Vector3zero = Vector3.zero;
         private static readonly Vector3 Vector3one = Vector3.one;
         private static readonly Vector3 Vector3yDown = new Vector3(0,-1);
+        private static Transform shakeCameraTransform;
+        private static Vector3 shakeCameraOffset;
 
         public const int sortingOrderDefault = 5000;
         
@@ -583,14 +585,31 @@ namespace CodeMonkey.Utils {
 
         // Screen Shake
         public static void ShakeCamera(float intensity, float timer) {
-            Vector3 lastCameraMovement = Vector3.zero;
+            Camera camera = Camera.main;
+            if (camera == null || intensity <= 0f || timer <= 0f)
+                return;
+
+            if (shakeCameraTransform != null && shakeCameraOffset != Vector3.zero)
+                shakeCameraTransform.position -= shakeCameraOffset;
+
+            shakeCameraTransform = camera.transform;
+            shakeCameraOffset = Vector3.zero;
             FunctionUpdater.Create(delegate () {
                 timer -= Time.unscaledDeltaTime;
-                Vector3 randomMovement = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized * intensity;
-                Camera.main.transform.position = Camera.main.transform.position - lastCameraMovement + randomMovement;
-                lastCameraMovement = randomMovement;
+                if (shakeCameraTransform == null)
+                    return true;
+
+                shakeCameraTransform.position -= shakeCameraOffset;
+                shakeCameraOffset = Vector3.zero;
+                if (timer <= 0f)
+                    return true;
+
+                shakeCameraOffset = new Vector3(
+                    UnityEngine.Random.Range(-1f, 1f),
+                    UnityEngine.Random.Range(-1f, 1f)).normalized * intensity;
+                shakeCameraTransform.position += shakeCameraOffset;
                 return timer <= 0f;
-            }, "CAMERA_SHAKE");
+            }, "CAMERA_SHAKE", true, true);
         }
 
 

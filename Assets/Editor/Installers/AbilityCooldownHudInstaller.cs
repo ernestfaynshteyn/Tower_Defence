@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Adds a scene-authored cooldown HUD to both gameplay scenes. Everything it
+/// Adds a scene-authored cooldown HUD to the prototype gameplay scene. Everything it
 /// creates remains ordinary editable uGUI content in the scene hierarchy.
 /// </summary>
 [InitializeOnLoad]
@@ -21,7 +21,6 @@ internal static class AbilityCooldownHudInstaller
 
     private static readonly string[] ScenePaths =
     {
-        "Assets/Scenes/Game thing.unity",
         "Assets/Scenes/Armory Prototype/Game thing - Armory Prototype.unity",
     };
 

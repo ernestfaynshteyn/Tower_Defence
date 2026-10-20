@@ -32,7 +32,6 @@ internal static class AbilitySkillTreeInstaller
 
     private static readonly string[] ScenePaths =
     {
-        "Assets/Scenes/Game thing.unity",
         "Assets/Scenes/Armory Prototype/Game thing - Armory Prototype.unity",
     };
 

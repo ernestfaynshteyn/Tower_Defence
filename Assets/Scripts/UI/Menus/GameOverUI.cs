@@ -112,10 +112,7 @@ public class GameOverUI : MonoBehaviour
 
     private static void LoadGameplayScene()
     {
-        string activeScene = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(PrototypeSceneRoutes.IsPrototypeLoss(activeScene)
-            ? PrototypeSceneRoutes.GameplayScene
-            : "Game thing");
+        SceneManager.LoadScene(PrototypeSceneRoutes.GameplayScene);
     }
 }
 

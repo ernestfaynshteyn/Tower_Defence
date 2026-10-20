@@ -22,9 +22,11 @@ public class GlobalData : MonoBehaviour
 {
     public static GlobalData Instance;
 
-    // This defaults on for the current game. A future Settings menu can
-    // change this property without any weapon scripts needing to be rewritten.
-    public static bool AutomaticPrimaryAiming { get; set; } = true;
+    public static bool AutomaticPrimaryAiming
+    {
+        get => GameSettings.AutomaticShootingEnabled;
+        set => GameSettings.SetAutomaticShootingEnabled(value);
+    }
 
     private static bool warnedAboutMissingGlobalData;
 
@@ -142,6 +144,6 @@ public class GlobalData : MonoBehaviour
         Debug.Log("Weapon: " + selectedWeapon);
 
 
-        SceneManager.LoadScene("Game thing");
+        SceneManager.LoadScene(PrototypeSceneRoutes.GameplayScene);
     }
 }

@@ -6,28 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Title card.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
-    path: Assets/Scenes/You lost! hahaha.unity
-    guid: 6128c83592662d142bb0b2e20d2fd64d
-  - enabled: 1
-    path: Assets/Scenes/Game thing.unity
-    guid: 687c43106981d9d429ca5084679d18c9
-  - enabled: 1
-    path: Assets/Scenes/Game selecting things.unity
-    guid: 3d50669d370aadf4990fc05ab1253e86
-  - enabled: 1
-    path: Assets/Scenes/Armory Prototype/Game selecting things - Armory Prototype.unity
-    guid: f691641c188a4561bd2bc6299328db7a
-  - enabled: 1
-    path: Assets/Scenes/Armory Prototype/Game thing - Armory Prototype.unity
-    guid: 6b17992e32914c708a2699595ab949bd
-  - enabled: 1
-    path: Assets/Scenes/Armory Prototype/Title card - Armory Prototype.unity
+    path: Assets/Scenes/Title card - Armory Prototype.unity
     guid: e21aa27f1e574c70a16be33b3ea327d2
   - enabled: 1
-    path: Assets/Scenes/Armory Prototype/You lost - Armory Prototype.unity
+    path: Assets/Scenes/Game selecting things - Armory Prototype.unity
+    guid: f691641c188a4561bd2bc6299328db7a
+  - enabled: 1
+    path: Assets/Scenes/Game thing - Armory Prototype.unity
+    guid: 6b17992e32914c708a2699595ab949bd
+  - enabled: 1
+    path: Assets/Scenes/You lost - Armory Prototype.unity
     guid: b1cfd9075f8e4d79875492cb9e72bce9
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}

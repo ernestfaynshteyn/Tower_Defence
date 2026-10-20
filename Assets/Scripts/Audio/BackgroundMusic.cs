@@ -1,10 +1,18 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
 public class BackgroundMusic : MonoBehaviour
 {
+    private sealed class ManagedAudioSource
+    {
+        public AudioSource Source;
+        public float BaseVolume;
+        public GameSettings.EffectCategory Category;
+    }
+
     [Header("Music")]
     [Tooltip("Used on the title, game selection, and losing screens.")]
     public AudioClip music;
@@ -51,8 +59,10 @@ public class BackgroundMusic : MonoBehaviour
 
     private static BackgroundMusic instance;
     private AudioSource musicSource, effectsSource, defenceRegenSource;
+    private readonly List<ManagedAudioSource> managedAudioSources = new List<ManagedAudioSource>();
     private Coroutine musicTransition;
     private bool currentSceneIsGameplay;
+    private bool currentMusicIsBoss;
     private float nextHit, nextDeath, nextHover, nextLightningChain;
     private float nextMiniTurret, nextSpikeHit, nextRicochet, nextToxicTrail;
     private float nextAbilityReady, nextToggle;
@@ -74,11 +84,13 @@ public class BackgroundMusic : MonoBehaviour
         if (instance != null && instance != this) { Destroy(this); return; }
         instance = this;
         DontDestroyOnLoad(gameObject);
-        musicSource = CreateSource(gameObject, true, 0.35f);
-        effectsSource = CreateSource(gameObject, false, 0.65f);
-        defenceRegenSource = CreateSource(gameObject, true, 0.12f);
+        musicSource = CreateRawSource(gameObject, true, 0.35f);
+        effectsSource = CreateManagedSource(gameObject, false, 1f, GameSettings.EffectCategory.EffectsMaster);
+        defenceRegenSource = CreateManagedSource(gameObject, true, 0.12f, GameSettings.EffectCategory.World);
+        GameSettings.AudioSettingsChanged += ApplyAudioSettings;
         SceneManager.sceneLoaded += SceneLoaded;
         currentSceneIsGameplay = IsGameplayScene(SceneManager.GetActiveScene());
+        ApplyAudioSettings();
         SetMusic(false);
     }
 
@@ -92,12 +104,92 @@ public class BackgroundMusic : MonoBehaviour
 
     public static AudioSource CreateSource(GameObject owner, bool loop, float volume)
     {
+        if (instance != null)
+            return instance.CreateManagedSource(owner, loop, volume, GameSettings.EffectCategory.Shooting);
+
+        return CreateRawSource(owner, loop,
+            volume * GameSettings.GetEffectSourceMultiplier(GameSettings.EffectCategory.Shooting));
+    }
+
+    private static AudioSource CreateRawSource(GameObject owner, bool loop, float volume)
+    {
         var source = owner.AddComponent<AudioSource>();
         source.playOnAwake = false;
         source.loop = loop;
         source.spatialBlend = 0f;
         source.volume = volume;
         return source;
+    }
+
+    private AudioSource CreateManagedSource(GameObject owner, bool loop, float baseVolume,
+        GameSettings.EffectCategory category)
+    {
+        for (int i = managedAudioSources.Count - 1; i >= 0; i--)
+            if (managedAudioSources[i].Source == null)
+                managedAudioSources.RemoveAt(i);
+
+        AudioSource source = CreateRawSource(owner, loop, baseVolume);
+        managedAudioSources.Add(new ManagedAudioSource
+        {
+            Source = source,
+            BaseVolume = baseVolume,
+            Category = category
+        });
+        source.volume = baseVolume * GameSettings.GetEffectSourceMultiplier(category);
+        return source;
+    }
+
+    private static void SetManagedSourceBaseVolume(AudioSource source, float baseVolume,
+        GameSettings.EffectCategory category)
+    {
+        if (source == null)
+            return;
+
+        if (instance == null)
+        {
+            source.volume = baseVolume * GameSettings.GetEffectSourceMultiplier(category);
+            return;
+        }
+
+        for (int i = 0; i < instance.managedAudioSources.Count; i++)
+        {
+            ManagedAudioSource managed = instance.managedAudioSources[i];
+            if (managed.Source != source)
+                continue;
+
+            managed.BaseVolume = baseVolume;
+            managed.Category = category;
+            source.volume = baseVolume * GameSettings.GetEffectSourceMultiplier(category);
+            return;
+        }
+
+        instance.managedAudioSources.Add(new ManagedAudioSource
+        {
+            Source = source,
+            BaseVolume = baseVolume,
+            Category = category
+        });
+        source.volume = baseVolume * GameSettings.GetEffectSourceMultiplier(category);
+    }
+
+    private void ApplyAudioSettings()
+    {
+        AudioListener.volume = GameSettings.MasterVolume;
+        for (int i = managedAudioSources.Count - 1; i >= 0; i--)
+        {
+            ManagedAudioSource managed = managedAudioSources[i];
+            if (managed.Source == null)
+            {
+                managedAudioSources.RemoveAt(i);
+                continue;
+            }
+
+            managed.Source.volume = managed.BaseVolume *
+                                    GameSettings.GetEffectSourceMultiplier(managed.Category);
+        }
+
+        if (musicSource != null && (musicSource.clip != null || musicTransition != null))
+            SetMusic(currentMusicIsBoss);
     }
 
     private void SceneLoaded(Scene scene, LoadSceneMode mode)
@@ -119,6 +211,7 @@ public class BackgroundMusic : MonoBehaviour
     {
         if (instance != this) return;
         SceneManager.sceneLoaded -= SceneLoaded;
+        GameSettings.AudioSettingsChanged -= ApplyAudioSettings;
         instance = null;
     }
 
@@ -138,12 +231,13 @@ public class BackgroundMusic : MonoBehaviour
 
     private void SetMusic(bool boss)
     {
+        currentMusicIsBoss = boss && bossMusic != null;
         if (!boss && !currentSceneIsGameplay)
             currentSceneIsGameplay = IsGameplayScene(SceneManager.GetActiveScene());
 
         AudioClip clip;
         float targetVolume;
-        if (boss && bossMusic != null)
+        if (currentMusicIsBoss)
         {
             clip = bossMusic;
             targetVolume = bossMusicVolume;
@@ -159,8 +253,15 @@ public class BackgroundMusic : MonoBehaviour
             targetVolume = menuMusicVolume;
         }
 
+        targetVolume *= GameSettings.GetMusicMultiplier(currentMusicIsBoss);
+
         if (musicSource.clip == clip)
         {
+            if (musicTransition != null)
+            {
+                StopCoroutine(musicTransition);
+                musicTransition = null;
+            }
             musicSource.volume = targetVolume;
             if (clip != null && !musicSource.isPlaying)
                 musicSource.Play();
@@ -237,19 +338,47 @@ public class BackgroundMusic : MonoBehaviour
     private void Play(AudioClip clip, float volume = 1f, float pitch = 1f)
     {
         if (clip == null) return;
+        GameSettings.EffectCategory category = GetEffectCategory(clip);
         if (pitch == 1f)
         {
-            effectsSource.PlayOneShot(clip, volume);
+            effectsSource.PlayOneShot(clip, volume * GameSettings.GetEffectCategoryMultiplier(category));
             return;
         }
 
         var oneShotObject = new GameObject("Temporary Audio One Shot");
         oneShotObject.transform.SetParent(transform, false);
-        var source = CreateSource(oneShotObject, false, volume);
+        var source = CreateManagedSource(oneShotObject, false, volume, category);
         source.pitch = pitch;
         source.clip = clip;
         source.Play();
         Destroy(oneShotObject, clip.length / Mathf.Abs(pitch));
+    }
+
+    private GameSettings.EffectCategory GetEffectCategory(AudioClip clip)
+    {
+        if (clip == frag || clip == nuke || clip == molotovShatter || clip == flashExplosion ||
+            clip == empBlast || clip == toxicSpitterImpact)
+            return GameSettings.EffectCategory.Explosions;
+
+        if (clip == buttonClick || clip == hover || clip == purchase || clip == purchaseDenied ||
+            clip == upgradeUnlocked || clip == tabOpen || clip == toggleSelect)
+            return GameSettings.EffectCategory.Interface;
+
+        if (clip == shotgun || clip == ak || clip == minigun || clip == flame || clip == reload ||
+            clip == gunOverheatStart || clip == flameOverheatStart || clip == overheatSound ||
+            clip == overheatVent || clip == overheatReady || clip == laserLoop || clip == laserStart ||
+            clip == laserStop || clip == lightningArc || clip == lightningChain ||
+            clip == toxicSpitterFire || clip == miniTurretFire)
+            return GameSettings.EffectCategory.Shooting;
+
+        if (clip == grenadeThrow || clip == smokeStart || clip == smokeLoop || clip == molotovLoop ||
+            clip == flashRinging || clip == pulsarActivate || clip == pulsarPulse || clip == nukeLaunch ||
+            clip == overchargeActivate || clip == freezeBurstActivate || clip == spikeBarrierHit ||
+            clip == reflectorRicochet || clip == empCharge || clip == toxicFloodActivate ||
+            clip == abilityReady || clip == toxicPoolLoop)
+            return GameSettings.EffectCategory.Abilities;
+
+        return GameSettings.EffectCategory.World;
     }
 
     public static void Purchase() { if (instance != null) instance.Play(instance.purchase, 0.5f); }
@@ -274,7 +403,17 @@ public class BackgroundMusic : MonoBehaviour
         Play(overheatVent, 0.22f);
         Play(overheatSound, 0.42f);
     }
-    public static void Explosion(bool isNuke) { if (instance != null) instance.Play(isNuke ? instance.nuke : instance.frag); }
+    public static void Explosion(bool isNuke)
+    {
+        if (instance == null)
+            return;
+
+        instance.Play(isNuke ? instance.nuke : instance.frag);
+        if (GameSettings.ScreenShake > 0f)
+            CodeMonkey.Utils.UtilsClass.ShakeCamera(
+                (isNuke ? 0.45f : 0.18f) * GameSettings.ScreenShake,
+                isNuke ? 0.45f : 0.22f);
+    }
     public static void Shotgun() { if (instance != null) instance.Play(instance.shotgun); }
     public static void PlayerHurt() { if (instance != null) instance.Play(instance.playerHurt, 0.35f); }
     public static void PlayerDeath() { if (instance != null) instance.Play(instance.playerDeath); }
@@ -321,7 +460,7 @@ public class BackgroundMusic : MonoBehaviour
 
         if (source.clip != instance.defenceRecharging)
             source.clip = instance.defenceRecharging;
-        source.volume = 0.11f;
+        SetManagedSourceBaseVolume(source, 0.11f, GameSettings.EffectCategory.World);
         source.loop = true;
         if (!source.isPlaying)
             source.Play();
@@ -360,7 +499,8 @@ public class BackgroundMusic : MonoBehaviour
         if (clip == null || duration <= 0f) return;
         var loopObject = new GameObject("Temporary Audio Loop");
         loopObject.transform.position = position;
-        var source = CreateSource(loopObject, true, volume);
+        GameSettings.EffectCategory category = GetEffectCategory(clip);
+        var source = CreateManagedSource(loopObject, true, volume, category);
         if (segmentLength > 0f)
         {
             source.loop = false;
@@ -369,7 +509,7 @@ public class BackgroundMusic : MonoBehaviour
         source.clip = clip;
         source.Play();
         var lifetime = loopObject.AddComponent<AudioLoopLifetime>();
-        lifetime.Initialize(source, duration, segmentLength);
+        lifetime.Initialize(source, duration, segmentLength, volume, category);
     }
 
     public static void EnemyHit(bool died)
@@ -434,7 +574,7 @@ public class BackgroundMusic : MonoBehaviour
 
         source.Stop();
         source.clip = clip;
-        source.volume = volume;
+        SetManagedSourceBaseVolume(source, volume, GameSettings.EffectCategory.Shooting);
         source.pitch = pitch;
         source.loop = true;
         return clip != null;
@@ -561,16 +701,19 @@ public class AudioLoopLifetime : MonoBehaviour
     private AudioSource source;
     private float remaining;
     private float fadeDuration;
-    private float initialVolume;
+    private float baseVolume;
     private float loopSegmentLength;
+    private GameSettings.EffectCategory category;
 
-    public void Initialize(AudioSource audioSource, float duration, float segmentLength = 0f)
+    public void Initialize(AudioSource audioSource, float duration, float segmentLength,
+        float sourceBaseVolume, GameSettings.EffectCategory sourceCategory)
     {
         source = audioSource;
         remaining = Mathf.Max(0f, duration);
         fadeDuration = Mathf.Min(1f, remaining);
-        initialVolume = source.volume;
+        baseVolume = sourceBaseVolume;
         loopSegmentLength = segmentLength;
+        category = sourceCategory;
     }
 
     private void Update()
@@ -584,8 +727,11 @@ public class AudioLoopLifetime : MonoBehaviour
         if (remaining <= fadeDuration && fadeDuration > 0f)
         {
             if (source != null)
-                source.volume = initialVolume * Mathf.Clamp01(remaining / fadeDuration);
+                source.volume = baseVolume * GameSettings.GetEffectSourceMultiplier(category) *
+                                Mathf.Clamp01(remaining / fadeDuration);
         }
+        else if (source != null)
+            source.volume = baseVolume * GameSettings.GetEffectSourceMultiplier(category);
         if (remaining <= 0f)
             Destroy(gameObject);
     }
