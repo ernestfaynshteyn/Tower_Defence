@@ -25,6 +25,7 @@ public sealed class PrototypeLoadoutSelection : MonoBehaviour
         public string description;
         public UnityEngine.UI.Button button;
         public TextMeshProUGUI label;
+        public GameObject iconPrefab;
     }
 
     private void Start()
@@ -79,8 +80,28 @@ public sealed class PrototypeLoadoutSelection : MonoBehaviour
         Weapon captured = choice.weapon;
         choice.button.onClick.AddListener(() => SelectWeapon(captured));
         choice.label = choice.button.GetComponentInChildren<TextMeshProUGUI>(true);
+        if (choice.label != null)
+        {
+            RectTransform labelRect = choice.label.rectTransform;
+            labelRect.anchorMin = new Vector2(0.06f, 0.06f);
+            labelRect.anchorMax = new Vector2(0.94f, 0.43f);
+            labelRect.offsetMin = Vector2.zero;
+            labelRect.offsetMax = Vector2.zero;
+            labelRect.localScale = Vector3.one;
+            choice.label.fontSize = 50f;
+            choice.label.enableAutoSizing = true;
+            choice.label.fontSizeMin = 38f;
+            choice.label.fontSizeMax = 50f;
+            choice.label.alignment = TextAlignmentOptions.Center;
+            choice.label.color = new Color32(15, 40, 16, 255);
+            choice.label.raycastTarget = false;
+        }
         if (choice.label == null)
             Debug.LogError(choice.displayName + " is missing its editable TextMeshPro label.", choice.button);
+        choice.iconPrefab = LoadWeaponIconPrefab(choice.weapon);
+        if (choice.iconPrefab == null)
+            Debug.LogError("Missing weapon icon prefab for " + choice.displayName + ".", choice.button);
+        AddWeaponIconToButton(choice);
         UpdateChoiceVisual(choice, globalData.selectedWeapon == choice.weapon);
     }
 
@@ -96,7 +117,57 @@ public sealed class PrototypeLoadoutSelection : MonoBehaviour
         choice.button.interactable = !selected;
         if (choice.label != null)
             choice.label.text = (selected ? "SELECTED\n" : string.Empty) +
-                                "<b>" + choice.displayName + "</b>\n<size=30>" + choice.description + "</size>";
+                                "<b>" + choice.displayName + "</b>\n<size=85%>" + choice.description + "</size>";
+    }
+
+    private void AddWeaponIconToButton(WeaponChoice choice)
+    {
+        if (choice.iconPrefab == null)
+            return;
+
+        GameObject iconObject = Instantiate(choice.iconPrefab, choice.button.transform, false);
+        iconObject.name = "Weapon Icon - " + choice.displayName;
+
+        RectTransform iconRect = iconObject.GetComponent<RectTransform>();
+        iconRect.anchorMin = new Vector2(0.12f, 0.46f);
+        iconRect.anchorMax = new Vector2(0.88f, 0.94f);
+        iconRect.pivot = new Vector2(0.5f, 0.5f);
+        iconRect.offsetMin = Vector2.zero;
+        iconRect.offsetMax = Vector2.zero;
+        iconRect.localScale = Vector3.one;
+
+        UnityEngine.UI.Image image = iconObject.GetComponent<UnityEngine.UI.Image>();
+        image.preserveAspect = true;
+        image.raycastTarget = false;
+    }
+
+    private static GameObject LoadWeaponIconPrefab(Weapon weapon)
+    {
+        string resourcePath;
+        switch (weapon)
+        {
+            case Weapon.gun1:
+                resourcePath = "PixelPrefabs/WeaponIcons/RapidBullets";
+                break;
+            case Weapon.piercingLaser:
+                resourcePath = "PixelPrefabs/WeaponIcons/PiercingLaser";
+                break;
+            case Weapon.gun2:
+                resourcePath = "PixelPrefabs/WeaponIcons/ShotgunBurst";
+                break;
+            case Weapon.flamethrower:
+                resourcePath = "PixelPrefabs/WeaponIcons/Flamethrower";
+                break;
+            case Weapon.lightningArc:
+                resourcePath = "PixelPrefabs/WeaponIcons/LightningArc";
+                break;
+            case Weapon.toxicSpitter:
+                resourcePath = "PixelPrefabs/WeaponIcons/ToxicSpitter";
+                break;
+            default:
+                return null;
+        }
+        return Resources.Load<GameObject>(resourcePath);
     }
 
     private static void StartPrototypeGame()

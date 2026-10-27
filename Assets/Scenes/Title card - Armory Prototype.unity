@@ -166,8 +166,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -1476,6 +1476,7 @@ GameObject:
   - component: {fileID: 982927703}
   - component: {fileID: 982927702}
   - component: {fileID: 982927701}
+  - component: {fileID: 2061934830}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -1585,6 +1586,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 982927699}
   m_CullTransparentMesh: 1
+--- !u!114 &2061934830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982927699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8f4f9633d041b49821f97d6c49b371, type: 3}
+  m_Name: ""
+  m_EditorClassIdentifier: ""
 --- !u!1 &1122313659
 GameObject:
   m_ObjectHideFlags: 0

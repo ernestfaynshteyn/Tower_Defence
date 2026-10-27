@@ -1,8 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UseGrenade : MonoBehaviour
 {
+    private const float ThrowableSpinDegreesPerSecond = 720f;
+    private static readonly Dictionary<GrenadeType, GameObject> ThrowableVisualPrefabs = new Dictionary<GrenadeType, GameObject>();
+
     public GameObject grenadePrefab;
     public Transform throwPoint;
 
@@ -196,6 +200,7 @@ public class UseGrenade : MonoBehaviour
         }
 
         GameObject grenade = Instantiate(grenadePrefab, startPos, Quaternion.identity);
+        ConfigureThrowableVisual(grenade, grenadeType);
 
         Grenades grenadeScript = grenade.GetComponent<Grenades>();
 
@@ -212,6 +217,92 @@ public class UseGrenade : MonoBehaviour
             grenadeDamage.enabled = false;
 
         StartCoroutine(MoveGrenadeInCurve(grenade, startPos, targetPos, grenadeType));
+    }
+
+    private static void ConfigureThrowableVisual(GameObject throwable, GrenadeType grenadeType)
+    {
+        GameObject visualPrefab = GetThrowableVisualPrefab(grenadeType);
+        if (visualPrefab == null)
+        {
+            Debug.LogWarning("No pixel visual prefab is assigned for " + grenadeType + ".");
+            return;
+        }
+
+        SpriteRenderer prefabRenderer = visualPrefab.GetComponentInChildren<SpriteRenderer>(true);
+        if (prefabRenderer == null || prefabRenderer.sprite == null)
+        {
+            Debug.LogWarning("The pixel visual prefab for " + grenadeType + " needs a SpriteRenderer with a sprite.", visualPrefab);
+            return;
+        }
+
+        SpriteRenderer[] oldSpriteRenderers = throwable.GetComponentsInChildren<SpriteRenderer>(true);
+        int sortingOrder = 0;
+        int sortingLayerId = 0;
+        if (oldSpriteRenderers.Length > 0)
+            sortingLayerId = oldSpriteRenderers[0].sortingLayerID;
+
+        foreach (SpriteRenderer oldRenderer in oldSpriteRenderers)
+        {
+            sortingOrder = Mathf.Max(sortingOrder, oldRenderer.sortingOrder);
+            oldRenderer.enabled = false;
+        }
+
+        foreach (UnityEngine.UI.Graphic oldGraphic in throwable.GetComponentsInChildren<UnityEngine.UI.Graphic>(true))
+            oldGraphic.enabled = false;
+
+        GameObject visual = Instantiate(visualPrefab, throwable.transform, false);
+        visual.name = "Pixel " + grenadeType + " Visual";
+        visual.layer = 0;
+        visual.transform.localPosition = Vector3.zero;
+        visual.transform.localRotation = Quaternion.identity;
+        Vector3 parentScale = throwable.transform.lossyScale;
+        visual.transform.localScale = new Vector3(
+            SignedScale(parentScale.x),
+            SignedScale(parentScale.y),
+            SignedScale(parentScale.z));
+
+        SpriteRenderer[] newRenderers = visual.GetComponentsInChildren<SpriteRenderer>(true);
+        foreach (SpriteRenderer newRenderer in newRenderers)
+        {
+            newRenderer.sortingLayerID = sortingLayerId;
+            newRenderer.sortingOrder = sortingOrder + 1;
+        }
+    }
+
+    private static float SignedScale(float parentScale)
+    {
+        float sign = parentScale < 0f ? -1f : 1f;
+        return sign * 0.45f / Mathf.Max(0.001f, Mathf.Abs(parentScale));
+    }
+
+    private static GameObject GetThrowableVisualPrefab(GrenadeType grenadeType)
+    {
+        if (ThrowableVisualPrefabs.TryGetValue(grenadeType, out GameObject cachedPrefab))
+            return cachedPrefab;
+
+        string resourceName;
+        switch (grenadeType)
+        {
+            case GrenadeType.Frag:
+                resourceName = "PixelPrefabs/ThrowableVisuals/Frag";
+                break;
+            case GrenadeType.Smoke:
+                resourceName = "PixelPrefabs/ThrowableVisuals/Smoke";
+                break;
+            case GrenadeType.Flash:
+                resourceName = "PixelPrefabs/ThrowableVisuals/Flashbang";
+                break;
+            case GrenadeType.Molotov:
+                resourceName = "PixelPrefabs/ThrowableVisuals/Molotov";
+                break;
+            default:
+                return null;
+        }
+
+        GameObject prefab = Resources.Load<GameObject>(resourceName);
+        if (prefab != null)
+            ThrowableVisualPrefabs.Add(grenadeType, prefab);
+        return prefab;
     }
 
     void UpdateCursor()
@@ -306,9 +397,15 @@ public class UseGrenade : MonoBehaviour
             Vector2 curvePos = GetBezierPoint(start, controlPoint, target, t);
 
             if (rb != null)
+            {
                 rb.MovePosition(curvePos);
+                rb.MoveRotation(rb.rotation + ThrowableSpinDegreesPerSecond * Time.fixedDeltaTime);
+            }
             else
+            {
                 grenade.transform.position = curvePos;
+                grenade.transform.Rotate(0f, 0f, ThrowableSpinDegreesPerSecond * Time.fixedDeltaTime);
+            }
 
             yield return new WaitForFixedUpdate();
         }

@@ -126,6 +126,8 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
     private Camera mainCamera;
     private RangeIndicatorScaler rangeIndicator;
     private LineRenderer weaponVisual;
+    private SpriteRenderer equippedWeaponSprite;
+    private PrototypePrimaryWeapon displayedWeapon;
     private LineRenderer spikeVisual;
     private LineRenderer reflectorVisual;
     private flameThrowerDamage originalFlamethrower;
@@ -1901,11 +1903,31 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
 
     private void UpdateWeaponVisual()
     {
-        if (weaponVisual == null) return;
-        Vector2 origin = playerHealth.transform.position;
-        Vector2 direction = GetAimDirection(origin);
-        weaponVisual.SetPosition(0, origin);
-        weaponVisual.SetPosition(1, origin + direction * 0.9f);
+        if (equippedWeaponSprite == null)
+        {
+            GameObject visual = new GameObject("Equipped Pixel Weapon");
+            equippedWeaponSprite = visual.AddComponent<SpriteRenderer>();
+            SpriteRenderer playerSprite = playerHealth.GetComponent<SpriteRenderer>();
+            if (playerSprite != null)
+                equippedWeaponSprite.sortingLayerID = playerSprite.sortingLayerID;
+            equippedWeaponSprite.sortingOrder = 25;
+            runtimeObjects.Add(visual);
+        }
+        if (equippedWeaponSprite.sprite == null || displayedWeapon != ActivePrimary)
+        {
+            displayedWeapon = ActivePrimary;
+            equippedWeaponSprite.sprite = Resources.Load<Sprite>("WeaponIcons/" + ActivePrimary);
+            if (equippedWeaponSprite.sprite != null)
+                equippedWeaponSprite.transform.localScale = Vector3.one *
+                    (1.5f / Mathf.Max(0.01f, equippedWeaponSprite.sprite.bounds.size.x));
+        }
+        Vector2 spriteOrigin = playerHealth.transform.position;
+        Vector2 spriteDirection = GetAimDirection(spriteOrigin);
+        equippedWeaponSprite.transform.position = (Vector3)(spriteOrigin + spriteDirection * 0.65f);
+        equippedWeaponSprite.transform.rotation = Quaternion.Euler(0f, 0f,
+            Mathf.Atan2(spriteDirection.y, spriteDirection.x) * Mathf.Rad2Deg);
+        equippedWeaponSprite.flipY = spriteDirection.x < 0f;
+        if (weaponVisual != null) weaponVisual.enabled = false;
     }
 
     private void UpdatePersistentVisuals()
