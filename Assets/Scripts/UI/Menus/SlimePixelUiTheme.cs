@@ -110,8 +110,9 @@ public static class SlimePixelUiTheme
             if (label == node.costText || label.gameObject.name == "Price") continue;
             label.color = new Color32(12, 28, 12, 255);
             label.enableAutoSizing = true;
-            label.fontSizeMin = 28f;
-            label.fontSizeMax = 38f;
+            bool isTitle = label.gameObject.name.IndexOf("title", System.StringComparison.OrdinalIgnoreCase) >= 0;
+            label.fontSizeMin = isTitle ? 30f : 16f;
+            label.fontSizeMax = isTitle ? 42f : 22f;
             label.raycastTarget = false;
         }
 

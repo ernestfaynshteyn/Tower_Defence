@@ -348,8 +348,8 @@ public class skills : MonoBehaviour
             priceLabel.alignment != TextAlignmentOptions.Center ||
             priceLabel.fontStyle != FontStyles.Bold ||
             !priceLabel.enableAutoSizing ||
-            !Mathf.Approximately(priceLabel.fontSizeMin, 18f) ||
-            !Mathf.Approximately(priceLabel.fontSizeMax, 30f) ||
+            !Mathf.Approximately(priceLabel.fontSizeMin, 30f) ||
+            !Mathf.Approximately(priceLabel.fontSizeMax, 42f) ||
             priceLabel.textWrappingMode != TextWrappingModes.NoWrap ||
             priceLabel.overflowMode != TextOverflowModes.Overflow ||
             priceLabel.raycastTarget)
@@ -359,8 +359,8 @@ public class skills : MonoBehaviour
             priceLabel.alignment = TextAlignmentOptions.Center;
             priceLabel.fontStyle = FontStyles.Bold;
             priceLabel.enableAutoSizing = true;
-            priceLabel.fontSizeMin = 18f;
-            priceLabel.fontSizeMax = 30f;
+            priceLabel.fontSizeMin = 30f;
+            priceLabel.fontSizeMax = 42f;
             priceLabel.textWrappingMode = TextWrappingModes.NoWrap;
             priceLabel.overflowMode = TextOverflowModes.Overflow;
             priceLabel.raycastTarget = false;
