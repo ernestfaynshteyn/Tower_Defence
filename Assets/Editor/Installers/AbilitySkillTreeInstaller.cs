@@ -16,13 +16,16 @@ using UnityEngine.UI;
 [InitializeOnLoad]
 internal static class AbilitySkillTreeInstaller
 {
-    private const int InstallerVersion = 8;
+    private const int InstallerVersion = 10;
     private const string ConnectorPrefix = "Ability Connector - ";
     private const string SewerPulseConnectorPrefix = "Sewer Pulse Connector - ";
     private const float SewerPulseConnectorScale = 0.5f;
     private const float SupportBoundaryPadding = 5f;
     private const float CostLabelGap = 6f;
     private const float CostLabelHeight = 32f;
+    // A small increase over the original 0.222 scale keeps the labels readable
+    // without making the dense attack branches touch each other.
+    private const float SkillNodeScale = 0.24f;
 
     // The support-tree red square ends at the white divider on the right.
     // New ability nodes are clamped by their full rendered size, not just their centres.
@@ -32,7 +35,7 @@ internal static class AbilitySkillTreeInstaller
 
     private static readonly string[] ScenePaths =
     {
-        "Assets/Scenes/Armory Prototype/Game thing - Armory Prototype.unity",
+        "Assets/Scenes/Game thing - Armory Prototype.unity",
     };
 
     private static readonly string[] PulsarRingIds =
@@ -60,9 +63,8 @@ internal static class AbilitySkillTreeInstaller
 
     private static readonly NodePlacement[] NewAttackNodes =
     {
-        // Empty upper-right area of the attack-tree red panel. With the
-        // existing 0.3 node scale these positions leave at least 20px between
-        // neighbouring buttons and remain clear of the range/multishot nodes.
+        // Empty upper-right area of the attack-tree red panel. These positions
+        // remain clear of the range/multishot nodes at the enlarged node scale.
         new NodePlacement("sewer_pulse", new Vector2(280f, 225f)),
         new NodePlacement("sewer_pulse_damage", new Vector2(360f, 225f)),
         new NodePlacement("sewer_pulse_force", new Vector2(440f, 225f)),
@@ -94,7 +96,7 @@ internal static class AbilitySkillTreeInstaller
     }
 
     [MenuItem("Tools/Tower Defence/Rebuild Ability Skill Nodes")]
-    private static void RebuildFromMenu()
+    public static void RebuildFromMenu()
     {
         InstallAllScenes(true);
     }
@@ -351,6 +353,12 @@ internal static class AbilitySkillTreeInstaller
                 changed |= WireRequirements(node, seeds[placement.SkillId], nodes);
         }
 
+        changed |= EnlargeAndSpaceSkillNodes(
+            attackParent,
+            supportParent,
+            defenceParent,
+            nodes);
+
         // Connector artwork is already authored in both scenes. Older versions
         // of this installer generated overlapping black lines whenever the
         // migration version changed, so remove only those generated extras and
@@ -396,6 +404,107 @@ internal static class AbilitySkillTreeInstaller
             EditorUtility.SetDirty(tree);
 
         return changed;
+    }
+
+    private static bool EnlargeAndSpaceSkillNodes(
+        Transform attackParent,
+        Transform supportParent,
+        Transform defenceParent,
+        List<skills> nodes)
+    {
+        bool changed = false;
+
+        foreach (Transform parent in new[] { attackParent, supportParent, defenceParent })
+        {
+            if (parent == null)
+                continue;
+
+            for (int i = 0; i < parent.childCount; i++)
+            {
+                Transform child = parent.GetChild(i);
+                if (!(child is RectTransform rect) || child.GetComponent<Button>() == null)
+                    continue;
+
+                Vector3 enlargedScale = new Vector3(
+                    SkillNodeScale,
+                    SkillNodeScale,
+                    rect.localScale.z);
+                if (rect.localScale != enlargedScale)
+                {
+                    rect.localScale = enlargedScale;
+                    EditorUtility.SetDirty(rect);
+                    changed = true;
+                }
+            }
+        }
+
+        // The larger nodes need a few small spacing corrections. The shifts
+        // stay within their original red sections, and existing connector ends
+        // remain underneath the enlarged buttons instead of becoming detached.
+        changed |= MoveNodeNear(attackParent, new Vector2(104.8f, 147.7f), new Vector2(112f, 147.7f));
+        changed |= MoveNodeNear(attackParent, new Vector2(104.8f, 90.1f), new Vector2(112f, 90.1f));
+        changed |= MoveNamedNode(attackParent, "skill 15 (attack)", new Vector2(221f, -2f));
+        changed |= MoveNamedNode(attackParent, "skill 20 (attack)", new Vector2(198f, -48f));
+        changed |= MoveNamedNode(attackParent, "skill 21 (attack)", new Vector2(198f, -92f));
+
+        skills toxicFlood = FindNode(nodes, "toxic_flood");
+        if (toxicFlood != null && toxicFlood.transform is RectTransform toxicRect)
+            changed |= SetAnchoredPosition(toxicRect, new Vector2(-95f, 75f));
+
+        return changed;
+    }
+
+    private static bool MoveNodeNear(
+        Transform parent,
+        Vector2 currentPosition,
+        Vector2 targetPosition)
+    {
+        if (parent == null)
+            return false;
+
+        for (int i = 0; i < parent.childCount; i++)
+        {
+            if (!(parent.GetChild(i) is RectTransform rect) ||
+                rect.GetComponent<Button>() == null)
+                continue;
+
+            if ((rect.anchoredPosition - currentPosition).sqrMagnitude <= 0.25f)
+                return SetAnchoredPosition(rect, targetPosition);
+        }
+
+        return false;
+    }
+
+    private static bool MoveNamedNode(
+        Transform parent,
+        string objectName,
+        Vector2 targetPosition)
+    {
+        if (parent == null)
+            return false;
+
+        for (int i = 0; i < parent.childCount; i++)
+        {
+            Transform child = parent.GetChild(i);
+            if (!string.Equals(child.name.Trim(), objectName, StringComparison.OrdinalIgnoreCase) ||
+                !(child is RectTransform rect) ||
+                child.GetComponent<Button>() == null)
+                continue;
+
+            return SetAnchoredPosition(rect, targetPosition);
+        }
+
+        return false;
+    }
+
+    private static bool SetAnchoredPosition(RectTransform rect, Vector2 targetPosition)
+    {
+        if (rect == null || rect.anchoredPosition == targetPosition)
+            return false;
+
+        rect.anchoredPosition = targetPosition;
+        EditorUtility.SetDirty(rect);
+        return true;
     }
 
     private static bool EnsureCostLabel(skills node, Rect? treeBounds)
