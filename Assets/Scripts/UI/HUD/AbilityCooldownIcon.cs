@@ -13,14 +13,12 @@ public sealed class AbilityCooldownIcon : MonoBehaviour
 
     [Header("Appearance")]
     [SerializeField] private Color readyColor = Color.white;
-    [SerializeField] private Color lockedColor = new Color(0.42f, 0.42f, 0.42f, 1f);
     [SerializeField, Min(1f)] private float readyPopScale = 1.2f;
     [SerializeField, Min(0.05f)] private float readyPopDuration = 0.28f;
 
     private Coroutine popRoutine;
     private bool stateInitialized;
     private bool wasCoolingDown;
-    private bool wasUnlocked;
     private string displayedText;
 
     private void Awake()
@@ -56,47 +54,53 @@ public sealed class AbilityCooldownIcon : MonoBehaviour
     }
 
     public void SetState(
-        bool unlocked,
+        bool isOwned,
         float remainingSeconds,
         float totalDuration,
         string readyText = "")
     {
+        if (!isOwned)
+        {
+            if (gameObject.activeSelf)
+            {
+                ResetPresentationState();
+                gameObject.SetActive(false);
+            }
+            return;
+        }
+
+        if (!gameObject.activeSelf)
+            gameObject.SetActive(true);
+
         float remaining = Mathf.Max(0f, remainingSeconds);
-        bool coolingDown = unlocked && remaining > 0.001f;
+        bool coolingDown = remaining > 0.001f;
 
         if (iconImage != null)
-            iconImage.color = unlocked ? readyColor : lockedColor;
+            iconImage.color = readyColor;
 
         if (cooldownOverlay != null)
         {
-            cooldownOverlay.enabled = !unlocked || coolingDown;
-            cooldownOverlay.fillAmount = unlocked
-                ? Mathf.Clamp01(remaining / Mathf.Max(0.01f, totalDuration))
-                : 1f;
+            cooldownOverlay.enabled = coolingDown;
+            cooldownOverlay.fillAmount = Mathf.Clamp01(
+                remaining / Mathf.Max(0.01f, totalDuration));
         }
 
-        SetTimerText(unlocked, coolingDown, remaining, readyText);
+        SetTimerText(coolingDown, remaining, readyText);
 
-        if (stateInitialized && unlocked && !coolingDown && (wasCoolingDown || !wasUnlocked))
+        if (stateInitialized && !coolingDown && wasCoolingDown)
             PlayReadyPop();
 
         stateInitialized = true;
         wasCoolingDown = coolingDown;
-        wasUnlocked = unlocked;
     }
 
     private void SetTimerText(
-        bool unlocked,
         bool coolingDown,
         float remaining,
         string readyText)
     {
         string nextText = string.Empty;
-        if (!unlocked)
-        {
-            nextText = "LOCKED";
-        }
-        else if (coolingDown)
+        if (coolingDown)
         {
             nextText = remaining < 10f
                 ? remaining.ToString("0.0")
@@ -111,6 +115,21 @@ public sealed class AbilityCooldownIcon : MonoBehaviour
         {
             displayedText = nextText;
             cooldownText.text = nextText;
+        }
+    }
+
+    private void ResetPresentationState()
+    {
+        stateInitialized = false;
+        wasCoolingDown = false;
+        displayedText = string.Empty;
+
+        if (cooldownText != null)
+            cooldownText.text = string.Empty;
+        if (cooldownOverlay != null)
+        {
+            cooldownOverlay.enabled = false;
+            cooldownOverlay.fillAmount = 0f;
         }
     }
 

@@ -13,15 +13,16 @@ using UnityEngine.SceneManagement;
 [InitializeOnLoad]
 internal static class AbilityCooldownHudInstaller
 {
-    private const int InstallerVersion = 6;
+    private const int InstallerVersion = 11;
     private const string HudName = "Ability Cooldown HUD";
-    private const float ThreeIconWidth = 420f;
-    private const float FiveIconWidth = 684f;
-    private const float SevenIconWidth = 948f;
+    private const string ThrowableHudName = "throwable visuals";
+    private const string ThrowablePanelSpritePath = "Assets/UI/HUD/SlimeThrowableTrayPanel.png";
+    private const float IconSize = 116f;
+    private const float IconSpacing = 12f;
 
     private static readonly string[] ScenePaths =
     {
-        "Assets/Scenes/Armory Prototype/Game thing - Armory Prototype.unity",
+        "Assets/Scenes/Game thing - Armory Prototype.unity",
     };
 
     private static bool isRunning;
@@ -30,17 +31,27 @@ internal static class AbilityCooldownHudInstaller
     {
         EditorApplication.playModeStateChanged -= HandlePlayModeStateChanged;
         EditorApplication.playModeStateChanged += HandlePlayModeStateChanged;
+        EditorApplication.delayCall += RefreshLoadedThrowableTrays;
         EditorApplication.delayCall += TryAutomaticInstall;
     }
 
     private static void HandlePlayModeStateChanged(PlayModeStateChange state)
     {
         if (state == PlayModeStateChange.EnteredEditMode)
+        {
+            EditorApplication.delayCall += RefreshLoadedThrowableTrays;
             EditorApplication.delayCall += TryAutomaticInstall;
+        }
     }
 
     [MenuItem("Tools/Tower Defence/Rebuild Ability Cooldown HUD")]
     private static void RebuildFromMenu()
+    {
+        InstallAllScenes(true);
+    }
+
+    [MenuItem("Tools/Tower Defence/Refresh Throwable HUD")]
+    private static void RefreshThrowableHudFromMenu()
     {
         InstallAllScenes(true);
     }
@@ -132,15 +143,19 @@ internal static class AbilityCooldownHudInstaller
         }
 
         bool changed = false;
+        changed |= ConfigureThrowableTray(canvas.transform);
         bool hasPrototypeAttachments = FindInScene<PrototypeArmoryBootstrap>(scene) != null;
-        float desiredWidth = hasPrototypeAttachments ? SevenIconWidth : FiveIconWidth;
+        int iconCount = hasPrototypeAttachments ? 7 : 5;
+        Vector2 desiredSize = new Vector2(
+            IconSize,
+            iconCount * IconSize + (iconCount - 1) * IconSpacing);
         Transform existing = canvas.transform.Find(HudName);
         RectTransform hudRect;
         if (existing == null)
         {
             GameObject hudObject = CreateUiObject(HudName, canvas.transform);
             hudRect = hudObject.GetComponent<RectTransform>();
-            hudRect.sizeDelta = new Vector2(desiredWidth, 132f);
+            hudRect.sizeDelta = desiredSize;
             SetBottomLeftPosition(hudRect);
             changed = true;
         }
@@ -152,12 +167,13 @@ internal static class AbilityCooldownHudInstaller
         if (hudRect == null)
             return changed;
 
-        if (Mathf.Approximately(hudRect.sizeDelta.x, ThreeIconWidth) ||
-            !Mathf.Approximately(hudRect.sizeDelta.x, desiredWidth))
+        if (hudRect.sizeDelta != desiredSize)
         {
-            hudRect.sizeDelta = new Vector2(desiredWidth, hudRect.sizeDelta.y);
+            hudRect.sizeDelta = desiredSize;
             changed = true;
         }
+
+        changed |= ConfigureVerticalLayout(hudRect);
 
         if (IsOriginalBottomCenterPosition(hudRect))
         {
@@ -178,13 +194,11 @@ internal static class AbilityCooldownHudInstaller
             changed = true;
         }
 
-        float firstIconX = hasPrototypeAttachments ? -396f : -264f;
         AbilityCooldownIcon sewerPulse = CreateOrUpdateIcon(
             hudRect,
             "Sewer Pulse Cooldown",
             "PULSE",
             "Z",
-            firstIconX,
             new Color(0.12f, 0.72f, 0.9f, 1f),
             ref changed);
         AbilityCooldownIcon emp = CreateOrUpdateIcon(
@@ -192,7 +206,6 @@ internal static class AbilityCooldownHudInstaller
             "EMP Cooldown",
             "EMP",
             "X",
-            firstIconX + 132f,
             new Color(0.32f, 0.52f, 1f, 1f),
             ref changed);
         AbilityCooldownIcon toxic = CreateOrUpdateIcon(
@@ -200,7 +213,6 @@ internal static class AbilityCooldownHudInstaller
             "Toxic Flood Cooldown",
             "TOXIC",
             "C",
-            firstIconX + 264f,
             new Color(0.28f, 0.78f, 0.25f, 1f),
             ref changed);
         AbilityCooldownIcon nuke = CreateOrUpdateIcon(
@@ -208,7 +220,6 @@ internal static class AbilityCooldownHudInstaller
             "Nuke Cooldown",
             "NUKE",
             "N",
-            firstIconX + 396f,
             new Color(0.95f, 0.35f, 0.12f, 1f),
             ref changed);
         AbilityCooldownIcon pulsar = CreateOrUpdateIcon(
@@ -216,15 +227,14 @@ internal static class AbilityCooldownHudInstaller
             "Pulsar Ring Cooldown",
             "PULSAR",
             "AUTO",
-            firstIconX + 528f,
             new Color(0.72f, 0.3f, 0.95f, 1f),
             ref changed);
 
-        changed |= SetIconPosition(sewerPulse, firstIconX);
-        changed |= SetIconPosition(emp, firstIconX + 132f);
-        changed |= SetIconPosition(toxic, firstIconX + 264f);
-        changed |= SetIconPosition(nuke, firstIconX + 396f);
-        changed |= SetIconPosition(pulsar, firstIconX + 528f);
+        changed |= SetIconLayout(sewerPulse, 0);
+        changed |= SetIconLayout(emp, 1);
+        changed |= SetIconLayout(toxic, 2);
+        changed |= SetIconLayout(nuke, 3);
+        changed |= SetIconLayout(pulsar, 4);
 
         AbilityCooldownIcon overcharge = null;
         AbilityCooldownIcon freezeBurst = null;
@@ -235,7 +245,6 @@ internal static class AbilityCooldownHudInstaller
                 "Overcharge Cooldown",
                 "OVER",
                 "R",
-                firstIconX + 660f,
                 new Color(1f, 0.45f, 0.08f, 1f),
                 ref changed);
             freezeBurst = CreateOrUpdateIcon(
@@ -243,11 +252,10 @@ internal static class AbilityCooldownHudInstaller
                 "Freeze Burst Cooldown",
                 "FREEZE",
                 "AUTO",
-                firstIconX + 792f,
                 new Color(0.25f, 0.85f, 1f, 1f),
                 ref changed);
-            changed |= SetIconPosition(overcharge, firstIconX + 660f);
-            changed |= SetIconPosition(freezeBurst, firstIconX + 792f);
+            changed |= SetIconLayout(overcharge, 5);
+            changed |= SetIconLayout(freezeBurst, 6);
         }
 
         TowerAbilityController controller = FindInScene<TowerAbilityController>(scene);
@@ -269,6 +277,89 @@ internal static class AbilityCooldownHudInstaller
         return true;
     }
 
+    private static bool ConfigureThrowableTray(Transform canvasTransform)
+    {
+        RectTransform tray = canvasTransform.Find(ThrowableHudName) as RectTransform;
+        if (tray == null)
+            return false;
+
+        bool trayChanged = false;
+        trayChanged |= SetIfDifferent(tray.anchorMin, Vector2.zero, value => tray.anchorMin = value);
+        trayChanged |= SetIfDifferent(tray.anchorMax, Vector2.zero, value => tray.anchorMax = value);
+        trayChanged |= SetIfDifferent(tray.pivot, Vector2.zero, value => tray.pivot = value);
+        trayChanged |= SetIfDifferent(tray.anchoredPosition, new Vector2(196f, 36f),
+            value => tray.anchoredPosition = value);
+        trayChanged |= SetIfDifferent(tray.sizeDelta, new Vector2(1325f, 241f),
+            value => tray.sizeDelta = value);
+        if (trayChanged)
+            EditorUtility.SetDirty(tray);
+
+        RectTransform table = tray.Find("table") as RectTransform;
+        if (table == null)
+            return trayChanged;
+
+        bool tableChanged = false;
+        tableChanged |= SetIfDifferent(table.localScale, new Vector3(0.82f, 0.82f, 1f),
+            value => table.localScale = value);
+        tableChanged |= SetIfDifferent(table.anchoredPosition, Vector2.zero,
+            value => table.anchoredPosition = value);
+        if (tableChanged)
+            EditorUtility.SetDirty(table);
+
+        UnityEngine.UI.Image background = table.GetComponent<UnityEngine.UI.Image>();
+        bool backgroundChanged = false;
+        if (background != null)
+        {
+            Sprite panelSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ThrowablePanelSpritePath);
+            if (!background.enabled)
+            {
+                background.enabled = true;
+                backgroundChanged = true;
+            }
+            if (panelSprite != null && background.sprite != panelSprite)
+            {
+                background.sprite = panelSprite;
+                backgroundChanged = true;
+            }
+            if (background.type != UnityEngine.UI.Image.Type.Sliced)
+            {
+                background.type = UnityEngine.UI.Image.Type.Sliced;
+                backgroundChanged = true;
+            }
+            if (background.color != Color.white)
+            {
+                background.color = Color.white;
+                backgroundChanged = true;
+            }
+            if (background.raycastTarget)
+            {
+                background.raycastTarget = false;
+                backgroundChanged = true;
+            }
+            if (backgroundChanged)
+                EditorUtility.SetDirty(background);
+        }
+
+        return trayChanged || tableChanged || backgroundChanged;
+    }
+
+    private static void RefreshLoadedThrowableTrays()
+    {
+        if (EditorApplication.isPlayingOrWillChangePlaymode)
+            return;
+
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+            if (!scene.IsValid() || !scene.isLoaded)
+                continue;
+
+            Canvas canvas = FindInScene<Canvas>(scene);
+            if (canvas != null && ConfigureThrowableTray(canvas.transform))
+                EditorSceneManager.MarkSceneDirty(scene);
+        }
+    }
+
     private static bool IsOriginalBottomCenterPosition(RectTransform rect)
     {
         return rect.anchorMin == new Vector2(0.5f, 0f) &&
@@ -285,18 +376,78 @@ internal static class AbilityCooldownHudInstaller
         rect.anchoredPosition = new Vector2(32f, 32f);
     }
 
-    private static bool SetIconPosition(AbilityCooldownIcon icon, float xPosition)
+    private static bool ConfigureVerticalLayout(RectTransform hudRect)
+    {
+        bool changed = false;
+        UnityEngine.UI.HorizontalLayoutGroup horizontal =
+            hudRect.GetComponent<UnityEngine.UI.HorizontalLayoutGroup>();
+        if (horizontal != null)
+        {
+            UnityEngine.Object.DestroyImmediate(horizontal);
+            changed = true;
+        }
+
+        UnityEngine.UI.VerticalLayoutGroup layout =
+            hudRect.GetComponent<UnityEngine.UI.VerticalLayoutGroup>();
+        if (layout == null)
+        {
+            layout = hudRect.gameObject.AddComponent<UnityEngine.UI.VerticalLayoutGroup>();
+            changed = true;
+        }
+
+        if (layout.padding.left != 0 || layout.padding.right != 0 ||
+            layout.padding.top != 0 || layout.padding.bottom != 0)
+        {
+            layout.padding = new RectOffset();
+            changed = true;
+        }
+
+        changed |= SetIfDifferent(layout.spacing, IconSpacing, value => layout.spacing = value);
+        if (layout.childAlignment != TextAnchor.LowerLeft)
+        {
+            layout.childAlignment = TextAnchor.LowerLeft;
+            changed = true;
+        }
+        changed |= SetIfDifferent(layout.childControlWidth, false, value => layout.childControlWidth = value);
+        changed |= SetIfDifferent(layout.childControlHeight, false, value => layout.childControlHeight = value);
+        changed |= SetIfDifferent(layout.childForceExpandWidth, false, value => layout.childForceExpandWidth = value);
+        changed |= SetIfDifferent(layout.childForceExpandHeight, false, value => layout.childForceExpandHeight = value);
+        changed |= SetIfDifferent(layout.reverseArrangement, true, value => layout.reverseArrangement = value);
+
+        if (changed)
+            EditorUtility.SetDirty(layout);
+        return changed;
+    }
+
+    private static bool SetIfDifferent<T>(T current, T desired, Action<T> setter)
+    {
+        if (Equals(current, desired))
+            return false;
+
+        setter(desired);
+        return true;
+    }
+
+    private static bool SetIconLayout(AbilityCooldownIcon icon, int siblingIndex)
     {
         if (icon == null || !(icon.transform is RectTransform rect))
             return false;
 
-        Vector2 position = new Vector2(xPosition, 0f);
-        if (rect.anchoredPosition == position)
-            return false;
+        bool changed = false;
+        if (rect.GetSiblingIndex() != siblingIndex)
+        {
+            rect.SetSiblingIndex(siblingIndex);
+            changed = true;
+        }
+        if (rect.sizeDelta != new Vector2(IconSize, IconSize))
+        {
+            rect.sizeDelta = new Vector2(IconSize, IconSize);
+            changed = true;
+        }
 
-        rect.anchoredPosition = position;
-        EditorUtility.SetDirty(rect);
-        return true;
+        if (changed)
+            EditorUtility.SetDirty(rect);
+        return changed;
     }
 
     private static AbilityCooldownIcon CreateOrUpdateIcon(
@@ -304,7 +455,6 @@ internal static class AbilityCooldownHudInstaller
         string objectName,
         string iconText,
         string keyText,
-        float xPosition,
         Color readyColor,
         ref bool changed)
     {
@@ -317,8 +467,8 @@ internal static class AbilityCooldownHudInstaller
             iconRect.anchorMin = new Vector2(0.5f, 0.5f);
             iconRect.anchorMax = new Vector2(0.5f, 0.5f);
             iconRect.pivot = new Vector2(0.5f, 0.5f);
-            iconRect.anchoredPosition = new Vector2(xPosition, 0f);
-            iconRect.sizeDelta = new Vector2(116f, 116f);
+            iconRect.anchoredPosition = Vector2.zero;
+            iconRect.sizeDelta = new Vector2(IconSize, IconSize);
             changed = true;
         }
         else
@@ -506,8 +656,8 @@ internal static class AbilityCooldownHudInstaller
 [InitializeOnLoad]
 internal static class SceneAuthoredArmoryPanelInstaller
 {
-    private const int InstallerVersion = 5;
-    private const string ScenePath = "Assets/Scenes/Armory Prototype/Game thing - Armory Prototype.unity";
+    private const int InstallerVersion = 7;
+    private const string ScenePath = "Assets/Scenes/Game thing - Armory Prototype.unity";
     private static bool isRunning;
 
     static SceneAuthoredArmoryPanelInstaller()
@@ -517,6 +667,12 @@ internal static class SceneAuthoredArmoryPanelInstaller
 
     [MenuItem("Tools/Tower Defence/Create Missing Armory Panel")]
     private static void InstallFromMenu()
+    {
+        Install(true);
+    }
+
+    [MenuItem("Tools/Tower Defence/Refresh Armory and Shop UI")]
+    private static void RefreshShopUiFromMenu()
     {
         Install(true);
     }

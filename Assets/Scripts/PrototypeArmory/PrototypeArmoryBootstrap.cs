@@ -39,6 +39,8 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         new Dictionary<PrototypeAttachment, TextMeshProUGUI>();
     private readonly Dictionary<PrototypeAttachment, string> attachmentBaseDescriptions =
         new Dictionary<PrototypeAttachment, string>();
+    private readonly Dictionary<PrototypeAttachment, GameObject> attachmentCards =
+        new Dictionary<PrototypeAttachment, GameObject>();
     private readonly Dictionary<PrototypeWeaponUpgrade, UnityEngine.UI.Button> weaponUpgradeButtons =
         new Dictionary<PrototypeWeaponUpgrade, UnityEngine.UI.Button>();
     private readonly Dictionary<PrototypeWeaponUpgrade, TextMeshProUGUI> weaponUpgradeButtonLabels =
@@ -47,6 +49,8 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         new Dictionary<PrototypeWeaponUpgrade, TextMeshProUGUI>();
     private readonly Dictionary<PrototypeWeaponUpgrade, TextMeshProUGUI> weaponUpgradeDescriptions =
         new Dictionary<PrototypeWeaponUpgrade, TextMeshProUGUI>();
+    private readonly Dictionary<PrototypeWeaponUpgrade, UnityEngine.UI.Image> weaponUpgradeCards =
+        new Dictionary<PrototypeWeaponUpgrade, UnityEngine.UI.Image>();
 
     private const string ArmoryPanelName = "Armory Panel";
     private static readonly PrototypeWeaponUpgrade[] SignatureUpgrades =
@@ -59,6 +63,8 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
     private PrototypeArmoryCombat combat;
     private TextMeshProUGUI weaponUpgradeHeading;
     private TextMeshProUGUI weaponStatsLabel;
+    private UnityEngine.UI.Image weaponUpgradeHeadingBackground;
+    private UnityEngine.UI.Image weaponStatsBackground;
     private TextMeshProUGUI armoryFeedbackLabel;
     private TextMeshProUGUI resetButtonLabel;
     private UnityEngine.UI.ScrollRect armoryScrollRect;
@@ -131,10 +137,13 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
     private void BuildThirdTab()
     {
         tabGroup.allowSwitchOff = false;
+        ConfigureTabBar(tabParent);
 
         ConfigureTabToggle(upgradesTab, 0, "UPGRADES");
         ConfigureTabToggle(grenadesTab, 1, "GRENADES");
         ConfigureTabToggle(armoryTab, 2, "ARMORY");
+        ConfigureGrenadesPanel();
+        ConfigureArmoryPanelPresentation();
 
         // Replace the legacy static callbacks. Those callbacks ran even when a
         // toggle was turning off, so two panels could reopen over each other.
@@ -166,6 +175,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
     private void RebuildShopLayout()
     {
         ConfigureShopForCurrentResolution();
+        ConfigureTabBar(tabParent);
         ConfigureTabToggle(upgradesTab, 0, "UPGRADES");
         ConfigureTabToggle(grenadesTab, 1, "GRENADES");
         ConfigureTabToggle(armoryTab, 2, "ARMORY");
@@ -217,6 +227,21 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         frame.localScale = Vector3.one * fitScale;
     }
 
+    private static void ConfigureTabBar(RectTransform tabs)
+    {
+        if (tabs == null)
+            return;
+
+        tabs.sizeDelta = new Vector2(1500f, 190f);
+        tabs.anchoredPosition = new Vector2(tabs.anchoredPosition.x, -112f);
+
+        UnityEngine.UI.Image barBackground = tabs.GetComponent<UnityEngine.UI.Image>();
+        if (barBackground == null)
+            barBackground = tabs.gameObject.AddComponent<UnityEngine.UI.Image>();
+        barBackground.color = new Color(0.035f, 0.045f, 0.065f, 0.97f);
+        barBackground.raycastTarget = false;
+    }
+
     private static void ConfigureTabToggle(UnityEngine.UI.Toggle toggle, int index, string labelText)
     {
         if (toggle == null)
@@ -224,7 +249,8 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
 
         toggle.gameObject.SetActive(true);
         toggle.interactable = true;
-        toggle.transition = UnityEngine.UI.Selectable.Transition.None;
+        toggle.transition = UnityEngine.UI.Selectable.Transition.ColorTint;
+        toggle.toggleTransition = UnityEngine.UI.Toggle.ToggleTransition.Fade;
         toggle.transform.SetSiblingIndex(index);
         if (toggle.GetComponent<ButtonAudioHover>() == null)
             toggle.gameObject.AddComponent<ButtonAudioHover>();
@@ -236,27 +262,31 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
             float rightAnchor = (index + 1f) / 3f;
             rect.anchorMin = new Vector2(leftAnchor, 0f);
             rect.anchorMax = new Vector2(rightAnchor, 1f);
-            rect.offsetMin = new Vector2(index == 0 ? 4f : 8f, 6f);
-            rect.offsetMax = new Vector2(index == 2 ? -4f : -8f, -6f);
+            rect.offsetMin = new Vector2(index == 0 ? 12f : 8f, 12f);
+            rect.offsetMax = new Vector2(index == 2 ? -12f : -8f, -12f);
             rect.localScale = Vector3.one;
         }
 
         if (toggle.targetGraphic is UnityEngine.UI.Image background)
         {
             background.raycastTarget = true;
-            background.color = new Color(0.82f, 0.85f, 0.9f, 1f);
+            background.color = Color.white;
         }
+
+        UnityEngine.UI.Image accent = EnsureTabSelectionAccent(toggle, index);
+        toggle.graphic = accent;
 
         TextMeshProUGUI label = toggle.GetComponentInChildren<TextMeshProUGUI>(true);
         if (label != null)
         {
             label.gameObject.SetActive(true);
             label.text = labelText;
-            label.color = new Color(0.08f, 0.1f, 0.14f, 1f);
-            label.fontSize = 36f;
+            label.color = new Color(0.67f, 0.72f, 0.8f, 1f);
+            label.fontSize = 32f;
             label.enableAutoSizing = true;
-            label.fontSizeMin = 15f;
-            label.fontSizeMax = 36f;
+            label.fontSizeMin = 18f;
+            label.fontSizeMax = 32f;
+            label.fontStyle = FontStyles.Bold;
             label.alignment = TextAlignmentOptions.Center;
             label.margin = Vector4.zero;
             label.raycastTarget = false;
@@ -264,9 +294,355 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
             RectTransform labelRect = label.rectTransform;
             labelRect.anchorMin = Vector2.zero;
             labelRect.anchorMax = Vector2.one;
-            labelRect.offsetMin = new Vector2(12f, 8f);
-            labelRect.offsetMax = new Vector2(-12f, -8f);
+            labelRect.offsetMin = new Vector2(18f, 16f);
+            labelRect.offsetMax = new Vector2(-18f, -16f);
             labelRect.localScale = Vector3.one;
+        }
+
+        SetTabVisual(toggle, toggle.isOn);
+    }
+
+    private static UnityEngine.UI.Image EnsureTabSelectionAccent(UnityEngine.UI.Toggle toggle, int index)
+    {
+        Transform existing = toggle.transform.Find("Selection Accent");
+        UnityEngine.UI.Image accent;
+        if (existing == null)
+        {
+            GameObject accentObject = new GameObject("Selection Accent", typeof(RectTransform),
+                typeof(CanvasRenderer), typeof(UnityEngine.UI.Image));
+            accentObject.transform.SetParent(toggle.transform, false);
+            accent = accentObject.GetComponent<UnityEngine.UI.Image>();
+        }
+        else
+        {
+            accent = existing.GetComponent<UnityEngine.UI.Image>();
+            if (accent == null)
+                accent = existing.gameObject.AddComponent<UnityEngine.UI.Image>();
+        }
+
+        RectTransform accentRect = accent.rectTransform;
+        accentRect.anchorMin = new Vector2(0f, 0f);
+        accentRect.anchorMax = new Vector2(1f, 0f);
+        accentRect.pivot = new Vector2(0.5f, 0f);
+        accentRect.anchoredPosition = Vector2.zero;
+        accentRect.sizeDelta = new Vector2(0f, 10f);
+        accent.color = GetTabAccent(index);
+        accent.raycastTarget = false;
+        accent.transform.SetAsLastSibling();
+        return accent;
+    }
+
+    private static Color GetTabAccent(int index)
+    {
+        switch (index)
+        {
+            case 0: return new Color(0.24f, 0.58f, 1f, 1f);
+            case 1: return new Color(1f, 0.48f, 0.16f, 1f);
+            default: return new Color(0.18f, 0.84f, 0.82f, 1f);
+        }
+    }
+
+    private void ConfigureGrenadesPanel()
+    {
+        if (grenadesPanel == null)
+            return;
+
+        RectTransform grenadePanelRect = grenadesPanel.transform as RectTransform;
+        RectTransform referenceRect = armoryPanel != null
+            ? armoryPanel.transform as RectTransform
+            : upgradesPanel != null ? upgradesPanel.transform as RectTransform : null;
+        if (grenadePanelRect != null && referenceRect != null)
+            CopyRect(referenceRect, grenadePanelRect);
+
+        UnityEngine.UI.ScrollRect legacyScroll = grenadesPanel.GetComponent<UnityEngine.UI.ScrollRect>();
+        if (legacyScroll != null)
+        {
+            legacyScroll.horizontal = false;
+            legacyScroll.vertical = false;
+            legacyScroll.StopMovement();
+        }
+
+        Transform shopWindow = grenadesPanel.transform.Find("shop window");
+        if (shopWindow == null)
+            return;
+
+        RectTransform windowRect = shopWindow as RectTransform;
+        if (windowRect != null)
+        {
+            windowRect.anchorMin = Vector2.zero;
+            windowRect.anchorMax = Vector2.one;
+            windowRect.pivot = new Vector2(0.5f, 0.5f);
+            windowRect.anchoredPosition = Vector2.zero;
+            windowRect.sizeDelta = Vector2.zero;
+            windowRect.localScale = Vector3.one;
+            windowRect.localRotation = Quaternion.identity;
+        }
+
+        UnityEngine.UI.Image windowImage = shopWindow.GetComponent<UnityEngine.UI.Image>();
+        if (windowImage != null)
+        {
+            windowImage.color = new Color(0.045f, 0.055f, 0.075f, 0.985f);
+            windowImage.raycastTarget = true;
+        }
+
+        TextMeshProUGUI header = EnsureGrenadeText(shopWindow, "Grenade Header");
+        header.text = "THROWABLE SUPPLIES\n<size=55%><color=#9BAFC8>BUY ONE PER CLICK  |  Q TO EQUIP  |  1-4 TO SELECT</color></size>";
+        header.fontSize = 42f;
+        header.fontStyle = FontStyles.Bold;
+        header.alignment = TextAlignmentOptions.Center;
+        header.color = new Color(0.94f, 0.97f, 1f, 1f);
+        header.enableAutoSizing = true;
+        header.fontSizeMin = 24f;
+        header.fontSizeMax = 42f;
+        SetAnchoredRect(header.rectTransform, new Vector2(0.08f, 0.87f), new Vector2(0.92f, 0.98f));
+        header.transform.SetAsLastSibling();
+
+        string[] objectNames = { "frag", "Smoke", "flash", "Molotov" };
+        string[] titles = { "FRAG GRENADE", "SMOKE GRENADE", "FLASHBANG", "MOLOTOV" };
+        string[] descriptions =
+        {
+            "High-damage blast in a wide area.",
+            "Creates a cloud that slows nearby enemies.",
+            "Damages and briefly stuns caught enemies.",
+            "Ignites an area for damage over time."
+        };
+        Color[] accents =
+        {
+            new Color(0.45f, 0.78f, 0.32f, 1f),
+            new Color(0.42f, 0.72f, 0.82f, 1f),
+            new Color(1f, 0.78f, 0.2f, 1f),
+            new Color(1f, 0.38f, 0.12f, 1f)
+        };
+
+        for (int index = 0; index < objectNames.Length; index++)
+        {
+            Transform item = shopWindow.Find(objectNames[index]);
+            if (item == null)
+                continue;
+
+            ConfigureGrenadeCard(item, index, titles[index], descriptions[index], accents[index]);
+        }
+    }
+
+    private static void ConfigureGrenadeCard(
+        Transform item,
+        int index,
+        string title,
+        string description,
+        Color accent)
+    {
+        RectTransform cardRect = item as RectTransform;
+        if (cardRect == null)
+            return;
+
+        float anchorX = index % 2 == 0 ? 0.27f : 0.73f;
+        float anchorY = index < 2 ? 0.64f : 0.28f;
+        cardRect.anchorMin = new Vector2(anchorX, anchorY);
+        cardRect.anchorMax = new Vector2(anchorX, anchorY);
+        cardRect.pivot = new Vector2(0.5f, 0.5f);
+        cardRect.anchoredPosition = Vector2.zero;
+        cardRect.sizeDelta = new Vector2(570f, 520f);
+        cardRect.localScale = Vector3.one;
+        cardRect.localRotation = Quaternion.identity;
+
+        UnityEngine.UI.Image cardImage = item.GetComponent<UnityEngine.UI.Image>();
+        if (cardImage == null)
+            cardImage = item.gameObject.AddComponent<UnityEngine.UI.Image>();
+
+        Transform iconTransform = item.Find("Icon");
+        UnityEngine.UI.Image iconImage;
+        if (iconTransform == null)
+        {
+            GameObject iconObject = new GameObject("Icon", typeof(RectTransform), typeof(CanvasRenderer),
+                typeof(UnityEngine.UI.Image));
+            iconObject.layer = item.gameObject.layer;
+            iconObject.transform.SetParent(item, false);
+            iconTransform = iconObject.transform;
+            iconImage = iconObject.GetComponent<UnityEngine.UI.Image>();
+            iconImage.sprite = cardImage.sprite;
+            iconImage.material = cardImage.material;
+            iconImage.color = Color.white;
+        }
+        else
+        {
+            iconImage = iconTransform.GetComponent<UnityEngine.UI.Image>();
+            if (iconImage == null)
+                iconImage = iconTransform.gameObject.AddComponent<UnityEngine.UI.Image>();
+        }
+
+        if (iconImage.sprite == null && cardImage.sprite != null)
+            iconImage.sprite = cardImage.sprite;
+        iconImage.preserveAspect = true;
+        iconImage.raycastTarget = false;
+        SetAnchoredRect(iconImage.rectTransform, new Vector2(0.14f, 0.43f), new Vector2(0.86f, 0.93f));
+        if (index == 3)
+            iconImage.rectTransform.localScale = new Vector3(1f, -1f, 1f);
+        iconTransform.SetAsFirstSibling();
+
+        cardImage.sprite = null;
+        cardImage.material = null;
+        cardImage.preserveAspect = false;
+        cardImage.color = Color.Lerp(new Color(0.075f, 0.09f, 0.125f, 1f), accent, 0.12f);
+        cardImage.raycastTarget = false;
+
+        TextMeshProUGUI titleLabel = EnsureGrenadeText(item, "Item Title");
+        titleLabel.text = title;
+        titleLabel.fontSize = 30f;
+        titleLabel.fontStyle = FontStyles.Bold;
+        titleLabel.alignment = TextAlignmentOptions.Center;
+        titleLabel.color = Color.Lerp(Color.white, accent, 0.38f);
+        titleLabel.enableAutoSizing = true;
+        titleLabel.fontSizeMin = 20f;
+        titleLabel.fontSizeMax = 30f;
+        SetAnchoredRect(titleLabel.rectTransform, new Vector2(0.07f, 0.31f), new Vector2(0.93f, 0.43f));
+
+        TextMeshProUGUI descriptionLabel = EnsureGrenadeText(item, "Item Description");
+        descriptionLabel.text = description;
+        descriptionLabel.fontSize = 21f;
+        descriptionLabel.alignment = TextAlignmentOptions.Center;
+        descriptionLabel.color = new Color(0.7f, 0.76f, 0.84f, 1f);
+        descriptionLabel.enableAutoSizing = true;
+        descriptionLabel.fontSizeMin = 15f;
+        descriptionLabel.fontSizeMax = 21f;
+        descriptionLabel.textWrappingMode = TextWrappingModes.Normal;
+        SetAnchoredRect(descriptionLabel.rectTransform, new Vector2(0.08f, 0.17f), new Vector2(0.92f, 0.31f));
+
+        UnityEngine.UI.Button buyButton = item.GetComponentInChildren<UnityEngine.UI.Button>(true);
+        if (buyButton == null)
+            return;
+
+        RectTransform buttonRect = buyButton.transform as RectTransform;
+        if (buttonRect != null)
+            SetAnchoredRect(buttonRect, new Vector2(0.25f, 0.035f), new Vector2(0.75f, 0.15f));
+
+        if (buyButton.GetComponent<ButtonAudioHover>() == null)
+            buyButton.gameObject.AddComponent<ButtonAudioHover>().SuppressClickSound();
+
+        BuyGrenadeButton purchase = buyButton.GetComponent<BuyGrenadeButton>();
+        TextMeshProUGUI buttonLabel = buyButton.GetComponentInChildren<TextMeshProUGUI>(true);
+        if (buttonLabel != null)
+        {
+            int baseCost = purchase != null ? Mathf.Max(0, purchase.cost) : 0;
+            int shownCost = Application.isPlaying ? GlobalData.ScaleUpgradePrice(baseCost) : baseCost;
+            buttonLabel.text = "BUY\n$" + shownCost;
+            buttonLabel.fontSize = 25f;
+            buttonLabel.fontStyle = FontStyles.Bold;
+            buttonLabel.alignment = TextAlignmentOptions.Center;
+            buttonLabel.color = Color.white;
+            buttonLabel.enableAutoSizing = true;
+            buttonLabel.fontSizeMin = 17f;
+            buttonLabel.fontSizeMax = 25f;
+            buttonLabel.raycastTarget = false;
+        }
+
+        buyButton.interactable = true;
+        SetButtonColor(buyButton, Color.Lerp(new Color(0.08f, 0.3f, 0.28f, 1f), accent, 0.46f));
+    }
+
+    private static TextMeshProUGUI EnsureGrenadeText(Transform parent, string childName)
+    {
+        Transform existing = parent.Find(childName);
+        TextMeshProUGUI text;
+        if (existing == null)
+        {
+            GameObject textObject = new GameObject(childName, typeof(RectTransform), typeof(CanvasRenderer));
+            textObject.layer = parent.gameObject.layer;
+            textObject.transform.SetParent(parent, false);
+            text = textObject.AddComponent<TextMeshProUGUI>();
+        }
+        else
+        {
+            text = existing.GetComponent<TextMeshProUGUI>();
+            if (text == null)
+                text = existing.gameObject.AddComponent<TextMeshProUGUI>();
+        }
+
+        text.raycastTarget = false;
+        return text;
+    }
+
+    private static void SetAnchoredRect(RectTransform rect, Vector2 anchorMin, Vector2 anchorMax)
+    {
+        if (rect == null)
+            return;
+
+        rect.anchorMin = anchorMin;
+        rect.anchorMax = anchorMax;
+        rect.pivot = new Vector2(0.5f, 0.5f);
+        rect.anchoredPosition = Vector2.zero;
+        rect.sizeDelta = Vector2.zero;
+        rect.localScale = Vector3.one;
+        rect.localRotation = Quaternion.identity;
+    }
+
+    private void ConfigureArmoryPanelPresentation()
+    {
+        if (armoryPanel == null)
+            return;
+
+        UnityEngine.UI.Image panelImage = armoryPanel.GetComponent<UnityEngine.UI.Image>();
+        if (panelImage != null)
+            panelImage.color = new Color(0.045f, 0.055f, 0.075f, 0.985f);
+
+        Transform header = armoryPanel.transform.Find("Header");
+        if (header != null)
+        {
+            UnityEngine.UI.Image headerImage = header.GetComponent<UnityEngine.UI.Image>();
+            if (headerImage != null)
+                headerImage.color = new Color(0.065f, 0.085f, 0.125f, 1f);
+
+            TextMeshProUGUI title = FindText(header, "Title");
+            if (title != null)
+            {
+                title.text = "ARMORY  |  LOADOUT";
+                title.fontSize = 32f;
+                title.fontStyle = FontStyles.Bold;
+                title.color = new Color(0.88f, 0.96f, 1f, 1f);
+            }
+
+            UnityEngine.UI.Button reset = FindButton(header, "RESET + REFUND Button");
+            if (reset != null)
+                SetButtonColor(reset, new Color(0.48f, 0.3f, 0.12f, 1f));
+            UnityEngine.UI.Button close = FindButton(header, "CLOSE Button");
+            if (close != null)
+                SetButtonColor(close, new Color(0.58f, 0.14f, 0.18f, 1f));
+        }
+
+        Transform content = armoryPanel.transform.Find("Scroll View/Viewport/Content");
+        if (content == null)
+            return;
+
+        UnityEngine.UI.VerticalLayoutGroup layout = content.GetComponent<UnityEngine.UI.VerticalLayoutGroup>();
+        if (layout != null)
+        {
+            layout.padding = new RectOffset(14, 14, 14, 22);
+            layout.spacing = 14f;
+        }
+
+        foreach (Transform child in content)
+        {
+            if (child.name.StartsWith("PRIMARY WEAPONS", StringComparison.OrdinalIgnoreCase))
+            {
+                StyleArmorySectionHeading(child, new Color(0.22f, 0.58f, 1f, 1f));
+            }
+            else if (child.name.StartsWith("SECONDARY ATTACHMENTS", StringComparison.OrdinalIgnoreCase))
+            {
+                StyleArmorySectionHeading(child, new Color(0.68f, 0.38f, 1f, 1f));
+            }
+        }
+    }
+
+    private static void StyleArmorySectionHeading(Transform section, Color accent)
+    {
+        UnityEngine.UI.Image background = section.GetComponent<UnityEngine.UI.Image>();
+        if (background != null)
+            background.color = Color.Lerp(new Color(0.055f, 0.07f, 0.105f, 1f), accent, 0.2f);
+
+        TextMeshProUGUI label = FindText(section, "Heading Label");
+        if (label != null)
+        {
+            label.color = Color.Lerp(Color.white, accent, 0.55f);
+            label.fontStyle = FontStyles.Bold;
         }
     }
 
@@ -280,6 +656,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         {
             bool changed = MatchArmoryPanelLayer();
             changed |= EnsureSignatureUpgradeCards();
+            changed |= EnsureSceneAuthoredShopPresentation();
             return changed;
         }
 
@@ -299,11 +676,29 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
             armoryPanel = existing.gameObject;
             MatchArmoryPanelLayer();
             EnsureSignatureUpgradeCards();
+            EnsureSceneAuthoredShopPresentation();
             return true;
         }
 
         BuildArmoryPanel();
+        EnsureSceneAuthoredShopPresentation();
         return armoryPanel != null;
+    }
+
+    private bool EnsureSceneAuthoredShopPresentation()
+    {
+        if (tabParent == null || upgradesTab == null || grenadesTab == null || armoryTab == null ||
+            grenadesPanel == null || armoryPanel == null)
+            return false;
+
+        ConfigureTabBar(tabParent);
+        ConfigureTabToggle(upgradesTab, 0, "UPGRADES");
+        ConfigureTabToggle(grenadesTab, 1, "GRENADES");
+        ConfigureTabToggle(armoryTab, 2, "ARMORY");
+        ConfigureGrenadesPanel();
+        ConfigureArmoryPanelPresentation();
+        MatchArmoryPanelLayer();
+        return true;
     }
 
     private bool EnsureSignatureUpgradeCards()
@@ -414,7 +809,9 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         RectTransform content = CreateScrollView(panelRect);
 
         weaponUpgradeHeading = CreateSectionHeading(content, "ACTIVE WEAPON UPGRADES");
+        weaponUpgradeHeadingBackground = weaponUpgradeHeading.transform.parent.GetComponent<UnityEngine.UI.Image>();
         weaponStatsLabel = CreateStatsCard(content);
+        weaponStatsBackground = weaponStatsLabel.transform.parent.GetComponent<UnityEngine.UI.Image>();
         foreach (PrototypeWeaponUpgrade upgrade in SignatureUpgrades)
             CreateWeaponUpgradeCard(content, upgrade);
 
@@ -477,10 +874,12 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         attachmentButtonLabels.Clear();
         attachmentDescriptions.Clear();
         attachmentBaseDescriptions.Clear();
+        attachmentCards.Clear();
         weaponUpgradeButtons.Clear();
         weaponUpgradeButtonLabels.Clear();
         weaponUpgradeTitles.Clear();
         weaponUpgradeDescriptions.Clear();
+        weaponUpgradeCards.Clear();
 
         Transform header = armoryPanel.transform.Find("Header");
         Transform scrollView = armoryPanel.transform.Find("Scroll View");
@@ -496,8 +895,16 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         armoryFeedbackLabel = FindText(header, "Feedback");
         resetButtonLabel = resetButton != null ? resetButton.GetComponentInChildren<TextMeshProUGUI>(true) : null;
         armoryScrollRect = scrollView.GetComponent<UnityEngine.UI.ScrollRect>();
-        weaponUpgradeHeading = FindText(content.Find("ACTIVE WEAPON UPGRADES"), "Heading Label");
-        weaponStatsLabel = FindText(content.Find("Active Weapon Stats"), "Stats Text");
+        Transform weaponUpgradeSection = content.Find("ACTIVE WEAPON UPGRADES");
+        Transform weaponStatsCard = content.Find("Active Weapon Stats");
+        weaponUpgradeHeading = FindText(weaponUpgradeSection, "Heading Label");
+        weaponStatsLabel = FindText(weaponStatsCard, "Stats Text");
+        weaponUpgradeHeadingBackground = weaponUpgradeSection != null
+            ? weaponUpgradeSection.GetComponent<UnityEngine.UI.Image>()
+            : null;
+        weaponStatsBackground = weaponStatsCard != null
+            ? weaponStatsCard.GetComponent<UnityEngine.UI.Image>()
+            : null;
 
         if (resetButton == null || closeButton == null || armoryFeedbackLabel == null ||
             armoryScrollRect == null || weaponUpgradeHeading == null || weaponStatsLabel == null)
@@ -521,6 +928,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
             weaponUpgradeButtonLabels[upgrade] = buttonLabel;
             weaponUpgradeTitles[upgrade] = title;
             weaponUpgradeDescriptions[upgrade] = description;
+            weaponUpgradeCards[upgrade] = card.GetComponent<UnityEngine.UI.Image>();
         }
 
         foreach (PrototypePrimaryWeapon weapon in Enum.GetValues(typeof(PrototypePrimaryWeapon)))
@@ -540,7 +948,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         foreach (PrototypeAttachment attachment in Enum.GetValues(typeof(PrototypeAttachment)))
         {
             string cardName = FormatEnumName(attachment);
-            if (!TryBindCard(content, cardName, out _, out UnityEngine.UI.Button button,
+            if (!TryBindCard(content, cardName, out GameObject card, out UnityEngine.UI.Button button,
                     out TextMeshProUGUI buttonLabel, out _, out TextMeshProUGUI description))
                 return false;
 
@@ -550,6 +958,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
             attachmentButtonLabels[attachment] = buttonLabel;
             attachmentDescriptions[attachment] = description;
             attachmentBaseDescriptions[attachment] = GetAttachmentBaseDescription(attachment);
+            attachmentCards[attachment] = card;
         }
 
         return true;
@@ -737,7 +1146,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         TextMeshProUGUI buttonLabel;
         TextMeshProUGUI titleLabel;
         TextMeshProUGUI descriptionLabel;
-        CreateCard(parent, upgrade.ToString(), string.Empty, out button, out buttonLabel,
+        GameObject card = CreateCard(parent, upgrade.ToString(), string.Empty, out button, out buttonLabel,
             out titleLabel, out descriptionLabel);
         PrototypeWeaponUpgrade captured = upgrade;
         button.onClick.AddListener(() => HandleWeaponUpgradeClicked(captured));
@@ -745,6 +1154,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         weaponUpgradeButtonLabels[upgrade] = buttonLabel;
         weaponUpgradeTitles[upgrade] = titleLabel;
         weaponUpgradeDescriptions[upgrade] = descriptionLabel;
+        weaponUpgradeCards[upgrade] = card.GetComponent<UnityEngine.UI.Image>();
     }
 
     private void CreateAttachmentCard(Transform parent, PrototypeAttachment attachment, string title, string description)
@@ -753,7 +1163,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         TextMeshProUGUI buttonLabel;
         TextMeshProUGUI titleLabel;
         TextMeshProUGUI descriptionLabel;
-        CreateCard(parent, title, description, out button, out buttonLabel,
+        GameObject card = CreateCard(parent, title, description, out button, out buttonLabel,
             out titleLabel, out descriptionLabel);
         PrototypeAttachment captured = attachment;
         button.onClick.AddListener(() => HandleAttachmentClicked(captured));
@@ -761,6 +1171,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         attachmentButtonLabels[attachment] = buttonLabel;
         attachmentDescriptions[attachment] = descriptionLabel;
         attachmentBaseDescriptions[attachment] = description;
+        attachmentCards[attachment] = card;
     }
 
     private GameObject CreateCard(Transform parent, string title, string description,
@@ -975,56 +1386,104 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         {
             if (!primaryButtonLabels.TryGetValue(weapon, out TextMeshProUGUI label)) continue;
             bool isActive = combat.ActivePrimary == weapon;
+            Color accent = GetWeaponAccent(weapon);
             if (primaryCards.TryGetValue(weapon, out GameObject card))
+            {
                 card.SetActive(!isActive);
+                UnityEngine.UI.Image cardImage = card.GetComponent<UnityEngine.UI.Image>();
+                if (cardImage != null)
+                    cardImage.color = Color.Lerp(new Color(0.07f, 0.08f, 0.105f, 1f), accent, 0.1f);
+                TextMeshProUGUI cardTitle = FindText(card.transform.Find("Description"), "Title");
+                if (cardTitle != null)
+                    cardTitle.color = Color.Lerp(Color.white, accent, 0.38f);
+            }
 
             if (combat.OwnsPrimary(weapon))
             {
                 label.text = "OWNED\nEQUIP";
                 primaryButtons[weapon].interactable = true;
-                SetButtonColor(primaryButtons[weapon], new Color(0.12f, 0.34f, 0.62f, 1f));
+                SetButtonColor(primaryButtons[weapon], Color.Lerp(new Color(0.1f, 0.28f, 0.5f, 1f), accent, 0.36f));
             }
             else
             {
                 label.text = "$" + combat.GetPrimaryCost(weapon);
                 primaryButtons[weapon].interactable = true;
-                SetButtonColor(primaryButtons[weapon], new Color(0.12f, 0.48f, 0.38f, 1f));
+                SetButtonColor(primaryButtons[weapon], Color.Lerp(new Color(0.08f, 0.32f, 0.3f, 1f), accent, 0.34f));
             }
         }
 
         PrototypePrimaryWeapon activeWeapon = combat.ActivePrimary;
         string activeName = PrototypeArmoryCombat.GetWeaponDisplayName(activeWeapon);
-        if (weaponUpgradeHeading != null)
-            weaponUpgradeHeading.text = activeName.ToUpperInvariant() + " — 3 SIGNATURE UPGRADES";
-        if (weaponStatsLabel != null)
-            weaponStatsLabel.text = combat.GetActiveWeaponStatsText();
-
-        foreach (PrototypeWeaponUpgrade upgrade in SignatureUpgrades)
+        Color weaponAccent = GetWeaponAccent(activeWeapon);
+        int unlockedSignatureCount = 0;
+        foreach (PrototypeWeaponUpgrade signatureUpgrade in SignatureUpgrades)
         {
+            if (combat.GetWeaponUpgradeLevel(activeWeapon, signatureUpgrade) >=
+                PrototypeArmoryCombat.GetWeaponUpgradeMaxLevel(signatureUpgrade))
+                unlockedSignatureCount++;
+        }
+
+        if (weaponUpgradeHeading != null)
+        {
+            weaponUpgradeHeading.text = activeName.ToUpperInvariant() + "  |  SIGNATURE UPGRADES  " +
+                                        unlockedSignatureCount + "/" + SignatureUpgrades.Length;
+            weaponUpgradeHeading.color = Color.Lerp(Color.white, weaponAccent, 0.72f);
+        }
+        if (weaponUpgradeHeadingBackground != null)
+            weaponUpgradeHeadingBackground.color = Color.Lerp(new Color(0.055f, 0.075f, 0.11f, 1f), weaponAccent, 0.2f);
+        if (weaponStatsLabel != null)
+        {
+            weaponStatsLabel.text = combat.GetActiveWeaponStatsText();
+            weaponStatsLabel.color = Color.Lerp(new Color(0.82f, 0.9f, 1f, 1f), weaponAccent, 0.28f);
+        }
+        if (weaponStatsBackground != null)
+            weaponStatsBackground.color = Color.Lerp(new Color(0.05f, 0.075f, 0.105f, 1f), weaponAccent, 0.12f);
+
+        for (int signatureIndex = 0; signatureIndex < SignatureUpgrades.Length; signatureIndex++)
+        {
+            PrototypeWeaponUpgrade upgrade = SignatureUpgrades[signatureIndex];
             if (!weaponUpgradeButtonLabels.TryGetValue(upgrade, out TextMeshProUGUI buttonLabel))
                 continue;
 
             int level = combat.GetWeaponUpgradeLevel(activeWeapon, upgrade);
             int max = PrototypeArmoryCombat.GetWeaponUpgradeMaxLevel(upgrade);
-            weaponUpgradeTitles[upgrade].text = PrototypeArmoryCombat.GetWeaponUpgradeName(activeWeapon, upgrade);
+            bool isUnlocked = level >= max;
+            string accentHex = ColorUtility.ToHtmlStringRGB(weaponAccent);
+            string signatureNumber = signatureIndex == 0 ? "I" : signatureIndex == 1 ? "II" : "III";
+            weaponUpgradeTitles[upgrade].text = "SIGNATURE " + signatureNumber + "  |  " +
+                                                PrototypeArmoryCombat.GetWeaponUpgradeName(activeWeapon, upgrade);
+            weaponUpgradeTitles[upgrade].color = Color.Lerp(Color.white, weaponAccent, 0.44f);
             weaponUpgradeDescriptions[upgrade].text =
                 PrototypeArmoryCombat.GetWeaponUpgradeDescription(activeWeapon, upgrade) +
-                "\n<color=#6DE6A0><b>NEXT:</b> " + combat.GetWeaponUpgradePreviewText(activeWeapon, upgrade) + "</color>";
+                (isUnlocked
+                    ? "\n<color=#" + accentHex + "><b>UNLOCKED:</b> Active for " + activeName + ".</color>"
+                    : "\n<color=#" + accentHex + "><b>UPGRADE:</b> " +
+                      combat.GetWeaponUpgradePreviewText(activeWeapon, upgrade) + "</color>");
 
-            if (level >= max)
+            if (weaponUpgradeCards.TryGetValue(upgrade, out UnityEngine.UI.Image cardImage) && cardImage != null)
             {
-                buttonLabel.text = max == 1 ? "OWNED" : "MAX\nLVL " + level;
+                float slotTint = 0.1f + signatureIndex * 0.025f;
+                cardImage.color = isUnlocked
+                    ? Color.Lerp(new Color(0.055f, 0.075f, 0.09f, 1f), weaponAccent, 0.26f)
+                    : Color.Lerp(new Color(0.07f, 0.08f, 0.105f, 1f), weaponAccent, slotTint);
+            }
+
+            if (isUnlocked)
+            {
+                buttonLabel.text = max == 1 ? "UNLOCKED" : "MAX\nLVL " + level;
                 weaponUpgradeButtons[upgrade].interactable = false;
-                SetButtonColor(weaponUpgradeButtons[upgrade], new Color(0.28f, 0.31f, 0.36f, 1f));
+                SetButtonColor(weaponUpgradeButtons[upgrade],
+                    Color.Lerp(new Color(0.18f, 0.22f, 0.27f, 1f), weaponAccent, 0.42f));
             }
             else
             {
                 int cost = PrototypeArmoryCombat.GetWeaponUpgradeCost(activeWeapon, upgrade, level);
                 buttonLabel.text = max == 1
-                    ? "BUY ONCE\n$" + cost
+                    ? "UNLOCK\n$" + cost
                     : "LVL " + level + "/" + max + "\n$" + cost;
                 weaponUpgradeButtons[upgrade].interactable = true;
-                SetButtonColor(weaponUpgradeButtons[upgrade], new Color(0.12f, 0.48f, 0.38f, 1f));
+                SetButtonColor(weaponUpgradeButtons[upgrade],
+                    Color.Lerp(new Color(0.08f, 0.32f, 0.3f, 1f), weaponAccent, 0.48f));
             }
         }
 
@@ -1033,6 +1492,16 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
             if (!attachmentButtonLabels.TryGetValue(attachment, out TextMeshProUGUI label)) continue;
             int level = combat.GetAttachmentLevel(attachment);
             int max = PrototypeArmoryCombat.GetAttachmentMaxLevel(attachment);
+            Color accent = GetAttachmentAccent(attachment);
+            if (attachmentCards.TryGetValue(attachment, out GameObject card) && card != null)
+            {
+                UnityEngine.UI.Image cardImage = card.GetComponent<UnityEngine.UI.Image>();
+                if (cardImage != null)
+                    cardImage.color = Color.Lerp(new Color(0.07f, 0.08f, 0.105f, 1f), accent, 0.09f);
+                TextMeshProUGUI cardTitle = FindText(card.transform.Find("Description"), "Title");
+                if (cardTitle != null)
+                    cardTitle.color = Color.Lerp(Color.white, accent, 0.34f);
+            }
             if (attachmentDescriptions.TryGetValue(attachment, out TextMeshProUGUI description) &&
                 attachmentBaseDescriptions.TryGetValue(attachment, out string baseDescription))
             {
@@ -1043,21 +1512,72 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
             {
                 label.text = "MAX\nLVL " + level;
                 attachmentButtons[attachment].interactable = false;
-                SetButtonColor(attachmentButtons[attachment], new Color(0.28f, 0.31f, 0.36f, 1f));
+                SetButtonColor(attachmentButtons[attachment],
+                    Color.Lerp(new Color(0.2f, 0.23f, 0.28f, 1f), accent, 0.24f));
             }
             else
             {
                 label.text = "LVL " + level + "/" + max + "\n$" + combat.GetAttachmentCost(attachment, level);
                 attachmentButtons[attachment].interactable = true;
-                SetButtonColor(attachmentButtons[attachment], new Color(0.12f, 0.48f, 0.38f, 1f));
+                SetButtonColor(attachmentButtons[attachment],
+                    Color.Lerp(new Color(0.08f, 0.32f, 0.3f, 1f), accent, 0.38f));
             }
         }
     }
 
     private static void SetButtonColor(UnityEngine.UI.Button button, Color color)
     {
-        if (button != null && button.targetGraphic is UnityEngine.UI.Image image)
-            image.color = color;
+        if (button == null)
+            return;
+
+        if (button.targetGraphic is UnityEngine.UI.Image image)
+            image.color = Color.white;
+
+        UnityEngine.UI.ColorBlock colors = button.colors;
+        colors.normalColor = color;
+        colors.highlightedColor = Color.Lerp(color, Color.white, 0.16f);
+        colors.pressedColor = Color.Lerp(color, Color.black, 0.2f);
+        colors.selectedColor = colors.highlightedColor;
+        colors.disabledColor = color;
+        colors.colorMultiplier = 1f;
+        colors.fadeDuration = 0.08f;
+        button.colors = colors;
+    }
+
+    private static Color GetWeaponAccent(PrototypePrimaryWeapon weapon)
+    {
+        switch (weapon)
+        {
+            case PrototypePrimaryWeapon.RapidBullets:
+                return new Color(1f, 0.72f, 0.2f, 1f);
+            case PrototypePrimaryWeapon.PiercingLaser:
+                return new Color(0.18f, 0.86f, 1f, 1f);
+            case PrototypePrimaryWeapon.ShotgunBurst:
+                return new Color(1f, 0.46f, 0.16f, 1f);
+            case PrototypePrimaryWeapon.Flamethrower:
+                return new Color(1f, 0.22f, 0.08f, 1f);
+            case PrototypePrimaryWeapon.LightningArc:
+                return new Color(1f, 0.88f, 0.12f, 1f);
+            default:
+                return new Color(0.35f, 0.92f, 0.28f, 1f);
+        }
+    }
+
+    private static Color GetAttachmentAccent(PrototypeAttachment attachment)
+    {
+        switch (attachment)
+        {
+            case PrototypeAttachment.MiniTurretSatellites:
+                return new Color(0.3f, 0.7f, 1f, 1f);
+            case PrototypeAttachment.SpikeBarrier:
+                return new Color(1f, 0.32f, 0.26f, 1f);
+            case PrototypeAttachment.OverchargeModule:
+                return new Color(1f, 0.58f, 0.16f, 1f);
+            case PrototypeAttachment.FreezeBurst:
+                return new Color(0.3f, 0.9f, 1f, 1f);
+            default:
+                return new Color(0.72f, 0.42f, 1f, 1f);
+        }
     }
 
     private void HandleArmoryTab(bool isOn)
@@ -1110,14 +1630,34 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         if (toggle == null)
             return;
 
+        int index = Mathf.Clamp(toggle.transform.GetSiblingIndex(), 0, 2);
+        Color accent = GetTabAccent(index);
+        Color normal = selected
+            ? Color.Lerp(new Color(0.08f, 0.105f, 0.15f, 1f), accent, 0.28f)
+            : new Color(0.075f, 0.09f, 0.125f, 1f);
+
         if (toggle.targetGraphic is UnityEngine.UI.Image background)
-            background.color = selected
-                ? new Color(0.12f, 0.35f, 0.62f, 1f)
-                : new Color(0.82f, 0.85f, 0.9f, 1f);
+            background.color = Color.white;
+
+        UnityEngine.UI.ColorBlock colors = toggle.colors;
+        colors.normalColor = normal;
+        colors.highlightedColor = Color.Lerp(normal, accent, selected ? 0.22f : 0.16f);
+        colors.pressedColor = Color.Lerp(normal, Color.black, 0.18f);
+        colors.selectedColor = colors.highlightedColor;
+        colors.disabledColor = new Color(0.055f, 0.06f, 0.075f, 0.72f);
+        colors.colorMultiplier = 1f;
+        colors.fadeDuration = 0.08f;
+        toggle.colors = colors;
+
+        UnityEngine.UI.Image selectionAccent = toggle.graphic as UnityEngine.UI.Image;
+        if (selectionAccent != null)
+            selectionAccent.color = accent;
 
         TextMeshProUGUI label = toggle.GetComponentInChildren<TextMeshProUGUI>(true);
         if (label != null)
-            label.color = selected ? Color.white : new Color(0.08f, 0.1f, 0.14f, 1f);
+            label.color = selected
+                ? Color.white
+                : new Color(0.67f, 0.72f, 0.8f, 1f);
     }
 
     private void CloseArmory()
