@@ -9,8 +9,16 @@ public class ZoomInOut : MonoBehaviour
 
     private float currentZoom = 1f;
 
+    void OnEnable()
+    {
+        if (target != null)
+            currentZoom = Mathf.Clamp(target.localScale.x, minZoom, maxZoom);
+    }
+
     void Update()
     {
+        if (target == null || !target.gameObject.activeInHierarchy)
+            return;
         float scroll = Input.mouseScrollDelta.y;
 
         if (scroll != 0)
@@ -18,7 +26,7 @@ public class ZoomInOut : MonoBehaviour
             currentZoom += scroll * zoomSpeed;
             currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
 
-            target.localScale = new Vector3(currentZoom, currentZoom, 1f);
+            target.localScale = new Vector3(currentZoom, currentZoom, target.localScale.z);
         }
     }
 }

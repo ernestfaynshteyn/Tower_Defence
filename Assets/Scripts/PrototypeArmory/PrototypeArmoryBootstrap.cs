@@ -355,10 +355,14 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
             CopyRect(referenceRect, grenadePanelRect);
 
         UnityEngine.UI.ScrollRect legacyScroll = grenadesPanel.GetComponent<UnityEngine.UI.ScrollRect>();
+        foreach (ZoomInOut zoom in grenadesPanel.GetComponentsInChildren<ZoomInOut>(true))
+            zoom.enabled = false;
         if (legacyScroll != null)
         {
             legacyScroll.horizontal = false;
-            legacyScroll.vertical = false;
+            legacyScroll.vertical = true;
+            legacyScroll.scrollSensitivity = 42f;
+            legacyScroll.movementType = UnityEngine.UI.ScrollRect.MovementType.Clamped;
             legacyScroll.StopMovement();
         }
 
@@ -369,14 +373,23 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         RectTransform windowRect = shopWindow as RectTransform;
         if (windowRect != null)
         {
-            windowRect.anchorMin = Vector2.zero;
+            windowRect.anchorMin = new Vector2(0f, 1f);
             windowRect.anchorMax = Vector2.one;
-            windowRect.pivot = new Vector2(0.5f, 0.5f);
+            windowRect.pivot = new Vector2(0.5f, 1f);
             windowRect.anchoredPosition = Vector2.zero;
-            windowRect.sizeDelta = Vector2.zero;
+            windowRect.sizeDelta = new Vector2(0f, Mathf.Max(1800f,
+                grenadePanelRect != null ? grenadePanelRect.rect.height : 1800f));
             windowRect.localScale = Vector3.one;
             windowRect.localRotation = Quaternion.identity;
+            if (legacyScroll != null)
+            {
+                legacyScroll.content = windowRect;
+                legacyScroll.viewport = grenadePanelRect;
+            }
         }
+
+        if (grenadesPanel.GetComponent<UnityEngine.UI.RectMask2D>() == null)
+            grenadesPanel.AddComponent<UnityEngine.UI.RectMask2D>();
 
         UnityEngine.UI.Image windowImage = shopWindow.GetComponent<UnityEngine.UI.Image>();
         if (windowImage != null)
@@ -431,6 +444,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         string description,
         Color accent)
     {
+        string[] iconNames = { "Frag", "Smoke", "Flashbang", "Molotov" };
         RectTransform cardRect = item as RectTransform;
         if (cardRect == null)
             return;
@@ -470,13 +484,17 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
                 iconImage = iconTransform.gameObject.AddComponent<UnityEngine.UI.Image>();
         }
 
-        if (iconImage.sprite == null && cardImage.sprite != null)
+        Sprite throwableIcon = Resources.Load<Sprite>("ThrowableIcons/" + iconNames[index]);
+        if (throwableIcon != null)
+            iconImage.sprite = throwableIcon;
+        else if (iconImage.sprite == null && cardImage.sprite != null)
             iconImage.sprite = cardImage.sprite;
+        iconImage.color = Color.white;
+        iconImage.material = null;
         iconImage.preserveAspect = true;
         iconImage.raycastTarget = false;
         SetAnchoredRect(iconImage.rectTransform, new Vector2(0.14f, 0.43f), new Vector2(0.86f, 0.93f));
-        if (index == 3)
-            iconImage.rectTransform.localScale = new Vector3(1f, -1f, 1f);
+        iconImage.rectTransform.localScale = Vector3.one;
         iconTransform.SetAsFirstSibling();
 
         cardImage.sprite = null;
@@ -1600,6 +1618,12 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
 
     private void ShowTab(ShopTab selectedTab)
     {
+        if (upgradesPanel != null)
+        {
+            foreach (UnityEngine.UI.ScrollRect treeScroll in
+                     upgradesPanel.GetComponentsInChildren<UnityEngine.UI.ScrollRect>(true))
+                treeScroll.scrollSensitivity = 0f;
+        }
         if (upgradesPanel != null)
             upgradesPanel.SetActive(selectedTab == ShopTab.Upgrades);
         if (grenadesPanel != null)

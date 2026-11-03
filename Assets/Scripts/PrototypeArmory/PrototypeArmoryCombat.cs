@@ -1923,7 +1923,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         }
         Vector2 spriteOrigin = playerHealth.transform.position;
         Vector2 spriteDirection = GetAimDirection(spriteOrigin);
-        equippedWeaponSprite.transform.position = (Vector3)(spriteOrigin + spriteDirection * 0.65f);
+        equippedWeaponSprite.transform.position = (Vector3)(spriteOrigin + spriteDirection * 0.25f);
         equippedWeaponSprite.transform.rotation = Quaternion.Euler(0f, 0f,
             Mathf.Atan2(spriteDirection.y, spriteDirection.x) * Mathf.Rad2Deg);
         equippedWeaponSprite.flipY = spriteDirection.x < 0f;
