@@ -88,7 +88,7 @@ public class GameOverUI : MonoBehaviour
                 rect.sizeDelta = new Vector2(600f, 280f);
             }
 
-            recordsText.fontSize = 48f;
+            recordsText.fontSize = 96f;
             recordsText.fontStyle = FontStyles.Bold;
             recordsText.alignment = TextAlignmentOptions.Top;
             recordsText.color = Color.black;
@@ -107,12 +107,17 @@ public class GameOverUI : MonoBehaviour
 
     public void RestartGame2()
     {
-        LoadGameplayScene();
+        LoadGameselectingScene();
     }
 
     private static void LoadGameplayScene()
     {
         SceneManager.LoadScene(PrototypeSceneRoutes.GameplayScene);
+    }
+
+    private static void LoadGameselectingScene()
+    {
+        SceneManager.LoadScene(PrototypeSceneRoutes.SelectionScene);
     }
 }
 

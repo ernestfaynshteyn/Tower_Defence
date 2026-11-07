@@ -5,10 +5,13 @@ public class EnemyMovement : MonoBehaviour
     public Transform target;
     public float speed = 3f;
     private EnemyHealth enemyHealth;
+    private Collider2D bodyCollider;
+    private Collider2D targetCollider;
 
     public void Start()
     {
         enemyHealth = GetComponent<EnemyHealth>();
+        bodyCollider = GetComponent<Collider2D>();
         if (enemyHealth == null)
             ApplyDifficulty();
 
@@ -17,6 +20,7 @@ public class EnemyMovement : MonoBehaviour
         if (playerObj != null)
         {
             target = playerObj.transform;
+            targetCollider = playerObj.GetComponent<Collider2D>();
         }
         else
         {
@@ -34,7 +38,10 @@ public class EnemyMovement : MonoBehaviour
             float step = activeSpeed * Time.deltaTime;
 
             // Move the current object's position towards the target's position
-            if (Vector3.Distance(target.position, transform.position) > 1.5f)
+            // Approach the actual tower hurtbox, not a fixed centre distance.
+            // Small slimes previously stopped outside it, especially on the axes.
+            if (targetCollider == null || bodyCollider == null ||
+                !bodyCollider.Distance(targetCollider).isOverlapped)
             {
                 transform.position = Vector3.MoveTowards(transform.position, target.position, step);
             }

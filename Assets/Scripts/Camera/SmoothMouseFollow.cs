@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class SmoothMouseFollow : MonoBehaviour
 {
+    [SerializeField] private bool rotateBody = true;
     private Transform aimTransform;
     private RangeIndicatorScaler rangeIndicator;
     private readonly List<Collider2D> targetColliders = new List<Collider2D>(64);
@@ -54,7 +55,8 @@ public class SmoothMouseFollow : MonoBehaviour
         float angle = Mathf.Atan2(AimDirection.y, AimDirection.x) * Mathf.Rad2Deg;
         if (aimTransform != null)
             aimTransform.eulerAngles = new Vector3(0, 0, angle);
-        transform.eulerAngles = new Vector3(0, 0, angle);
+        if (rotateBody)
+            transform.eulerAngles = new Vector3(0, 0, angle);
     }
 
     private bool TryFindNearestEnemy(out EnemyHealth nearest)

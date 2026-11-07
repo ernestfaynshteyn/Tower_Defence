@@ -13,10 +13,13 @@ public sealed class ToxicSlimeBehaviour : MonoBehaviour
     private SpriteRenderer sourceRenderer;
     private PlayerHealth playerHealth;
     private Vector3 lastTrailPosition;
+    private float earlyWavePower = 1f;
 
     private void Start()
     {
         sourceRenderer = GetComponent<SpriteRenderer>();
+        earlyWavePower = WaveManager.Instance != null
+            ? WaveManager.Instance.EarlyWaveEnemyPowerMultiplier : 1f;
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
             playerHealth = player.GetComponent<PlayerHealth>();
@@ -45,7 +48,7 @@ public sealed class ToxicSlimeBehaviour : MonoBehaviour
             sourceRenderer,
             trailLifetime,
             poisonRadius,
-            poisonDamage,
+            poisonDamage * earlyWavePower,
             damageInterval);
     }
 }

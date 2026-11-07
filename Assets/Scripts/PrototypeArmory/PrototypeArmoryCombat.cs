@@ -381,9 +381,9 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         float range = GetWeaponDistance(profile.Range, origin, direction);
         Vector2 end = origin + direction * range;
         Color bulletColor = tracerRound ? new Color(1f, 0.25f, 0.08f) : new Color(1f, 0.9f, 0.25f);
-        CreateTimedLine(tracerRound ? "Tracer Round" : "Rapid Bullet", origin, end,
+        CreateTimedLine(tracerRound ? "Tracer Round" : "Rapid Bullet", GetWeaponMuzzlePosition(), end,
             bulletColor, tracerRound ? 0.065f : 0.035f, 0.055f);
-        CreateDirectionalParticles("Rapid Bullet Sparks", origin, direction,
+        CreateDirectionalParticles("Rapid Bullet Sparks", GetWeaponMuzzlePosition(), direction,
             bulletColor, tracerRound ? 9 : 5, 2.8f, 0.1f, 0.18f, 10f);
 
         int targetsRemaining = 1 + GetPierceCount(profile);
@@ -418,9 +418,9 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         Vector2 end = origin + direction * range;
         Color laserColor = new Color(0.2f, 0.95f, 1f);
         bool wideBeam = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialTwo);
-        CreateTimedLine("Piercing Laser", origin, end, laserColor,
+        CreateTimedLine("Piercing Laser", GetWeaponMuzzlePosition(), end, laserColor,
             wideBeam ? 0.32f : 0.1f, profile.FireDelay * 1.35f);
-        CreateLineParticles("Piercing Laser Particles", origin, end, laserColor, 22, 0.09f, 0.14f);
+        CreateLineParticles("Piercing Laser Particles", GetWeaponMuzzlePosition(), end, laserColor, 22, 0.09f, 0.14f);
 
         float pulseDamage = profile.Damage;
         if (HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialOne))
@@ -464,7 +464,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
     {
         const int pelletCount = 7;
         float halfSpread = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialOne) ? 11.5f : 19f;
-        CreateDirectionalParticles("Shotgun Muzzle Particles", origin, direction,
+        CreateDirectionalParticles("Shotgun Muzzle Particles", GetWeaponMuzzlePosition(), direction,
             new Color(1f, 0.65f, 0.2f), 14, 3.2f, 0.12f, 0.2f, 22f);
         for (int i = 0; i < pelletCount; i++)
         {
@@ -493,7 +493,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
     {
         float range = GetWeaponDistance(profile.Range, origin, direction);
         Vector2 end = origin + direction * range;
-        CreateTimedLine("Shotgun Pellet", origin, end, new Color(1f, 0.65f, 0.2f), 0.025f, 0.045f);
+        CreateTimedLine("Shotgun Pellet", GetWeaponMuzzlePosition(), end, new Color(1f, 0.65f, 0.2f), 0.025f, 0.045f);
 
         int targetsRemaining = 1 + GetPierceCount(profile);
         HashSet<EnemyHealth> hitEnemies = new HashSet<EnemyHealth>();
@@ -518,7 +518,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
     {
         float range = GetWeaponDistance(profile.Range, origin, direction);
         Vector2 end = origin + direction * range;
-        CreateTimedLine("Shotgun Center Slug", origin, end,
+        CreateTimedLine("Shotgun Center Slug", GetWeaponMuzzlePosition(), end,
             new Color(1f, 0.82f, 0.32f), 0.075f, 0.08f);
 
         foreach (RaycastHit2D hit in GetRaycastHits(origin, direction, range))
@@ -545,7 +545,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         if (originalFlamethrower == null)
         {
             Color fallbackColor = new Color(1f, 0.25f, 0.04f, 0.8f);
-            CreateDirectionalParticles("Flamethrower Fallback", origin, direction, fallbackColor,
+            CreateDirectionalParticles("Flamethrower Fallback", GetWeaponMuzzlePosition(), direction, fallbackColor,
                 12, range / 0.32f, 0.32f, 0.2f, halfAngle);
         }
 
@@ -624,13 +624,21 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
             current = FindAimTarget(origin, direction, playerRange, 32f, null);
         if (current == null)
         {
-            CreateDirectionalParticles("Lightning Charge", origin, direction,
+            // A missed shot still needs a visible discharge, just as bullets,
+            // laser, flame and toxic shots remain visible without a target.
+            float range = GetWeaponDistance(profile.Range, origin, direction);
+            Vector2 end = origin + direction * range;
+            Color lightningColor = new Color(0.95f, 0.85f, 0.12f);
+            CreateTimedLine("Lightning Miss", GetWeaponMuzzlePosition(), end, lightningColor, 0.075f, 0.15f);
+            CreateLineParticles("Lightning Miss Particles", GetWeaponMuzzlePosition(), end,
+                lightningColor, 10, 0.11f, 0.16f);
+            CreateDirectionalParticles("Lightning Charge", GetWeaponMuzzlePosition(), direction,
                 new Color(0.95f, 0.85f, 0.12f), 8, 2.2f, 0.12f, 0.12f, 35f);
             return;
         }
 
         HashSet<EnemyHealth> hit = new HashSet<EnemyHealth>();
-        Vector2 start = origin;
+        Vector2 start = GetWeaponMuzzlePosition();
         float damage = profile.Damage;
         int chainCount = Mathf.Max(1, GetPierceCount(profile));
         EnemyHealth firstHit = null;
@@ -688,7 +696,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         Vector2 delta = target - origin;
         if (delta.magnitude > range)
             target = origin + delta.normalized * range;
-        StartCoroutine(ToxicBombRoutine(origin, target, splashRadius, profile.Damage));
+        StartCoroutine(ToxicBombRoutine(GetWeaponMuzzlePosition(), target, splashRadius, profile.Damage));
     }
 
     private float GetToxicSplashRadius()
@@ -1901,6 +1909,30 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         runtimeObjects.Add(satellite);
     }
 
+    private Vector2 GetWeaponMuzzlePosition()
+    {
+        if (equippedWeaponSprite == null || equippedWeaponSprite.sprite == null)
+            return playerHealth.transform.position;
+
+        // Normalized texture coordinates measured from each 32px cannon's
+        // front opening, including its transparent padding (Y points upward).
+        Vector2 muzzle;
+        switch (ActivePrimary)
+        {
+            case PrototypePrimaryWeapon.PiercingLaser: muzzle = new Vector2(31f / 32f, 0.5f); break;
+            case PrototypePrimaryWeapon.Flamethrower: muzzle = new Vector2(31f / 32f, 0.5f); break;
+            case PrototypePrimaryWeapon.ShotgunBurst: muzzle = new Vector2(31f / 32f, 15.5f / 32f); break;
+            case PrototypePrimaryWeapon.LightningArc: muzzle = new Vector2(31f / 32f, 15.5f / 32f); break;
+            case PrototypePrimaryWeapon.ToxicSpitter: muzzle = new Vector2(31f / 32f, 15.5f / 32f); break;
+            default: muzzle = new Vector2(31f / 32f, 15.5f / 32f); break;
+        }
+        Bounds bounds = equippedWeaponSprite.sprite.bounds;
+        Vector3 local = bounds.min + Vector3.Scale(bounds.size, new Vector3(muzzle.x, muzzle.y, 0f));
+        local.z = 0f;
+        if (equippedWeaponSprite.flipY) local.y = -local.y;
+        return equippedWeaponSprite.transform.TransformPoint(local);
+    }
+
     private void UpdateWeaponVisual()
     {
         if (equippedWeaponSprite == null)
@@ -1923,7 +1955,8 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         }
         Vector2 spriteOrigin = playerHealth.transform.position;
         Vector2 spriteDirection = GetAimDirection(spriteOrigin);
-        equippedWeaponSprite.transform.position = (Vector3)(spriteOrigin + spriteDirection * 0.25f);
+        // Keep the rear mounting block over the tower while the barrel extends forward.
+        equippedWeaponSprite.transform.position = (Vector3)(spriteOrigin + spriteDirection * 0.45f);
         equippedWeaponSprite.transform.rotation = Quaternion.Euler(0f, 0f,
             Mathf.Atan2(spriteDirection.y, spriteDirection.x) * Mathf.Rad2Deg);
         equippedWeaponSprite.flipY = spriteDirection.x < 0f;
@@ -1984,9 +2017,13 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         Vector2 direction = GetAimDirection(origin);
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         originalFlamethrowerObject.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        if (originalFlamethrower.ParticleEffect != null)
+            originalFlamethrower.ParticleEffect.transform.position = GetWeaponMuzzlePosition();
 
         WeaponProfile profile = GetProfile(PrototypePrimaryWeapon.Flamethrower);
         float visibleDistance = GetWeaponDistance(profile.Range, origin, direction);
+        visibleDistance = Mathf.Max(0f, visibleDistance -
+            Vector2.Distance(origin, GetWeaponMuzzlePosition()));
         float rangeMultiplier = visibleDistance / Mathf.Max(0.01f, profile.Range);
         float spreadMultiplier = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialTwo) ? 1.5f : 1f;
         originalFlamethrower.SetExternalVisual(shouldPlay, rangeMultiplier, spreadMultiplier);

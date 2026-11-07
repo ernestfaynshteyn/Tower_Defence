@@ -202,8 +202,13 @@ public class WaveManager : MonoBehaviour
     public float GetEnemyHealthMultiplierForCurrentWave()
     {
         int completedWaves = Mathf.Max(0, currentWave - 1);
-        return Mathf.Pow(Mathf.Max(1f, enemyHealthGrowthPerWave), completedWaves);
+        return Mathf.Pow(Mathf.Max(1f, enemyHealthGrowthPerWave), completedWaves) *
+               EarlyWaveEnemyPowerMultiplier;
     }
+
+    // Apply on spawn so surviving enemies keep their original wave's strength.
+    public float EarlyWaveEnemyPowerMultiplier => currentWave <= 2 ? 0.5f :
+        currentWave <= 4 ? 0.75f : 1f;
 
     public float GetEnemySpeedMultiplierForCurrentWave()
     {

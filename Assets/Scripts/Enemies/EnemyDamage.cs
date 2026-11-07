@@ -8,6 +8,11 @@ public class EnemyDamage : MonoBehaviour
     private float nextDamageTimer  = 0f;
     private IEnemyAttackEffect attackEffect;
     private SlimeCombatVfx combatVfx;
+    private Collider2D bodyCollider;
+    private Collider2D playerCollider;
+    private PlayerHealth playerHealth;
+    private EnemyHealth enemyHealth;
+    private float earlyWavePower = 1f;
 
     public string enemyID;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -15,39 +20,45 @@ public class EnemyDamage : MonoBehaviour
     {
         attackEffect = GetComponent<IEnemyAttackEffect>();
         combatVfx = GetComponent<SlimeCombatVfx>();
-        ApplyDifficulty();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-   
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
+        bodyCollider = GetComponent<Collider2D>();
+        enemyHealth = GetComponent<EnemyHealth>();
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
         {
-            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
-            if (playerHealth == null)
-                return;
+            playerHealth = player.GetComponent<PlayerHealth>();
+            playerCollider = player.GetComponent<Collider2D>();
+        }
+        ApplyDifficulty();
+        earlyWavePower = WaveManager.Instance != null
+            ? WaveManager.Instance.EarlyWaveEnemyPowerMultiplier : 1f;
+    }
 
-            if (nextDamageTimer >= damageRate)
-            {
-                nextDamageTimer = 0;
-                Vector3 impactPosition = playerHealth.transform.position;
-                if (attackEffect != null)
-                    attackEffect.DealDamage(playerHealth, damageAmount, enemyID);
-                else
-                    playerHealth.TakeDamage(damageAmount, enemyID);
+    private void FixedUpdate()
+    {
+        // Trigger Stay callbacks can stop when the slime's Rigidbody2D sleeps.
+        // Check the root hurtbox directly so stationary contact still attacks,
+        // and weapon/range colliders cannot count as touching the tower.
+        if (playerHealth == null || bodyCollider == null || playerCollider == null ||
+            !bodyCollider.enabled || !playerCollider.enabled ||
+            (enemyHealth != null && enemyHealth.CurrentHealth <= 0f) ||
+            !bodyCollider.Distance(playerCollider).isOverlapped)
+            return;
 
-                combatVfx?.PlayAttackEffect(impactPosition);
-            }
-            if (playerHealth.currentHealth <= 0 && GlobalData.Instance != null)
-            {
-                GlobalData.Instance.sprite = GetComponent<SpriteRenderer>().sprite;
-            }
-            nextDamageTimer += Time.deltaTime;
+        nextDamageTimer += Time.fixedDeltaTime;
+        if (nextDamageTimer >= damageRate)
+        {
+            nextDamageTimer = 0;
+            Vector3 impactPosition = playerHealth.transform.position;
+            if (attackEffect != null)
+                attackEffect.DealDamage(playerHealth, damageAmount * earlyWavePower, enemyID);
+            else
+                playerHealth.TakeDamage(damageAmount * earlyWavePower, enemyID);
+
+            combatVfx?.PlayAttackEffect(impactPosition);
+        }
+        if (playerHealth.currentHealth <= 0 && GlobalData.Instance != null)
+        {
+            GlobalData.Instance.sprite = GetComponent<SpriteRenderer>().sprite;
         }
     }
 
