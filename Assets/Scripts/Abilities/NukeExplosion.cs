@@ -93,16 +93,25 @@ public class NukeExplosion : MonoBehaviour
 
     private static void DestroyAllActiveEnemies()
     {
-        EnemyHealth[] enemies = FindObjectsByType<EnemyHealth>(FindObjectsSortMode.None);
         int defeated = 0;
-        foreach (EnemyHealth enemy in enemies)
+        // Boss death events can spawn children synchronously. Sweep again so
+        // those children are included in the same screen clear.
+        for (int pass = 0; pass < 16; pass++)
         {
-            if (enemy != null && enemy.gameObject.activeInHierarchy && enemy.health > 0f)
+            EnemyHealth[] enemies = FindObjectsByType<EnemyHealth>(FindObjectsSortMode.None);
+            int defeatedThisPass = 0;
+            foreach (EnemyHealth enemy in enemies)
             {
-                enemy.TakeDamage(float.MaxValue, DamageNumberType.Explosive);
-                if (enemy.health <= 0f)
-                    defeated++;
+                if (enemy != null && enemy.gameObject.activeInHierarchy && enemy.health > 0f)
+                {
+                    enemy.TakeDamage(float.MaxValue, DamageNumberType.Explosive);
+                    if (enemy.health <= 0f)
+                        defeatedThisPass++;
+                }
             }
+            defeated += defeatedThisPass;
+            if (defeatedThisPass == 0)
+                break;
         }
         Debug.Log($"[Nuke] Detonated: defeated {defeated} active enemies. Rewards and wave counts use the normal enemy death flow.");
     }

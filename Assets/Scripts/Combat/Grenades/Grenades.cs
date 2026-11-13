@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum GrenadeType
@@ -11,6 +12,9 @@ public enum GrenadeType
 public class Grenades : MonoBehaviour
 {
     PlayerStats stats;
+    [HideInInspector] public bool managedByThrower;
+    private readonly object slowSource = new object();
+    private readonly HashSet<EnemyHealth> slowedEnemies = new HashSet<EnemyHealth>();
 
     [Header("Type")]
     public GrenadeType grenadeType;
@@ -40,6 +44,7 @@ public class Grenades : MonoBehaviour
 
     void Start()
     {
+        if (managedByThrower) return;
         stats = PlayerStats.instance;
         //baseSmokeDuration = stats.Get("attack_speed");
         Invoke(nameof(Explode), GetFuseTime());
@@ -146,26 +151,38 @@ public class Grenades : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (managedByThrower) return;
         if (grenadeType != GrenadeType.Smoke) return;
 
         if (other.CompareTag("Enemy"))
         {
             EnemyHealth enemy = other.GetComponent<EnemyHealth>();
             if (enemy != null)
-                enemy.ApplySlow(GetSlowMultiplier());
+            {
+                slowedEnemies.Add(enemy);
+                enemy.ApplySlow(GetSlowMultiplier(), slowSource);
+            }
         }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
+        if (managedByThrower) return;
         if (grenadeType != GrenadeType.Smoke) return;
 
         if (other.CompareTag("Enemy"))
         {
             EnemyHealth enemy = other.GetComponent<EnemyHealth>();
-            if (enemy != null)
-                enemy.RemoveSlow();
+            if (enemy != null && slowedEnemies.Remove(enemy))
+                enemy.RemoveSlow(slowSource);
         }
+    }
+
+    private void OnDestroy()
+    {
+        foreach (EnemyHealth enemy in slowedEnemies)
+            if (enemy != null)
+                enemy.RemoveSlow(slowSource);
     }
 
     float GetFuseTime() =>

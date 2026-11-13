@@ -55,6 +55,7 @@ public class WaveManager : MonoBehaviour
     private TextMeshProUGUI waveTitleTMP;
 
     private bool isWaveActive;
+    public bool CanSpawnEnemies => isWaveActive && !waitingForNextWave;
     private bool waitingForNextWave;
     private bool rewardGiven;
     private int baseEnemyNeeded;

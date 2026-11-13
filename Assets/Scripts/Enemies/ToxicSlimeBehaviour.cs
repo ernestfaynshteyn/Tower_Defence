@@ -17,7 +17,9 @@ public sealed class ToxicSlimeBehaviour : MonoBehaviour
 
     private void Start()
     {
-        sourceRenderer = GetComponent<SpriteRenderer>();
+        sourceRenderer = transform.Find("Rough Slime Art")?.GetComponent<SpriteRenderer>();
+        if (sourceRenderer == null)
+            sourceRenderer = GetComponent<SpriteRenderer>();
         earlyWavePower = WaveManager.Instance != null
             ? WaveManager.Instance.EarlyWaveEnemyPowerMultiplier : 1f;
         GameObject player = GameObject.FindWithTag("Player");

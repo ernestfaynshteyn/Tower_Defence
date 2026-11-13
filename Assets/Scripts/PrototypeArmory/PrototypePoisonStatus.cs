@@ -27,12 +27,20 @@ public sealed class PrototypePoisonStatus : MonoBehaviour
             return;
         }
 
-        remainingDuration -= Time.deltaTime;
-        tickTimer -= Time.deltaTime;
-        if (tickTimer > 0f)
-            return;
+        float activeTime = Mathf.Min(Time.deltaTime, remainingDuration);
+        remainingDuration -= activeTime;
+        tickTimer += activeTime;
+        while (tickTimer >= 0.5f)
+        {
+            enemyHealth.TakeDamage(damagePerSecond * 0.5f, DamageNumberType.Poison);
+            tickTimer -= 0.5f;
+        }
 
-        tickTimer = 0.5f;
-        enemyHealth.TakeDamage(damagePerSecond * 0.5f, DamageNumberType.Poison);
+        if (remainingDuration <= 0f)
+        {
+            if (tickTimer > 0f)
+                enemyHealth.TakeDamage(damagePerSecond * tickTimer, DamageNumberType.Poison);
+            Destroy(this);
+        }
     }
 }

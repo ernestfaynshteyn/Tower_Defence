@@ -369,6 +369,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
     private void FireRapidBullet(Vector2 origin, Vector2 direction, WeaponProfile profile,
         bool allowSpecialCycle = true)
     {
+        Vector2 muzzle = GetWeaponMuzzlePosition();
         bool tracerRound = false;
         bool bulletStorm = false;
         if (allowSpecialCycle)
@@ -378,17 +379,17 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
             bulletStorm = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialThree) && rapidBulletCounter % 20 == 0;
         }
 
-        float range = GetWeaponDistance(profile.Range, origin, direction);
-        Vector2 end = origin + direction * range;
+        float range = GetWeaponDistance(profile.Range, muzzle, direction);
+        Vector2 end = muzzle + direction * range;
         Color bulletColor = tracerRound ? new Color(1f, 0.25f, 0.08f) : new Color(1f, 0.9f, 0.25f);
-        CreateTimedLine(tracerRound ? "Tracer Round" : "Rapid Bullet", GetWeaponMuzzlePosition(), end,
+        CreateTimedLine(tracerRound ? "Tracer Round" : "Rapid Bullet", muzzle, end,
             bulletColor, tracerRound ? 0.065f : 0.035f, 0.055f);
-        CreateDirectionalParticles("Rapid Bullet Sparks", GetWeaponMuzzlePosition(), direction,
+        CreateDirectionalParticles("Rapid Bullet Sparks", muzzle, direction,
             bulletColor, tracerRound ? 9 : 5, 2.8f, 0.1f, 0.18f, 10f);
 
         int targetsRemaining = 1 + GetPierceCount(profile);
         HashSet<EnemyHealth> hitEnemies = new HashSet<EnemyHealth>();
-        foreach (RaycastHit2D hit in GetRaycastHits(origin, direction, range))
+        foreach (RaycastHit2D hit in GetRaycastHits(muzzle, direction, range))
         {
             EnemyHealth enemy = hit.collider != null ? hit.collider.GetComponentInParent<EnemyHealth>() : null;
             if (enemy == null || !hitEnemies.Add(enemy))
@@ -414,13 +415,14 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
 
     private void FirePiercingLaser(Vector2 origin, Vector2 direction, WeaponProfile profile)
     {
-        float range = GetWeaponDistance(profile.Range, origin, direction);
-        Vector2 end = origin + direction * range;
+        Vector2 muzzle = GetWeaponMuzzlePosition();
+        float range = GetWeaponDistance(profile.Range, muzzle, direction);
+        Vector2 end = muzzle + direction * range;
         Color laserColor = new Color(0.2f, 0.95f, 1f);
         bool wideBeam = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialTwo);
-        CreateTimedLine("Piercing Laser", GetWeaponMuzzlePosition(), end, laserColor,
+        CreateTimedLine("Piercing Laser", muzzle, end, laserColor,
             wideBeam ? 0.32f : 0.1f, profile.FireDelay * 1.35f);
-        CreateLineParticles("Piercing Laser Particles", GetWeaponMuzzlePosition(), end, laserColor, 22, 0.09f, 0.14f);
+        CreateLineParticles("Piercing Laser Particles", muzzle, end, laserColor, 22, 0.09f, 0.14f);
 
         float pulseDamage = profile.Damage;
         if (HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialOne))
@@ -439,8 +441,8 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         float lastDamage = 0f;
         int targetsRemaining = Mathf.Max(1, GetPierceCount(profile));
         List<RaycastHit2D> laserHits = wideBeam
-            ? GetCircleCastHits(origin, direction, range, 0.22f)
-            : GetRaycastHits(origin, direction, range);
+            ? GetCircleCastHits(muzzle, direction, range, 0.22f)
+            : GetRaycastHits(muzzle, direction, range);
         foreach (RaycastHit2D hit in laserHits)
         {
             EnemyHealth enemy = hit.collider != null ? hit.collider.GetComponentInParent<EnemyHealth>() : null;
@@ -491,18 +493,19 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
 
     private void FireShotgunPellet(Vector2 origin, Vector2 direction, WeaponProfile profile)
     {
-        float range = GetWeaponDistance(profile.Range, origin, direction);
-        Vector2 end = origin + direction * range;
-        CreateTimedLine("Shotgun Pellet", GetWeaponMuzzlePosition(), end, new Color(1f, 0.65f, 0.2f), 0.025f, 0.045f);
+        Vector2 muzzle = GetWeaponMuzzlePosition();
+        float range = GetWeaponDistance(profile.Range, muzzle, direction);
+        Vector2 end = muzzle + direction * range;
+        CreateTimedLine("Shotgun Pellet", muzzle, end, new Color(1f, 0.65f, 0.2f), 0.025f, 0.045f);
 
         int targetsRemaining = 1 + GetPierceCount(profile);
         HashSet<EnemyHealth> hitEnemies = new HashSet<EnemyHealth>();
-        foreach (RaycastHit2D hit in GetRaycastHits(origin, direction, range))
+        foreach (RaycastHit2D hit in GetRaycastHits(muzzle, direction, range))
         {
             EnemyHealth enemy = hit.collider != null ? hit.collider.GetComponentInParent<EnemyHealth>() : null;
             if (enemy == null || !hitEnemies.Add(enemy))
                 continue;
-            float distance = Vector2.Distance(origin, enemy.transform.position);
+            float distance = Vector2.Distance(muzzle, enemy.transform.position);
             float falloff = Mathf.Lerp(1f, 0.45f, Mathf.Clamp01(distance / Mathf.Max(0.01f, range)));
             float dealt = DealWeaponDamage(enemy, profile.Damage * falloff);
             TryReflect(enemy, dealt);
@@ -516,18 +519,19 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
 
     private void FireShotgunSlug(Vector2 origin, Vector2 direction, WeaponProfile profile)
     {
-        float range = GetWeaponDistance(profile.Range, origin, direction);
-        Vector2 end = origin + direction * range;
-        CreateTimedLine("Shotgun Center Slug", GetWeaponMuzzlePosition(), end,
+        Vector2 muzzle = GetWeaponMuzzlePosition();
+        float range = GetWeaponDistance(profile.Range, muzzle, direction);
+        Vector2 end = muzzle + direction * range;
+        CreateTimedLine("Shotgun Center Slug", muzzle, end,
             new Color(1f, 0.82f, 0.32f), 0.075f, 0.08f);
 
-        foreach (RaycastHit2D hit in GetRaycastHits(origin, direction, range))
+        foreach (RaycastHit2D hit in GetRaycastHits(muzzle, direction, range))
         {
             EnemyHealth enemy = hit.collider != null ? hit.collider.GetComponentInParent<EnemyHealth>() : null;
             if (enemy == null)
                 continue;
 
-            float distance = Vector2.Distance(origin, enemy.transform.position);
+            float distance = Vector2.Distance(muzzle, enemy.transform.position);
             float falloff = Mathf.Lerp(1f, 0.65f, Mathf.Clamp01(distance / Mathf.Max(0.01f, range)));
             float dealt = DealWeaponDamage(enemy, profile.Damage * 2.2f * falloff);
             TryReflect(enemy, dealt);
@@ -537,7 +541,8 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
 
     private void FireFlamethrower(Vector2 origin, Vector2 direction, WeaponProfile profile)
     {
-        float range = GetWeaponDistance(profile.Range, origin, direction);
+        Vector2 muzzle = GetWeaponMuzzlePosition();
+        float range = GetWeaponDistance(profile.Range, muzzle, direction);
         bool longBurn = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialOne);
         bool wideSpread = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialTwo);
         bool combustion = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialThree);
@@ -545,13 +550,13 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         if (originalFlamethrower == null)
         {
             Color fallbackColor = new Color(1f, 0.25f, 0.04f, 0.8f);
-            CreateDirectionalParticles("Flamethrower Fallback", GetWeaponMuzzlePosition(), direction, fallbackColor,
+            CreateDirectionalParticles("Flamethrower Fallback", muzzle, direction, fallbackColor,
                 12, range / 0.32f, 0.32f, 0.2f, halfAngle);
         }
 
-        foreach (EnemyHealth enemy in FindEnemies(origin, range))
+        foreach (EnemyHealth enemy in FindEnemies(muzzle, range))
         {
-            Vector2 toEnemy = (Vector2)enemy.transform.position - origin;
+            Vector2 toEnemy = (Vector2)enemy.transform.position - muzzle;
             if (Vector2.Angle(direction, toEnemy) > halfAngle)
                 continue;
 
@@ -618,27 +623,28 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
     private void FireLightning(Vector2 origin, Vector2 direction, WeaponProfile profile,
         HashSet<EnemyHealth> volleyHits)
     {
-        float playerRange = GetWeaponRadius(profile.Range);
-        EnemyHealth current = FindAimTarget(origin, direction, playerRange, 32f, volleyHits);
+        Vector2 muzzle = GetWeaponMuzzlePosition();
+        float playerRange = GetWeaponDistance(profile.Range, muzzle, direction);
+        EnemyHealth current = FindAimTarget(muzzle, direction, playerRange, 32f, volleyHits);
         if (current == null && volleyHits != null && volleyHits.Count > 0)
-            current = FindAimTarget(origin, direction, playerRange, 32f, null);
+            current = FindAimTarget(muzzle, direction, playerRange, 32f, null);
         if (current == null)
         {
             // A missed shot still needs a visible discharge, just as bullets,
             // laser, flame and toxic shots remain visible without a target.
-            float range = GetWeaponDistance(profile.Range, origin, direction);
-            Vector2 end = origin + direction * range;
+            float range = playerRange;
+            Vector2 end = muzzle + direction * range;
             Color lightningColor = new Color(0.95f, 0.85f, 0.12f);
-            CreateTimedLine("Lightning Miss", GetWeaponMuzzlePosition(), end, lightningColor, 0.075f, 0.15f);
-            CreateLineParticles("Lightning Miss Particles", GetWeaponMuzzlePosition(), end,
+            CreateTimedLine("Lightning Miss", muzzle, end, lightningColor, 0.075f, 0.15f);
+            CreateLineParticles("Lightning Miss Particles", muzzle, end,
                 lightningColor, 10, 0.11f, 0.16f);
-            CreateDirectionalParticles("Lightning Charge", GetWeaponMuzzlePosition(), direction,
+            CreateDirectionalParticles("Lightning Charge", muzzle, direction,
                 new Color(0.95f, 0.85f, 0.12f), 8, 2.2f, 0.12f, 0.12f, 35f);
             return;
         }
 
         HashSet<EnemyHealth> hit = new HashSet<EnemyHealth>();
-        Vector2 start = GetWeaponMuzzlePosition();
+        Vector2 start = muzzle;
         float damage = profile.Damage;
         int chainCount = Mathf.Max(1, GetPierceCount(profile));
         EnemyHealth firstHit = null;
@@ -1650,18 +1656,19 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         bool useWeaponUpgrade,
         DamageNumberType damageType)
     {
-        if (enemy == null) return 0f;
+        if (enemy == null || enemy.CurrentHealth <= 0f) return 0f;
         float damage = useWeaponUpgrade ? GetWeaponDamage(baseDamage) : GetModifiedDamage(baseDamage);
         float critChance = GetChance(StatNames.CritChance);
         if (UnityEngine.Random.value < critChance)
             damage *= 2f * (1f + GetChance(StatNames.CritDamage));
+        float dealtDamage = Mathf.Min(Mathf.Max(0f, damage), enemy.CurrentHealth);
         enemy.TakeDamage(damage, damageType);
 
         float lifestealChance = GetChance(StatNames.LifestealChance);
-        float lifestealAmount = Mathf.Max(0f, GetPercent(StatNames.LifestealAmount) / 100f);
-        if (playerHealth != null && lifestealAmount > 0f && UnityEngine.Random.value < lifestealChance)
-            playerHealth.Heal(enemy.MaxHealth * lifestealAmount);
-        return damage;
+        float lifestealMultiplier = Mathf.Max(0f, 1f + GetPercent(StatNames.LifestealAmount) / 100f);
+        if (playerHealth != null && dealtDamage > 0f && UnityEngine.Random.value < lifestealChance)
+            playerHealth.Heal(dealtDamage * 0.1f * lifestealMultiplier);
+        return dealtDamage;
     }
 
     private float GetWeaponDamage(float baseDamage)
@@ -1815,6 +1822,10 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         foreach (EnemyHealth enemy in FindEnemies(origin, range))
         {
             if (excluded != null && excluded.Contains(enemy))
+                continue;
+            if (rangeIndicator != null && rangeIndicator.WorldRadius > 0f &&
+                ((Vector2)enemy.transform.position - rangeIndicator.WorldCenter).sqrMagnitude >
+                rangeIndicator.WorldRadius * rangeIndicator.WorldRadius)
                 continue;
             float angle = Vector2.Angle(direction, (Vector2)enemy.transform.position - origin);
             if (angle >= bestAngle) continue;
@@ -2021,9 +2032,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
             originalFlamethrower.ParticleEffect.transform.position = GetWeaponMuzzlePosition();
 
         WeaponProfile profile = GetProfile(PrototypePrimaryWeapon.Flamethrower);
-        float visibleDistance = GetWeaponDistance(profile.Range, origin, direction);
-        visibleDistance = Mathf.Max(0f, visibleDistance -
-            Vector2.Distance(origin, GetWeaponMuzzlePosition()));
+        float visibleDistance = GetWeaponDistance(profile.Range, GetWeaponMuzzlePosition(), direction);
         float rangeMultiplier = visibleDistance / Mathf.Max(0.01f, profile.Range);
         float spreadMultiplier = HasWeaponUpgrade(PrototypeWeaponUpgrade.SpecialTwo) ? 1.5f : 1f;
         originalFlamethrower.SetExternalVisual(shouldPlay, rangeMultiplier, spreadMultiplier);

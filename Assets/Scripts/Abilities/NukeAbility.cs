@@ -47,7 +47,7 @@ public class NukeAbility : MonoBehaviour
 
     private void Update()
     {
-        if (!isUnlocked || (playerHealth != null && playerHealth.IsStunned) ||
+        if (!isUnlocked || Time.timeScale <= 0f || (playerHealth != null && playerHealth.IsStunned) ||
             Time.time < nextReadyTime || !Input.GetKeyDown(activationKey))
             return;
 

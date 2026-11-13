@@ -17,7 +17,10 @@ public class EnemyHealth : MonoBehaviour
     [Tooltip("Enable only while diagnosing damage calculations. Per-hit logging is expensive.")]
     public bool logDamage;
     private float baseSpeed;
+    private bool speedInitialized;
     private float slowMultiplier = 1f;
+    private readonly object legacySlowSource = new object();
+    private readonly Dictionary<object, float> slowSources = new Dictionary<object, float>();
     private bool isStunned;
     private float stunnedUntil;
     private Coroutine stunCoroutine;
@@ -46,6 +49,7 @@ public class EnemyHealth : MonoBehaviour
         ApplyWaveScaling();
         MaxHealth = health;
         baseSpeed = moveSpeed;
+        speedInitialized = true;
         RefreshMoveSpeed();
         if (animator == null)
         {
@@ -206,18 +210,36 @@ public class EnemyHealth : MonoBehaviour
 
     public void ApplySlow(float multiplier)
     {
-        if (isDead) return;
+        ApplySlow(multiplier, legacySlowSource);
+    }
+
+    public void ApplySlow(float multiplier, object source)
+    {
+        if (isDead || source == null) return;
         float resisted = Mathf.Lerp(1f, Mathf.Clamp01(multiplier), 1f - slowResistance);
         if (resisted < 0.999f)
             RecordStatusOnce(StatusEffectRecord.Slowed);
-        slowMultiplier = resisted;
-        RefreshMoveSpeed();
+        slowSources[source] = resisted;
+        RefreshSlowMultiplier();
+    }
+
+    private void RefreshSlowMultiplier()
+    {
+        slowMultiplier = 1f;
+        foreach (float multiplier in slowSources.Values)
+            slowMultiplier = Mathf.Min(slowMultiplier, multiplier);
+        if (speedInitialized)
+            RefreshMoveSpeed();
     }
     public void RemoveSlow()
     {
-        if (isDead) return;
-        slowMultiplier = 1f;
-        RefreshMoveSpeed();
+        RemoveSlow(legacySlowSource);
+    }
+
+    public void RemoveSlow(object source)
+    {
+        if (isDead || source == null || !slowSources.Remove(source)) return;
+        RefreshSlowMultiplier();
     }
 
     /// <summary>Moves this enemy away from an origin. Reusable by pulse-style abilities.</summary>

@@ -34,7 +34,8 @@ public class Spawner : MonoBehaviour
         if (WaveManager.Instance == null)
             return;
 
-        if (WaveManager.Instance.enemySpawned >= WaveManager.Instance.enemyNeeded)
+        if (!WaveManager.Instance.CanSpawnEnemies ||
+            WaveManager.Instance.enemySpawned >= WaveManager.Instance.enemyNeeded)
             return;
 
         spawnTimer += Time.deltaTime;

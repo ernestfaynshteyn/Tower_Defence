@@ -143,13 +143,12 @@ public class Bullet : MonoBehaviour
                 finalDamage *= critMultiplier;
             }
 
+            float dealtDamage = Mathf.Min(Mathf.Max(0f, finalDamage), enemy.CurrentHealth);
             enemy.TakeDamage(finalDamage);
 
-            if (ownerHealth != null && lifestealAmount > 0f && Random.value < lifestealChance)
+            if (ownerHealth != null && dealtDamage > 0f && lifestealAmount > 0f && Random.value < lifestealChance)
             {
-                // Lifesteal is intentionally based on the defeated target's
-                // maximum health, rather than shrinking with a weak hit.
-                ownerHealth.Heal(enemy.MaxHealth * lifestealAmount);
+                ownerHealth.Heal(dealtDamage * lifestealAmount);
             }
 
             Destroy(gameObject);

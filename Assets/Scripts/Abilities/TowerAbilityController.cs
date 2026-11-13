@@ -46,8 +46,7 @@ public sealed class TowerAbilityController : MonoBehaviour
     private float empReadyTime;
     private float toxicReadyTime;
 
-    private const int MaxPulseEnemies = 128;
-    private readonly Collider2D[] pulseOverlapResults = new Collider2D[MaxPulseEnemies];
+    private readonly List<Collider2D> pulseOverlapResults = new List<Collider2D>(256);
     private readonly HashSet<EnemyHealth> pulseEnemiesHit = new HashSet<EnemyHealth>();
 
     public bool IsSewerPulseUnlocked => GetFlag(StatNames.SewerPulseUnlocked);
@@ -91,6 +90,7 @@ public sealed class TowerAbilityController : MonoBehaviour
         float radius = GetModified(StatNames.SewerPulseRadius, baseSewerPulseRadius);
         float damage = GetModified(StatNames.SewerPulseDamage, baseSewerPulseDamage);
         float pushDistance = GetModified(StatNames.SewerPulseForce, baseSewerPulseForce);
+        pulseOverlapResults.Clear();
         int hitCount = Physics2D.OverlapCircle(
             transform.position,
             radius,
@@ -101,7 +101,6 @@ public sealed class TowerAbilityController : MonoBehaviour
         for (int i = 0; i < hitCount; i++)
         {
             Collider2D hit = pulseOverlapResults[i];
-            pulseOverlapResults[i] = null;
             if (hit == null)
                 continue;
 
@@ -269,16 +268,14 @@ public sealed class TowerAbilityController : MonoBehaviour
 /// <summary>A temporary poison area spawned by Toxic Flood.</summary>
 public sealed class ToxicFloodZone : MonoBehaviour
 {
-    private const int MaxEnemiesPerTick = 128;
-
-    private readonly Collider2D[] overlapResults = new Collider2D[MaxEnemiesPerTick];
+    private readonly List<Collider2D> overlapResults = new List<Collider2D>(256);
     private readonly HashSet<EnemyHealth> enemiesHit = new HashSet<EnemyHealth>();
 
     private float remainingDuration;
     private float radius;
     private float damagePerSecond;
     private float tickInterval;
-    private float nextTickTime;
+    private float elapsedSinceTick;
     private LineRenderer outline;
     private ParticleSystem particles;
     private Material visualMaterial;
@@ -297,7 +294,7 @@ public sealed class ToxicFloodZone : MonoBehaviour
         radius = Mathf.Max(0.1f, zoneRadius);
         damagePerSecond = Mathf.Max(0f, dps);
         tickInterval = Mathf.Max(0.05f, interval);
-        nextTickTime = Time.time;
+        elapsedSinceTick = 0f;
 
         CreateOutline(color, Mathf.Clamp(segments, 12, 96), lineWidth, sortingOrder);
         CreateParticles(color, sortingOrder);
@@ -305,25 +302,30 @@ public sealed class ToxicFloodZone : MonoBehaviour
 
     private void Update()
     {
-        remainingDuration -= Time.deltaTime;
-        if (remainingDuration <= 0f)
+        float activeTime = Mathf.Min(Time.deltaTime, remainingDuration);
+        remainingDuration -= activeTime;
+        elapsedSinceTick += activeTime;
+        while (elapsedSinceTick >= tickInterval)
         {
-            Destroy(gameObject);
-            return;
+            DamageEnemies(tickInterval);
+            elapsedSinceTick -= tickInterval;
         }
 
-        if (Time.time >= nextTickTime)
+        if (remainingDuration <= 0f)
         {
-            DamageEnemies();
-            nextTickTime = Time.time + tickInterval;
+            if (elapsedSinceTick > 0f)
+                DamageEnemies(elapsedSinceTick);
+            Destroy(gameObject);
+            return;
         }
 
         float pulse = 0.85f + Mathf.Sin(Time.time * 5f) * 0.08f;
         transform.localScale = new Vector3(pulse, pulse, 1f);
     }
 
-    private void DamageEnemies()
+    private void DamageEnemies(float elapsedTime)
     {
+        overlapResults.Clear();
         int count = Physics2D.OverlapCircle(
             transform.position,
             radius,
@@ -331,11 +333,10 @@ public sealed class ToxicFloodZone : MonoBehaviour
             overlapResults);
 
         enemiesHit.Clear();
-        float damageThisTick = damagePerSecond * tickInterval;
+        float damageThisTick = damagePerSecond * elapsedTime;
         for (int i = 0; i < count; i++)
         {
             Collider2D hit = overlapResults[i];
-            overlapResults[i] = null;
             if (hit == null)
                 continue;
 

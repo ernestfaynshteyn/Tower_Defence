@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UseGrenade : MonoBehaviour
 {
@@ -93,8 +94,9 @@ public class UseGrenade : MonoBehaviour
 
         UpdateTrajectoryLine();
 
-        if (isEquipped && !isThrowing &&
+        if (isEquipped && !isThrowing && Time.timeScale > 0f &&
             (playerHealth == null || !playerHealth.IsStunned) &&
+            (EventSystem.current == null || !EventSystem.current.IsPointerOverGameObject()) &&
             Input.GetMouseButtonDown(0))
         {
             StartCoroutine(ThrowGrenadeRoutine());
@@ -207,6 +209,8 @@ public class UseGrenade : MonoBehaviour
         if (grenadeScript != null)
         {
             grenadeScript.grenadeType = grenadeType;
+            // UseGrenade owns the flight and explosion of thrown prefabs.
+            grenadeScript.managedByThrower = true;
         }
 
         // The old prefabs carry GrenadeDamage while this component owns the
@@ -508,19 +512,27 @@ public class UseGrenade : MonoBehaviour
     private IEnumerator ApplySmokeArea(Vector2 position, float radius)
     {
         float elapsed = 0f;
-        var slowedEnemies = new System.Collections.Generic.HashSet<EnemyHealth>();
+        object slowSource = new object();
+        var slowedEnemies = new HashSet<EnemyHealth>();
 
         while (elapsed < smokeAreaDuration)
         {
+            var enemiesInside = new HashSet<EnemyHealth>();
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(position, radius, enemyLayer);
             foreach (Collider2D enemyCollider in hitEnemies)
             {
                 EnemyHealth enemy = enemyCollider.GetComponentInParent<EnemyHealth>();
                 if (enemy == null) continue;
 
-                enemy.ApplySlow(smokeSlowMultiplier);
-                slowedEnemies.Add(enemy);
+                enemiesInside.Add(enemy);
+                if (slowedEnemies.Add(enemy))
+                    enemy.ApplySlow(smokeSlowMultiplier, slowSource);
             }
+
+            foreach (EnemyHealth enemy in slowedEnemies)
+                if (enemy != null && !enemiesInside.Contains(enemy))
+                    enemy.RemoveSlow(slowSource);
+            slowedEnemies = enemiesInside;
 
             yield return new WaitForSeconds(areaTickInterval);
             elapsed += areaTickInterval;
@@ -529,7 +541,7 @@ public class UseGrenade : MonoBehaviour
         foreach (EnemyHealth enemy in slowedEnemies)
         {
             if (enemy != null)
-                enemy.RemoveSlow();
+                enemy.RemoveSlow(slowSource);
         }
     }
 

@@ -223,7 +223,8 @@ public class Shottingscript : MonoBehaviour
             float critChance = Mathf.Clamp01(GetChanceModifier(StatNames.CritChance) / 100f);
             float critMultiplier = 2f * (1f + GetChanceModifier(StatNames.CritDamage) / 100f);
             float lifestealChance = Mathf.Clamp01(GetPercentModifier(StatNames.LifestealChance) / 100f);
-            float lifestealAmount = Mathf.Max(0f, GetPercentModifier(StatNames.LifestealAmount) / 100f);
+            float lifestealAmount = 0.1f * Mathf.Max(0f,
+                1f + GetPercentModifier(StatNames.LifestealAmount) / 100f);
             float maxDistance = bulletScript.BaseMaxDistance * Mathf.Max(0.01f, rangeMultiplier);
             if (rangeIndicator != null)
                 maxDistance = rangeIndicator.ClampDistanceToIndicator(firingPoint.position, shotDirection, maxDistance);

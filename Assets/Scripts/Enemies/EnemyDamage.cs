@@ -58,7 +58,10 @@ public class EnemyDamage : MonoBehaviour
         }
         if (playerHealth.currentHealth <= 0 && GlobalData.Instance != null)
         {
-            GlobalData.Instance.sprite = GetComponent<SpriteRenderer>().sprite;
+            SpriteRenderer killerArt = transform.Find("Rough Slime Art")?.GetComponent<SpriteRenderer>();
+            if (killerArt == null)
+                killerArt = GetComponent<SpriteRenderer>();
+            GlobalData.Instance.sprite = killerArt != null ? killerArt.sprite : null;
         }
     }
 
