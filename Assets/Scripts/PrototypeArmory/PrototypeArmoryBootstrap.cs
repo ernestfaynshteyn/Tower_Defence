@@ -53,6 +53,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         new Dictionary<PrototypeWeaponUpgrade, UnityEngine.UI.Image>();
 
     private const string ArmoryPanelName = "Armory Panel";
+    private static Sprite mossStoneButtonSprite;
     private static readonly PrototypeWeaponUpgrade[] SignatureUpgrades =
     {
         PrototypeWeaponUpgrade.SpecialOne,
@@ -238,7 +239,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         UnityEngine.UI.Image barBackground = tabs.GetComponent<UnityEngine.UI.Image>();
         if (barBackground == null)
             barBackground = tabs.gameObject.AddComponent<UnityEngine.UI.Image>();
-        barBackground.color = new Color(0.035f, 0.045f, 0.065f, 0.97f);
+        barBackground.color = new Color(0.14f, 0.14f, 0.14f, 0.92f);
         barBackground.raycastTarget = false;
     }
 
@@ -249,7 +250,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
 
         toggle.gameObject.SetActive(true);
         toggle.interactable = true;
-        toggle.transition = UnityEngine.UI.Selectable.Transition.ColorTint;
+        toggle.transition = UnityEngine.UI.Selectable.Transition.None;
         toggle.toggleTransition = UnityEngine.UI.Toggle.ToggleTransition.Fade;
         toggle.transform.SetSiblingIndex(index);
         if (toggle.GetComponent<ButtonAudioHover>() == null)
@@ -273,7 +274,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
             background.color = Color.white;
         }
 
-        UnityEngine.UI.Image accent = EnsureTabSelectionAccent(toggle, index);
+        UnityEngine.UI.Image accent = EnsureTabSelectionAccent(toggle);
         toggle.graphic = accent;
 
         TextMeshProUGUI label = toggle.GetComponentInChildren<TextMeshProUGUI>(true);
@@ -281,7 +282,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         {
             label.gameObject.SetActive(true);
             label.text = labelText;
-            label.color = new Color(0.67f, 0.72f, 0.8f, 1f);
+            label.color = Color.white;
             label.fontSize = 32f;
             label.enableAutoSizing = true;
             label.fontSizeMin = 18f;
@@ -302,7 +303,7 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         SetTabVisual(toggle, toggle.isOn);
     }
 
-    private static UnityEngine.UI.Image EnsureTabSelectionAccent(UnityEngine.UI.Toggle toggle, int index)
+    private static UnityEngine.UI.Image EnsureTabSelectionAccent(UnityEngine.UI.Toggle toggle)
     {
         Transform existing = toggle.transform.Find("Selection Accent");
         UnityEngine.UI.Image accent;
@@ -326,20 +327,10 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         accentRect.pivot = new Vector2(0.5f, 0f);
         accentRect.anchoredPosition = Vector2.zero;
         accentRect.sizeDelta = new Vector2(0f, 10f);
-        accent.color = GetTabAccent(index);
+        accent.color = Color.clear;
         accent.raycastTarget = false;
         accent.transform.SetAsLastSibling();
         return accent;
-    }
-
-    private static Color GetTabAccent(int index)
-    {
-        switch (index)
-        {
-            case 0: return new Color(0.24f, 0.58f, 1f, 1f);
-            case 1: return new Color(1f, 0.48f, 0.16f, 1f);
-            default: return new Color(0.18f, 0.84f, 0.82f, 1f);
-        }
     }
 
     private void ConfigureGrenadesPanel()
@@ -497,10 +488,14 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         iconImage.rectTransform.localScale = Vector3.one;
         iconTransform.SetAsFirstSibling();
 
-        cardImage.sprite = null;
+        Sprite stoneCard = Resources.Load<Sprite>("ThrowableIcons/StoneCard");
+        cardImage.sprite = stoneCard;
+        cardImage.type = UnityEngine.UI.Image.Type.Simple;
         cardImage.material = null;
         cardImage.preserveAspect = false;
-        cardImage.color = Color.Lerp(new Color(0.075f, 0.09f, 0.125f, 1f), accent, 0.12f);
+        cardImage.color = stoneCard != null
+            ? Color.white
+            : Color.Lerp(new Color(0.075f, 0.09f, 0.125f, 1f), accent, 0.12f);
         cardImage.raycastTarget = false;
 
         TextMeshProUGUI titleLabel = EnsureGrenadeText(item, "Item Title");
@@ -1247,9 +1242,9 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
             typeof(UnityEngine.UI.Image), typeof(UnityEngine.UI.Button));
         buttonObject.transform.SetParent(parent, false);
         UnityEngine.UI.Image image = buttonObject.GetComponent<UnityEngine.UI.Image>();
-        image.color = color;
         UnityEngine.UI.Button button = buttonObject.GetComponent<UnityEngine.UI.Button>();
         button.targetGraphic = image;
+        SetButtonColor(button, color);
         buttonObject.AddComponent<ButtonAudioHover>().SuppressClickSound();
 
         TextMeshProUGUI text = CreateText(buttonObject.transform, label, fontSize, TextAlignmentOptions.Center, Color.white);
@@ -1549,14 +1544,24 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
             return;
 
         if (button.targetGraphic is UnityEngine.UI.Image image)
+        {
+            if (mossStoneButtonSprite == null)
+                mossStoneButtonSprite = Resources.Load<Sprite>("UI/Buttons/MossStoneButton");
+            if (mossStoneButtonSprite != null)
+            {
+                image.sprite = mossStoneButtonSprite;
+                image.type = UnityEngine.UI.Image.Type.Sliced;
+            }
             image.color = Color.white;
+        }
 
         UnityEngine.UI.ColorBlock colors = button.colors;
-        colors.normalColor = color;
-        colors.highlightedColor = Color.Lerp(color, Color.white, 0.16f);
-        colors.pressedColor = Color.Lerp(color, Color.black, 0.2f);
+        Color tint = Color.Lerp(Color.white, color, 0.16f);
+        colors.normalColor = tint;
+        colors.highlightedColor = Color.white;
+        colors.pressedColor = Color.Lerp(tint, Color.black, 0.22f);
         colors.selectedColor = colors.highlightedColor;
-        colors.disabledColor = color;
+        colors.disabledColor = Color.Lerp(tint, Color.black, 0.5f);
         colors.colorMultiplier = 1f;
         colors.fadeDuration = 0.08f;
         button.colors = colors;
@@ -1654,34 +1659,39 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         if (toggle == null)
             return;
 
-        int index = Mathf.Clamp(toggle.transform.GetSiblingIndex(), 0, 2);
-        Color accent = GetTabAccent(index);
-        Color normal = selected
-            ? Color.Lerp(new Color(0.08f, 0.105f, 0.15f, 1f), accent, 0.28f)
-            : new Color(0.075f, 0.09f, 0.125f, 1f);
-
         if (toggle.targetGraphic is UnityEngine.UI.Image background)
+        {
+            string spritePath = selected
+                ? "UI/Tabs/MossStoneSelected"
+                : toggle.transform.GetSiblingIndex() == 1
+                    ? "UI/Tabs/MossStoneGrenadesInactive"
+                    : "UI/Tabs/MossStoneInactive";
+            Sprite tabSprite = Resources.Load<Sprite>(spritePath);
+            if (tabSprite != null)
+                background.sprite = tabSprite;
+            background.type = UnityEngine.UI.Image.Type.Sliced;
             background.color = Color.white;
+        }
 
         UnityEngine.UI.ColorBlock colors = toggle.colors;
-        colors.normalColor = normal;
-        colors.highlightedColor = Color.Lerp(normal, accent, selected ? 0.22f : 0.16f);
-        colors.pressedColor = Color.Lerp(normal, Color.black, 0.18f);
-        colors.selectedColor = colors.highlightedColor;
-        colors.disabledColor = new Color(0.055f, 0.06f, 0.075f, 0.72f);
+        colors.normalColor = Color.white;
+        colors.highlightedColor = Color.white;
+        colors.pressedColor = Color.white;
+        colors.selectedColor = Color.white;
+        colors.disabledColor = Color.white;
         colors.colorMultiplier = 1f;
         colors.fadeDuration = 0.08f;
         toggle.colors = colors;
 
         UnityEngine.UI.Image selectionAccent = toggle.graphic as UnityEngine.UI.Image;
         if (selectionAccent != null)
-            selectionAccent.color = accent;
+            selectionAccent.color = Color.clear;
 
         TextMeshProUGUI label = toggle.GetComponentInChildren<TextMeshProUGUI>(true);
         if (label != null)
             label.color = selected
-                ? Color.white
-                : new Color(0.67f, 0.72f, 0.8f, 1f);
+                ? new Color(0.1f, 0.1f, 0.1f, 1f)
+                : Color.white;
     }
 
     private void CloseArmory()

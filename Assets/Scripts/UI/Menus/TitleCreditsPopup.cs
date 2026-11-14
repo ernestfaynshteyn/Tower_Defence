@@ -143,6 +143,7 @@ public sealed class TitleCreditsPopup : MonoBehaviour
 
         UnityEngine.UI.Button button = buttonObject.GetComponent<UnityEngine.UI.Button>();
         button.targetGraphic = buttonImage;
+        SlimePixelUiTheme.ApplyButtonSkin(button);
         button.onClick.AddListener(ClosePopup);
 
         CreateText(buttonObject.transform, "Close Credits Label", "CLOSE  •  SPACE",

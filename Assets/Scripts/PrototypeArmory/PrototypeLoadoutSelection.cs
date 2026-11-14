@@ -93,7 +93,7 @@ public sealed class PrototypeLoadoutSelection : MonoBehaviour
             choice.label.fontSizeMin = 38f;
             choice.label.fontSizeMax = 50f;
             choice.label.alignment = TextAlignmentOptions.Center;
-            choice.label.color = new Color32(15, 40, 16, 255);
+            choice.label.color = new Color32(245, 245, 235, 255);
             choice.label.raycastTarget = false;
         }
         if (choice.label == null)

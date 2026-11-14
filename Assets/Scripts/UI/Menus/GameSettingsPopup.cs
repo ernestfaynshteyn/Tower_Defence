@@ -289,6 +289,7 @@ public sealed class GameSettingsPopup : MonoBehaviour
         buttonImage.color = new Color(0.25f, 0.58f, 0.27f, 1f);
         Button button = buttonObject.GetComponent<Button>();
         button.targetGraphic = buttonImage;
+        SlimePixelUiTheme.ApplyButtonSkin(button);
         button.onClick.AddListener(Close);
 
         CreateText(buttonObject.transform, "Close Settings Label", "CLOSE",

@@ -9,9 +9,9 @@ using UnityEngine.UI;
 /// </summary>
 public static class SlimePixelUiTheme
 {
-    private const string ButtonSpritePath = "UI/PixelButton";
+    private const string ButtonSpritePath = "UI/Buttons/MossStoneButton";
     private const string ConnectorSpritePath = "UI/PixelConnector";
-    private const string SkillNodeSpritePath = "UI/SkillTreeNode";
+    private const string SkillNodeSpritePath = "UI/Buttons/MossStoneButton";
     private const string SkillCrownSpritePath = "UI/SkillTreeCrown";
     private const string FinaleCrownObjectName = "Finale Crown";
 
@@ -90,10 +90,10 @@ public static class SlimePixelUiTheme
 
     private static void ApplySkillNodeSkin(skills node)
     {
-        node.lockColor = new Color32(172, 181, 161, 255);
+        node.lockColor = new Color32(138, 144, 137, 255);
         node.affordableColor = Color.white;
-        node.unaffordableColor = new Color32(208, 220, 195, 255);
-        node.maxColor = new Color32(255, 235, 160, 255);
+        node.unaffordableColor = new Color32(205, 215, 194, 255);
+        node.maxColor = new Color32(255, 224, 140, 255);
         Button button = node.GetComponent<Button>();
         if (button == null || !(button.targetGraphic is Image image))
             return;
@@ -108,7 +108,7 @@ public static class SlimePixelUiTheme
         foreach (TMPro.TMP_Text label in node.GetComponentsInChildren<TMPro.TMP_Text>(true))
         {
             if (label == node.costText || label.gameObject.name == "Price") continue;
-            label.color = new Color32(12, 28, 12, 255);
+            label.color = new Color32(245, 245, 235, 255);
             label.enableAutoSizing = true;
             bool isTitle = label.gameObject.name.IndexOf("title", System.StringComparison.OrdinalIgnoreCase) >= 0;
             label.fontSizeMin = isTitle ? 30f : 16f;
@@ -118,10 +118,10 @@ public static class SlimePixelUiTheme
 
         ColorBlock colors = button.colors;
         colors.normalColor = Color.white;
-        colors.highlightedColor = new Color32(218, 252, 184, 255);
-        colors.pressedColor = new Color32(103, 166, 78, 255);
-        colors.selectedColor = new Color32(198, 240, 154, 255);
-        colors.disabledColor = new Color32(133, 151, 121, 190);
+        colors.highlightedColor = Color.white;
+        colors.pressedColor = new Color32(180, 180, 175, 255);
+        colors.selectedColor = Color.white;
+        colors.disabledColor = new Color32(138, 144, 137, 255);
         button.colors = colors;
     }
 
@@ -168,8 +168,10 @@ public static class SlimePixelUiTheme
         crown.transform.SetAsLastSibling();
     }
 
-    private static void ApplyButtonSkin(Button button)
+    public static void ApplyButtonSkin(Button button)
     {
+        if (buttonSprite == null)
+            buttonSprite = Resources.Load<Sprite>(ButtonSpritePath);
         if (button == null || !(button.targetGraphic is Image image) || buttonSprite == null)
             return;
 
@@ -177,7 +179,7 @@ public static class SlimePixelUiTheme
         // UISprite is the plain background used by the game's skill buttons.
         if (image.sprite != null && image.sprite.name != "UISprite" &&
             image.sprite.name != "Background" && image.sprite.name != "InputFieldBackground" &&
-            image.sprite.name != "PixelButton")
+            image.sprite.name != "PixelButton" && image.sprite.name != "MossStoneButton")
             return;
 
         image.sprite = buttonSprite;
@@ -188,11 +190,19 @@ public static class SlimePixelUiTheme
 
         ColorBlock colors = button.colors;
         colors.normalColor = Color.white;
-        colors.highlightedColor = new Color32(218, 252, 184, 255);
-        colors.pressedColor = new Color32(103, 166, 78, 255);
-        colors.selectedColor = new Color32(198, 240, 154, 255);
-        colors.disabledColor = new Color32(133, 151, 121, 190);
+        colors.highlightedColor = Color.white;
+        colors.pressedColor = new Color32(180, 180, 175, 255);
+        colors.selectedColor = Color.white;
+        colors.disabledColor = new Color32(138, 144, 137, 255);
         button.colors = colors;
+
+        skills skillNode = button.GetComponent<skills>();
+        foreach (TMPro.TMP_Text label in button.GetComponentsInChildren<TMPro.TMP_Text>(true))
+        {
+            if (skillNode != null && (label == skillNode.costText || label.gameObject.name == "Price"))
+                continue;
+            label.color = new Color32(245, 245, 235, 255);
+        }
     }
 
     private static void ApplyConnectorSkin(Image image)
