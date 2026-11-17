@@ -12,7 +12,7 @@ public sealed class TitleTutorialPopup : MonoBehaviour
         "• Aim with the mouse and hold Left Mouse Button to fire. Press A to toggle auto-shoot.\n" +
         "• Press Q to equip or put away grenades. While equipped, press 1–4 to select Frag, Smoke, Flash, or Molotov, then click to throw.\n" +
         "• Unlocked abilities: Z = Sewer Pulse, X = EMP, C = Toxic Flood, N = Nuke.\n" +
-        "• Survive each slime wave and protect your defence.";
+        "• Survive each slime wave and protect your tower.";
 
     private Button tutorialButton;
     private TMP_FontAsset tutorialFont;

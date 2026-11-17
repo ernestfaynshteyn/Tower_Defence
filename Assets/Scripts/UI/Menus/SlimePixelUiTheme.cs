@@ -14,6 +14,19 @@ public static class SlimePixelUiTheme
     private const string SkillNodeSpritePath = "UI/Buttons/MossStoneButton";
     private const string SkillCrownSpritePath = "UI/SkillTreeCrown";
     private const string FinaleCrownObjectName = "Finale Crown";
+    private const string TitleSceneName = "Title card - Armory Prototype";
+    private const string LossSceneName = "You lost - Armory Prototype";
+    private static readonly string[] TitleButtonNames =
+    {
+        "StartGame", "tutorial", "Options", "Credits", "QuitGame"
+    };
+    private static readonly string[] LossButtonNames = { "Retry", "Retry (1)" };
+    private static readonly string[] MenuButtonSpritePaths =
+    {
+        "UI/Tabs/MossStoneSelected",
+        "UI/Tabs/MossStoneInactive",
+        "UI/Tabs/MossStoneGrenadesInactive"
+    };
 
     private static Sprite buttonSprite;
     private static Sprite connectorSprite;
@@ -48,11 +61,50 @@ public static class SlimePixelUiTheme
         foreach (Button button in buttons)
             ApplyButtonSkin(button);
 
+        if (SceneManager.GetActiveScene().name == TitleSceneName)
+            ApplyRandomMenuButtonSkins(buttons, TitleSceneName, TitleButtonNames);
+        else if (SceneManager.GetActiveScene().name == LossSceneName)
+            ApplyRandomMenuButtonSkins(buttons, LossSceneName, LossButtonNames);
+
         ApplySkillTreeSkins();
 
         Image[] images = Object.FindObjectsByType<Image>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         foreach (Image image in images)
             ApplyConnectorSkin(image);
+    }
+
+    private static void ApplyRandomMenuButtonSkins(Button[] buttons, string sceneName, string[] buttonNames)
+    {
+        Sprite[] styles = new Sprite[MenuButtonSpritePaths.Length];
+        for (int i = 0; i < styles.Length; i++)
+        {
+            styles[i] = Resources.Load<Sprite>(MenuButtonSpritePaths[i]);
+            if (styles[i] == null)
+            {
+                Debug.LogWarning("Menu button style is missing: " + MenuButtonSpritePaths[i]);
+                return;
+            }
+        }
+
+        foreach (Button button in buttons)
+        {
+            if (button == null || button.gameObject.scene.name != sceneName ||
+                System.Array.IndexOf(buttonNames, button.gameObject.name) < 0 ||
+                !(button.targetGraphic is Image image))
+                continue;
+
+            int style = Random.Range(0, styles.Length);
+            image.sprite = styles[style];
+            image.type = Image.Type.Sliced;
+            image.pixelsPerUnitMultiplier = 3.125f;
+            image.color = Color.white;
+
+            Color textColor = style == 0
+                ? new Color32(31, 31, 29, 255)
+                : style == 2 ? Color.white : new Color32(245, 245, 235, 255);
+            foreach (TMPro.TMP_Text label in button.GetComponentsInChildren<TMPro.TMP_Text>(true))
+                label.color = textColor;
+        }
     }
 
     private static void ApplySkillTreeSkins()

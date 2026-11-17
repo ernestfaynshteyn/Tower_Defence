@@ -91,13 +91,15 @@ public class GameOverUI : MonoBehaviour
             recordsText.fontSize = 96f;
             recordsText.fontStyle = FontStyles.Bold;
             recordsText.alignment = TextAlignmentOptions.Top;
-            recordsText.color = Color.black;
             recordsText.textWrappingMode = TextWrappingModes.Normal;
             recordsText.raycastTarget = false;
         }
 
         if (recordsText != null)
+        {
+            recordsText.color = Color.white;
             recordsText.text = GameRecords.GetSummaryText();
+        }
     }
 
     public void RestartGame()
