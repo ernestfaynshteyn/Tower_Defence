@@ -88,7 +88,7 @@ public class GameOverUI : MonoBehaviour
                 rect.sizeDelta = new Vector2(600f, 280f);
             }
 
-            recordsText.fontSize = 96f;
+            recordsText.fontSize = 24f;
             recordsText.fontStyle = FontStyles.Bold;
             recordsText.alignment = TextAlignmentOptions.Top;
             recordsText.textWrappingMode = TextWrappingModes.Normal;

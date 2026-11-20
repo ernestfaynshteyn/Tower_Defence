@@ -59,7 +59,15 @@ public static class SlimePixelUiTheme
 
         Button[] buttons = Object.FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         foreach (Button button in buttons)
+        {
+            // The lose-screen buttons are sized and styled in the scene.
+            // Only their randomly selected artwork is changed below.
+            if (SceneManager.GetActiveScene().name == LossSceneName &&
+                button.gameObject.scene.name == LossSceneName &&
+                System.Array.IndexOf(LossButtonNames, button.gameObject.name) >= 0)
+                continue;
             ApplyButtonSkin(button);
+        }
 
         if (SceneManager.GetActiveScene().name == TitleSceneName)
             ApplyRandomMenuButtonSkins(buttons, TitleSceneName, TitleButtonNames);
@@ -96,7 +104,8 @@ public static class SlimePixelUiTheme
             int style = Random.Range(0, styles.Length);
             image.sprite = styles[style];
             image.type = Image.Type.Sliced;
-            image.pixelsPerUnitMultiplier = 3.125f;
+            if (sceneName != LossSceneName)
+                image.pixelsPerUnitMultiplier = 3.125f;
             image.color = Color.white;
 
             Color textColor = style == 0
@@ -157,14 +166,24 @@ public static class SlimePixelUiTheme
         image.color = Color.white;
         image.raycastTarget = true;
 
+        bool isAttackNode = false;
+        for (Transform ancestor = node.transform.parent; ancestor != null; ancestor = ancestor.parent)
+        {
+            if (ancestor.name == "attack tree")
+            {
+                isAttackNode = true;
+                break;
+            }
+        }
+
         foreach (TMPro.TMP_Text label in node.GetComponentsInChildren<TMPro.TMP_Text>(true))
         {
             if (label == node.costText || label.gameObject.name == "Price") continue;
-            label.color = new Color32(245, 245, 235, 255);
+            label.color = isAttackNode ? Color.white : new Color32(245, 245, 235, 255);
             label.enableAutoSizing = true;
             bool isTitle = label.gameObject.name.IndexOf("title", System.StringComparison.OrdinalIgnoreCase) >= 0;
-            label.fontSizeMin = isTitle ? 30f : 16f;
-            label.fontSizeMax = isTitle ? 42f : 22f;
+            label.fontSizeMin = isAttackNode ? (isTitle ? 20f : 11f) : (isTitle ? 30f : 16f);
+            label.fontSizeMax = isAttackNode ? (isTitle ? 28f : 17f) : (isTitle ? 42f : 22f);
             label.raycastTarget = false;
         }
 
