@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise skill-tree upgrades and UI behavior. Ernest directed the design.
 using System;
 using System.Collections.Generic;
 using TMPro;

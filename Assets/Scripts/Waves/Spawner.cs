@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise spawning and boss-wave behavior. Ernest directed the design.
 using UnityEngine;
 public class Spawner : MonoBehaviour
 {

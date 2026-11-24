@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise weapon behavior and upgrades. Ernest directed the design.
 using UnityEngine;
 
 public class Aim : MonoBehaviour

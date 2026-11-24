@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise menu behavior and layouts. Ernest directed the design.
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -108,11 +109,22 @@ public static class SlimePixelUiTheme
                 image.pixelsPerUnitMultiplier = 3.125f;
             image.color = Color.white;
 
+            ColorBlock menuColors = button.colors;
+            menuColors.normalColor = Color.white;
+            menuColors.highlightedColor = style == 0
+                ? new Color32(221, 238, 193, 255)
+                : new Color32(195, 235, 172, 255);
+            menuColors.selectedColor = menuColors.highlightedColor;
+            button.colors = menuColors;
+
             Color textColor = style == 0
                 ? new Color32(31, 31, 29, 255)
                 : style == 2 ? Color.white : new Color32(245, 245, 235, 255);
             foreach (TMPro.TMP_Text label in button.GetComponentsInChildren<TMPro.TMP_Text>(true))
+            {
                 label.color = textColor;
+                label.raycastTarget = false;
+            }
         }
     }
 
@@ -189,9 +201,9 @@ public static class SlimePixelUiTheme
 
         ColorBlock colors = button.colors;
         colors.normalColor = Color.white;
-        colors.highlightedColor = Color.white;
+        colors.highlightedColor = new Color32(195, 235, 172, 255);
         colors.pressedColor = new Color32(180, 180, 175, 255);
-        colors.selectedColor = Color.white;
+        colors.selectedColor = new Color32(195, 235, 172, 255);
         colors.disabledColor = new Color32(138, 144, 137, 255);
         button.colors = colors;
     }
@@ -243,7 +255,13 @@ public static class SlimePixelUiTheme
     {
         if (buttonSprite == null)
             buttonSprite = Resources.Load<Sprite>(ButtonSpritePath);
-        if (button == null || !(button.targetGraphic is Image image) || buttonSprite == null)
+        if (button == null)
+            return;
+
+        foreach (TMPro.TMP_Text label in button.GetComponentsInChildren<TMPro.TMP_Text>(true))
+            label.raycastTarget = false;
+
+        if (!(button.targetGraphic is Image image) || buttonSprite == null)
             return;
 
         // Keep icons and purpose-made button artwork intact. The default uGUI
@@ -261,9 +279,9 @@ public static class SlimePixelUiTheme
 
         ColorBlock colors = button.colors;
         colors.normalColor = Color.white;
-        colors.highlightedColor = Color.white;
+        colors.highlightedColor = new Color32(195, 235, 172, 255);
         colors.pressedColor = new Color32(180, 180, 175, 255);
-        colors.selectedColor = Color.white;
+        colors.selectedColor = new Color32(195, 235, 172, 255);
         colors.disabledColor = new Color32(138, 144, 137, 255);
         button.colors = colors;
 

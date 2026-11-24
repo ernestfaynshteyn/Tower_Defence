@@ -1,3 +1,4 @@
+// AI assistance: Codex helped implement and revise the armory, loadout, and weapon systems. Ernest directed the design.
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1493,7 +1494,7 @@ public sealed class PrototypeArmoryCombat : MonoBehaviour
         switch (weapon)
         {
             case PrototypePrimaryWeapon.PiercingLaser:
-                return new WeaponProfile("Piercing Laser", 7.5f, 5f, 0.09f, 110f, 6f, 27f, 6);
+                return new WeaponProfile("Piercing Laser", 9f, 5f, 0.09f, 110f, 4f, 32f, 6);
             case PrototypePrimaryWeapon.ShotgunBurst:
                 return new WeaponProfile("Shotgun Burst", 25f, 3.6f, 0.72f, 90f, 23f, 26f, 0);
             case PrototypePrimaryWeapon.Flamethrower:

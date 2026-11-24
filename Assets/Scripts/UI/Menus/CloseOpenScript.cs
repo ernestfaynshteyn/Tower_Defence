@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise menu behavior and layouts. Ernest directed the design.
 using UnityEngine;
 
 public class CloseOpenScript : MonoBehaviour

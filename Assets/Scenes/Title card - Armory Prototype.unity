@@ -1078,6 +1078,7 @@ GameObject:
   - component: {fileID: 727871578}
   - component: {fileID: 727871577}
   - component: {fileID: 727871576}
+  - component: {fileID: 1381360418}
   m_Layer: 5
   m_Name: StartGame
   m_TagString: Untagged
@@ -1856,7 +1857,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1381360419}
-  - component: {fileID: 1381360418}
   - component: {fileID: 1381360420}
   m_Layer: 0
   m_Name: GlobalData
@@ -1871,7 +1871,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1381360417}
+  m_GameObject: {fileID: 727871574}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b42cf74b66ba6f489eff87f0bca73c4, type: 3}

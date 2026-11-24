@@ -1,3 +1,4 @@
+// AI assistance: Codex helped review projectile behavior. Ernest directed the design.
 using UnityEngine;
 
 public class Bullet : MonoBehaviour

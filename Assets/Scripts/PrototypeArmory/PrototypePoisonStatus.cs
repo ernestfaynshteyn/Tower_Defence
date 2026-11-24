@@ -1,3 +1,4 @@
+// AI assistance: Codex helped implement and revise the armory, loadout, and weapon systems. Ernest directed the design.
 using UnityEngine;
 
 [DisallowMultipleComponent]

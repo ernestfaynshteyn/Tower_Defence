@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise currency integration. Ernest directed the design.
 using UnityEngine;
 
 /// <summary>

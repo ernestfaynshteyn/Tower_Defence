@@ -1,3 +1,4 @@
+// AI assistance: Codex helped implement and revise the armory, loadout, and weapon systems. Ernest directed the design.
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -215,6 +216,20 @@ public sealed class PrototypeArmoryBootstrap : MonoBehaviour
         frontCanvas.sortingOrder = 250;
         if (shopRoot.GetComponent<UnityEngine.UI.GraphicRaycaster>() == null)
             shopRoot.gameObject.AddComponent<UnityEngine.UI.GraphicRaycaster>();
+
+        // The shop gets its own raycaster above the main canvas. Keep the
+        // existing open/close buttons above it so the shop cannot intercept clicks.
+        Transform treeButtons = shopRoot.parent.Find("opan and close buttons");
+        if (treeButtons != null)
+        {
+            Canvas buttonCanvas = treeButtons.GetComponent<Canvas>();
+            if (buttonCanvas == null)
+                buttonCanvas = treeButtons.gameObject.AddComponent<Canvas>();
+            buttonCanvas.overrideSorting = true;
+            buttonCanvas.sortingOrder = frontCanvas.sortingOrder + 1;
+            if (treeButtons.GetComponent<UnityEngine.UI.GraphicRaycaster>() == null)
+                treeButtons.gameObject.AddComponent<UnityEngine.UI.GraphicRaycaster>();
+        }
         Canvas.ForceUpdateCanvases();
 
         frame.anchorMin = new Vector2(1f, 0.5f);

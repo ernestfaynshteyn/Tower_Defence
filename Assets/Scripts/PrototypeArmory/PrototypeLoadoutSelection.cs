@@ -1,3 +1,4 @@
+// AI assistance: Codex helped implement and revise the armory, loadout, and weapon systems. Ernest directed the design.
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -16,6 +17,8 @@ public sealed class PrototypeLoadoutSelection : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Button startButton;
 
     private readonly List<WeaponChoice> choices = new List<WeaponChoice>();
+    private readonly Dictionary<UnityEngine.UI.Button, Difficulty> difficultyChoices =
+        new Dictionary<UnityEngine.UI.Button, Difficulty>();
     private GlobalData globalData;
 
     private sealed class WeaponChoice
@@ -59,7 +62,59 @@ public sealed class PrototypeLoadoutSelection : MonoBehaviour
 
         startButton.onClick = new UnityEngine.UI.Button.ButtonClickedEvent();
         startButton.onClick.AddListener(StartPrototypeGame);
+        ConfigureDifficultyButtons();
         SelectWeapon(globalData.selectedWeapon);
+    }
+
+    private void ConfigureDifficultyButtons()
+    {
+        // The title screen's GlobalData persists into this scene. The scene's
+        // duplicate is destroyed, so its serialized button callbacks can be stale.
+        foreach (UnityEngine.UI.Button button in FindObjectsByType<UnityEngine.UI.Button>(
+                     FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            if (button.onClick.GetPersistentEventCount() == 0)
+                continue;
+            Difficulty difficulty;
+            switch (button.onClick.GetPersistentMethodName(0))
+            {
+                case "SetEasy": difficulty = Difficulty.Easy; break;
+                case "SetNormal": difficulty = Difficulty.Normal; break;
+                case "SetHard": difficulty = Difficulty.Hard; break;
+                case "SetExtreme": difficulty = Difficulty.Extreme; break;
+                default: continue;
+            }
+
+            difficultyChoices.Add(button, difficulty);
+            button.onClick = new UnityEngine.UI.Button.ButtonClickedEvent();
+            Difficulty selectedDifficulty = difficulty;
+            button.onClick.AddListener(() =>
+            {
+                globalData.currentDifficulty = selectedDifficulty;
+                RefreshDifficultyButtons();
+            });
+            foreach (TMP_Text label in button.GetComponentsInChildren<TMP_Text>(true))
+                label.raycastTarget = false;
+        }
+
+        RefreshDifficultyButtons();
+    }
+
+    private void RefreshDifficultyButtons()
+    {
+        foreach (KeyValuePair<UnityEngine.UI.Button, Difficulty> choice in difficultyChoices)
+        {
+            bool selected = globalData.currentDifficulty == choice.Value;
+            UnityEngine.UI.ColorBlock colors = choice.Key.colors;
+            colors.normalColor = selected ? new Color32(55, 116, 63, 255) : Color.white;
+            colors.highlightedColor = selected
+                ? new Color32(82, 145, 86, 255)
+                : new Color32(195, 235, 172, 255);
+            colors.selectedColor = colors.normalColor;
+            choice.Key.colors = colors;
+            if (choice.Key.targetGraphic != null)
+                choice.Key.targetGraphic.color = colors.normalColor;
+        }
     }
 
     private void AddChoice(Weapon weapon, string displayName, string description, UnityEngine.UI.Button button)

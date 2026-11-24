@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise progression and records. Ernest directed the design.
 using System;
 using System.Collections.Generic;
 using TMPro;

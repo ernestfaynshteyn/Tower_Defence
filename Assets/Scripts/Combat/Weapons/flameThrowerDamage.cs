@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+// AI assistance: Codex helped revise weapon behavior and upgrades. Ernest directed the design.
+using UnityEngine;
 public class flameThrowerDamage : MonoBehaviour
 {
     [Range(1, 1000)]

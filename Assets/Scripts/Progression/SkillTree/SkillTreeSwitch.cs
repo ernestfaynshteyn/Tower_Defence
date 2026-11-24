@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise skill-tree upgrades and UI behavior. Ernest directed the design.
 using UnityEngine;
 using UnityEngine.UI; // Required for UI elements
 

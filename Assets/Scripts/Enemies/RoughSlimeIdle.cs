@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise slime combat and visuals. Ernest directed the design.
 using UnityEngine;
 
 /// <summary>Subtle visual wobble on the child sprite; the enemy hurtbox stays still.</summary>

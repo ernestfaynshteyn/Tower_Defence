@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+// AI assistance: Codex helped revise settings and scene flow. Ernest directed the design.
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public enum Difficulty

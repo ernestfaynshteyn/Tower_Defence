@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise skill-tree upgrades and UI behavior. Ernest directed the design.
     /// <summary>
 /// Central list of stat keys so SkillEffect.statName and gameplay code
 /// (Upgrades.Instance.GetValue(...)) always agree on spelling.

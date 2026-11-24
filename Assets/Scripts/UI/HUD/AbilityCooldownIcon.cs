@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise the gameplay HUD. Ernest directed the design.
 using System.Collections;
 using TMPro;
 using UnityEngine;

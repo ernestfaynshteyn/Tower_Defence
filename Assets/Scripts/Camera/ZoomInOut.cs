@@ -1,3 +1,4 @@
+// AI assistance: Codex helped review camera behavior. Ernest directed the design.
 using UnityEngine;
 
 public class ZoomInOut : MonoBehaviour

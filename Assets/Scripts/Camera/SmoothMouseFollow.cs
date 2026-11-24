@@ -1,3 +1,4 @@
+// AI assistance: Codex helped review camera behavior. Ernest directed the design.
 using UnityEngine;
 using CodeMonkey.Utils;
 using System.Collections.Generic;

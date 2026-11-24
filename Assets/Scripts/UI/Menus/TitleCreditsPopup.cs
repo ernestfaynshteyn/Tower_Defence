@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise menu behavior and layouts. Ernest directed the design.
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,14 +8,18 @@ public sealed class TitleCreditsPopup : MonoBehaviour
 {
     private static readonly string[] Credits =
     {
-        "Game Concept & Design — Ernest",
-        "Programming & Systems — Ernest",
-        "Gameplay, Weapons & Upgrades — Ernest",
-        "Enemies, Waves & Balancing — Ernest",
-        "UI & Menus — Ernest",
-        "Audio Integration — Ernest",
-        "Testing & Polish — Jin",
-        "Everything Else — Jin"
+        "Game concept, design & integration — Ernest",
+        "Programming direction and testing — Ernest",
+        "Playtesting and polish — Jin",
+        "Slime Enemy pixel art — War (War's Vault)",
+        "Mini Pixel 2D Weapons — Ghost",
+        "SimpleFX visual effects — Synty Studios",
+        "CodeMonkey utilities — Code Monkey",
+        "BoldPixels font — YukiPixels",
+        "Gameplay and boss music — SRG774 (OpenGameArt)",
+        "Sound effects — Kenney audio packs",
+        "Code assistance — ChatGPT and Codex",
+        "Visual and UI assistance — ChatGPT and Codex"
     };
 
     private UnityEngine.UI.Button creditsButton;
@@ -116,7 +121,7 @@ public sealed class TitleCreditsPopup : MonoBehaviour
         for (int i = 0; i < Credits.Length; i++)
         {
             CreateText(panel.transform, "Credit " + (i + 1), Credits[i],
-                new Vector2(0f, 145f - i * 37f), new Vector2(620f, 32f), 19f,
+                new Vector2(0f, 158f - i * 31f), new Vector2(640f, 27f), 15f,
                 FontStyles.Normal, TextAlignmentOptions.Center, new Color(0.12f, 0.16f, 0.12f), false);
         }
 
@@ -135,7 +140,7 @@ public sealed class TitleCreditsPopup : MonoBehaviour
         buttonRect.anchorMin = new Vector2(0.5f, 0.5f);
         buttonRect.anchorMax = new Vector2(0.5f, 0.5f);
         buttonRect.pivot = new Vector2(0.5f, 0.5f);
-        buttonRect.anchoredPosition = new Vector2(0f, -215f);
+        buttonRect.anchoredPosition = new Vector2(0f, -230f);
         buttonRect.sizeDelta = new Vector2(190f, 42f);
 
         UnityEngine.UI.Image buttonImage = buttonObject.GetComponent<UnityEngine.UI.Image>();

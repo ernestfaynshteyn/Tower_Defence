@@ -1,3 +1,4 @@
+// AI assistance: Codex helped integrate music and sound. Ernest directed the design.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise slime combat and visuals. Ernest directed the design.
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;

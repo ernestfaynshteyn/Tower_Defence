@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise player health and stats. Ernest directed the design.
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

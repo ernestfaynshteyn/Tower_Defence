@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise grenade behavior and effects. Ernest directed the design.
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;

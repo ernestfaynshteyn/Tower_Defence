@@ -1,3 +1,4 @@
+// AI assistance: Codex helped revise the gameplay HUD. Ernest directed the design.
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
