@@ -16,12 +16,8 @@ public static class SlimePixelUiTheme
     private const string SkillCrownSpritePath = "UI/SkillTreeCrown";
     private const string FinaleCrownObjectName = "Finale Crown";
     private const string TitleSceneName = "Title card - Armory Prototype";
+    private const string SelectionSceneName = "Game selecting things - Armory Prototype";
     private const string LossSceneName = "You lost - Armory Prototype";
-    private static readonly string[] TitleButtonNames =
-    {
-        "StartGame", "tutorial", "Options", "Credits", "QuitGame"
-    };
-    private static readonly string[] LossButtonNames = { "Retry", "Retry (1)" };
     private static readonly string[] MenuButtonSpritePaths =
     {
         "UI/Tabs/MossStoneSelected",
@@ -30,6 +26,7 @@ public static class SlimePixelUiTheme
     };
 
     private static Sprite buttonSprite;
+    private static Sprite[] menuButtonSprites;
     private static Sprite connectorSprite;
     private static Sprite skillNodeSprite;
     private static Sprite skillCrownSprite;
@@ -57,15 +54,39 @@ public static class SlimePixelUiTheme
             skillNodeSprite = Resources.Load<Sprite>(SkillNodeSpritePath);
         if (skillCrownSprite == null)
             skillCrownSprite = Resources.Load<Sprite>(SkillCrownSpritePath);
+        if (menuButtonSprites == null)
+        {
+            menuButtonSprites = new Sprite[MenuButtonSpritePaths.Length];
+            for (int i = 0; i < menuButtonSprites.Length; i++)
+                menuButtonSprites[i] = Resources.Load<Sprite>(MenuButtonSpritePaths[i]);
+        }
 
         Button[] buttons = Object.FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        int[] menuStyleOrder = { 0, 1, 2 };
+        for (int i = menuStyleOrder.Length - 1; i > 0; i--)
+        {
+            int swapIndex = Random.Range(0, i + 1);
+            int previous = menuStyleOrder[i];
+            menuStyleOrder[i] = menuStyleOrder[swapIndex];
+            menuStyleOrder[swapIndex] = previous;
+        }
+        int menuButtonCount = 0;
         foreach (Button button in buttons)
-            ApplyButtonSkin(button);
+        {
+            if (button == null)
+                continue;
 
-        if (SceneManager.GetActiveScene().name == TitleSceneName)
-            ApplyRandomMenuButtonSkins(buttons, TitleSceneName, TitleButtonNames);
-        else if (SceneManager.GetActiveScene().name == LossSceneName)
-            ApplyRandomMenuButtonSkins(buttons, LossSceneName, LossButtonNames);
+            // Keep the scene's button dimensions and sprite slicing settings.
+            string buttonScene = button.gameObject.scene.name;
+            if (buttonScene == TitleSceneName || buttonScene == SelectionSceneName ||
+                buttonScene == LossSceneName)
+            {
+                ApplyMenuButtonStyle(button, menuStyleOrder[menuButtonCount++ % menuStyleOrder.Length]);
+                continue;
+            }
+
+            ApplyButtonSkin(button);
+        }
 
         ApplySkillTreeSkins();
 
@@ -74,48 +95,27 @@ public static class SlimePixelUiTheme
             ApplyConnectorSkin(image);
     }
 
-    private static void ApplyRandomMenuButtonSkins(Button[] buttons, string sceneName, string[] buttonNames)
+    private static void ApplyMenuButtonStyle(Button button, int styleIndex)
     {
-        Sprite[] styles = new Sprite[MenuButtonSpritePaths.Length];
-        for (int i = 0; i < styles.Length; i++)
+        if (!(button.targetGraphic is Image image) || menuButtonSprites[styleIndex] == null)
+            return;
+
+        image.sprite = menuButtonSprites[styleIndex];
+        image.color = Color.white;
+        ColorBlock colors = button.colors;
+        colors.normalColor = Color.white;
+        colors.highlightedColor = new Color32(235, 235, 235, 255);
+        colors.pressedColor = new Color32(210, 210, 210, 255);
+        colors.selectedColor = Color.white;
+        colors.disabledColor = new Color32(140, 140, 140, 255);
+        button.colors = colors;
+        Color textColor = styleIndex == 0
+            ? new Color32(31, 31, 29, 255)
+            : styleIndex == 1 ? new Color32(245, 245, 235, 255) : Color.white;
+        foreach (TMPro.TMP_Text label in button.GetComponentsInChildren<TMPro.TMP_Text>(true))
         {
-            styles[i] = Resources.Load<Sprite>(MenuButtonSpritePaths[i]);
-            if (styles[i] == null)
-            {
-                Debug.LogWarning("Menu button style is missing: " + MenuButtonSpritePaths[i]);
-                return;
-            }
-        }
-
-        foreach (Button button in buttons)
-        {
-            if (button == null || button.gameObject.scene.name != sceneName ||
-                System.Array.IndexOf(buttonNames, button.gameObject.name) < 0 ||
-                !(button.targetGraphic is Image image))
-                continue;
-
-            int style = Random.Range(0, styles.Length);
-            image.sprite = styles[style];
-            image.type = Image.Type.Sliced;
-            image.pixelsPerUnitMultiplier = 3.125f;
-            image.color = Color.white;
-
-            ColorBlock menuColors = button.colors;
-            menuColors.normalColor = Color.white;
-            menuColors.highlightedColor = style == 0
-                ? new Color32(221, 238, 193, 255)
-                : new Color32(195, 235, 172, 255);
-            menuColors.selectedColor = menuColors.highlightedColor;
-            button.colors = menuColors;
-
-            Color textColor = style == 0
-                ? new Color32(31, 31, 29, 255)
-                : style == 2 ? Color.white : new Color32(245, 245, 235, 255);
-            foreach (TMPro.TMP_Text label in button.GetComponentsInChildren<TMPro.TMP_Text>(true))
-            {
-                label.color = textColor;
-                label.raycastTarget = false;
-            }
+            label.color = textColor;
+            label.raycastTarget = false;
         }
     }
 

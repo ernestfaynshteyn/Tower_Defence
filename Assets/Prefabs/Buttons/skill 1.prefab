@@ -433,9 +433,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9215603795874435504}
-        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: -463448849467315430}
+        m_TargetAssemblyTypeName: skills, Assembly-CSharp
+        m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

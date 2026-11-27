@@ -80,7 +80,7 @@ public class GameOverUI : MonoBehaviour
                 rect.anchoredPosition = retryButton.anchoredPosition + Vector2.down *
                     (retryButton.rect.height * Mathf.Abs(retryButton.localScale.y) * 0.5f + 12f);
                 rect.sizeDelta = new Vector2(
-                    Mathf.Max(360f, retryButton.rect.width * Mathf.Abs(retryButton.localScale.x)),
+                    Mathf.Max(531.4744f, retryButton.rect.width * Mathf.Abs(retryButton.localScale.x)),
                     280f);
             }
             else
@@ -89,7 +89,7 @@ public class GameOverUI : MonoBehaviour
                 rect.sizeDelta = new Vector2(600f, 280f);
             }
 
-            recordsText.fontSize = 96f;
+            recordsText.fontSize = 24f;
             recordsText.fontStyle = FontStyles.Bold;
             recordsText.alignment = TextAlignmentOptions.Top;
             recordsText.textWrappingMode = TextWrappingModes.Normal;
