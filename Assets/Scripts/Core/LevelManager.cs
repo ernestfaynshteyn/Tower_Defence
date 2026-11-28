@@ -29,10 +29,6 @@ public class LevelManager : MonoBehaviour
             quit.onClick = new Button.ButtonClickedEvent();
             quit.onClick.AddListener(QuitGame);
         }
-#if UNITY_WEBGL && !UNITY_EDITOR
-        if (quitButton != null)
-            quitButton.SetActive(false);
-#endif
     }
 
     // Update is called once per frame
